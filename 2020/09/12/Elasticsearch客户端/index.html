@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="maven 依赖123456789101112131415161718192021222324  	&lt;!--elasticsearch--&gt;      &lt;dependency&gt;          &lt;groupId&gt;org.elasticsearch&lt;&#x2F;groupId&gt;          &lt;artifactId&gt;elasticsearch&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elasticsearch客户端">
+<meta property="og:url" content="http://yoursite.com/2020/09/12/Elasticsearch%E5%AE%A2%E6%88%B7%E7%AB%AF/index.html">
+<meta property="og:site_name" content="Astilt&#39;s blog">
+<meta property="og:description" content="maven 依赖123456789101112131415161718192021222324  	&lt;!--elasticsearch--&gt;      &lt;dependency&gt;          &lt;groupId&gt;org.elasticsearch&lt;&#x2F;groupId&gt;          &lt;artifactId&gt;elasticsearch&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-12T06:56:53.000Z">
+<meta property="article:modified_time" content="2020-09-24T08:40:59.767Z">
+<meta property="article:author" content="Astilt">
+<meta property="article:tag" content="Elasticsearch">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/09/12/Elasticsearch%E5%AE%A2%E6%88%B7%E7%AB%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Elasticsearch客户端 | Astilt's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Astilt's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Astilt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/12/Elasticsearch%E5%AE%A2%E6%88%B7%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Elasticsearch客户端
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-12 14:56:53" itemprop="dateCreated datePublished" datetime="2020-09-12T14:56:53+08:00">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-24 16:40:59" itemprop="dateModified" datetime="2020-09-24T16:40:59+08:00">2020-09-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NoSql/" itemprop="url" rel="index"><span itemprop="name">NoSql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="maven-依赖"><a href="#maven-依赖" class="headerlink" title="maven 依赖"></a>maven 依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  	<span class="comment">&lt;!--elasticsearch--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.elasticsearch<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>elasticsearch<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>6.8.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--elasticsearch 高级API--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.elasticsearch.client<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>elasticsearch-rest-high-level-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>6.8.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--junit--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--lombok--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.16.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.http.HttpHost;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.client.RestClient;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.client.RestClientBuilder;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.client.RestHighLevelClient;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EsClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RestHighLevelClient <span class="title">getClient</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//  创建 HttpHost</span></span><br><span class="line">        HttpHost httpHost = <span class="keyword">new</span> HttpHost(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">9200</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建 RestClientBuilder</span></span><br><span class="line">        RestClientBuilder builder = RestClient.builder(httpHost);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建 RestHighLevelClient</span></span><br><span class="line">        RestHighLevelClient client = <span class="keyword">new</span> RestHighLevelClient(builder);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> client;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="索引操作"><a href="#索引操作" class="headerlink" title="索引操作"></a>索引操作</h1><ul>
+<li>新建索引</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateInx</span></span>&#123;</span><br><span class="line">  RestHighLevelClient client =  EsClient.getClient();</span><br><span class="line">    String index = <span class="string">&quot;person&quot;</span>;</span><br><span class="line">    String type=<span class="string">&quot;man&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createIndx</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">// 1.准备关于索引的setting</span></span><br><span class="line">        Settings.Builder settings = Settings.builder()</span><br><span class="line">                .put(<span class="string">&quot;number_of_shards&quot;</span>, <span class="number">2</span>)</span><br><span class="line">                .put(<span class="string">&quot;number_of_replicas&quot;</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2.准备关于索引的mapping</span></span><br><span class="line">        XContentBuilder mappings = JsonXContent.contentBuilder()</span><br><span class="line">                .startObject()</span><br><span class="line">                    .startObject(<span class="string">&quot;properties&quot;</span>)</span><br><span class="line">                        .startObject(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">                            .field(<span class="string">&quot;type&quot;</span>, <span class="string">&quot;text&quot;</span>)</span><br><span class="line">                        .endObject()</span><br><span class="line">                        .startObject(<span class="string">&quot;age&quot;</span>)</span><br><span class="line">                            .field(<span class="string">&quot;type&quot;</span>, <span class="string">&quot;integer&quot;</span>)</span><br><span class="line">                        .endObject()</span><br><span class="line">                        .startObject(<span class="string">&quot;birthday&quot;</span>)</span><br><span class="line">                            .field(<span class="string">&quot;type&quot;</span>, <span class="string">&quot;date&quot;</span>)</span><br><span class="line">                            .field(<span class="string">&quot;format&quot;</span>, <span class="string">&quot;yyyy-MM-dd&quot;</span>)</span><br><span class="line">                        .endObject()</span><br><span class="line">                    .endObject()</span><br><span class="line">                .endObject();</span><br><span class="line">        <span class="comment">// 3.将settings和mappings 封装到到一个Request对象中</span></span><br><span class="line">        CreateIndexRequest request = <span class="keyword">new</span> CreateIndexRequest(index)</span><br><span class="line">                .settings(settings)</span><br><span class="line">                .mapping(type,mappings);</span><br><span class="line">        <span class="comment">// 4.使用client 去连接ES</span></span><br><span class="line">        CreateIndexResponse response = client.indices().create(request, RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;response:&quot;</span>+response.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>检查索引是否存在</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CheckIdxExit</span> </span>&#123;</span><br><span class="line">    RestHighLevelClient client =  EsClient.getClient();</span><br><span class="line">    String index = <span class="string">&quot;person&quot;</span>;</span><br><span class="line">    String type=<span class="string">&quot;man&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">existTest</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//  1.准备request 对象</span></span><br><span class="line">        GetIndexRequest request = <span class="keyword">new</span> GetIndexRequest(index);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2.通过client 去 操作</span></span><br><span class="line">        <span class="keyword">boolean</span> exists = client.indices().exists(request, RequestOptions.DEFAULT);</span><br><span class="line">        <span class="comment">// 3输出结果</span></span><br><span class="line">        System.out.println(exists);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>删除索引</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeleteIdx</span> </span>&#123;</span><br><span class="line">    RestHighLevelClient client =  EsClient.getClient();</span><br><span class="line">    String index = <span class="string">&quot;person&quot;</span>;</span><br><span class="line">    String type=<span class="string">&quot;man&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 1.获取request</span></span><br><span class="line"></span><br><span class="line">        DeleteIndexRequest request = <span class="keyword">new</span> DeleteIndexRequest(index);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//  2.使用client 操作request</span></span><br><span class="line">        AcknowledgedResponse delete = client.indices().delete(request, RequestOptions.DEFAULT);</span><br><span class="line">        <span class="comment">//  3.输出结果</span></span><br><span class="line">        System.out.println(delete.isAcknowledged());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="文档操作"><a href="#文档操作" class="headerlink" title="文档操作"></a>文档操作</h1><ul>
+<li>新建文档</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateDoc</span> </span>&#123;</span><br><span class="line">    ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">    RestHighLevelClient client =  EsClient.getClient();</span><br><span class="line">    String index = <span class="string">&quot;person&quot;</span>;</span><br><span class="line">    String type=<span class="string">&quot;man&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 单个新建</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createDoc</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//  1.准备一个json数据</span></span><br><span class="line">        Person person  = <span class="keyword">new</span> Person(<span class="number">1</span>,<span class="string">&quot;张三&quot;</span>,<span class="number">33</span>,<span class="keyword">new</span> Date());</span><br><span class="line">        String json = mapper.writeValueAsString(person);</span><br><span class="line">        <span class="comment">//  2.创建一个request对象(手动指定的方式创建)</span></span><br><span class="line">        IndexRequest request = <span class="keyword">new</span> IndexRequest(index,type,person.getId().toString());</span><br><span class="line">        request.source(json, XContentType.JSON);</span><br><span class="line">        <span class="comment">// 3.使用client 操作request对象生成doc</span></span><br><span class="line">        IndexResponse response = client.index(request, RequestOptions.DEFAULT);</span><br><span class="line">        <span class="comment">// 4.输出返回结果</span></span><br><span class="line">        System.out.println(response.getResult().toString());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 批量新建</span></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bulkCreateDoc</span><span class="params">()</span> <span class="keyword">throws</span>  Exception</span>&#123;</span><br><span class="line">        <span class="comment">// 1.准备多个json 对象</span></span><br><span class="line">        Person p1 = <span class="keyword">new</span> Person(<span class="number">1</span>,<span class="string">&quot;张三&quot;</span>,<span class="number">23</span>,<span class="keyword">new</span> Date());</span><br><span class="line">        Person p2 = <span class="keyword">new</span> Person(<span class="number">2</span>,<span class="string">&quot;里斯&quot;</span>,<span class="number">24</span>,<span class="keyword">new</span> Date());</span><br><span class="line">        Person p3 = <span class="keyword">new</span> Person(<span class="number">3</span>,<span class="string">&quot;王武&quot;</span>,<span class="number">24</span>,<span class="keyword">new</span> Date());</span><br><span class="line">        String json1  = mapper.writeValueAsString(p1);</span><br><span class="line">        String json2  = mapper.writeValueAsString(p2);</span><br><span class="line">        String json3  = mapper.writeValueAsString(p3);</span><br><span class="line">        <span class="comment">// 2.创建request</span></span><br><span class="line">        BulkRequest bulkRequest = <span class="keyword">new</span> BulkRequest();</span><br><span class="line">        bulkRequest.add(<span class="keyword">new</span> IndexRequest(index,type,p1.getId().toString()).source(json1,XContentType.JSON))</span><br><span class="line">                .add(<span class="keyword">new</span> IndexRequest(index,type,p2.getId().toString()).source(json2,XContentType.JSON))</span><br><span class="line">                .add(<span class="keyword">new</span> IndexRequest(index,type,p3.getId().toString()).source(json3,XContentType.JSON));</span><br><span class="line">        <span class="comment">// 3.client 执行</span></span><br><span class="line">        BulkResponse responses = client.bulk(bulkRequest, RequestOptions.DEFAULT);</span><br><span class="line">        <span class="comment">// 4.输出结果</span></span><br><span class="line">        System.out.println(responses.getItems().toString());</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>修改文档</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UpdateDoc</span> </span>&#123;</span><br><span class="line">    ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">    RestHighLevelClient client =  EsClient.getClient();</span><br><span class="line">    String index = <span class="string">&quot;person&quot;</span>;</span><br><span class="line">    String type=<span class="string">&quot;man&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateDocTest</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">// 1.创建要跟新的Map</span></span><br><span class="line">        Map&lt;String,Object&gt;  doc = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        doc.put(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;张三三&quot;</span>);</span><br><span class="line">        <span class="comment">// 2.创建request, 将doc 封装进去</span></span><br><span class="line">        UpdateRequest request = <span class="keyword">new</span> UpdateRequest(index,type,<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        request.doc(doc);</span><br><span class="line">        <span class="comment">// 3. client 去操作 request</span></span><br><span class="line">        UpdateResponse response = client.update(request, RequestOptions.DEFAULT);</span><br><span class="line">        <span class="comment">// 4.输出 更新结果</span></span><br><span class="line">        System.out.println(response.getResult());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>删除文档</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeleteDoc</span> </span>&#123;</span><br><span class="line">    ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">    RestHighLevelClient client =  EsClient.getClient();</span><br><span class="line">    String index = <span class="string">&quot;person&quot;</span>;</span><br><span class="line">    String type=<span class="string">&quot;man&quot;</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 单个删除</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteDocTest</span><span class="params">()</span> <span class="keyword">throws</span>  Exception</span>&#123;</span><br><span class="line">        <span class="comment">//  1.封装删除对象</span></span><br><span class="line">        DeleteRequest request = <span class="keyword">new</span> DeleteRequest(index,type,<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        <span class="comment">//  2 client 操作 request对象</span></span><br><span class="line">        DeleteResponse response = client.delete(request, RequestOptions.DEFAULT);</span><br><span class="line">        <span class="comment">//  3.输出结果</span></span><br><span class="line">        System.out.println(response.getResult().toString());</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">   <span class="comment">// 批量删除</span></span><br><span class="line">     <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bulkDelete</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 1.创建Request 对象</span></span><br><span class="line">        BulkRequest bulkRequest = <span class="keyword">new</span> BulkRequest();</span><br><span class="line">        bulkRequest.add(<span class="keyword">new</span> DeleteRequest(index, type, <span class="string">&quot;1&quot;</span>));</span><br><span class="line">        bulkRequest.add(<span class="keyword">new</span> DeleteRequest(index, type, <span class="string">&quot;2&quot;</span>));</span><br><span class="line">        bulkRequest.add(<span class="keyword">new</span> DeleteRequest(index, type, <span class="string">&quot;3&quot;</span>));</span><br><span class="line">        <span class="comment">// 2.执行</span></span><br><span class="line">        BulkResponse re = client.bulk(bulkRequest, RequestOptions.DEFAULT);</span><br><span class="line">        <span class="comment">// 3.输出结果</span></span><br><span class="line">        System.out.println(re.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/11/Elasticsearch%E7%AE%80%E4%BB%8B/" rel="prev" title="Elasticsearch简介">
+      <i class="fa fa-chevron-left"></i> Elasticsearch简介
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/14/Elasticsearch%E6%9F%A5%E8%AF%A2/" rel="next" title="Elasticsearch查询">
+      Elasticsearch查询 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#maven-%E4%BE%9D%E8%B5%96"><span class="nav-number">1.</span> <span class="nav-text">maven 依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">索引操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">文档操作</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Astilt</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Astilt</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
