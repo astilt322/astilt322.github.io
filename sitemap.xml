@@ -2,7 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/09/15/nginx/</loc>
+    
+    <lastmod>2020-09-25</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/09/24/haddop%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2020-09-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/09/11/Elasticsearch%E7%AE%80%E4%BB%8B/</loc>
     
     <lastmod>2020-09-25</lastmod>
     
@@ -23,13 +37,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/09/15/nginx/</loc>
-    
-    <lastmod>2020-09-24</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2020/09/22/Python%E5%A4%9A%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/</loc>
     
     <lastmod>2020-09-24</lastmod>
@@ -38,13 +45,6 @@
   
   <url>
     <loc>http://yoursite.com/2020/09/18/datax/</loc>
-    
-    <lastmod>2020-09-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/09/11/Elasticsearch%E7%AE%80%E4%BB%8B/</loc>
     
     <lastmod>2020-09-24</lastmod>
     

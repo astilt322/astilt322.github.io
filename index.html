@@ -186,7 +186,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-25 09:56:47" itemprop="dateModified" datetime="2020-09-25T09:56:47+08:00">2020-09-25</time>
+                <time title="修改时间：2020-09-25 10:03:47" itemprop="dateModified" datetime="2020-09-25T10:03:47+08:00">2020-09-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -217,7 +217,8 @@
 <li>homebrew 安装（中文官网：<a target="_blank" rel="noopener" href="https://brew.sh/index_zh-cn.html%EF%BC%89">https://brew.sh/index_zh-cn.html）</a></li>
 <li>ssh locahost（免密码登陆）</li>
 </ul>
-<p><img src="/.com//image-20200925094959417.png" alt="image-20200925094959417"></p>
+<img src="/2020/09/24/haddop%E5%AE%89%E8%A3%85/image-20200925094959417.png" class title="image-20200925094959417">
+
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -P <span class="string">&quot;you-email&quot;</span></span><br><span class="line">cat ~<span class="regexp">/.ssh/i</span>d_rsa.pub &gt;&gt; ~<span class="regexp">/.ssh/</span>authorized_keys</span><br><span class="line">ssh localhost</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -881,7 +882,7 @@
 <ul>
 <li>使用kibana查看，同步成功</li>
 </ul>
-<img src="/.com//09/18/datax/image-20200918192804137.png" class title="image-20200918192804137">
+<img src="/2020/09/18/datax/image-20200918192804137.png" class title="image-20200918192804137">
 
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>datax 解放了我们在数据开发时候异构数据源间etl处理，使用起来还是很简单的，更多高级功能或者坑遇到再写。</p>
 
@@ -934,7 +935,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-24 16:40:59" itemprop="dateModified" datetime="2020-09-24T16:40:59+08:00">2020-09-24</time>
+                <time title="修改时间：2020-09-25 10:03:49" itemprop="dateModified" datetime="2020-09-25T10:03:49+08:00">2020-09-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -958,7 +959,8 @@
 
       
           <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Nginx (engine x) 是一个高性能的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTTP">HTTP</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/7793488">反向代理</a>web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BF%84%E7%BD%97%E6%96%AF/125568">俄罗斯</a>访问量第二的Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004年10月4日</p>
-<p><img src="/.com//nginxer.jpg" alt="nginxer"></p>
+<img src="/2020/09/15/nginx/nginxer.jpg" class title="nginxer">
+
 <h1 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h1><ul>
 <li>docker-compose安装</li>
 </ul>
@@ -967,7 +969,8 @@
 <ul>
 <li>浏览器访问：<a target="_blank" rel="noopener" href="http://localhost:8087/">http://localhost:8087</a></li>
 </ul>
-<p><img src="/.com//image-20200915201202164.png" alt="nginxer"></p>
+<img src="/2020/09/15/nginx/image-20200915201202164.png" class title="nginxer">
+
 <h1 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h1><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  docker_nginx docker <span class="built_in">ps</span></span><br><span class="line">CONTAINER ID        IMAGE                              COMMAND                  CREATED             STATUS              PORTS                  NAMES</span><br><span class="line">dbe84a274189        daocloud.io/library/nginx:latest   <span class="string">&quot;/docker-entrypoint.…&quot;</span>   <span class="number">5</span> minutes ago       Up <span class="number">5</span> minutes        <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8087</span>-&gt;<span class="number">80</span>/tcp   nginx</span><br><span class="line"></span><br><span class="line">➜  docker_nginx docker exec <span class="literal">-it</span> dbe bash</span><br><span class="line">root@dbe84a274189:/<span class="comment"># ls</span></span><br><span class="line">bin  boot  dev	docker<span class="literal">-entrypoint</span>.d  docker<span class="literal">-entrypoint</span>.sh  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@dbe84a274189:/<span class="comment"># cd etc/nginx/</span></span><br><span class="line">root@dbe84a274189:/etc/nginx<span class="comment"># ls</span></span><br><span class="line">conf.d	fastcgi_params	koi<span class="literal">-utf</span>  koi<span class="literal">-win</span>  mime.types  modules  nginx.conf  scgi_params	uwsgi_params  win<span class="literal">-utf</span></span><br><span class="line">root@dbe84a274189:/etc/nginx<span class="comment"># cat nginx.conf</span></span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -1720,7 +1723,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-24 16:40:59" itemprop="dateModified" datetime="2020-09-24T16:40:59+08:00">2020-09-24</time>
+                <time title="修改时间：2020-09-25 10:03:30" itemprop="dateModified" datetime="2020-09-25T10:03:30+08:00">2020-09-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1775,7 +1778,10 @@
 <li><p>根据id标识去存放数据的位置拉去指定数据</p>
 </li>
 </ol>
-<p><img src="/.com//es%E6%A3%80%E7%B4%A2%E6%B5%81%E7%A8%8B.png" alt="es检索流程"></p>
+
+
+
+
 <h2 id="对比solr"><a href="#对比solr" class="headerlink" title="对比solr"></a>对比solr</h2><ol>
 <li><p>solr 查询死数据，速度比es快。但是数据如果是改变的，solr查询速度会降低很多，ES的查询速度没有明显的改变</p>
 </li>
