@@ -180,7 +180,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-09-29 11:11:37 / 修改时间：21:22:16" itemprop="dateCreated datePublished" datetime="2020-09-29T11:11:37+08:00">2020-09-29</time>
+              <time title="创建时间：2020-09-29 11:11:37 / 修改时间：21:30:52" itemprop="dateCreated datePublished" datetime="2020-09-29T11:11:37+08:00">2020-09-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -204,6 +204,11 @@
 
       
           <h1 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h1><p>阿里巴巴Java开发手册，对于单元测试有如下描述，我大致抽象了下：</p>
+<h2 id="错误意识"><a href="#错误意识" class="headerlink" title="错误意识"></a>错误意识</h2><ul>
+<li>那是测试同学干的事情，单元测试代码是多余的！汽车的整体功能与各单元部件的测试正常与否是强相关？（认知需转变）</li>
+<li>单元测试代码不需要维护！一年半载后，那么单元测试几乎处于废弃状态。（跟随业务维护）</li>
+<li>单元测试与线上故障没有辩证关系！好的单元测试能够最大限度地规避线上故障（做比没做要好）</li>
+</ul>
 <h2 id="AIR-原则"><a href="#AIR-原则" class="headerlink" title="AIR 原则"></a>AIR 原则</h2><blockquote>
 <p>单元测试在线上运行时候，感觉像空气（air）一样并不存在，但是在质量保证上却又十分关键。</p>
 </blockquote>
@@ -218,12 +223,14 @@
 <li>D: Design，与设计文档相结合，来编写单元测试。</li>
 <li>E: Error，单元测试的目的是证明程序有错，而不是证明程序无错。为了发现代码中潜在的错误，我们需要在编写测试用例时有一些强制的错误输入（如非法数据、异常流程、非业务允许输入等）来得到预期的错误结果</li>
 </ul>
-<h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><h3 id="强制"><a href="#强制" class="headerlink" title="强制"></a>强制</h3><ul>
+<h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><p><strong>强制</strong></p>
+<ul>
 <li>粒度尽量小，最大至方法级别</li>
 <li>核心业务、核心应用、核心模块确保有单元测试</li>
 <li>代码必须写在如下工程目录：src/test/java</li>
 </ul>
-<h3 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h3><ul>
+<p><strong>推荐</strong></p>
+<ul>
 <li>DAO层，Manager层，可重用度高的Service，都应该进行单元测试</li>
 <li>不手动操作数据库，请使用用程序准备符合业务的数据</li>
 <li>数据库相关的单元测试，可以设置自动回滚机制，不造脏数据</li>
@@ -231,18 +238,13 @@
 <li>在设计评审阶段，开发人员需要和测试人员一起确定单元测试范围，单元测试最好覆盖所有测试用例（UC）</li>
 </ul>
 <h2 id="业务代码"><a href="#业务代码" class="headerlink" title="业务代码"></a>业务代码</h2><blockquote>
-<p>为了更方便地进行单元测试，业务代码应避免以下情况。</p>
+<p>为了更方便地进行单元测试，业务代码应避免以下情况</p>
 </blockquote>
 <ul>
 <li>构造方法中做的事情过多</li>
 <li>存在过多的全局变量和静态方法</li>
 <li>存在过多的外部依赖</li>
 <li>存在过多的条件语句</li>
-</ul>
-<h2 id="误解"><a href="#误解" class="headerlink" title="误解"></a>误解</h2><ul>
-<li>那是测试同学干的事情，单元测试代码是多余的！汽车的整体功能与各单元部件的测试正常与否是强相关？（意识转变）</li>
-<li>单元测试代码不需要维护！一年半载后，那么单元测试几乎处于废弃状态。（跟随业务维护）</li>
-<li>单元测试与线上故障没有辩证关系！好的单元测试能够最大限度地规避线上故障（做比没做好）</li>
 </ul>
 <h1 id="Junit-Mockito"><a href="#Junit-Mockito" class="headerlink" title="Junit+Mockito"></a>Junit+Mockito</h1><blockquote>
 <p>基于springBoot 1.5.19</p>
@@ -251,11 +253,11 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><a target="_blank" rel="noopener" href="http://junit.org/">JUnit</a> —用于 Java 应用程序的单元测试的事实上的标准。（4.x版本）</li>
-<li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/4.3.13.RELEASE/spring-framework-reference/htmlsingle/#integration-testing">Spring Test</a>和 Spring Boot 测试—对 Spring Boot 应用程序的 Util 和集成测试支持。</li>
-<li><a target="_blank" rel="noopener" href="https://joel-costigliola.github.io/assertj/">AssertJ</a> —流畅的 assert 库。</li>
+<li><a target="_blank" rel="noopener" href="https://junit.org/junit4/">JUnit</a> —用于 Java 应用程序的单元测试的事实上的标准。（4.x版本）</li>
+<li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/4.3.13.RELEASE/spring-framework-reference/htmlsingle/#integration-testing">Spring Test</a> 和 Spring Boot 测试—对 Spring Boot 应用程序的 Util 和集成测试支持。</li>
 <li><a target="_blank" rel="noopener" href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a> —匹配器对象库(也称为约束或谓词)。</li>
 <li><a target="_blank" rel="noopener" href="http://mockito.org/">Mockito</a> — Java 模拟框架。（1.x版本）</li>
+<li><a target="_blank" rel="noopener" href="https://joel-costigliola.github.io/assertj/">AssertJ</a> —流畅的 assert 库。</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/skyscreamer/JSONassert">JSONassert</a> — JSON 的 assert 库。</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/jayway/JsonPath">JsonPath</a> — JSON 的 XPath。</li>
 </ul>
@@ -266,33 +268,37 @@
 <h4 id="相关注解"><a href="#相关注解" class="headerlink" title="相关注解"></a>相关注解</h4><table>
 <thead>
 <tr>
-<th>@Test(excepted==xx.class,timeout=毫秒数)</th>
-<th>修饰一个方法为测试方法，excepted参数可以忽略某些异常类</th>
+<th align="center">注解</th>
+<th align="center">说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>@Before</td>
-<td>在每一个测试方法被运行前执行一次</td>
+<td align="center">@Test(excepted==xx.class,timeout=毫秒数)</td>
+<td align="center">修饰一个方法为测试方法，excepted参数可以忽略某些异常类</td>
 </tr>
 <tr>
-<td>@BeforeClass</td>
-<td>在所有测试方法执行前执行</td>
+<td align="center">@Before</td>
+<td align="center">在每一个测试方法被运行前执行一次</td>
 </tr>
 <tr>
-<td>@After</td>
-<td>在每一个测试方法运行后执行一次</td>
+<td align="center">@BeforeClass</td>
+<td align="center">在所有测试方法执行前执行</td>
 </tr>
 <tr>
-<td>@AfterClass</td>
-<td>在所有测试方法执行后执行</td>
+<td align="center">@After</td>
+<td align="center">在每一个测试方法运行后执行一次</td>
 </tr>
 <tr>
-<td>@Ignore</td>
-<td>修饰的类或方法会被测试运行器忽略</td>
+<td align="center">@AfterClass</td>
+<td align="center">在所有测试方法执行后执行</td>
 </tr>
 <tr>
-<td>@RunWith</td>
-<td>更改测试运行器</td>
+<td align="center">@Ignore</td>
+<td align="center">修饰的类或方法会被测试运行器忽略</td>
+</tr>
+<tr>
+<td align="center">@RunWith</td>
+<td align="center">更改测试运行器</td>
 </tr>
 </tbody></table>
 <h4 id="常规用法"><a href="#常规用法" class="headerlink" title="常规用法"></a>常规用法</h4><h5 id="套件"><a href="#套件" class="headerlink" title="套件"></a>套件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskOneTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Task one do.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskTwoTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Task two do.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskThreeTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Task Three.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 更改测试运行方式为 Suite</span></span><br><span class="line"><span class="meta">@RunWith(Suite.class)</span> </span><br><span class="line"><span class="comment">// 2. 将测试类传入进来</span></span><br><span class="line"><span class="meta">@Suite</span>.SuiteClasses(&#123;TaskOneTest.class, TaskTwoTest.class, TaskThreeTest.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuitTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试套件的入口类只是组织测试类一起进行测试，无任何测试方法，</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -318,11 +324,8 @@
 
 
 
-<h3 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h3><p>junit 里面可以使用junit自带的断言，和assertThat。</p>
-<h6 id="Junit-1"><a href="#Junit-1" class="headerlink" title="Junit"></a>Junit</h6><blockquote>
-<p>第一个值是错误情况的消息（可选），后续参数的顺序是：期望值、实际值</p>
-</blockquote>
-<table>
+<h3 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h3><p>junit 断言，表格里面和assertThat。</p>
+<h6 id><a href="#" class="headerlink" title></a></h6><table>
 <thead>
 <tr>
 <th align="center">断言</th>
@@ -730,7 +733,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-24 16:40:59" itemprop="dateModified" datetime="2020-09-24T16:40:59+08:00">2020-09-24</time>
+                <time title="修改时间：2020-10-09 18:08:00" itemprop="dateModified" datetime="2020-10-09T18:08:00+08:00">2020-10-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -754,17 +757,9 @@
 
       
           <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在日常的开发中，我们经常需要在多版本的python之间切换，手动修改bash文件比较麻烦，pyenv应运而生。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>安装homebrew</li>
-</ul>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c <span class="string">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装homebrew"><a href="#安装homebrew" class="headerlink" title="安装homebrew"></a>安装homebrew</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c <span class="string">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;</span></span><br></pre></td></tr></table></figure>
 
-
-
-<ul>
-<li>安装pyenv</li>
-</ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install pyenv</span><br></pre></td></tr></table></figure>
+<h2 id="安装pyenv"><a href="#安装pyenv" class="headerlink" title="安装pyenv"></a>安装pyenv</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install pyenv</span><br></pre></td></tr></table></figure>
 
 
 
@@ -774,9 +769,13 @@
 <blockquote>
 <p>我是用的oh-my-zsh，所以编辑 .zshrc文件。</p>
 </blockquote>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、vim ~/.zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将下面2句话放在文件最后</span></span><br><span class="line"><span class="comment"># 使用bash，同理就放在～/.bash_profile里</span></span><br><span class="line"><span class="comment"># 别忘了 source </span></span><br><span class="line">export PYENV_ROOT=/usr/local/var/pyenv</span><br><span class="line"><span class="keyword">if</span> which pyenv &gt; /dev/null; then eval <span class="string">&quot;<span class="variable">$</span>(pyenv init -)&quot;</span>; fi</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、source ~/.zshrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、vim ~/.zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将下面3句话放在文件最后</span></span><br><span class="line"><span class="comment"># 使用bash，同理就放在～/.bash_profile里</span></span><br><span class="line"><span class="comment"># 别忘了 source </span></span><br><span class="line">export PYENV_ROOT=/usr/local/var/pyenv</span><br><span class="line">export PATH=<span class="string">&quot;<span class="variable">$PYENV_ROOT</span>/bin:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line">eval <span class="string">&quot;<span class="variable">$</span>(/usr/local/bin/pyenv init -)&quot;</span></span><br><span class="line"><span class="keyword">if</span> which pyenv &gt; /dev/null; then eval <span class="string">&quot;<span class="variable">$</span>(pyenv init -)&quot;</span>; fi</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、source ~/.zshrc</span><br></pre></td></tr></table></figure>
 
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><h2 id="安装指定版本python"><a href="#安装指定版本python" class="headerlink" title="安装指定版本python"></a>安装指定版本python</h2><blockquote>
+
+
+<h2 id="安装指定版本python"><a href="#安装指定版本python" class="headerlink" title="安装指定版本python"></a>安装指定版本python</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 3.8.5</span><br></pre></td></tr></table></figure>
+
+<h3 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h3><blockquote>
 <p>使用pyenv install 安装指定python版本时候很慢，最好的办法是离线下载下来</p>
 </blockquote>
 <ul>
@@ -845,8 +844,17 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-24 16:40:59" itemprop="dateModified" datetime="2020-09-24T16:40:59+08:00">2020-09-24</time>
+                <time title="修改时间：2020-10-10 17:14:53" itemprop="dateModified" datetime="2020-10-10T17:14:53+08:00">2020-10-10</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
 
           
 
@@ -859,8 +867,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="关机、重启"><a href="#关机、重启" class="headerlink" title="关机、重启"></a>关机、重启</h1><h2 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h2><ul>
-<li>shutdown -h now：关机不掉点</li>
+          <p>日常使用了很多linux命令，有时候会忘了，这里列举常用的命令，使用系统如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[deploy@dev-node ~]$ lsb_release -a</span><br><span class="line">LSB Version:	:core-4.1-amd64:core-4.1-noarch:cxx-4.1-amd64:cxx-4.1-noarch:desktop-4.1-amd64:desktop-4.1-noarch:languages-4.1-amd64:languages-4.1-noarch:printing-4.1-amd64:printing-4.1-noarch</span><br><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS Linux release 7.3.1611 (Core)</span><br><span class="line">Release:	7.3.1611</span><br><span class="line">Codename:	Core</span><br></pre></td></tr></table></figure>
+
+<h1 id="关机、重启"><a href="#关机、重启" class="headerlink" title="关机、重启"></a>关机、重启</h1><h2 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h2><ul>
+<li>shutdown -h now：关机不掉电</li>
 <li>halt：同上意义</li>
 <li>init 0：同上意义</li>
 <li>poweroff：关闭电源</li>
@@ -870,6 +881,41 @@
 <li>reboot：同上</li>
 <li>init：同上</li>
 </ul>
+<h1 id="用户和组"><a href="#用户和组" class="headerlink" title="用户和组"></a>用户和组</h1><ul>
+<li>查看用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id hf</span><br><span class="line">who</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>看所有用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建工作组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd ghf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除工作组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupdel ghf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd hf</span><br><span class="line">passwd 123</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel hf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用户与用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 新建用户并加入到用户组</span><br><span class="line">useradd -g ghf hf</span><br><span class="line">// 存在hf用户加入到ghf组，并移除其他所属组</span><br><span class="line">usermod -G ghf hf</span><br><span class="line">// 存在hf用户加入到ghd组，其他所属组不变</span><br><span class="line">usermod -a ghd hf</span><br></pre></td></tr></table></figure>
+
 <h1 id="文件和目录操作命令"><a href="#文件和目录操作命令" class="headerlink" title="文件和目录操作命令"></a>文件和目录操作命令</h1><h2 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h2><blockquote>
 <p>print working directory，显示当前目录</p>
 </blockquote>
@@ -881,7 +927,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt</span><br></pre></td></tr></table></figure>
 
 <h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><blockquote>
-<p>以树机构展示目录结构。</p>
+<p>以树类目形式展示目录结构</p>
 </blockquote>
 <p>有些系统没有安装此命令，没有请安装。例如：只显示第一层的/opt 。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ tree -L 1 /opt</span><br><span class="line">/opt</span><br><span class="line">├── client</span><br><span class="line">├── code</span><br><span class="line">├── conf</span><br><span class="line">├── data</span><br><span class="line">├── keytab</span><br><span class="line">├── plugins</span><br><span class="line">├── third</span><br><span class="line">└── workspace</span><br></pre></td></tr></table></figure>
@@ -1152,6 +1198,25 @@
 <p>和tail -f 几乎等效，默认也是输出文件最后10行。但是如果文件不增长，不会去访问磁盘文件，也不更改文件访问时间。</p>
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost logs]$ tailf -100 data.log</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h1><ul>
+<li>系统磁盘使用情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h [路径]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>目录使用情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh [路径]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>分区</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看</span></span><br><span class="line">[deploy<span class="meta">@dubhe</span>-node ~]$ sudo fdisk  -l /dev/sdb1</span><br><span class="line">磁盘 /dev/sdb1：<span class="number">53.7</span> GB, <span class="number">53686042624</span> 字节，<span class="number">104855552</span> 个扇区</span><br><span class="line">Units = 扇区 of <span class="number">1</span> * <span class="number">512</span> = <span class="number">512</span> bytes</span><br><span class="line">扇区大小(逻辑/物理)：<span class="number">512</span> 字节 / <span class="number">512</span> 字节</span><br><span class="line">I/O 大小(最小/最佳)：<span class="number">512</span> 字节 / <span class="number">512</span> 字节</span><br><span class="line"></span><br><span class="line"><span class="comment">// 管理</span></span><br><span class="line">命令使用格式：fdisk /dev/sd# ：创建，删除，保存磁盘分区配置。</span><br><span class="line">fdisk提供了一个交互式接口来管理分区，它有许多子命令，分别用于不同的管理功能；所有的操作均在内存中完成，没有直接同步到磁盘；直到使用w命令保存至磁盘上；</span><br><span class="line">以下命令选项为m中的常用选项：</span><br><span class="line">              n：创建新分区        d：删除已有分区</span><br><span class="line">              t：修改分区类型      l：查看所有已经ID</span><br><span class="line">              w：保存并退出        q：不保存并退出</span><br><span class="line">              m：查看帮助信息      p：显示现有分区信息</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -1311,7 +1376,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-25 10:03:49" itemprop="dateModified" datetime="2020-09-25T10:03:49+08:00">2020-09-25</time>
+                <time title="修改时间：2020-10-09 09:13:19" itemprop="dateModified" datetime="2020-10-09T09:13:19+08:00">2020-10-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2099,7 +2164,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-25 10:03:30" itemprop="dateModified" datetime="2020-09-25T10:03:30+08:00">2020-09-25</time>
+                <time title="修改时间：2020-10-09 09:13:19" itemprop="dateModified" datetime="2020-10-09T09:13:19+08:00">2020-10-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2322,13 +2387,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
