@@ -102,14 +102,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E5%91%BD%E4%BB%A4/</loc>
+    <loc>http://yoursite.com/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</loc>
+    <loc>http://yoursite.com/tags/%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -160,14 +160,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/Linux/</loc>
+    <loc>http://yoursite.com/categories/Java/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/Java/</loc>
+    <loc>http://yoursite.com/categories/Linux/</loc>
     <lastmod>2020-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
