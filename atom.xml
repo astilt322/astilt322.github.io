@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-22T12:58:15.243Z</updated>
+  <updated>2020-11-04T08:59:58.801Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,107 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>greenplum</title>
+    <link href="http://yoursite.com/2020/11/04/greenplum/"/>
+    <id>http://yoursite.com/2020/11/04/greenplum/</id>
+    <published>2020-11-04T08:57:22.000Z</published>
+    <updated>2020-11-04T08:59:58.801Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Greenplum-接好"><a href="#Greenplum-接好" class="headerlink" title="Greenplum 接好"></a>Greenplum 接好</h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Greenplum-接好&quot;&gt;&lt;a href=&quot;#Greenplum-接好&quot; class=&quot;headerlink&quot; title=&quot;Greenplum 接好&quot;&gt;&lt;/a&gt;Greenplum 接好&lt;/h1&gt;</summary>
+      
+    
+    
+    
+    <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="greenplum" scheme="http://yoursite.com/tags/greenplum/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>postgresql简单使用</title>
+    <link href="http://yoursite.com/2020/11/04/postgresql%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2020/11/04/postgresql%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</id>
+    <published>2020-11-04T03:54:46.000Z</published>
+    <updated>2020-11-04T12:10:13.585Z</updated>
+    
+    <content type="html"><![CDATA[<p>在pg里面有schema的概念。这里我们可以简单理解下：database（仓库）–&gt; schema（房间）–&gt;对象（表、视图、触发器）</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul><li>拉取镜像并运行：<code>docker run -it --name greenplum  -p 5432:5432 -d kevinmtrowbridge/greenplumdb_singlenode</code></li><li>进入到容器内：<code>docker exec -it greenplum /bin/bash</code> </li><li>登陆：<code>psql -h localhost -p 5432 -U gpadmin template1</code></li><li>切换到 postgres库：<code> \c  postgres</code></li><li>创建用户：<code>CREATE USER astilt PASSWORD &#39;astilt&#39;;</code></li><li>授权：<code>GRANT ALL PRIVILEGES ON DATABASE postgres TO astilt;</code></li><li>客户端navicat登陆吧，username：astilt，pwd：astilt</li></ul><h1 id="mysql对比"><a href="#mysql对比" class="headerlink" title="mysql对比"></a>mysql对比</h1><h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><table><thead><tr><th align="left">操作</th><th align="left">MySQL</th><th align="left">GP</th></tr></thead><tbody><tr><td align="left">切换数据库</td><td align="left">USE {dbname}</td><td align="left">\c {dbname}</td></tr><tr><td align="left">查看当前库/用户</td><td align="left">无</td><td align="left">\c</td></tr><tr><td align="left">查看所有数据库</td><td align="left">SHOW DATABASE</td><td align="left">\l</td></tr><tr><td align="left">切换Schema</td><td align="left">无</td><td align="left">SET search_path={schemaname}</td></tr><tr><td align="left">查看Schema</td><td align="left">无</td><td align="left">\dn</td></tr><tr><td align="left">查看所用用户</td><td align="left">select * from mysql.user</td><td align="left">\du</td></tr><tr><td align="left">查看所有表</td><td align="left">SHOW TABLES</td><td align="left">\d</td></tr><tr><td align="left">查看表结构</td><td align="left">DESC {tablename}</td><td align="left">\d  {tablename}</td></tr><tr><td align="left">按列展示结果</td><td align="left">\G（跟在SQL语句后）</td><td align="left">\x（单独运行，再次运行切回按行）</td></tr><tr><td align="left">查看运行时间</td><td align="left">默认展示</td><td align="left">\timing</td></tr><tr><td align="left">查看客户端连接</td><td align="left">SHOW PROCESSLIST</td><td align="left">SELECT * FROM pg_stat_activity</td></tr><tr><td align="left">客户端工具</td><td align="left">mysql -h{hostname} -P{port} -u{user} -p{pwd} {dbname}</td><td align="left">PGPASSWORD={pwd} psql -h{hostname} -p{port} -U{user} -d {dbname}</td></tr></tbody></table><h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="自增长"><a href="#自增长" class="headerlink" title="自增长"></a>自增长</h3><ul><li>Mysql</li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`mysql_test`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>  <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT, </span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="string">`id`</span>)</span><br><span class="line">  ) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8</span><br></pre></td></tr></table></figure><ul><li><p>pg</p><blockquote><p>使用的 <a href="https://www.postgresql.org/docs/8.3/sql-createsequence.html">Sequence</a></p></blockquote></li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 1</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> gp_test (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">SERIAL</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">  <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>)</span><br><span class="line">  ) </span><br><span class="line">  // <span class="number">2</span></span><br><span class="line"> <span class="keyword">CREATE</span> <span class="keyword">SEQUENCE</span> users_id_seq <span class="keyword">INCREMENT</span> <span class="keyword">BY</span> <span class="number">2</span> <span class="keyword">MINVALUE</span>  <span class="number">10000</span> MAXVALUE <span class="number">99999</span>;</span><br><span class="line"> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> gp_test (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">bigint</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NEXTVAL</span> (<span class="string">&#x27;users_id_seq&#x27;</span>),</span><br><span class="line">  <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>)</span><br><span class="line">  )   </span><br></pre></td></tr></table></figure><h2 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h2><table><thead><tr><th align="left">MySQL</th><th align="left">GP</th></tr></thead><tbody><tr><td align="left">TINYINT</td><td align="left">SMALLINT</td></tr><tr><td align="left">MEDIUMINT</td><td align="left">INTEGER</td></tr><tr><td align="left">TINYINT UNSIGNED</td><td align="left">SMALLINT check({columnname} &gt;= 0)</td></tr><tr><td align="left">FLOAT</td><td align="left">REAL</td></tr><tr><td align="left">DATETIME</td><td align="left">TIMESTAMP</td></tr><tr><td align="left">LONGTEXT</td><td align="left">TEXT</td></tr><tr><td align="left">MEDIUMTEXT</td><td align="left">TEXT</td></tr><tr><td align="left">BLOB</td><td align="left">BYTEA</td></tr></tbody></table><h1 id="PG-常用创建"><a href="#PG-常用创建" class="headerlink" title="PG 常用创建"></a>PG 常用创建</h1><ul><li>用户/角色</li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">ROLE</span> custom <span class="keyword">PASSWORD</span> <span class="string">&#x27;custom&#x27;</span>; (创建后不能登陆)</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> custom <span class="keyword">PASSWORD</span> <span class="string">&#x27;custom&#x27;</span>;（创建后能登陆）</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">ROLE</span> custom LOGIN;（新增login权限，可以登陆了）</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> hf <span class="keyword">TO</span> custom;（将hf数据库的所有权限都赋予custom用户）</span><br><span class="line">// 登陆</span><br><span class="line">psql -U custom -d hf -h 192.168.90.112 -p 5432</span><br><span class="line">// 修改密码</span><br><span class="line">\password [USERNAME]</span><br></pre></td></tr></table></figure><ul><li>schema</li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 创建一个新模式ord，对应于登录用户custom：</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">SCHEMA</span> <span class="keyword">ord</span>; </span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">SCHEMA</span> <span class="keyword">ord</span> OWNER <span class="keyword">TO</span> custom;</span><br><span class="line">// 再次创建一张test表，这次这张表要指明模式ord</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> ord.test (<span class="keyword">id</span> <span class="built_in">integer</span> <span class="keyword">not</span> <span class="literal">null</span>);</span><br></pre></td></tr></table></figure><ul><li>database</li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 数据库所有者是当前创建数据库的角色，默认的表空间是系统的默认表空间pg_default。在`PostgreSQL`中，数据的创建是通过**克隆**数据库模板来实现的，这与SQL SERVER是同样的机制。由于`CREATE DATABASE dbname`并没有指明数据库模板，所以系统将默认克隆`template1`数据库，得到新的数据库`dbname`，template1`数据库的默认表空间是`pg_default</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> hf;</span><br><span class="line"><span class="keyword">drop</span> databasem hf;</span><br></pre></td></tr></table></figure><ul><li>表空间</li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLESPACE</span> ts OWNER custom LOCATION <span class="string">&#x27;/tmp/data/tsmars&#x27;</span>;</span><br><span class="line">// 指定模版和表空间创建数据库</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> hf <span class="keyword">TEMPLATE</span> template1 <span class="keyword">TABLESPACE</span> ts;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> hf OWNER <span class="keyword">TO</span> custom;</span><br></pre></td></tr></table></figure><ul><li>表</li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 新建</span><br><span class="line">create table ([字段名1] [类型1] &lt;references 关联表名(关联的字段名)&gt;;,[字段名2] [类型2],......&lt;,primary key (字段名m,字段名n,...)&gt;;); </span><br><span class="line">// 删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> [表名]; </span><br><span class="line">// 重命名一个表</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名A] <span class="keyword">rename</span> <span class="keyword">to</span> [表名B]; </span><br><span class="line">// 在已有的表里添加字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">add</span> <span class="keyword">column</span> [字段名] [类型]; </span><br><span class="line">//删除表中的字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">drop</span> <span class="keyword">column</span> [字段名]; </span><br><span class="line">//重命名一个字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">rename</span> <span class="keyword">column</span> [字段名A] <span class="keyword">to</span> [字段名B]; </span><br><span class="line">//给一个字段设置缺省值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">alter</span> <span class="keyword">column</span> [字段名] <span class="keyword">set</span> <span class="keyword">default</span> [新的默认值];</span><br><span class="line">//去除缺省值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">alter</span> <span class="keyword">column</span> [字段名] <span class="keyword">drop</span> <span class="keyword">default</span>; </span><br><span class="line">//表中插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名 ([字段名m],[字段名n],......) <span class="keyword">values</span> ([列m的值],[列n的值],......); </span><br><span class="line">//修改表中的某行某列的数据</span><br><span class="line"><span class="keyword">update</span> [表名] <span class="keyword">set</span> [目标字段名]=[目标值] <span class="keyword">where</span> [该行特征]; </span><br><span class="line">//删除表中某行数据</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> [表名] <span class="keyword">where</span> [该行特征]; </span><br></pre></td></tr></table></figure><h1 id="schema模式"><a href="#schema模式" class="headerlink" title="schema模式"></a>schema模式</h1><p><code>模式(schema)</code>是对数据库(database)逻辑分割，在数据库创建的同时，就已经默认为数据库创建了一个模式：public。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在pg里面有schema的概念。这里我们可以简单理解下：database（仓库）–&amp;gt; schema（房间）–&amp;gt;对象（表、视图、触发器）&lt;/p&gt;
+&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a</summary>
+      
+    
+    
+    
+    <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="postgresql" scheme="http://yoursite.com/tags/postgresql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>aop</title>
+    <link href="http://yoursite.com/2020/11/03/aop/"/>
+    <id>http://yoursite.com/2020/11/03/aop/</id>
+    <published>2020-11-03T11:02:10.000Z</published>
+    <updated>2020-11-03T12:54:12.610Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前经常使用spring的aop来做些自定义的动作，但是没有真正系统的了解过它，最近整理下。</p><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><blockquote><p>Aspect-oriented Programming (AOP)，相对于Object-oriented Programming (OOP)来说是另外一种编程风格。在spring中，可以使用xml和aspectJ两种风格来定义切面。</p></blockquote><h2 id="Aspect"><a href="#Aspect" class="headerlink" title="Aspect"></a>Aspect</h2><ul><li>添加了**@Aspect**的类</li><li>基于xml配置的类</li></ul><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">&quot;myAspect&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;aBean&quot;</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;aBean&quot;</span> <span class="attr">class</span>=<span class="string">&quot;...&quot;</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="Join-Point"><a href="#Join-Point" class="headerlink" title="Join Point"></a>Join Point</h2><p>连接点，在spring代表一个方法的执行。spring中可以简单认为所有方法都是连接点。</p><h2 id="PointCut"><a href="#PointCut" class="headerlink" title="PointCut"></a>PointCut</h2><p>切点，是用来描述连接点，通过它可以确定哪些连接点可以被增强。切点表达式，是aop的核心，稍后介绍。</p><h2 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a>Advice</h2><p>由 aspect 添加到特定的Join Point(即满足 PointCut规则的 join point) 的一段代码。</p><h1 id="Advice类型"><a href="#Advice类型" class="headerlink" title="Advice类型"></a>Advice类型</h1><ul><li>@Before：在一个方法执行前被调用</li><li>@AfterReturning：仅当方法成功完成后执行的通知，异常后不执行</li><li>@AfterThrowing：方法抛出异常退出时执行的通知</li><li>@After：方法执行之后调用的通知，无论方法执行是否成功</li><li>@Around：方法执行之前和之后调用的通知（大而全的类型，可以替代很多类型）</li></ul><h1 id="切点定义"><a href="#切点定义" class="headerlink" title="切点定义"></a>切点定义</h1><h2 id="方法匹配模式：execution"><a href="#方法匹配模式：execution" class="headerlink" title="方法匹配模式：execution()"></a>方法匹配模式：execution()</h2><ul><li>任意公共方法的执行：<code>execution(public * *(..))</code></li><li>任何一个以“set”开始的方法的执行：<code>execution(* set*(..))</code></li><li>AccountService 接口的任意方法的执行：<code>execution(* com.xyz.service.AccountService.*(..))</code></li><li>定义在service包里的任意方法的执行：<code>execution(* com.xyz.service.*.*(..))</code></li><li>定义在service包或者子包里的任意方法的执行：<code>execution(* com.xyz.service..*.*(..))</code></li><li>在service包里的任意连接点（在Spring AOP中只是方法执行）：<code>within(com.xyz.service.*)</code></li><li>在service包或者子包里的任意连接点（在Spring AOP中只是方法执行）：<code>within(com.xyz.service..*)</code></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;之前经常使用spring的aop来做些自定义的动作，但是没有真正系统的了解过它，最近整理下。&lt;/p&gt;
+&lt;h1 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Asp</summary>
+      
+    
+    
+    
+    <category term="spring" scheme="http://yoursite.com/categories/spring/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>常用命令记录</title>
+    <link href="http://yoursite.com/2020/10/29/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2020/10/29/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</id>
+    <published>2020-10-29T12:46:58.000Z</published>
+    <updated>2020-10-30T01:14:05.124Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>查看mac上JDK路径</li></ul><p><code> /usr/libexec/java_home -V</code></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;查看mac上JDK路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt; /usr/libexec/java_home -V&lt;/code&gt;&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="命令" scheme="http://yoursite.com/categories/%E5%91%BD%E4%BB%A4/"/>
+    
+    
+    <category term="Mac 、linux" scheme="http://yoursite.com/tags/Mac-%E3%80%81linux/"/>
+    
+  </entry>
   
   <entry>
     <title>shiro</title>

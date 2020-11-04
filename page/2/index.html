@@ -155,6 +155,834 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/22/Python%E5%A4%9A%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/22/Python%E5%A4%9A%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">Python多版本管理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-22 16:53:36" itemprop="dateCreated datePublished" datetime="2020-09-22T16:53:36+08:00">2020-09-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-09 18:08:00" itemprop="dateModified" datetime="2020-10-09T18:08:00+08:00">2020-10-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在日常的开发中，我们经常需要在多版本的python之间切换，手动修改bash文件比较麻烦，pyenv应运而生。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装homebrew"><a href="#安装homebrew" class="headerlink" title="安装homebrew"></a>安装homebrew</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c <span class="string">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="安装pyenv"><a href="#安装pyenv" class="headerlink" title="安装pyenv"></a>安装pyenv</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install pyenv</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>设置环境变量</li>
+</ul>
+<blockquote>
+<p>我是用的oh-my-zsh，所以编辑 .zshrc文件。</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、vim ~/.zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将下面3句话放在文件最后</span></span><br><span class="line"><span class="comment"># 使用bash，同理就放在～/.bash_profile里</span></span><br><span class="line"><span class="comment"># 别忘了 source </span></span><br><span class="line">export PYENV_ROOT=/usr/local/var/pyenv</span><br><span class="line">export PATH=<span class="string">&quot;<span class="variable">$PYENV_ROOT</span>/bin:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line">eval <span class="string">&quot;<span class="variable">$</span>(/usr/local/bin/pyenv init -)&quot;</span></span><br><span class="line"><span class="keyword">if</span> which pyenv &gt; /dev/null; then eval <span class="string">&quot;<span class="variable">$</span>(pyenv init -)&quot;</span>; fi</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、source ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装指定版本python"><a href="#安装指定版本python" class="headerlink" title="安装指定版本python"></a>安装指定版本python</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 3.8.5</span><br></pre></td></tr></table></figure>
+
+<h3 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h3><blockquote>
+<p>使用pyenv install 安装指定python版本时候很慢，最好的办法是离线下载下来</p>
+</blockquote>
+<ul>
+<li>cd $PYENV_ROOT &amp;&amp; mkdir cache</li>
+<li><a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/">下载</a> python版本，并拷贝到$PYENV_ROOT/cache 中</li>
+<li>pyenv install Python-xxx.tar.xz</li>
+<li>pyenv global xxx</li>
+<li>pyenv rehash （一定要，不然不生效）</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li>受托管的python版本们：pyenv versions</li>
+<li>当前使用的python版本：pyenv version</li>
+<li>安装指定python版本。例如：pyenv install 3.8.5</li>
+<li>卸载指定python版本：pyenv uninstall [python版本号]</li>
+<li>全局生效：pyenv global xxx</li>
+<li>当前shell生效：pyenv shell xxx</li>
+<li>本文件夹下生效：pyenv local xxx</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/Linux%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/21/Linux%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Linux命令</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-21 08:45:49" itemprop="dateCreated datePublished" datetime="2020-09-21T08:45:49+08:00">2020-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-10 17:14:53" itemprop="dateModified" datetime="2020-10-10T17:14:53+08:00">2020-10-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>日常使用了很多linux命令，有时候会忘了，这里列举常用的命令，使用系统如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[deploy@dev-node ~]$ lsb_release -a</span><br><span class="line">LSB Version:	:core-4.1-amd64:core-4.1-noarch:cxx-4.1-amd64:cxx-4.1-noarch:desktop-4.1-amd64:desktop-4.1-noarch:languages-4.1-amd64:languages-4.1-noarch:printing-4.1-amd64:printing-4.1-noarch</span><br><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS Linux release 7.3.1611 (Core)</span><br><span class="line">Release:	7.3.1611</span><br><span class="line">Codename:	Core</span><br></pre></td></tr></table></figure>
+
+<h1 id="关机、重启"><a href="#关机、重启" class="headerlink" title="关机、重启"></a>关机、重启</h1><h2 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h2><ul>
+<li>shutdown -h now：关机不掉电</li>
+<li>halt：同上意义</li>
+<li>init 0：同上意义</li>
+<li>poweroff：关闭电源</li>
+</ul>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><ul>
+<li>shutdown -r now：立即重启</li>
+<li>reboot：同上</li>
+<li>init：同上</li>
+</ul>
+<h1 id="用户和组"><a href="#用户和组" class="headerlink" title="用户和组"></a>用户和组</h1><ul>
+<li>查看用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id hf</span><br><span class="line">who</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>看所有用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建工作组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd ghf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除工作组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupdel ghf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd hf</span><br><span class="line">passwd 123</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel hf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用户与用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 新建用户并加入到用户组</span><br><span class="line">useradd -g ghf hf</span><br><span class="line">// 存在hf用户加入到ghf组，并移除其他所属组</span><br><span class="line">usermod -G ghf hf</span><br><span class="line">// 存在hf用户加入到ghd组，其他所属组不变</span><br><span class="line">usermod -a ghd hf</span><br></pre></td></tr></table></figure>
+
+<h1 id="文件和目录操作命令"><a href="#文件和目录操作命令" class="headerlink" title="文件和目录操作命令"></a>文件和目录操作命令</h1><h2 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h2><blockquote>
+<p>print working directory，显示当前目录</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost ~]$ pwd</span><br><span class="line">/home/deploy</span><br></pre></td></tr></table></figure>
+
+<h2 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h2><blockquote>
+<p>chang directory，切换目录。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt</span><br></pre></td></tr></table></figure>
+
+<h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><blockquote>
+<p>以树类目形式展示目录结构</p>
+</blockquote>
+<p>有些系统没有安装此命令，没有请安装。例如：只显示第一层的/opt 。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ tree -L 1 /opt</span><br><span class="line">/opt</span><br><span class="line">├── client</span><br><span class="line">├── code</span><br><span class="line">├── conf</span><br><span class="line">├── data</span><br><span class="line">├── keytab</span><br><span class="line">├── plugins</span><br><span class="line">├── third</span><br><span class="line">└── workspace</span><br></pre></td></tr></table></figure>
+
+<h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><blockquote>
+<p>Make directory 创建目录。</p>
+</blockquote>
+<p>-p 创建多级目录，-v 显示创建过程。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ mkdir -v  -p hf/fan</span><br><span class="line">mkdir: 已创建目录 &quot;hf&quot;</span><br><span class="line">mkdir: 已创建目录 &quot;hf/fan&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h2><blockquote>
+<p>创建文件，注意不是目录。</p>
+</blockquote>
+<p>创建2个文件，touch 后面可以接多个需要被新建的文件名。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ touch a.txt b.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><blockquote>
+<p>列出文件，最长用的命令了。</p>
+</blockquote>
+<p>列举几个本人常常使用的命令组合</p>
+<ul>
+<li>ls：列出当前位置文件</li>
+<li>ls -l 、ll ：2命令等同。都表示列出当前位置的所有文件，并列出目录的信息</li>
+<li>ls -al、ll -a : 2命令等同。意义同上，额外显示隐藏的.文件</li>
+<li>ls -ltr ：列出当前位置的所有文件，并列出目录的信息，且按照修改时间自然排序，即可以使文件最新创建/修改的在最后一个</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ ls</span><br><span class="line">a.txt  b.txt  workspace</span><br><span class="line">[deploy@localhost opt]$ ll</span><br><span class="line">总用量 8</span><br><span class="line">-rw-rw-r--  1 deploy deploy    0 9月  20 14:17 a.txt</span><br><span class="line">-rw-rw-r--  1 deploy deploy    0 9月  20 14:17 b.txt</span><br><span class="line">drwxrwxr-x  3 deploy deploy   17 9月  20 14:12 hf</span><br><span class="line">drwxrwxr-x 43 deploy deploy 4096 9月  18 22:42 workspace</span><br><span class="line"></span><br><span class="line">[deploy@localhost opt]$ ll -a</span><br><span class="line">总用量 8</span><br><span class="line">drwxr-xr-x. 11 deploy deploy  151 9月  20 14:17 .</span><br><span class="line">dr-xr-xr-x. 18 root   root    256 5月  19 09:21 ..</span><br><span class="line">-rw-rw-r--   1 deploy deploy    0 9月  20 14:17 a.txt</span><br><span class="line">-rw-rw-r--   1 deploy deploy    0 9月  20 14:17 b.txt</span><br><span class="line">drwxrwxr-x  3 deploy deploy   17 9月  20 14:12 hf</span><br><span class="line">drwxrwxr-x  43 deploy deploy 4096 9月  18 22:42 workspace</span><br><span class="line"></span><br><span class="line">[deploy@localhost opt]$ ls -ltr</span><br><span class="line">总用量 8</span><br><span class="line">drwxrwxr-x 43 deploy deploy 4096 9月  18 22:42 workspace</span><br><span class="line">drwxrwxr-x  3 deploy deploy   17 9月  20 14:12 hf</span><br><span class="line">-rw-rw-r--  1 deploy deploy    0 9月  20 14:17 b.txt</span><br><span class="line">-rw-rw-r--  1 deploy deploy    0 9月  20 14:17 a.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><blockquote>
+<p>copy，复制</p>
+</blockquote>
+<ul>
+<li>单个文件复制</li>
+<li>文件夹复制</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ cp a.txt hf/</span><br><span class="line">[deploy@localhost workspace]$ cp -r hf/ workspace/</span><br></pre></td></tr></table></figure>
+
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><blockquote>
+<p>move  剪切、重命名。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ mv b.txt hf/</span><br><span class="line">[deploy@localhost opt]$ cd hf/</span><br><span class="line">[deploy@localhost hf]$ mv b.txt bb.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><blockquote>
+<p>删除</p>
+</blockquote>
+<p>经常使用的命令，-rf 递归强制删除</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost hf]$ rm -rf bb.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h2><blockquote>
+<p>link 链接</p>
+</blockquote>
+<p>索引节点（inode）：在linux中所有的文件都有一个inode，且inode和文件的关系是：1:n。</p>
+<h3 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h3><blockquote>
+<p>类似windows上的快捷方式，是符号链接。<strong>目标文件不能存在</strong>，目标文件删除不影响源文件，源文件删除了，目标文件仍存在，但是不能访问了，也就是没入口了。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost hf]$ ln -s /home/deploy/fan /home/deploy/soft_fan</span><br><span class="line">[deploy@localhost hf]$ ls</span><br><span class="line">a.txt  fan  soft_fan</span><br></pre></td></tr></table></figure>
+
+<h3 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h3><p>索引节点（inode）：linux文件系统中（etx2，ext3，ext4）每个文件都有一个inode节点，且inode节点和文件的关系是1:n。硬链接就是通过inode共享方式存在的。源文件删除了，不影响硬链接，反之一样。只有硬链接和源文件都没了，文件实体彻底没了。</p>
+<p><strong>不能使用目录来作为硬链接</strong>，一般文件即可哦</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost fan]$ sudo ln /etc/hosts hard_fan</span><br></pre></td></tr></table></figure>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><blockquote>
+<p>查找目录下文件</p>
+</blockquote>
+<p>find [目录]  [参数] [限定条件] [执行动作]</p>
+<ul>
+<li>目录：符合linux规定的目录路径</li>
+<li>参数（基本不使用，这里只做介绍下）：<ul>
+<li>-depth：从指定目录喜爱最深的子目录开始查找</li>
+<li>-maxdepth levels：查找最大的目录级数，level为自然数</li>
+<li>-regxtype type：改变正则的模式，默认为emacs，可以有posix-awk、posix-basic、posix-egrep、posix-extened</li>
+</ul>
+</li>
+<li>限定条件（选项很多，介绍几个常用的）<ul>
+<li>-name：按照文件名字查找，支持 * ? [] 通配符（<strong>常用</strong>）</li>
+<li>-type：查找文件类型（f：普通文件；d 目录；l 符号链接；）（<strong>常用</strong>）</li>
+<li>！：反，例如 ! -type d，查找不是目录</li>
+<li>-regex：接受正则（<strong>常用</strong>）</li>
+<li>-atime -/+/ n：文件访问时间，单位天，-n天内，+n天之前，n距离现在n天（明确的）</li>
+<li>-ctime  -/+/ n：文件改变时间，单位天，-n天内，+n天之前，n距离现在n天（明确的）</li>
+<li>-size -n[bkMG]：查找指定大小的文件。bkMG为单位</li>
+<li>-perm xxx：按照权限，例如-perm 755</li>
+</ul>
+</li>
+<li>执行动作（使用的也很少）<ul>
+<li>-delete：查出后删除</li>
+<li>-exec：对查询出的文件执行后续的shell指令</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> // 查找log文件，且大小大于6M</span><br><span class="line"> [deploy@localhost opt]$ find . -name *.log -size +6M</span><br><span class="line"> // 查找当前路径下，只查找1级目录下，类型是文件的显示出</span><br><span class="line"> [deploy@localhost opt]$ find . -maxdepth 1 -type f | xargs ls -l</span><br><span class="line">-rw-rw-r-- 1 deploy deploy 0 9月  20 14:17 ./a.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="rename"><a href="#rename" class="headerlink" title="rename"></a>rename</h2><blockquote>
+<p> 通过字符串替换的方式修改文件名字</p>
+</blockquote>
+<p> 将当前路径下所有的txt文件修改为md文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ rename .txt .md *.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="md5sum"><a href="#md5sum" class="headerlink" title="md5sum"></a>md5sum</h2><blockquote>
+<p>计算文件md5值，一般用于检查传输的文件是否破坏</p>
+</blockquote>
+<h2 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h2><blockquote>
+<p>改变文件/目录的用户和用户组</p>
+</blockquote>
+<p>chown [-R]  [owner] [:[group]]  [file]</p>
+<ul>
+<li>更改文件所属用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R  deploy client</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更改用户所属用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// :和. 都可以</span><br><span class="line">chown -R  :deploy  client</span><br><span class="line">chown -R  .deploy  client</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更改用户所属用户和用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R  deploy:deploy  client</span><br></pre></td></tr></table></figure>
+
+<h2 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h2><blockquote>
+<p>改变文件权限，只有文件所主和root用户才能执行</p>
+</blockquote>
+<p>chmod [-R] [mode] [file]</p>
+<ul>
+<li>用户类型和操作符</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">权限位</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">用户类型</td>
+<td align="center">属主：u；属组：g；其他：o</td>
+</tr>
+<tr>
+<td align="center">操作字符</td>
+<td align="center">加：+；减-；设置：=</td>
+</tr>
+</tbody></table>
+<ul>
+<li>权限</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">权限字母</th>
+<th align="center">对应数字</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">r</td>
+<td align="center">4</td>
+<td align="center">读</td>
+</tr>
+<tr>
+<td align="center">w</td>
+<td align="center">2</td>
+<td align="center">写</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">1</td>
+<td align="center">执行</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">0</td>
+<td align="center">没有任何权限</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>权限解释</p>
+<blockquote>
+<p>例如：755/rwxr-xr-x</p>
+</blockquote>
+</li>
+<li><p>7 | rwx 属主权限</p>
+</li>
+<li><p>5 | r-x 属组权限</p>
+</li>
+<li><p>5 | r-x 其他用户权限</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ chmod 755 hf</span><br><span class="line">[deploy@localhost opt]$ chmod o+w  hf</span><br><span class="line">[deploy@localhost opt]$ chmod g+rwx hf</span><br><span class="line">[deploy@localhost opt]$ chmod o= hf</span><br><span class="line">[deploy@localhost opt]$ chmod u=rwx,g=rx,o= hf</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="文件过滤和内容编辑命令"><a href="#文件过滤和内容编辑命令" class="headerlink" title="文件过滤和内容编辑命令"></a>文件过滤和内容编辑命令</h1><h2 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h2><blockquote>
+<p>一般用作查看文件内容，或者重定向到指定文件。</p>
+</blockquote>
+<ul>
+<li>输出内容并编号</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$  cat -n  b</span><br><span class="line">     1  bb</span><br><span class="line">     2  bbb</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ cat &gt;&gt;f&lt;&lt;EOF</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> 0908322</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> EOF</span></span><br><span class="line"></span><br><span class="line">[deploy@localhost opt]$ cat f</span><br><span class="line">0908322</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>编辑文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 覆盖，记得enter后ctr+c</span><br><span class="line">[deploy@localhost opt]$ cat &gt;f</span><br><span class="line">66666666</span><br><span class="line">^C</span><br><span class="line">[deploy@localhost opt]$ cat f</span><br><span class="line">66666666</span><br><span class="line">// 追加，记得enter后ctr+c</span><br><span class="line">[deploy@localhost opt]$ cat &gt;&gt;f</span><br><span class="line">77777777</span><br><span class="line">^C</span><br><span class="line">[deploy@localhost opt]$ cat f</span><br><span class="line">66666666</span><br><span class="line">77777777</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="more"><a href="#more" class="headerlink" title="more"></a>more</h2><blockquote>
+<p>一页页将文件内容显示</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost logs]$ more data.log</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>Enter: 向下一行</li>
+<li>空格 | f：向下滚一屏</li>
+<li>b：向上滚一屏</li>
+<li>-s：连续多个空行显示为一行</li>
+<li>/ 查找文本</li>
+<li>v：调用vi</li>
+<li>q：退出</li>
+</ul>
+<h2 id="less"><a href="#less" class="headerlink" title="less"></a>less</h2><blockquote>
+<p>more  的高级版本，包含more的参数</p>
+</blockquote>
+<ul>
+<li>-i：搜索时忽略大小写</li>
+<li>-m：类似more，可以显示百分比</li>
+<li>-N ：显示行号</li>
+<li>G：最后一行</li>
+<li>g：开头一行</li>
+</ul>
+<h2 id="head"><a href="#head" class="headerlink" title="head"></a>head</h2><blockquote>
+<p>显示文件头几行，默认10</p>
+</blockquote>
+<ul>
+<li><p>-n ：头几行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost logs]$ head -100 data.log</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h2><blockquote>
+<p>显示文件尾几行，默认10</p>
+</blockquote>
+<ul>
+<li><p>-n ：头几行</p>
+</li>
+<li><p>-f：实时显示文件变化后追加的数据</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost logs]$ tail -100f data.log</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="tailf"><a href="#tailf" class="headerlink" title="tailf"></a>tailf</h2><blockquote>
+<p>和tail -f 几乎等效，默认也是输出文件最后10行。但是如果文件不增长，不会去访问磁盘文件，也不更改文件访问时间。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost logs]$ tailf -100 data.log</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h1><ul>
+<li>系统磁盘使用情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h [路径]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>目录使用情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh [路径]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>分区</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看</span></span><br><span class="line">[deploy<span class="meta">@dubhe</span>-node ~]$ sudo fdisk  -l /dev/sdb1</span><br><span class="line">磁盘 /dev/sdb1：<span class="number">53.7</span> GB, <span class="number">53686042624</span> 字节，<span class="number">104855552</span> 个扇区</span><br><span class="line">Units = 扇区 of <span class="number">1</span> * <span class="number">512</span> = <span class="number">512</span> bytes</span><br><span class="line">扇区大小(逻辑/物理)：<span class="number">512</span> 字节 / <span class="number">512</span> 字节</span><br><span class="line">I/O 大小(最小/最佳)：<span class="number">512</span> 字节 / <span class="number">512</span> 字节</span><br><span class="line"></span><br><span class="line"><span class="comment">// 管理</span></span><br><span class="line">命令使用格式：fdisk /dev/sd# ：创建，删除，保存磁盘分区配置。</span><br><span class="line">fdisk提供了一个交互式接口来管理分区，它有许多子命令，分别用于不同的管理功能；所有的操作均在内存中完成，没有直接同步到磁盘；直到使用w命令保存至磁盘上；</span><br><span class="line">以下命令选项为m中的常用选项：</span><br><span class="line">              n：创建新分区        d：删除已有分区</span><br><span class="line">              t：修改分区类型      l：查看所有已经ID</span><br><span class="line">              w：保存并退出        q：不保存并退出</span><br><span class="line">              m：查看帮助信息      p：显示现有分区信息</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/18/datax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/18/datax/" class="post-title-link" itemprop="url">datax</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-18 17:50:02" itemprop="dateCreated datePublished" datetime="2020-09-18T17:50:02+08:00">2020-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-24 16:40:59" itemprop="dateModified" datetime="2020-09-24T16:40:59+08:00">2020-09-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><blockquote>
+<p>GitHub 地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/DataX">https://github.com/alibaba/DataX</a></p>
+</blockquote>
+<p>DataX 是阿里巴巴集团内被广泛使用的离线数据同步工具/平台，实现包括 MySQL、Oracle、SqlServer、Postgre、HDFS、Hive、ADS、HBase、TableStore(OTS)、MaxCompute(ODPS)、DRDS 等各种异构数据源之间高效的数据同步功能。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><ul>
+<li>Linux｜Macos</li>
+<li><a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/cn/java/javase/downloads/index.html">JDK(1.8以上，推荐1.8)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.python.org/downloads/">Python(推荐Python2.6.X)</a></li>
+<li><a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">Apache Maven 3.x</a> (Compile DataX)</li>
+</ul>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><ul>
+<li><p>tar.gz包下载：<a target="_blank" rel="noopener" href="http://datax-opensource.oss-cn-hangzhou.aliyuncs.com/datax.tar.gz">http://datax-opensource.oss-cn-hangzhou.aliyuncs.com/datax.tar.gz</a></p>
+</li>
+<li><p>源码编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:alibaba&#x2F;DataX.git</span><br><span class="line">cd  &#123;DataX_source_code_home&#125;</span><br><span class="line">mvn -U clean package assembly:assembly -Dmaven.test.skip&#x3D;true</span><br><span class="line">&#x2F;&#x2F;打包成功后的DataX包位于 &#123;DataX_source_code_home&#125;&#x2F;target&#x2F;datax&#x2F;datax&#x2F;</span><br><span class="line">cd  &#123;DataX_source_code_home&#125;</span><br><span class="line">ls .&#x2F;target&#x2F;datax&#x2F;datax&#x2F;</span><br><span class="line">bin		conf		job		lib		log		log_perf	plugin		script		tmp</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h1><h2 id="怎么执行"><a href="#怎么执行" class="headerlink" title="怎么执行"></a>怎么执行</h2><p>datax 通过bin目录下的datax.py 文件 运行json文件来进行数据同步。解压缩包里有个测试datax的json文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd  &#123;DataX_source_code_home&#125;</span><br><span class="line">./bin/datax.py ./job/job.json</span><br><span class="line">// 运行后结果</span><br><span class="line">2020-09-18 18:22:47.282 [job-0] INFO  JobContainer -                                                                             </span><br><span class="line">任务启动时刻                    : 2020-09-18 18:22:37                                                                            │</span><br><span class="line">任务结束时刻                    : 2020-09-18 18:22:47                                                                            │</span><br><span class="line">任务总计耗时                    :                 10s                                                                            │</span><br><span class="line">任务平均流量                    :          253.91KB/s                                                                            │</span><br><span class="line">记录写入速度                    :          10000rec/s                                                                            │</span><br><span class="line">读出记录总数                    :              100000                                                                            │</span><br><span class="line">读写失败总数                    :                   0</span><br></pre></td></tr></table></figure>
+
+<h2 id="msyql-同步到es"><a href="#msyql-同步到es" class="headerlink" title="msyql 同步到es"></a>msyql 同步到es</h2><ul>
+<li>mysql 脚本</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">ROP TABLE IF EXISTS `test`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`test`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">&#x27;key&#x27;</span>,</span><br><span class="line">  <span class="string">`col_ip`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;projectcol_ipname&#x27;</span>,</span><br><span class="line">  <span class="string">`col_double`</span> <span class="keyword">double</span>(<span class="number">16</span>,<span class="number">2</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_double&#x27;</span>,</span><br><span class="line">  <span class="string">`col_long`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_long&#x27;</span>,</span><br><span class="line">  <span class="string">`col_integer`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;1&#x27;</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_integer&#x27;</span>,</span><br><span class="line">  <span class="string">`col_keyword`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_keyword&#x27;</span>,</span><br><span class="line">  <span class="string">`col_text`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_text&#x27;</span>,</span><br><span class="line">  <span class="string">`col_geo_point`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_geo_point&#x27;</span>,</span><br><span class="line">  <span class="string">`col_date`</span> datetime <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_date time&#x27;</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>) <span class="keyword">USING</span> BTREE</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4 ROW_FORMAT=DYNAMIC;</span><br><span class="line"></span><br><span class="line"><span class="keyword">LOCK</span> <span class="keyword">TABLES</span> <span class="string">`test`</span> WRITE;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span> (<span class="string">`id`</span>, <span class="string">`col_ip`</span>, <span class="string">`col_double`</span>, <span class="string">`col_long`</span>, <span class="string">`col_integer`</span>, <span class="string">`col_keyword`</span>, <span class="string">`col_text`</span>, <span class="string">`col_geo_point`</span>, <span class="string">`col_date`</span>)</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">	(<span class="number">1</span>,<span class="string">&#x27;1.1.1.1&#x27;</span>,<span class="number">19890604.00</span>,<span class="number">19890604</span>,<span class="number">19890604</span>,<span class="string">&#x27;hello world&#x27;</span>,<span class="string">&#x27;hello world&#x27;</span>,<span class="string">&#x27;41.12,-71.34&#x27;</span>,<span class="string">&#x27;2020-09-18 19:04:29&#x27;</span>);</span><br><span class="line"><span class="keyword">UNLOCK</span> <span class="keyword">TABLES</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>myql2es.json</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;job&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;setting&quot;</span>:&#123;</span><br><span class="line">            <span class="attr">&quot;speed&quot;</span>:&#123;</span><br><span class="line">                <span class="attr">&quot;channel&quot;</span>:<span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;content&quot;</span>:[</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">&quot;reader&quot;</span>:&#123;</span><br><span class="line">                    <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;mysqlreader&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;parameter&quot;</span>:&#123;</span><br><span class="line">                        <span class="attr">&quot;username&quot;</span>:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;password&quot;</span>:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;column&quot;</span>:[</span><br><span class="line">                            <span class="string">&quot;col_ip&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_double&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_long&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_integer&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_keyword&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_text&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_geo_point&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_date&quot;</span></span><br><span class="line">                        ],</span><br><span class="line">                        <span class="attr">&quot;splitPk&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;connection&quot;</span>:[</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;table&quot;</span>:[</span><br><span class="line">                                    <span class="string">&quot;test&quot;</span></span><br><span class="line">                                ],</span><br><span class="line">                                <span class="attr">&quot;jdbcUrl&quot;</span>:[</span><br><span class="line">                                    <span class="string">&quot;jdbc:mysql://127.0.0.1:3306/test&quot;</span></span><br><span class="line">                                ]</span><br><span class="line">                            &#125;</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">&quot;writer&quot;</span>:&#123;</span><br><span class="line">                    <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;elasticsearchwriter&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;parameter&quot;</span>:&#123;</span><br><span class="line">                        <span class="attr">&quot;endpoint&quot;</span>:<span class="string">&quot;http://192.168.90.124:9200&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;index&quot;</span>:<span class="string">&quot;mytest&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;default&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;accessId&quot;</span>: <span class="string">&quot;1&quot;</span>, <span class="comment">// 不写报错，，没有认证就随写个值</span></span><br><span class="line">                        <span class="attr">&quot;accessKey&quot;</span>: <span class="string">&quot;1&quot;</span>, <span class="comment">// 不写报错，没有认证就随写个值</span></span><br><span class="line">                        <span class="attr">&quot;cleanup&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">                        <span class="attr">&quot;settings&quot;</span>:&#123;</span><br><span class="line">                            <span class="attr">&quot;index&quot;</span>:&#123;</span><br><span class="line">                                <span class="attr">&quot;number_of_shards&quot;</span>:<span class="number">5</span>,</span><br><span class="line">                                <span class="attr">&quot;number_of_replicas&quot;</span>:<span class="number">0</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        <span class="attr">&quot;discovery&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">                        <span class="attr">&quot;batchSize&quot;</span>:<span class="number">1000</span>,</span><br><span class="line">                        <span class="attr">&quot;splitter&quot;</span>:<span class="string">&quot;,&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;column&quot;</span>:[</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_ip&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;ip&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_double&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;double&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_long&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;long&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_integer&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;integer&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_keyword&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;keyword&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_text&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;text&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_geo_point&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;geo_point&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_date&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;date&quot;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用kibana查看，同步成功</li>
+</ul>
+<img src="/2020/09/18/datax/image-20200918192804137.png" class title="image-20200918192804137">
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>datax 解放了我们在数据开发时候异构数据源间etl处理，使用起来还是很简单的，更多高级功能或者坑遇到再写。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/15/nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/15/nginx/" class="post-title-link" itemprop="url">nginx</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-15 19:57:38" itemprop="dateCreated datePublished" datetime="2020-09-15T19:57:38+08:00">2020-09-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-09 09:13:19" itemprop="dateModified" datetime="2020-10-09T09:13:19+08:00">2020-10-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">服务器</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Nginx (engine x) 是一个高性能的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTTP">HTTP</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/7793488">反向代理</a>web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BF%84%E7%BD%97%E6%96%AF/125568">俄罗斯</a>访问量第二的Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004年10月4日</p>
+<img src="/2020/09/15/nginx/nginxer.jpg" class title="nginxer">
+
+<h1 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h1><ul>
+<li>docker-compose安装</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ mkdir docker_nginx &amp;&amp; <span class="built_in">cd</span> docker_nginx</span><br><span class="line">➜  ~ vim docker<span class="literal">-compose</span>.yml</span><br><span class="line"></span><br><span class="line">// docker<span class="literal">-compose</span>.yml的内容</span><br><span class="line">version: <span class="string">&#x27;3.1&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    restart: always</span><br><span class="line">    image: daocloud.io/library/nginx:latest</span><br><span class="line">    container_name: nginx</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="number">8087</span>:<span class="number">80</span></span><br><span class="line">      </span><br><span class="line">// 保存退出，运行如下命令</span><br><span class="line">➜  docker_nginx docker<span class="literal">-compose</span> up <span class="literal">-d</span></span><br><span class="line">Recreating nginx ... done</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>浏览器访问：<a target="_blank" rel="noopener" href="http://localhost:8087/">http://localhost:8087</a></li>
+</ul>
+<img src="/2020/09/15/nginx/image-20200915201202164.png" class title="nginxer">
+
+<h1 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h1><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  docker_nginx docker <span class="built_in">ps</span></span><br><span class="line">CONTAINER ID        IMAGE                              COMMAND                  CREATED             STATUS              PORTS                  NAMES</span><br><span class="line">dbe84a274189        daocloud.io/library/nginx:latest   <span class="string">&quot;/docker-entrypoint.…&quot;</span>   <span class="number">5</span> minutes ago       Up <span class="number">5</span> minutes        <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8087</span>-&gt;<span class="number">80</span>/tcp   nginx</span><br><span class="line"></span><br><span class="line">➜  docker_nginx docker exec <span class="literal">-it</span> dbe bash</span><br><span class="line">root@dbe84a274189:/<span class="comment"># ls</span></span><br><span class="line">bin  boot  dev	docker<span class="literal">-entrypoint</span>.d  docker<span class="literal">-entrypoint</span>.sh  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@dbe84a274189:/<span class="comment"># cd etc/nginx/</span></span><br><span class="line">root@dbe84a274189:/etc/nginx<span class="comment"># ls</span></span><br><span class="line">conf.d	fastcgi_params	koi<span class="literal">-utf</span>  koi<span class="literal">-win</span>  mime.types  modules  nginx.conf  scgi_params	uwsgi_params  win<span class="literal">-utf</span></span><br><span class="line">root@dbe84a274189:/etc/nginx<span class="comment"># cat nginx.conf</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>nginx.conf 内容</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker_processes和worker_connections 决定了nginx的并发能力</span></span><br><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span><br><span class="line">                      &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">                      &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    #gzip  on;</span><br><span class="line">  <span class="comment">// 注意，/etc/nginx/conf.d下.conf文件都会加载</span></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>default.conf 的内容</li>
+</ul>
+<blockquote>
+<p>配置文件中除了注释的内容，最重要的就是server 模块</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@dbe84a274189:/etc/nginx# cd conf.d/</span><br><span class="line">root@dbe84a274189:/etc/nginx/conf.d# ls</span><br><span class="line">default.conf</span><br><span class="line">root@dbe84a274189:/etc/nginx/conf.d# cat default.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改docker-compose.yml</li>
+</ul>
+<blockquote>
+<p>关联本地目录conf.d 到nginx配置文件目录</p>
+</blockquote>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.1&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">daocloud.io/library/nginx:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8087</span><span class="string">:80</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./conf.d:/etc/nginx/conf.d</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加default.conf</li>
+</ul>
+<blockquote>
+<p>需要添加default.conf，否则会访问不到nginx的首页</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  docker_nginx <span class="built_in">ls</span></span><br><span class="line">conf.d             docker<span class="literal">-compose</span>.yml</span><br><span class="line">➜  docker_nginx <span class="built_in">cd</span> conf.d</span><br><span class="line">➜  conf.d vim default.conf</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>重启nginx</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  conf.d docker-compose down</span><br><span class="line">➜  conf.d docker-compose build</span><br><span class="line">➜  conf.d docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h1 id="Nginx功能"><a href="#Nginx功能" class="headerlink" title="Nginx功能"></a>Nginx功能</h1><h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p><strong>正向代理</strong></p>
+<ul>
+<li>客户端自己设置</li>
+<li>客户端了解背后的代理和目标服务器</li>
+<li>对目标服务器访问隐藏了客户端ip</li>
+</ul>
+<p><strong>反向代理</strong></p>
+<ul>
+<li>配置是在目标服务器端</li>
+<li>客户端不知道访问到的是哪一台目标服务器</li>
+<li>对客户端隐藏了目标服务器的ip</li>
+</ul>
+<h3 id="配置location"><a href="#配置location" class="headerlink" title="配置location"></a>配置location</h3><blockquote>
+<p>优先级关系： (location = ) &gt; (location /xxx/yyy/zzz) &gt; (location ^<del>) &gt; (location ~,</del>*) &gt; (location /起始路径) &gt; (location /)</p>
+</blockquote>
+<ul>
+<li>注释掉之前的location 模块，添加如下模块，让其跳转到百度首页</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">             proxy_pass https://www.baidu.com;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其他配置</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 1. = 匹配</span><br><span class="line">location = / &#123;</span><br><span class="line">  # 精准匹配，主机名后面不能带任何的字符串</span><br><span class="line">&#125;</span><br><span class="line"># 2. 通用匹配</span><br><span class="line">location /xxx&#123;</span><br><span class="line">  # 匹配所有以/xxx开头的路径  </span><br><span class="line">&#125;</span><br><span class="line"># 3. 正则匹配</span><br><span class="line">location ~/xxx &#123;</span><br><span class="line">  # 匹配所有以/xxx开头的路径</span><br><span class="line">&#125;</span><br><span class="line"># 4. 匹配开头路径</span><br><span class="line">location ^~/images/ &#123;</span><br><span class="line">    # 匹配所有以 /images 开头的路径</span><br><span class="line">&#125;</span><br><span class="line"># 5. ~* \.(gif|jpg|png)$ &#123;</span><br><span class="line">  # 匹配以gif或者jpg或者png为结尾的路径</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ul>
+<li>轮询（默认）</li>
+<li>权重（weight=2，默认为1）</li>
+<li>ip_hash（按照客户端IP地址的分配方式，可以确保相同客户端的请求一直发送到相同的服务器。配置了，其他配置都没效果了）</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//配置要映射的服务器</span></span><br><span class="line"> upstream my_upstream &#123;</span><br><span class="line">        ip_hash;</span><br><span class="line">        server 192.168.90.01:8081 weight=2;;</span><br><span class="line">        server 192.168.90.02:8082 weight=3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">        listen       8080;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass http://my_upstream;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Nginx-常见命令"><a href="#Nginx-常见命令" class="headerlink" title="Nginx 常见命令"></a>Nginx 常见命令</h1><ul>
+<li><p>启动</p>
+<ol>
+<li>/usr/sbin/nginx</li>
+<li>nginx</li>
+</ol>
+</li>
+<li><p>停止</p>
+<p>nginx -s stop</p>
+</li>
+<li><p>查看nginx进程</p>
+<p>ps -ef | grep nginx</p>
+</li>
+<li><p>重新加载配置文件</p>
+<p>nginx -s reload</p>
+</li>
+<li><p>检配置文件是否正确</p>
+<p>nginx -t</p>
+</li>
+<li><p>查看nginx 版本</p>
+<p>nginx -v</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/Elasticsearch%E6%9F%A5%E8%AF%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1033,20 +1861,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
