@@ -155,6 +155,154 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/13/Java8%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/13/Java8%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">Java8经典用法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-13 14:04:45 / 修改时间：14:17:53" itemprop="dateCreated datePublished" datetime="2020-11-13T14:04:45+08:00">2020-11-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="List-–-gt-Map"><a href="#List-–-gt-Map" class="headerlink" title="List –&gt; Map"></a>List –&gt; Map</h1><ul>
+<li>Map &lt;属性，属性&gt;</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; = getUsers();</span><br><span class="line">Map&lt;String,Integer&gt; userMap = Maps.newHashMap();</span><br><span class="line">userMap = list.stream().collect(Collectors.toMap(User::getName, User::getAge));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Map &lt;属性，集合&gt;</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import com.google.common.collect.Lists;</span></span><br><span class="line">Map&lt;String, List&lt;User&gt;&gt; mapList = userList.stream()</span><br><span class="line">                .collect(Collectors.toMap(</span><br><span class="line">                        User::getUserNumber,</span><br><span class="line">                        Lists::newArrayList,</span><br><span class="line">                        (List&lt;User&gt; newList, List&lt;User&gt; oldList) -&gt; &#123;</span><br><span class="line">                            oldList.addAll(newList);</span><br><span class="line">                            <span class="keyword">return</span> oldList;</span><br><span class="line">                        &#125;));</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/05/idea%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%87%E5%BF%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/05/idea%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%87%E5%BF%98/" class="post-title-link" itemprop="url">idea快捷键备忘</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-05 20:33:56 / 修改时间：20:39:29" itemprop="dateCreated datePublished" datetime="2020-11-05T20:33:56+08:00">2020-11-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IDEA/" itemprop="url" rel="index"><span itemprop="name">IDEA</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>记录为MacOS 下的idea的快捷键，备忘</p>
+<ul>
+<li>optimize imports：⌃+⌥+o</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/04/greenplum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -245,10 +393,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-11-04 11:54:46 / 修改时间：20:10:13" itemprop="dateCreated datePublished" datetime="2020-11-04T11:54:46+08:00">2020-11-04</time>
+              <time title="创建时间：2020-11-04 11:54:46" itemprop="dateCreated datePublished" datetime="2020-11-04T11:54:46+08:00">2020-11-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-17 13:15:31" itemprop="dateModified" datetime="2020-11-17T13:15:31+08:00">2020-11-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -271,14 +425,22 @@
 
       
           <p>在pg里面有schema的概念。这里我们可以简单理解下：database（仓库）–&gt; schema（房间）–&gt;对象（表、视图、触发器）</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it greenplum psql -h 127.0.0.1 -p 5432：5432 -U postgres</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li>拉取镜像并运行：<code>docker run -it --name greenplum  -p 5432:5432 -d kevinmtrowbridge/greenplumdb_singlenode</code></li>
 <li>进入到容器内：<code>docker exec -it greenplum /bin/bash</code> </li>
+<li><code>su - gpadmin</code></li>
 <li>登陆：<code>psql -h localhost -p 5432 -U gpadmin template1</code></li>
 <li>切换到 postgres库：<code> \c  postgres</code></li>
 <li>创建用户：<code>CREATE USER astilt PASSWORD &#39;astilt&#39;;</code></li>
 <li>授权：<code>GRANT ALL PRIVILEGES ON DATABASE postgres TO astilt;</code></li>
 <li>客户端navicat登陆吧，username：astilt，pwd：astilt</li>
+</ul>
+<h1 id="配置允许远程客户端连接"><a href="#配置允许远程客户端连接" class="headerlink" title="配置允许远程客户端连接"></a>配置允许远程客户端连接</h1><ul>
+<li>使用find  [pg的安装目录] -name pg_hba.conf</li>
+<li>最后一行加：<strong>host  all       all       0.0.0.0/0       md5</strong></li>
+<li>切换到gpadmin，执行gpstop -u 重新加载配置文件</li>
 </ul>
 <h1 id="mysql对比"><a href="#mysql对比" class="headerlink" title="mysql对比"></a>mysql对比</h1><h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><table>
 <thead>
@@ -428,7 +590,37 @@
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 新建</span><br><span class="line">create table ([字段名1] [类型1] &lt;references 关联表名(关联的字段名)&gt;;,[字段名2] [类型2],......&lt;,primary key (字段名m,字段名n,...)&gt;;); </span><br><span class="line">// 删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> [表名]; </span><br><span class="line">// 重命名一个表</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名A] <span class="keyword">rename</span> <span class="keyword">to</span> [表名B]; </span><br><span class="line">// 在已有的表里添加字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">add</span> <span class="keyword">column</span> [字段名] [类型]; </span><br><span class="line">//删除表中的字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">drop</span> <span class="keyword">column</span> [字段名]; </span><br><span class="line">//重命名一个字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">rename</span> <span class="keyword">column</span> [字段名A] <span class="keyword">to</span> [字段名B]; </span><br><span class="line">//给一个字段设置缺省值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">alter</span> <span class="keyword">column</span> [字段名] <span class="keyword">set</span> <span class="keyword">default</span> [新的默认值];</span><br><span class="line">//去除缺省值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">alter</span> <span class="keyword">column</span> [字段名] <span class="keyword">drop</span> <span class="keyword">default</span>; </span><br><span class="line">//表中插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名 ([字段名m],[字段名n],......) <span class="keyword">values</span> ([列m的值],[列n的值],......); </span><br><span class="line">//修改表中的某行某列的数据</span><br><span class="line"><span class="keyword">update</span> [表名] <span class="keyword">set</span> [目标字段名]=[目标值] <span class="keyword">where</span> [该行特征]; </span><br><span class="line">//删除表中某行数据</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> [表名] <span class="keyword">where</span> [该行特征]; </span><br></pre></td></tr></table></figure>
 
-<h1 id="schema模式"><a href="#schema模式" class="headerlink" title="schema模式"></a>schema模式</h1><p><code>模式(schema)</code>是对数据库(database)逻辑分割，在数据库创建的同时，就已经默认为数据库创建了一个模式：public。</p>
+<h1 id="日期和时间间字段"><a href="#日期和时间间字段" class="headerlink" title="日期和时间间字段"></a>日期和时间间字段</h1><ul>
+<li><p>date:日期字段，格式:2016-04-15</p>
+</li>
+<li><p>timestamp:时间字段，格式:2016-04-15 20:00:00</p>
+</li>
+<li><p>获取当时时间函数</p>
+<ul>
+<li>select now();</li>
+<li>select current_timestamp;</li>
+<li>select CURRENT_TIME;</li>
+<li>select LOCALTIME;</li>
+<li>select LOCALTIMESTAMP;</li>
+</ul>
+</li>
+<li><p>获取当天日期</p>
+<ul>
+<li>select now()+interval ‘2 day’;</li>
+</ul>
+</li>
+<li><p>时间截取</p>
+<ul>
+<li>select extract(year from now()); </li>
+</ul>
+</li>
+<li><p>时间转换: </p>
+<ul>
+<li>select timestamp ‘2012-05-12 18:54:54’;</li>
+<li>select date ‘2012-05-12 18:54:54’; </li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -646,10 +838,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-10-22 17:07:52 / 修改时间：20:58:15" itemprop="dateCreated datePublished" datetime="2020-10-22T17:07:52+08:00">2020-10-22</time>
+              <time title="创建时间：2020-10-22 17:07:52" itemprop="dateCreated datePublished" datetime="2020-10-22T17:07:52+08:00">2020-10-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-17 15:47:23" itemprop="dateModified" datetime="2020-11-17T15:47:23+08:00">2020-11-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -694,7 +892,8 @@
 <li>“运行方式”：一种功能，允许用户采用其他用户的身份（如果允许），有时在管理方案中很有用。</li>
 <li>“记住我”：在整个会话中记住用户的身份，因此他们仅在必要时登录。</li>
 </ul>
-<h1 id="架构和术语"><a href="#架构和术语" class="headerlink" title="架构和术语"></a>架构和术语</h1><h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="/Users/hf/blog/source/_posts/shiro/ShiroArchitecture.png" alt="ShiroArchitecture"></p>
+<h1 id="架构和术语"><a href="#架构和术语" class="headerlink" title="架构和术语"></a>架构和术语</h1><h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><img src="/2020/10/22/shiro/ShiroArchitecture.png" class title="ShiroArchitecture">
+
 <h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul>
 <li><strong>Subject：</strong> 当前与软件交互的实体（用户，第三方服务，计划任务等）</li>
 <li><strong>SecurityManager：</strong> Shiro体系结构的核心。它主要是一个“伞”对象，用于协调其托管组件以确保它们能够顺利协同工作。它还管理Shiro对每个应用程序用户的“视图”，因此它知道如何对每个用户执行安全性操作。</li>
@@ -837,10 +1036,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-10-13 17:06:27 / 修改时间：20:12:20" itemprop="dateCreated datePublished" datetime="2020-10-13T17:06:27+08:00">2020-10-13</time>
+              <time title="创建时间：2020-10-13 17:06:27" itemprop="dateCreated datePublished" datetime="2020-10-13T17:06:27+08:00">2020-10-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-17 15:46:59" itemprop="dateModified" datetime="2020-11-17T15:46:59+08:00">2020-11-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -885,15 +1090,20 @@
 <h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
 <li>星型</li>
 </ul>
-<p><img src="/Users/hf/blog/source/_posts/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%98%9F%E5%9E%8B-2582216.png" alt="星型"></p>
+<img src="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%98%9F%E5%9E%8B-2582216.png" class title="星型">
+
 <ul>
 <li>雪花型</li>
 </ul>
-<p><img src="/Users/hf/blog/source/_posts/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E9%9B%AA%E8%8A%B1.png" alt="雪花"></p>
+<img src="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E9%9B%AA%E8%8A%B1.png" class title="雪花">
+
 <ul>
 <li>星座型</li>
 </ul>
-<p><img src="/Users/hf/blog/source/_posts/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%98%9F%E5%BA%A7.png" alt="星座"></p>
+<img src="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%98%9F%E5%BA%A7.png" class title="星座">
+
+
+
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>选择什么模型进行建模，需要结合业务，没有谁好或坏。不过现在互联网公司，业务错综复杂，还需要快速应用构建，所以维度建模比较常见，而常见的类型又以星座型居多</p>
 
       
@@ -914,7 +1124,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/29/Java%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/09/nginx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -928,7 +1138,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/29/Java%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Java单元测试</a>
+            <a href="/2020/10/09/nginx/" class="post-title-link" itemprop="url">未命名</a>
         </h1>
 
         <div class="post-meta">
@@ -937,19 +1147,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-09-29 11:11:37 / 修改时间：21:30:52" itemprop="dateCreated datePublished" datetime="2020-09-29T11:11:37+08:00">2020-09-29</time>
+              <time title="创建时间：2020-10-09 09:13:19" itemprop="dateCreated datePublished" datetime="2020-10-09T09:13:19+08:00">2020-10-09</time>
             </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
                 </span>
-            </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-12 19:52:06" itemprop="dateModified" datetime="2020-11-12T19:52:06+08:00">2020-11-12</time>
+              </span>
 
           
 
@@ -962,488 +1169,118 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h1><p>阿里巴巴Java开发手册，对于单元测试有如下描述，我大致抽象了下：</p>
-<h2 id="错误意识"><a href="#错误意识" class="headerlink" title="错误意识"></a>错误意识</h2><ul>
-<li>那是测试同学干的事情，单元测试代码是多余的！汽车的整体功能与各单元部件的测试正常与否是强相关？（认知需转变）</li>
-<li>单元测试代码不需要维护！一年半载后，那么单元测试几乎处于废弃状态。（跟随业务维护）</li>
-<li>单元测试与线上故障没有辩证关系！好的单元测试能够最大限度地规避线上故障（做比没做要好）</li>
+          <p>title: nginx<br>date: 2020-09-15 19:57:38<br>categories: 服务器<br>tags: nginx</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Nginx (engine x) 是一个高性能的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTTP">HTTP</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/7793488">反向代理</a>web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BF%84%E7%BD%97%E6%96%AF/125568">俄罗斯</a>访问量第二的Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004年10月4日</p>
+<img src="/2020/10/09/nginx/nginxer.jpg" class title="nginxer">
+
+<h1 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h1><ul>
+<li>docker-compose安装</li>
 </ul>
-<h2 id="AIR-原则"><a href="#AIR-原则" class="headerlink" title="AIR 原则"></a>AIR 原则</h2><blockquote>
-<p>单元测试在线上运行时候，感觉像空气（air）一样并不存在，但是在质量保证上却又十分关键。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ mkdir docker_nginx &amp;&amp; <span class="built_in">cd</span> docker_nginx</span><br><span class="line">➜  ~ vim docker<span class="literal">-compose</span>.yml</span><br><span class="line"></span><br><span class="line">// docker<span class="literal">-compose</span>.yml的内容</span><br><span class="line">version: <span class="string">&#x27;3.1&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    restart: always</span><br><span class="line">    image: daocloud.io/library/nginx:latest</span><br><span class="line">    container_name: nginx</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="number">8087</span>:<span class="number">80</span></span><br><span class="line">      </span><br><span class="line">// 保存退出，运行如下命令</span><br><span class="line">➜  docker_nginx docker<span class="literal">-compose</span> up <span class="literal">-d</span></span><br><span class="line">Recreating nginx ... done</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>浏览器访问：<a target="_blank" rel="noopener" href="http://localhost:8087/">http://localhost:8087</a></li>
+</ul>
+<img src="/2020/10/09/nginx/image-20200915201202164.png" class title="nginxer">
+
+<h1 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h1><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  docker_nginx docker <span class="built_in">ps</span></span><br><span class="line">CONTAINER ID        IMAGE                              COMMAND                  CREATED             STATUS              PORTS                  NAMES</span><br><span class="line">dbe84a274189        daocloud.io/library/nginx:latest   <span class="string">&quot;/docker-entrypoint.…&quot;</span>   <span class="number">5</span> minutes ago       Up <span class="number">5</span> minutes        <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8087</span>-&gt;<span class="number">80</span>/tcp   nginx</span><br><span class="line"></span><br><span class="line">➜  docker_nginx docker exec <span class="literal">-it</span> dbe bash</span><br><span class="line">root@dbe84a274189:/<span class="comment"># ls</span></span><br><span class="line">bin  boot  dev	docker<span class="literal">-entrypoint</span>.d  docker<span class="literal">-entrypoint</span>.sh  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@dbe84a274189:/<span class="comment"># cd etc/nginx/</span></span><br><span class="line">root@dbe84a274189:/etc/nginx<span class="comment"># ls</span></span><br><span class="line">conf.d	fastcgi_params	koi<span class="literal">-utf</span>  koi<span class="literal">-win</span>  mime.types  modules  nginx.conf  scgi_params	uwsgi_params  win<span class="literal">-utf</span></span><br><span class="line">root@dbe84a274189:/etc/nginx<span class="comment"># cat nginx.conf</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>nginx.conf 内容</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker_processes和worker_connections 决定了nginx的并发能力</span></span><br><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span><br><span class="line">                      &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">                      &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    #gzip  on;</span><br><span class="line">  <span class="comment">// 注意，/etc/nginx/conf.d下.conf文件都会加载</span></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>default.conf 的内容</li>
+</ul>
+<blockquote>
+<p>配置文件中除了注释的内容，最重要的就是server 模块</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@dbe84a274189:/etc/nginx# cd conf.d/</span><br><span class="line">root@dbe84a274189:/etc/nginx/conf.d# ls</span><br><span class="line">default.conf</span><br><span class="line">root@dbe84a274189:/etc/nginx/conf.d# cat default.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改docker-compose.yml</li>
+</ul>
+<blockquote>
+<p>关联本地目录conf.d 到nginx配置文件目录</p>
+</blockquote>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.1&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">daocloud.io/library/nginx:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8087</span><span class="string">:80</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./conf.d:/etc/nginx/conf.d</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加default.conf</li>
+</ul>
+<blockquote>
+<p>需要添加default.conf，否则会访问不到nginx的首页</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  docker_nginx <span class="built_in">ls</span></span><br><span class="line">conf.d             docker<span class="literal">-compose</span>.yml</span><br><span class="line">➜  docker_nginx <span class="built_in">cd</span> conf.d</span><br><span class="line">➜  conf.d vim default.conf</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>重启nginx</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  conf.d docker-compose down</span><br><span class="line">➜  conf.d docker-compose build</span><br><span class="line">➜  conf.d docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h1 id="Nginx功能"><a href="#Nginx功能" class="headerlink" title="Nginx功能"></a>Nginx功能</h1><h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p><strong>正向代理</strong></p>
+<ul>
+<li>客户端自己设置</li>
+<li>客户端了解背后的代理和目标服务器</li>
+<li>对目标服务器访问隐藏了客户端ip</li>
+</ul>
+<p><strong>反向代理</strong></p>
+<ul>
+<li>配置是在目标服务器端</li>
+<li>客户端不知道访问到的是哪一台目标服务器</li>
+<li>对客户端隐藏了目标服务器的ip</li>
+</ul>
+<h3 id="配置location"><a href="#配置location" class="headerlink" title="配置location"></a>配置location</h3><blockquote>
+<p>优先级关系： (location = ) &gt; (location /xxx/yyy/zzz) &gt; (location ^<del>) &gt; (location ~,</del>*) &gt; (location /起始路径) &gt; (location /)</p>
 </blockquote>
 <ul>
-<li>A：Automatic（测试框架通常是定期执行的，执行过程必须完全自动化才有意义）</li>
-<li>I：Independent（单元测试用例之间决不能互相调用，也不能依赖执行的先后次序）</li>
-<li>R：Repeatable（单元测试是可以重复执行的，不能受到外界环境的影响）</li>
+<li>注释掉之前的location 模块，添加如下模块，让其跳转到百度首页</li>
 </ul>
-<h2 id="BCDE-原则"><a href="#BCDE-原则" class="headerlink" title="BCDE 原则"></a>BCDE 原则</h2><ul>
-<li>B: Border，边界值测试，包括循环边界、特殊取值、特殊时间点，数据顺序。</li>
-<li>C: Correct，正确的输入，并得到预期的结果。</li>
-<li>D: Design，与设计文档相结合，来编写单元测试。</li>
-<li>E: Error，单元测试的目的是证明程序有错，而不是证明程序无错。为了发现代码中潜在的错误，我们需要在编写测试用例时有一些强制的错误输入（如非法数据、异常流程、非业务允许输入等）来得到预期的错误结果</li>
-</ul>
-<h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><p><strong>强制</strong></p>
-<ul>
-<li>粒度尽量小，最大至方法级别</li>
-<li>核心业务、核心应用、核心模块确保有单元测试</li>
-<li>代码必须写在如下工程目录：src/test/java</li>
-</ul>
-<p><strong>推荐</strong></p>
-<ul>
-<li>DAO层，Manager层，可重用度高的Service，都应该进行单元测试</li>
-<li>不手动操作数据库，请使用用程序准备符合业务的数据</li>
-<li>数据库相关的单元测试，可以设置自动回滚机制，不造脏数据</li>
-<li>不可测的代码需要做重构，不要为了要求测试而写不规范的测试代码</li>
-<li>在设计评审阶段，开发人员需要和测试人员一起确定单元测试范围，单元测试最好覆盖所有测试用例（UC）</li>
-</ul>
-<h2 id="业务代码"><a href="#业务代码" class="headerlink" title="业务代码"></a>业务代码</h2><blockquote>
-<p>为了更方便地进行单元测试，业务代码应避免以下情况</p>
-</blockquote>
-<ul>
-<li>构造方法中做的事情过多</li>
-<li>存在过多的全局变量和静态方法</li>
-<li>存在过多的外部依赖</li>
-<li>存在过多的条件语句</li>
-</ul>
-<h1 id="Junit-Mockito"><a href="#Junit-Mockito" class="headerlink" title="Junit+Mockito"></a>Junit+Mockito</h1><blockquote>
-<p>基于springBoot 1.5.19</p>
-</blockquote>
-<p>一般我们开发都是使用springBoot，引入了类似如下的依赖：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">             proxy_pass https://www.baidu.com;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><a target="_blank" rel="noopener" href="https://junit.org/junit4/">JUnit</a> —用于 Java 应用程序的单元测试的事实上的标准。（4.x版本）</li>
-<li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/4.3.13.RELEASE/spring-framework-reference/htmlsingle/#integration-testing">Spring Test</a> 和 Spring Boot 测试—对 Spring Boot 应用程序的 Util 和集成测试支持。</li>
-<li><a target="_blank" rel="noopener" href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a> —匹配器对象库(也称为约束或谓词)。</li>
-<li><a target="_blank" rel="noopener" href="http://mockito.org/">Mockito</a> — Java 模拟框架。（1.x版本）</li>
-<li><a target="_blank" rel="noopener" href="https://joel-costigliola.github.io/assertj/">AssertJ</a> —流畅的 assert 库。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/skyscreamer/JSONassert">JSONassert</a> — JSON 的 assert 库。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/jayway/JsonPath">JsonPath</a> — JSON 的 XPath。</li>
+<li>其他配置</li>
 </ul>
-<h2 id="Junit"><a href="#Junit" class="headerlink" title="Junit"></a>Junit</h2><blockquote>
-<p>参考：<a target="_blank" rel="noopener" href="https://github.com/junit-team/junit4/wiki/Getting-started">https://github.com/junit-team/junit4/wiki/Getting-started</a></p>
-</blockquote>
-<p>JUnit 是一个 Java 编程语言的单元测试框架。JUnit 在测试驱动的开发方面有很重要的发展，是起源于 JUnit 的一个统称为 xUnit 的单元测试框架之一。</p>
-<h4 id="相关注解"><a href="#相关注解" class="headerlink" title="相关注解"></a>相关注解</h4><table>
-<thead>
-<tr>
-<th align="center">注解</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">@Test(excepted==xx.class,timeout=毫秒数)</td>
-<td align="center">修饰一个方法为测试方法，excepted参数可以忽略某些异常类</td>
-</tr>
-<tr>
-<td align="center">@Before</td>
-<td align="center">在每一个测试方法被运行前执行一次</td>
-</tr>
-<tr>
-<td align="center">@BeforeClass</td>
-<td align="center">在所有测试方法执行前执行</td>
-</tr>
-<tr>
-<td align="center">@After</td>
-<td align="center">在每一个测试方法运行后执行一次</td>
-</tr>
-<tr>
-<td align="center">@AfterClass</td>
-<td align="center">在所有测试方法执行后执行</td>
-</tr>
-<tr>
-<td align="center">@Ignore</td>
-<td align="center">修饰的类或方法会被测试运行器忽略</td>
-</tr>
-<tr>
-<td align="center">@RunWith</td>
-<td align="center">更改测试运行器</td>
-</tr>
-</tbody></table>
-<h4 id="常规用法"><a href="#常规用法" class="headerlink" title="常规用法"></a>常规用法</h4><h5 id="套件"><a href="#套件" class="headerlink" title="套件"></a>套件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskOneTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Task one do.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskTwoTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Task two do.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskThreeTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Task Three.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 更改测试运行方式为 Suite</span></span><br><span class="line"><span class="meta">@RunWith(Suite.class)</span> </span><br><span class="line"><span class="comment">// 2. 将测试类传入进来</span></span><br><span class="line"><span class="meta">@Suite</span>.SuiteClasses(&#123;TaskOneTest.class, TaskTwoTest.class, TaskThreeTest.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuitTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试套件的入口类只是组织测试类一起进行测试，无任何测试方法，</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 1. = 匹配</span><br><span class="line">location = / &#123;</span><br><span class="line">  # 精准匹配，主机名后面不能带任何的字符串</span><br><span class="line">&#125;</span><br><span class="line"># 2. 通用匹配</span><br><span class="line">location /xxx&#123;</span><br><span class="line">  # 匹配所有以/xxx开头的路径  </span><br><span class="line">&#125;</span><br><span class="line"># 3. 正则匹配</span><br><span class="line">location ~/xxx &#123;</span><br><span class="line">  # 匹配所有以/xxx开头的路径</span><br><span class="line">&#125;</span><br><span class="line"># 4. 匹配开头路径</span><br><span class="line">location ^~/images/ &#123;</span><br><span class="line">    # 匹配所有以 /images 开头的路径</span><br><span class="line">&#125;</span><br><span class="line"># 5. ~* \.(gif|jpg|png)$ &#123;</span><br><span class="line">  # 匹配以gif或者jpg或者png为结尾的路径</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h5 id="参数化测试"><a href="#参数化测试" class="headerlink" title="参数化测试"></a>参数化测试</h5><blockquote>
-<p>参数化测试允许开发人员使用不同的值反复运行同一个测试，遵循 5 个步骤来创建<strong>参数化测试</strong>。</p>
-</blockquote>
-<ul>
-<li>用 <code>@RunWith(Parameterized.class)</code>来注释 <strong>test 类</strong></li>
-<li>创建一个由 <code>@Parameters</code> 注释的<strong>公共的静态方法</strong>，始化所有需要测试的参数对</li>
-<li>为测试类声明几个变量，分别用于存放期望值和测试所用数据</li>
-<li>创建一个公共的构造函数，为上述声明的几个变量赋值</li>
-<li>类有一个测试，它需要注解@Test到方法。</li>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ul>
+<li>轮询（默认）</li>
+<li>权重（weight=2，默认为1）</li>
+<li>ip_hash（按照客户端IP地址的分配方式，可以确保相同客户端的请求一直发送到相同的服务器。配置了，其他配置都没效果了）</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="meta">@RunWith(Parameterized.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FibonacciTest</span> </span>&#123;</span><br><span class="line">     <span class="comment">//2</span></span><br><span class="line">    <span class="meta">@Parameterized</span>.Parameters</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Collection&lt;Object[]&gt; data() &#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.asList(<span class="keyword">new</span> Object[][]&#123;</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">2</span>, <span class="number">1</span>&#125;, &#123;<span class="number">3</span>, <span class="number">2</span>&#125;, &#123;<span class="number">4</span>, <span class="number">3</span>&#125;, &#123;<span class="number">5</span>, <span class="number">5</span>&#125;, &#123;<span class="number">6</span>, <span class="number">8</span>&#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> fInput, fExpected;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FibonacciTest</span><span class="params">(<span class="keyword">int</span> input, <span class="keyword">int</span> expected)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.fInput = input;</span><br><span class="line">        <span class="keyword">this</span>.fExpected = expected;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//5</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        assertEquals(fExpected, Fibonacci.compute(fInput));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 被测试的类的方法    </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fibonacci</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">compute</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">    	</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123; </span><br><span class="line">        	result = n; </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">        	result = compute(n - <span class="number">1</span>) + compute(n - <span class="number">2</span>); </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//配置要映射的服务器</span></span><br><span class="line"> upstream my_upstream &#123;</span><br><span class="line">        ip_hash;</span><br><span class="line">        server 192.168.90.01:8081 weight=2;;</span><br><span class="line">        server 192.168.90.02:8082 weight=3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">        listen       8080;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass http://my_upstream;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p>若参数为单个的还可以这样做：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Parameters</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Iterable&lt;? extends Object&gt; data() &#123;</span><br><span class="line">    <span class="keyword">return</span> Arrays.asList(<span class="string">&quot;first test&quot;</span>, <span class="string">&quot;second test&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Parameters</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Object[] data() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Object[] &#123; <span class="string">&quot;first test&quot;</span>, <span class="string">&quot;second test&quot;</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h3><p>junit 断言，表格里面和assertThat。</p>
-<h6 id><a href="#" class="headerlink" title></a></h6><table>
-<thead>
-<tr>
-<th align="center">断言</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">assertArrayEquals(expecteds, actuals)</td>
-<td align="center">查看两个数组是否相等。</td>
-</tr>
-<tr>
-<td align="center">assertEquals(expected, actual)</td>
-<td align="center">查看两个对象是否相等。类似于字符串比较使用的equals()方法。</td>
-</tr>
-<tr>
-<td align="center">assertNotEquals(first, second)</td>
-<td align="center">查看两个对象是否不相等。</td>
-</tr>
-<tr>
-<td align="center">assertNull(object)</td>
-<td align="center">查看对象是否为空。</td>
-</tr>
-<tr>
-<td align="center">assertNotNull(object)</td>
-<td align="center">查看对象是否不为空。</td>
-</tr>
-<tr>
-<td align="center">assertSame(expected, actual)</td>
-<td align="center">查看两个对象的引用是否相等。类似于使用“==”比较两个对象。</td>
-</tr>
-<tr>
-<td align="center">assertNotSame(unexpected, actual)</td>
-<td align="center">查看两个对象的引用是否不相等。类似于使用“!=”比较两个对象。</td>
-</tr>
-<tr>
-<td align="center">assertTrue(condition)</td>
-<td align="center">查看运行结果是否为true。</td>
-</tr>
-<tr>
-<td align="center">assertFalse(condition)</td>
-<td align="center">查看运行结果是否为false。</td>
-</tr>
-</tbody></table>
-<h6 id="assertThat与Matcher"><a href="#assertThat与Matcher" class="headerlink" title="assertThat与Matcher"></a>assertThat与Matcher</h6><p>包括两个包org.hamcrest.CoreMatchers和org.hamcrest.Matchers</p>
+<h1 id="Nginx-常见命令"><a href="#Nginx-常见命令" class="headerlink" title="Nginx 常见命令"></a>Nginx 常见命令</h1><ul>
+<li><p>启动</p>
 <ol>
-<li>org.hamcrest.CoreMatchers</li>
+<li>/usr/sbin/nginx</li>
+<li>nginx</li>
 </ol>
-<ul>
-<li>assertThat( number, allOf( greaterThan(10), lessThan(15) ) ):相当于“与”（&amp;&amp;）,即allOf中条件都必须成立</li>
-<li>assertThat( number, anyOf( greaterThan(30), lessThan(1) ) )：相当于“或”（||），即只要anyOf中有一个条件成立就可以了</li>
-<li>assertThat( number, anything() )：无论什么条件，永远为true</li>
-<li>assertThat( string, is( “engine” ) )和assertThat( string, equalTo( expectedValue ) )：两个作用是一样的，只是写法不同，都是Object的equals方法</li>
-<li>assertThat( string, not( “engine” ) ):not匹配符和is匹配符正好相反</li>
-</ul>
-<ol start="2">
-<li>org.hamcrest.Matchers</li>
-</ol>
-<p>（1）字符串相关匹配符</p>
-<ul>
-<li>assertThat( string, containsString( “engine” ) ):包含子字符串”engine”则测试通过</li>
-<li>assertThat( string, endsWith( “engine” ) )：以子字符串”engine”结尾则测试通过</li>
-<li>assertThat( string, startsWith( “engine” ) )：以子字符串”engine”开始则测试通过</li>
-<li>assertThat( testedString, equalToIgnoringCase( “engine” ) ); 忽略大小写的情况</li>
-<li>assertThat( testedString, equalToIgnoringWhiteSpace( “engine” ) )：忽略头尾的任意个空格</li>
-<li>assertThat( string, is( “engine” ) )：判断两个字符串相等</li>
-</ul>
-<p>（2）数值相关匹配符</p>
-<ul>
-<li>assertThat( number, closeTo( 10.0, 0.1 ) ):在10.0±0.1范围之内则测试通过</li>
-<li>assertThat( number, greaterThan(11) ):大于11则测试通过</li>
-<li>assertThat( number, lessThan (11) ):小于11则测试通过</li>
-<li>assertThat( number, greaterThanOrEqualTo (11) )：大于等于11则测试通过</li>
-<li>assertThat( number, lessThanOrEqualTo (11) )：小于等于11则测试通过</li>
-</ul>
-<p>（3）collection相关匹配符</p>
-<ul>
-<li>assertThat( map, hasEntry( “key”, “value” ) ):mapObject含有一个键值为”key”对应元素值为”value”测试通过</li>
-<li>assertThat( list, hasItem ( “element” ) )：iterableObject含有元素“element”项则测试通过</li>
-<li>assertThat( map, hasKey ( “key” ) )：mapObject含有键值“key”则测试通过</li>
-<li>assertThat( map, hasValue ( “key” ) )：mapObject含有元素值“value”则测试通过</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AssertTests</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertArrayEquals</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] expected = <span class="string">&quot;trial&quot;</span>.getBytes();</span><br><span class="line">    <span class="keyword">byte</span>[] actual = <span class="string">&quot;trial&quot;</span>.getBytes();</span><br><span class="line">    org.junit.Assert.assertArrayEquals(<span class="string">&quot;failure - byte arrays not same&quot;</span>, expected, actual);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertEquals</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertEquals(<span class="string">&quot;failure - strings are not equal&quot;</span>, <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertFalse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertFalse(<span class="string">&quot;failure - should be false&quot;</span>, <span class="keyword">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertNotNull</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertNotNull(<span class="string">&quot;should not be null&quot;</span>, <span class="keyword">new</span> Object());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertNotSame</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertNotSame(<span class="string">&quot;should not be same Object&quot;</span>, <span class="keyword">new</span> Object(), <span class="keyword">new</span> Object());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertNull</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertNull(<span class="string">&quot;should be null&quot;</span>, <span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertSame</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Integer aNumber = Integer.valueOf(<span class="number">768</span>);</span><br><span class="line">    org.junit.Assert.assertSame(<span class="string">&quot;should be same&quot;</span>, aNumber, aNumber);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// JUnit Matchers assertThat</span></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertThatBothContainsString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertThat(<span class="string">&quot;albumen&quot;</span>, both(containsString(<span class="string">&quot;a&quot;</span>)).and(containsString(<span class="string">&quot;b&quot;</span>)));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertThathasItemsContainsString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertThat(Arrays.asList(<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>), hasItems(<span class="string">&quot;one&quot;</span>, <span class="string">&quot;three&quot;</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertThatEveryItemContainsString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertThat(Arrays.asList(<span class="keyword">new</span> String[] &#123; <span class="string">&quot;fun&quot;</span>, <span class="string">&quot;ban&quot;</span>, <span class="string">&quot;net&quot;</span> &#125;), everyItem(containsString(<span class="string">&quot;n&quot;</span>)));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Core Hamcrest Matchers with assertThat</span></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertThatHamcrestCoreMatchers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    assertThat(<span class="string">&quot;good&quot;</span>, allOf(equalTo(<span class="string">&quot;good&quot;</span>), startsWith(<span class="string">&quot;good&quot;</span>)));</span><br><span class="line">    assertThat(<span class="string">&quot;good&quot;</span>, not(allOf(equalTo(<span class="string">&quot;bad&quot;</span>), equalTo(<span class="string">&quot;good&quot;</span>))));</span><br><span class="line">    assertThat(<span class="string">&quot;good&quot;</span>, anyOf(equalTo(<span class="string">&quot;bad&quot;</span>), equalTo(<span class="string">&quot;good&quot;</span>)));</span><br><span class="line">    assertThat(<span class="number">7</span>, not(CombinableMatcher.&lt;Integer&gt; either(equalTo(<span class="number">3</span>)).or(equalTo(<span class="number">4</span>))));</span><br><span class="line">    assertThat(<span class="keyword">new</span> Object(), not(sameInstance(<span class="keyword">new</span> Object())));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertTrue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertTrue(<span class="string">&quot;failure - should be true&quot;</span>, <span class="keyword">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/25/hive%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/25/hive%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">hive安装</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-25 10:33:12" itemprop="dateCreated datePublished" datetime="2020-09-25T10:33:12+08:00">2020-09-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-10 17:22:17" itemprop="dateModified" datetime="2020-10-10T17:22:17+08:00">2020-10-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h1><p>上一篇安装了hadoop，这次我们来使用hive操作haddop。</p>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li>macOS Catalina 10.15.6</li>
-<li>JDK 1.8.0_261</li>
-<li>homebrew</li>
-</ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>brew install hive</li>
-</ul>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><ul>
-<li>环境变量</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo export HIVE_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;hive&#x2F;3.1.2_1 &gt;&gt; ~&#x2F;.zshrc</span><br><span class="line">export PATH&#x3D;$HIVE_HOME&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><h3 id="hive-site-xml"><a href="#hive-site-xml" class="headerlink" title="hive-site.xml"></a>hive-site.xml</h3><blockquote>
-<p>没有就：mv hive-default.xml.template hive-site.xml，然后添加如下configuration</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.local<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://localhost:3306/metastore<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.cj.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">　　<span class="comment">&lt;!--mysql用户名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>root<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">　　<span class="comment">&lt;!--mysql密码--&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>root<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- hive用来存储不同阶段的map/reduce的执行计划的目录，同时也存储中间输出结果</span></span><br><span class="line"><span class="comment">	，默认是/tmp/&lt;user.name&gt;/hive,我们实际一般会按组区分，然后组内自建一个tmp目录存&gt;储 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.local.scratchdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.downloaded.resources.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.warehouse.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/data/hive/warehouse<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.server2.logging.operation.log.location<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
 </li>
-</ul>
-<ul>
-<li><p>配置元数据库存</p>
-<ul>
-<li>装好mysql，创建数据库metastore。</li>
-<li>下载mysql驱动放到hive的lib目录下：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/file/?id=496588">https://dev.mysql.com/downloads/file/?id=496588</a></li>
-<li>schematool -initSchema -dbType mysql</li>
-</ul>
+<li><p>停止</p>
+<p>nginx -s stop</p>
 </li>
-</ul>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><ul>
-<li>启动metastore：hive –service metastore &amp; </li>
-<li>nohup hiveserver2 &amp; (若需要jdbc连接)</li>
-<li>运行：hive</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/24/haddop%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/24/haddop%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">haddop安装</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-24 20:27:26" itemprop="dateCreated datePublished" datetime="2020-09-24T20:27:26+08:00">2020-09-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-10 17:44:16" itemprop="dateModified" datetime="2020-10-10T17:44:16+08:00">2020-10-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li>macOS Catalina 10.15.6</li>
-<li>JDK 1.8.0_261</li>
-<li>homebrew</li>
-</ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>ssh locahost（免密码登陆）</li>
-</ul>
-<img src="/2020/09/24/haddop%E5%AE%89%E8%A3%85/image-20200925094959417.png" class title="image-20200925094959417">
-
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -P <span class="string">&quot;you-email&quot;</span></span><br><span class="line">cat ~<span class="regexp">/.ssh/i</span>d_rsa.pub &gt;&gt; ~<span class="regexp">/.ssh/</span>authorized_keys</span><br><span class="line">ssh localhost</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install hadoop</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><blockquote>
-<p>所有的配置均在： /usr/local/Cellar/hadoop/3.3.0/libexec/etc/hadoop下</p>
-</blockquote>
-<ul>
-<li>配置文件</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>配置文件的名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>core-site.xml</td>
-<td>核心配置文件，主要定义了我们文件访问的格式 hdfs://</td>
-</tr>
-<tr>
-<td>hadoop-env.sh</td>
-<td>主要配置我们的java路径</td>
-</tr>
-<tr>
-<td>hdfs-site.xml</td>
-<td>主要定义配置我们的hdfs的相关配置</td>
-</tr>
-<tr>
-<td>mapred-site.xml</td>
-<td>主要定义我们的mapreduce相关的一些配置</td>
-</tr>
-<tr>
-<td>slaves</td>
-<td>控制我们的从节点在哪里 datanode nodemanager在哪些机器上</td>
-</tr>
-<tr>
-<td>yarm-site.xml</td>
-<td>配置我们的resourcemanager资源调度</td>
-</tr>
-</tbody></table>
-<ul>
-<li>指定Java环境：hadoop-env.sh</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>core-site.xml</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 临时数据存放的位置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/usr/local/Cellar/hadoop/hdfs/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>A base for other temporary directories.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 单一namenode,配置fs.default.name，</span></span><br><span class="line"><span class="comment">    namenode HA需要配置s.defaultFS</span></span><br><span class="line"><span class="comment">    HDFS和MapReduce组件都需要用到它 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.default.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>mapred-site.xml</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapred.job.tracker<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>localhost:9010<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>hdfs-site.xml</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 我们只有一台主机和一个伪分布式模式的DataNode，将此值修改为1--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><ul>
-<li>格式化hdfs文件系统</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/Cellar/hadoop/3.3.0/bin</span><br><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>运行</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/Cellar/hadoop/3.3.0/sbin</span><br><span class="line">./start-all.sh</span><br><span class="line">jps</span><br><span class="line">57969 SecondaryNameNode</span><br><span class="line">58161 ResourceManager</span><br><span class="line">57734 NameNode</span><br><span class="line">58263 NodeManager</span><br><span class="line">49034 RemoteMavenServer36</span><br><span class="line">57835 DataNode</span><br><span class="line">61182 Jps</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h1><ul>
-<li>hdfs web ui: <a target="_blank" rel="noopener" href="http://localhost:9870/">http://localhost:9870/</a>  (3.x之前为50070端口)</li>
-<li>yarn web ui: <a target="_blank" rel="noopener" href="http://localhost:8088/">http://localhost:8088/</a> </li>
+<li><p>查看nginx进程</p>
+<p>ps -ef | grep nginx</p>
+</li>
+<li><p>重新加载配置文件</p>
+<p>nginx -s reload</p>
+</li>
+<li><p>检配置文件是否正确</p>
+<p>nginx -t</p>
+</li>
+<li><p>查看nginx 版本</p>
+<p>nginx -v</p>
+</li>
 </ul>
 
       
@@ -1530,20 +1367,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

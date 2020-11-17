@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="在pg里面有schema的概念。这里我们可以简单理解下：database（仓库）–&gt; schema（房间）–&gt;对象（表、视图、触发器） 安装 拉取镜像并运行：docker run -it --name greenplum  -p 5432:5432 -d kevinmtrowbridge&#x2F;greenplumdb_singlenode 进入到容器内：docker exec -it gre">
+  <meta name="description" content="在pg里面有schema的概念。这里我们可以简单理解下：database（仓库）–&gt; schema（房间）–&gt;对象（表、视图、触发器） 安装1docker exec -it greenplum psql -h 127.0.0.1 -p 5432：5432 -U postgres   拉取镜像并运行：docker run -it --name greenplum  -p 5432:543">
 <meta property="og:type" content="article">
 <meta property="og:title" content="postgresql简单使用">
 <meta property="og:url" content="http://yoursite.com/2020/11/04/postgresql%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Astilt&#39;s blog">
-<meta property="og:description" content="在pg里面有schema的概念。这里我们可以简单理解下：database（仓库）–&gt; schema（房间）–&gt;对象（表、视图、触发器） 安装 拉取镜像并运行：docker run -it --name greenplum  -p 5432:5432 -d kevinmtrowbridge&#x2F;greenplumdb_singlenode 进入到容器内：docker exec -it gre">
+<meta property="og:description" content="在pg里面有schema的概念。这里我们可以简单理解下：database（仓库）–&gt; schema（房间）–&gt;对象（表、视图、触发器） 安装1docker exec -it greenplum psql -h 127.0.0.1 -p 5432：5432 -U postgres   拉取镜像并运行：docker run -it --name greenplum  -p 5432:543">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-11-04T03:54:46.000Z">
-<meta property="article:modified_time" content="2020-11-04T12:10:13.585Z">
+<meta property="article:modified_time" content="2020-11-17T05:15:31.784Z">
 <meta property="article:author" content="Astilt">
 <meta property="article:tag" content="postgresql">
 <meta name="twitter:card" content="summary">
@@ -182,10 +182,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-11-04 11:54:46 / 修改时间：20:10:13" itemprop="dateCreated datePublished" datetime="2020-11-04T11:54:46+08:00">2020-11-04</time>
+              <time title="创建时间：2020-11-04 11:54:46" itemprop="dateCreated datePublished" datetime="2020-11-04T11:54:46+08:00">2020-11-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-17 13:15:31" itemprop="dateModified" datetime="2020-11-17T13:15:31+08:00">2020-11-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -208,14 +214,22 @@
 
       
         <p>在pg里面有schema的概念。这里我们可以简单理解下：database（仓库）–&gt; schema（房间）–&gt;对象（表、视图、触发器）</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it greenplum psql -h 127.0.0.1 -p 5432：5432 -U postgres</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li>拉取镜像并运行：<code>docker run -it --name greenplum  -p 5432:5432 -d kevinmtrowbridge/greenplumdb_singlenode</code></li>
 <li>进入到容器内：<code>docker exec -it greenplum /bin/bash</code> </li>
+<li><code>su - gpadmin</code></li>
 <li>登陆：<code>psql -h localhost -p 5432 -U gpadmin template1</code></li>
 <li>切换到 postgres库：<code> \c  postgres</code></li>
 <li>创建用户：<code>CREATE USER astilt PASSWORD &#39;astilt&#39;;</code></li>
 <li>授权：<code>GRANT ALL PRIVILEGES ON DATABASE postgres TO astilt;</code></li>
 <li>客户端navicat登陆吧，username：astilt，pwd：astilt</li>
+</ul>
+<h1 id="配置允许远程客户端连接"><a href="#配置允许远程客户端连接" class="headerlink" title="配置允许远程客户端连接"></a>配置允许远程客户端连接</h1><ul>
+<li>使用find  [pg的安装目录] -name pg_hba.conf</li>
+<li>最后一行加：<strong>host  all       all       0.0.0.0/0       md5</strong></li>
+<li>切换到gpadmin，执行gpstop -u 重新加载配置文件</li>
 </ul>
 <h1 id="mysql对比"><a href="#mysql对比" class="headerlink" title="mysql对比"></a>mysql对比</h1><h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><table>
 <thead>
@@ -365,7 +379,37 @@
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 新建</span><br><span class="line">create table ([字段名1] [类型1] &lt;references 关联表名(关联的字段名)&gt;;,[字段名2] [类型2],......&lt;,primary key (字段名m,字段名n,...)&gt;;); </span><br><span class="line">// 删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> [表名]; </span><br><span class="line">// 重命名一个表</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名A] <span class="keyword">rename</span> <span class="keyword">to</span> [表名B]; </span><br><span class="line">// 在已有的表里添加字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">add</span> <span class="keyword">column</span> [字段名] [类型]; </span><br><span class="line">//删除表中的字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">drop</span> <span class="keyword">column</span> [字段名]; </span><br><span class="line">//重命名一个字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">rename</span> <span class="keyword">column</span> [字段名A] <span class="keyword">to</span> [字段名B]; </span><br><span class="line">//给一个字段设置缺省值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">alter</span> <span class="keyword">column</span> [字段名] <span class="keyword">set</span> <span class="keyword">default</span> [新的默认值];</span><br><span class="line">//去除缺省值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">alter</span> <span class="keyword">column</span> [字段名] <span class="keyword">drop</span> <span class="keyword">default</span>; </span><br><span class="line">//表中插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名 ([字段名m],[字段名n],......) <span class="keyword">values</span> ([列m的值],[列n的值],......); </span><br><span class="line">//修改表中的某行某列的数据</span><br><span class="line"><span class="keyword">update</span> [表名] <span class="keyword">set</span> [目标字段名]=[目标值] <span class="keyword">where</span> [该行特征]; </span><br><span class="line">//删除表中某行数据</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> [表名] <span class="keyword">where</span> [该行特征]; </span><br></pre></td></tr></table></figure>
 
-<h1 id="schema模式"><a href="#schema模式" class="headerlink" title="schema模式"></a>schema模式</h1><p><code>模式(schema)</code>是对数据库(database)逻辑分割，在数据库创建的同时，就已经默认为数据库创建了一个模式：public。</p>
+<h1 id="日期和时间间字段"><a href="#日期和时间间字段" class="headerlink" title="日期和时间间字段"></a>日期和时间间字段</h1><ul>
+<li><p>date:日期字段，格式:2016-04-15</p>
+</li>
+<li><p>timestamp:时间字段，格式:2016-04-15 20:00:00</p>
+</li>
+<li><p>获取当时时间函数</p>
+<ul>
+<li>select now();</li>
+<li>select current_timestamp;</li>
+<li>select CURRENT_TIME;</li>
+<li>select LOCALTIME;</li>
+<li>select LOCALTIMESTAMP;</li>
+</ul>
+</li>
+<li><p>获取当天日期</p>
+<ul>
+<li>select now()+interval ‘2 day’;</li>
+</ul>
+</li>
+<li><p>时间截取</p>
+<ul>
+<li>select extract(year from now()); </li>
+</ul>
+</li>
+<li><p>时间转换: </p>
+<ul>
+<li>select timestamp ‘2012-05-12 18:54:54’;</li>
+<li>select date ‘2012-05-12 18:54:54’; </li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -450,7 +494,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">mysql对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%A2%9E%E9%95%BF"><span class="nav-number">2.2.1.</span> <span class="nav-text">自增长</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">字段类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PG-%E5%B8%B8%E7%94%A8%E5%88%9B%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">PG 常用创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#schema%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">schema模式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%81%E8%AE%B8%E8%BF%9C%E7%A8%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">配置允许远程客户端连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql%E5%AF%B9%E6%AF%94"><span class="nav-number">3.</span> <span class="nav-text">mysql对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%A2%9E%E9%95%BF"><span class="nav-number">3.2.1.</span> <span class="nav-text">自增长</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">字段类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PG-%E5%B8%B8%E7%94%A8%E5%88%9B%E5%BB%BA"><span class="nav-number">4.</span> <span class="nav-text">PG 常用创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4%E9%97%B4%E5%AD%97%E6%AE%B5"><span class="nav-number">5.</span> <span class="nav-text">日期和时间间字段</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -464,20 +508,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
