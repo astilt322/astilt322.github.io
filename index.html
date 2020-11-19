@@ -155,6 +155,632 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/18/Java%E7%9A%84%E6%97%A5%E5%BF%97%E4%BD%93%E7%B3%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/18/Java%E7%9A%84%E6%97%A5%E5%BF%97%E4%BD%93%E7%B3%BB/" class="post-title-link" itemprop="url">Java的日志体系</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-18 15:34:12" itemprop="dateCreated datePublished" datetime="2020-11-18T15:34:12+08:00">2020-11-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-19 14:56:55" itemprop="dateModified" datetime="2020-11-19T14:56:55+08:00">2020-11-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><p>Java体系日志很多，一直没有整理，乱乱的。好，我们先来看看日志框架组件以及大致处理流程：</p>
+<ul>
+<li>Loggers：Logger负责捕捉事件并将其发送给合适的Appender</li>
+<li>Appenders：也称为Handlers，负责从Logger中取出日志消息，并使用Layout来格式化消息，然后将消息发送出去，比如发送到控制台、文件或其他日志收集系统。</li>
+<li>Layouts：也称为Formatters，负责对日志事件进中的数据进行转换和格式化。</li>
+<li>Filters：过滤器，根据需要定制哪些信息会被记录，哪些信息会被放过。</li>
+</ul>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><ul>
+<li>log4j(最早的Java领域日志，作者Ceki Gülcü，现归属Apache)</li>
+<li>jul（jdk1.4后新增，看到log4j后加的）</li>
+<li>logback（log4j作者Ceki Gülcü另外一个框架）</li>
+<li>log4j2（log4j的改良版本，Apache）</li>
+</ul>
+<h2 id="门面"><a href="#门面" class="headerlink" title="门面"></a>门面</h2><ul>
+<li>jcl（Apache 推出 Jakarta Commons Logging）</li>
+<li>slf4j（log4j作者Ceki Gülcü写的，和logback一起出现的）</li>
+</ul>
+<h2 id="时间轴"><a href="#时间轴" class="headerlink" title="时间轴"></a>时间轴</h2><img src="/2020/11/18/Java%E7%9A%84%E6%97%A5%E5%BF%97%E4%BD%93%E7%B3%BB/image-20201118153430603.png" class title="image-20201118153430603">
+
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="log4j"><a href="#log4j" class="headerlink" title="log4j"></a>log4j</h2><blockquote>
+<p>log4j 1.x 版本，2015年5月，Apache宣布log4j1.x 停止更新。最新版为1.2.17。</p>
+</blockquote>
+<ul>
+<li>依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>classpath下配置log4j.properties </li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 日志记录器Logger的全局设置 ###</span></span><br><span class="line"><span class="comment">#第一个参数指定输出的最低日志级别，即只输出该级别及以上级别的日志,D和E为自定义名字，对应下面appender</span></span><br><span class="line"><span class="meta">log4j.rootLogger</span>=<span class="string">DEBUG,stdout,D,E</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#*******设置控制台输出********</span></span><br><span class="line"><span class="meta">log4j.appender.stdout</span>=<span class="string">org.apache.log4j.ConsoleAppender</span></span><br><span class="line"><span class="comment">#指定标准输出设备为系统输出设备</span></span><br><span class="line"><span class="meta">log4j.appender.stdout.Target</span>=<span class="string">System.out</span></span><br><span class="line"><span class="comment">#指定使用自定义的格式化器</span></span><br><span class="line"><span class="meta">log4j.appender.stdout.layout</span>=<span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="comment">#指定日志格式</span></span><br><span class="line"><span class="meta">log4j.appender.stdout.layout.ConversionPattern</span>=<span class="string">[%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#********文件输出每天一个文件********</span></span><br><span class="line"><span class="meta">log4j.appender.D</span>=<span class="string">org.apache.log4j.DailyRollingFileAppender</span></span><br><span class="line"><span class="comment">#指定将日志输出到哪个文件中</span></span><br><span class="line"><span class="meta">log4j.appender.D.File</span>=<span class="string">./debug.log</span></span><br><span class="line"><span class="comment">#指定文件写入方式为追加</span></span><br><span class="line"><span class="meta">log4j.appender.D.Append</span>=<span class="string">true</span></span><br><span class="line"><span class="comment">#指定最低输出级别，针对这个appender</span></span><br><span class="line"><span class="meta">log4j.appender.D.Threshold</span>=<span class="string">DEBUG</span></span><br><span class="line"><span class="meta">log4j.appender.D.DatePattern</span>=<span class="string">&#x27;.&#x27;yyyy-MM-dd-HH-mm</span></span><br><span class="line"><span class="comment">#指定日志格式</span></span><br><span class="line"><span class="meta">log4j.appender.D.layout</span>=<span class="string">org.apache.log4j.SimpleLayout</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#********文件输出按照大小来生产文件********</span></span><br><span class="line"><span class="meta">log4j.appender.E</span>=<span class="string">org.apache.log4j.RollingFileAppender</span></span><br><span class="line"><span class="meta">log4j.appender.E.File</span>=<span class="string">./error.log</span></span><br><span class="line"><span class="meta">log4j.appender.E.Append</span>=<span class="string">true</span></span><br><span class="line"><span class="comment">#指定最低输出级别，针对这个appender</span></span><br><span class="line"><span class="meta">log4j.appender.E.Threshold</span>=<span class="string">ERROR</span></span><br><span class="line"><span class="comment">#指定日志文件的最大尺寸</span></span><br><span class="line"><span class="meta">log4j.appender.E.MaxFileSize</span>=<span class="string">20KB</span></span><br><span class="line"><span class="comment">#指定最大备份数为5</span></span><br><span class="line"><span class="meta">log4j.appender.E.MaxBackupIndex</span>=<span class="string">5</span></span><br><span class="line"><span class="comment">#指定日志输出格式使用自定义格式</span></span><br><span class="line"><span class="meta">log4j.appender.E.layout</span>=<span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="comment">#指定日志格式</span></span><br><span class="line"><span class="meta">log4j.appender.E.layout.ConversionPattern</span>=<span class="string">%d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#********指定具体包打印日志级别********</span></span><br><span class="line"><span class="meta">log4j.logger.org.mybatis</span>=<span class="string">DEBUG,D</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>appender</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>全路径</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>org.apache.log4j.ConsoleAppender</td>
+<td>控制台</td>
+</tr>
+<tr>
+<td>org.apache.log4j.FileAppender</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>org.apache.log4j.DailyRollingFileAppender</td>
+<td>每天产生一个日志文件</td>
+</tr>
+<tr>
+<td>org.apache.log4j.RollingFileAppender</td>
+<td>文件大小到达指定尺寸的时候产生一个新的文件</td>
+</tr>
+<tr>
+<td>org.apache.log4j.WriterAppender</td>
+<td>将日志信息以流格式发送到任意指定的地方</td>
+</tr>
+</tbody></table>
+<ul>
+<li>属性配置</li>
+</ul>
+<p>不同的appender有的属性不同，动手点到类里瞧瞧。例如RollingFileAppender的 File、Append、Threshold等。</p>
+<ul>
+<li>伪装Java 代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</span><br><span class="line"><span class="comment">// 获取logger</span></span><br><span class="line"> Logger logger = Logger.getLogger(App.class.getName());</span><br><span class="line"> logger.error(<span class="string">&quot;11111&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="log4j2"><a href="#log4j2" class="headerlink" title="log4j2"></a>log4j2</h2><blockquote>
+<p>2.x版本配置文件后缀，只能为”.xml”,”.json”或者”.jsn”。一般建议log4j2使用xml形式配置。默认没有配置文件情况，也会输出error以上级别的日志到控制台。</p>
+</blockquote>
+<ul>
+<li>依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>classpath下配置log4j2.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">status</span>=<span class="string">&quot;WARN&quot;</span> <span class="attr">monitorInterval</span>=<span class="string">&quot;30&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--先定义所有的appender--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appenders</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">&lt;!--这个输出控制台的配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">console</span> <span class="attr">name</span>=<span class="string">&quot;Console&quot;</span> <span class="attr">target</span>=<span class="string">&quot;SYSTEM_OUT&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;[%d&#123;HH:mm:ss:SSS&#125;] [%p] - %l - %m%n&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">console</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">&lt;!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">File</span> <span class="attr">name</span>=<span class="string">&quot;log&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;log/test.log&quot;</span> <span class="attr">append</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;HH:mm:ss.SSS&#125; %-5level %class&#123;36&#125; %L %M - %msg%xEx%n&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">File</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">&lt;!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">&quot;RollingFileInfo&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;$&#123;sys:user.home&#125;/logs/info.log&quot;</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">filePattern</span>=<span class="string">&quot;$&#123;sys:user.home&#125;/logs/$$&#123;date:yyyy-MM&#125;/info-%d&#123;yyyy-MM-dd&#125;-%i.log&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ThresholdFilter</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span> <span class="attr">onMatch</span>=<span class="string">&quot;ACCEPT&quot;</span> <span class="attr">onMismatch</span>=<span class="string">&quot;DENY&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;[%d&#123;HH:mm:ss:SSS&#125;] [%p] - %l - %m%n&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Policies</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">TimeBasedTriggeringPolicy</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">&quot;100 MB&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Policies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">&quot;RollingFileWarn&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;$&#123;sys:user.home&#125;/logs/warn.log&quot;</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">filePattern</span>=<span class="string">&quot;$&#123;sys:user.home&#125;/logs/$$&#123;date:yyyy-MM&#125;/warn-%d&#123;yyyy-MM-dd&#125;-%i.log&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ThresholdFilter</span> <span class="attr">level</span>=<span class="string">&quot;warn&quot;</span> <span class="attr">onMatch</span>=<span class="string">&quot;ACCEPT&quot;</span> <span class="attr">onMismatch</span>=<span class="string">&quot;DENY&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;[%d&#123;HH:mm:ss:SSS&#125;] [%p] - %l - %m%n&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Policies</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">TimeBasedTriggeringPolicy</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">&quot;100 MB&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Policies</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">DefaultRolloverStrategy</span> <span class="attr">max</span>=<span class="string">&quot;20&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">&quot;RollingFileError&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;$&#123;sys:user.home&#125;/logs/error.log&quot;</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">filePattern</span>=<span class="string">&quot;$&#123;sys:user.home&#125;/logs/$$&#123;date:yyyy-MM&#125;/error-%d&#123;yyyy-MM-dd&#125;-%i.log&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ThresholdFilter</span> <span class="attr">level</span>=<span class="string">&quot;error&quot;</span> <span class="attr">onMatch</span>=<span class="string">&quot;ACCEPT&quot;</span> <span class="attr">onMismatch</span>=<span class="string">&quot;DENY&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;[%d&#123;HH:mm:ss:SSS&#125;] [%p] - %l - %m%n&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Policies</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">TimeBasedTriggeringPolicy</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">&quot;100 MB&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Policies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appenders</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--然后定义logger，只有定义了logger并引入的appender，appender才会生效，也就是说打印的日志内容会到相应文件中--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">loggers</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--过滤掉spring和mybatis的一些无用的DEBUG信息，可以作为定义具体包日志级别--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;org.springframework&quot;</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;org.mybatis&quot;</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">&quot;all&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;Console&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;RollingFileInfo&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;RollingFileWarn&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;RollingFileError&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>配置详解</p>
+<blockquote>
+<p>节点不区分大小写，试验过。</p>
+</blockquote>
+</li>
+</ul>
+<p>1.根节点<code>Configuration</code>有两个属性：<code>status</code>和<code>monitorinterval</code>，有两个子节点：<code>Appenders</code>和<code>Loggers</code>(表明可以定义多个<code>Appender</code>和<code>Logger</code>)：</p>
+<ul>
+<li><code>status</code>用来指定<code>log4j</code>本身的打印日志的级别。</li>
+<li><code>monitorinterval</code>用于指定<code>log4j</code>自动重新配置的监测间隔时间，单位是s，最小是5s</li>
+</ul>
+<p>2.<code>Appenders</code>节点，常见的有三种子节点：<code>Console</code>、<code>RollingFile</code>、<code>File</code>：</p>
+<ul>
+<li><code>Console</code>节点用来定义输出到控制台的<code>Appender</code><br>（1）<code>name</code>：指定 Appender 的名字<br>（2）<code>target</code>：<code>SYSTEM_OUT</code> 或<code>SYSTEM_ERR</code>，一般只设置默认：<code>SYSTEM_OUT</code><br>（3）<code>PatternLayout</code>：输出格式，不设置默认为<code>%m%n</code></li>
+<li><code>File</code>节点用来定义输出到指定位置的文件的<code>Appender</code><br>（1）<code>name</code>：指定<code>Appender</code>的名字<br>（2）<code>fileName</code>：指定输出日志的目的文件带全路径的文件名<br>（3）<code>PatternLayout</code>：输出格式，不设置默认为<code>%m%n</code></li>
+<li><code>RollingFile</code>节点用来定义超过指定大小自动删除旧的创建新的的<code>Appender</code><br>（1）<code>name</code>：指定<code>Appender</code>的名字<br>（2）<code>fileName</code>：指定输出日志的目的文件带全路径的文件名<br>（3）<code>PatternLayout</code>：输出格式，不设置默认为<code>%m%n</code><br>（4）<code>filePattern</code>：指定新建日志文件的名称格式<br>（5）<code>Policies</code>：指定滚动日志的策略，就是什么时候进行新建日志文件输出日志<br>（6）<code>TimeBasedTriggeringPolicy：Policies</code>子节点，基于时间的滚动策略，<code>interval</code>属性用来指定多久滚动一次，默认是<code>1 hour</code>。<code>modulate=true</code>用来调整时间：比如现在是早上<code>3am</code>，<code>interval</code>是4，那么第一次滚动是在<code>4am</code>，接着是<code>8am</code>，<code>12am</code>…而不是<code>7am</code><br>（7）<code>SizeBasedTriggeringPolicy：Policies</code>子节点，基于指定文件大小的滚动策略，size 属性用来定义每个日志文件的大小.<br>（8）<code>DefaultRolloverStrategy</code>：用来指定同一个文件夹下最多有几个日志文件时开始删除最旧的，创建新的(通过<code>max</code>属性)。</li>
+</ul>
+<p>3.<code>Loggers</code>节点，常见的有两种<code>Root</code>和<code>Logger</code>：<br><strong>Root</strong> 节点用来指定项目的根日志，如果没有单独指定 <code>Logger</code>，那么就会默认使用该 <code>Root</code>日志输出<br>  <code>level</code>：日志输出级别，共有8个级别，按照从低到高为：<code>All &lt; Trace &lt; Debug &lt; Info &lt; Warn &lt; Error &lt; Fatal &lt; OFF</code><br>  <code>AppenderRef：Root</code>的子节点，用来指定该日志输出到哪个<code>Appender</code><br><strong>Logger</strong> 节点用来单独指定日志的形式，比如要为指定包下的<code>class</code>指定不同的日志级别等。<br>  <code>level</code>：日志输出级别，共有8个级别，按照从低到高为：<code>All &lt; Trace &lt; Debug &lt; Info &lt; Warn &lt; Error &lt; Fatal &lt; OFF</code><br>  <code>name</code>：用来指定该 <code>Logger</code>所适用的类或者类所在的包全路径,继承自 <code>Root</code>节点.<br>  <code>AppenderRef：Logger</code>的子节点，用来指定该日志输出到哪个<code>Appender</code>，如果没有指定，就会默认继承自 <code>Root</code>。如果指定了，那么会在指定的这个<code>Appender</code>和 <code>Root</code>的<code>Appender</code>中都会输出，此时我们可以设置 <code>Logger</code>的 <code>additivity=&quot;false&quot;</code>只在自定义的 <code>Appender</code>中进行输出。</p>
+<ol>
+<li>关于日志 level<br>共有8个级别，按照从低到高为：<code>All &lt; Trace &lt; Debug &lt; Info &lt; Warn &lt; Error &lt; Fatal &lt; OFF</code>：</li>
+</ol>
+<ul>
+<li><code>All</code>：最低等级的，用于打开所有日志记录.</li>
+<li><code>Trace</code>：是追踪，就是程序推进以下，你就可以写个<code>trace</code>输出，所以<code>trace</code>应该会特别多，不过没关系，我们可以设置最低日志级别不让他输出.</li>
+<li><code>Debug</code>：指出细粒度信息事件对调试应用程序是非常有帮助的.</li>
+<li><code>Info</code>：消息在粗粒度级别上突出强调应用程序的运行过程.</li>
+<li><code>Warn</code>：输出警告及warn以下级别的日志.</li>
+<li><code>Error</code>：输出错误信息日志.</li>
+<li><code>Fatal</code>：输出每个严重的错误事件将会导致应用程序的退出的日志.</li>
+<li><code>OFF</code>：最高等级的，用于关闭所有日志记录.<br>程序会打印高于或等于所设置级别的日志，设置的日志等级越高，打印出来的日志就越少。</li>
+</ul>
+<p>log4j和log4j2 日志级别有8个：按照从低到高为：All（打开所有日志级别）&lt; Trace &lt; Debug &lt; Info &lt; Warn &lt; Error &lt; Fatal &lt; OFF（关闭所有日志级别）</p>
+<h2 id="JUL"><a href="#JUL" class="headerlink" title="JUL"></a>JUL</h2><p>JDK 1.4 之后自带的log，位于java.util.logging包下。它使用起来也是很简单，不需要依赖额外的jar。</p>
+<ul>
+<li>日志级别</li>
+</ul>
+<p>​      FINEST（最低值）–&gt;FINER–&gt;FINE–&gt;CONFIG–&gt;INFO（默认级别）–&gt;WARNING–&gt;SEVERE（最高值）</p>
+<ul>
+<li><p>默认配置</p>
+<blockquote>
+<p>$JAVA_HOME/jre/lib/logging.properties</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">############################################################</span></span><br><span class="line"><span class="comment">#       Default Logging Configuration File</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># You can use a different file by specifying a filename</span></span><br><span class="line"><span class="comment"># with the java.util.logging.config.file system property.</span></span><br><span class="line"><span class="comment"># For example java -Djava.util.logging.config.file=myfile</span></span><br><span class="line"><span class="comment">############################################################</span></span><br><span class="line"></span><br><span class="line"><span class="comment">############################################################</span></span><br><span class="line"><span class="comment">#       Global properties</span></span><br><span class="line"><span class="comment">############################################################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &quot;handlers&quot; specifies a comma separated list of log Handler</span></span><br><span class="line"><span class="comment"># classes.  These handlers will be installed during VM startup.</span></span><br><span class="line"><span class="comment"># Note that these classes must be on the system classpath.</span></span><br><span class="line"><span class="comment"># By default we only configure a ConsoleHandler, which will only</span></span><br><span class="line"><span class="comment"># show messages at the INFO and above levels.</span></span><br><span class="line"><span class="attr">handlers</span>= <span class="string">java.util.logging.ConsoleHandler</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># To also add the FileHandler, use the following line instead.</span></span><br><span class="line"><span class="comment">#handlers= java.util.logging.FileHandler, java.util.logging.ConsoleHandler</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Default global logging level.</span></span><br><span class="line"><span class="comment"># This specifies which kinds of events are logged across</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># all loggers.  For any given facility this global level</span></span><br><span class="line"><span class="comment"># can be overriden by a facility specific level</span></span><br><span class="line"><span class="comment"># Note that the ConsoleHandler also has a separate level</span></span><br><span class="line"><span class="comment"># setting to limit messages printed to the console.</span></span><br><span class="line"><span class="meta">.level</span>= <span class="string">INFO</span></span><br><span class="line"></span><br><span class="line"><span class="comment">############################################################</span></span><br><span class="line"><span class="comment"># Handler specific properties.</span></span><br><span class="line"><span class="comment"># Describes specific configuration info for Handlers.</span></span><br><span class="line"><span class="comment">############################################################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># default file output is in user&#x27;s home directory.</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.pattern</span> = <span class="string">%h/java%u.log</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.limit</span> = <span class="string">50000</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.count</span> = <span class="string">1</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.formatter</span> = <span class="string">java.util.logging.XMLFormatter</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Limit the message that are printed on the console to INFO and above.</span></span><br><span class="line"><span class="meta">java.util.logging.ConsoleHandler.level</span> = <span class="string">INFO</span></span><br><span class="line"><span class="meta">java.util.logging.ConsoleHandler.formatter</span> = <span class="string">java.util.logging.SimpleFormatter</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Example to customize the SimpleFormatter output format</span></span><br><span class="line"><span class="comment"># to print one-line log message like this:</span></span><br><span class="line"><span class="comment">#     &lt;level&gt;: &lt;log message&gt; [&lt;date/time&gt;]</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># java.util.logging.SimpleFormatter.format=%4$s: %5$s [%1$tc]%n</span></span><br><span class="line"></span><br><span class="line"><span class="comment">############################################################</span></span><br><span class="line"><span class="comment"># Facility specific properties.</span></span><br><span class="line"><span class="comment"># Provides extra control for each logger.</span></span><br><span class="line"><span class="comment">############################################################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># For example, set the com.xyz.foo logger to only log SEVERE</span></span><br><span class="line"><span class="comment"># messages:</span></span><br><span class="line"><span class="meta">com.xyz.foo.level</span> = <span class="string">SEVERE</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自定义配置</li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置RootLogger的Handler，有java.util.logging.ConsoleHandler,java.util.logging.FileHandler</span></span><br><span class="line"><span class="attr">handlers</span>= <span class="string">java.util.logging.ConsoleHandler,java.util.logging.FileHandler</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#针对所有handler与包的根日志级别</span></span><br><span class="line"><span class="meta">.level</span>= <span class="string">ALL</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#文件位置，可以是任何path，这样配置默认在项目根路径下</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.pattern</span> = <span class="string">java%u.log</span></span><br><span class="line"><span class="comment">#默认一个文件最多50000条日志记录</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.limit</span> = <span class="string">50000</span></span><br><span class="line"><span class="comment">#设置FileHandle的日志级别为WARNING（低于这个级别就不打印到文件里）</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.level</span>= <span class="string">WARNING</span></span><br><span class="line"><span class="comment">#配置生成一个文件</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.count</span> = <span class="string">1</span></span><br><span class="line"><span class="comment">#配置使用SimpleFormatter格式器</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.formatter</span> = <span class="string">java.util.logging.SimpleFormatter</span></span><br><span class="line"><span class="comment">#配置追加模式</span></span><br><span class="line"><span class="meta">java.util.logging.FileHandler.append</span>=<span class="string">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#ConsoleHandler的日志级别默认是INFO(低于这个级别就不打印到控制台)</span></span><br><span class="line"><span class="meta">java.util.logging.ConsoleHandler.level</span> = <span class="string">INFO</span></span><br><span class="line"><span class="comment">#ConsoleHandler的默认格式化器时SimpleFormatter</span></span><br><span class="line"><span class="meta">java.util.logging.ConsoleHandler.formatter</span> = <span class="string">java.util.logging.SimpleFormatter</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置日志格式</span></span><br><span class="line"><span class="meta">java.util.logging.SimpleFormatter.format</span>= <span class="string">%1$tc %2$s%n%4$s: %5$s%6$s%n</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>加载配置文件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JULLogConfig</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        InputStream inputStream = <span class="keyword">new</span> FileInputStream(<span class="string">&quot;$&#123;file.path&#125;/logging.properties&quot;</span>);</span><br><span class="line">        LogManager manager = LogManager.getLogManager();</span><br><span class="line">        manager.readConfiguration(inputStream);</span><br><span class="line">        Logger logger = Logger.getLogger(JULLogConfig.class.getName());</span><br><span class="line">      <span class="comment">// 高于设置的WARNING级别，因此会打印到log文件里</span></span><br><span class="line">        logger.severe(<span class="string">&quot;999999999&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="logback"><a href="#logback" class="headerlink" title="logback"></a>logback</h1><ul>
+<li><code>logback</code>和<code>log4j</code>是一个人写的</li>
+<li><code>springboot</code>默认使用的日志框架是<code>logback</code>。</li>
+<li>三个模块组成<ul>
+<li>logback-core</li>
+<li>logback-classic</li>
+<li>logback-access</li>
+</ul>
+</li>
+<li>其他的关于性能，关于内存占用，关于测试，关于文档详见源码及官网说明</li>
+</ul>
+<p><code>logback-core</code> 是其它模块的基础设施，其它模块基于它构建，显然，<code>logback-core</code> 提供了一些关键的通用机制。<code>logback-classic</code> 的地位和作用等同于 <code>Log4J</code>，它也被认为是 <code>Log4J</code> 的一个改进版，并且它实现了简单日志门面 <code>SLF4J</code>；而 <code>logback-access</code> 主要作为一个与 <code>Servlet</code> 容器交互的模块，比如说<code>tomcat</code>或者 <code>jetty</code>，提供一些与 <code>HTTP</code> 访问相关的功能。</p>
+<ul>
+<li>依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.25<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置文件logback.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 属性文件:在properties文件中找到对应的配置项 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">springProperty</span> <span class="attr">scope</span>=<span class="string">&quot;context&quot;</span> <span class="attr">name</span>=<span class="string">&quot;logging.path&quot;</span>  <span class="attr">source</span>=<span class="string">&quot;logging.path&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">springProperty</span> <span class="attr">scope</span>=<span class="string">&quot;context&quot;</span> <span class="attr">name</span>=<span class="string">&quot;logging.level&quot;</span> <span class="attr">source</span>=<span class="string">&quot;logging.level.com.astilt.spring.boot&quot;</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认的控制台日志输出，一般生产环境都是后台启动，这个没太大作用 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;STDOUT&quot;</span>  <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Pattern</span>&gt;</span>%d&#123;HH:mm:ss.SSS&#125; %-5level %logger&#123;80&#125; - %msg%n<span class="tag">&lt;/<span class="name">Pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;logFile&quot;</span>  <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">append</span>&gt;</span>true<span class="tag">&lt;/<span class="name">append</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--临界值过滤器，过滤掉低于指定临界值的日志--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">level</span>&gt;</span>$&#123;logging.level&#125;<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--指定被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">file</span>&gt;</span></span><br><span class="line">            $&#123;logging.path&#125;/glmapper-spring-boot/glmapper-loggerone.log</span><br><span class="line">        <span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 每天生成一个日志文件，保存30天的日志文件 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">FileNamePattern</span>&gt;</span>$&#123;logging.path&#125;/glmapper-spring-boot/glmapper-loggerone.log.%d&#123;yyyy-MM-dd&#125;<span class="tag">&lt;/<span class="name">FileNamePattern</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!--日志文件保留天数--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">MaxHistory</span>&gt;</span>30<span class="tag">&lt;/<span class="name">MaxHistory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">charset</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">charset</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"> <span class="comment">&lt;!-- com.astilt.controller这个包下的$&#123;logging.level&#125;级别的日志将会使用logFile来打印--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;com.astilt.controller&quot;</span> <span class="attr">level</span>=<span class="string">&quot;$&#123;logging.level&#125;&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">additivity</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;logFile&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">&quot;$&#123;logging.level&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;STDOUT&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> xml的节点：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">scan</span>=<span class="string">&quot;true&quot;</span> <span class="attr">scanPeriod</span>=<span class="string">&quot;60 seconds&quot;</span> <span class="attr">debug</span>=<span class="string">&quot;false&quot;</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;glmapper-name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;glmapper-demo&quot;</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">contextName</span>&gt;</span>$&#123;glmapper-name&#125;<span class="tag">&lt;/<span class="name">contextName</span>&gt;</span> </span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span>&gt;</span></span><br><span class="line">        //xxxx</span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span>   </span><br><span class="line"><span class="comment">&lt;!-- 用来设置某一个包或者具体的某一个类的日志打印级别以及指定appender。--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span>&gt;</span></span><br><span class="line">        //xxxx</span><br><span class="line">    <span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span>&gt;</span>             </span><br><span class="line">       //xxxx</span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span>  </span><br></pre></td></tr></table></figure>
+
+<p>scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。</p>
+<p>scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。</p>
+<p>debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。</p>
+<ul>
+<li><p>节点</p>
+<p>root：根logger，也是logger</p>
+<p>logger：普通的logger</p>
+<p>appender：需要被 logger<code>或者</code>root<code>的</code>appender-ref指向，它种类有</p>
+<ul>
+<li>ConsoleAppender：把日志添加到控制台</li>
+<li>FileAppender：把日志添加到文件</li>
+<li>RollingFileAppender：滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。它是FileAppender的子类</li>
+</ul>
+</li>
+</ul>
+<h2 id="JCL"><a href="#JCL" class="headerlink" title="JCL"></a>JCL</h2><p>Jakarta Commons-logging（JCL）是Apache 最早提供的日志的框架接口。它本身并没有记录log的功能，只是统一了JDK Logging与Log4j的AP。</p>
+<p><strong>动态查找原理</strong>：Log 是一个接口声明。LogFactory 的内部会去装载具体的日志系统，并获得实现该Log 接口的实现类。LogFactory 内部装载日志系统的流程如下：</p>
+<ol>
+<li>首先，寻找org.apache.commons.logging.LogFactory 属性配置。</li>
+<li>否则，利用JDK1.3 开始提供的service 发现机制，会扫描classpah 下的META-INF/services/org.apache.commons.logging.LogFactory文件，若找到则装载里面的配置，使用里面的配置。</li>
+<li>否则，从Classpath 里寻找commons-logging.properties ，找到则根据里面的配置加载。</li>
+<li>否则，使用默认的配置：如果能找到Log4j 则默认使用log4j 实现，如果没有则使用JDK14Logger 实现，再没有则使用commons-logging 内部提供的SimpleLog 实现。</li>
+</ol>
+<ul>
+<li>依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 我是用是log4j--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>     </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>伪Java 代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.LogFactory;</span><br><span class="line">Log logger = LogFactory.getLog(App.class);</span><br><span class="line">logger.info(<span class="string">&quot;111111&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>log4j.properties 如上，不列了。</li>
+</ul>
+<h2 id="Slf4J"><a href="#Slf4J" class="headerlink" title="Slf4J"></a>Slf4J</h2><p>The Simple Logging Facade for Java（SLF4J）可作为各种日志记录框架（例如java.util.logging，logback和log4j）的简单外观或抽象。</p>
+<p>说白了就是提供统一接口，实现由各个具体的日志框架实现。目前支持的日志框架有：</p>
+<ul>
+<li>slf4j-log4j12-1.7.28.jar （log4j 1.2.x 版本）+log4j</li>
+<li>slf4j-jdk14-1.7.28.jar（JDK 1.4日志记录）</li>
+<li>slf4j-nop-1.7.28.jar</li>
+<li>slf4j-simple-1.7.28.jar</li>
+<li>slf4j-jcl-1.7.28.jar</li>
+<li>logback-classic-1.2.3.jar 、logback-core-1.2.3.jar</li>
+</ul>
+<p>按需添加自己使用的日志jar。并加上对应的日志配置文件。</p>
+<p>使用的伪Java代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line">Logger logger = LoggerFactory.getLogger(App.class);</span><br><span class="line">logger.error(<span class="string">&quot;11111&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在SprngBoot中自带了slf4j+logback，不需要导入包，开箱即用，也是我平时使用最多的方式。</p>
+<p>在使用层面，我觉得log4j、logback最方便，配置和概念都比较清晰，也比较相像。至于JUL、log4j2 使用的比较少，JCL也不多，目前基本上slf4j+logback可以畅行江湖，推荐！</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/18/mybatis%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/18/mybatis%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">mybatis原理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-18 11:33:23 / 修改时间：16:08:27" itemprop="dateCreated datePublished" datetime="2020-11-18T11:33:23+08:00">2020-11-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    Connection conn = <span class="keyword">null</span>;</span><br><span class="line">    Statement stat = <span class="keyword">null</span>;</span><br><span class="line">    ResultSet result = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 1、注册驱动</span></span><br><span class="line">        Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">        <span class="comment">// 2、获得连接</span></span><br><span class="line">        conn = DriverManager.getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/test?characterEncoding=utf-8&amp;serverTimezone=UTC&amp;useSSL=false&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;123456&quot;</span>);</span><br><span class="line">        <span class="comment">// 3、获取数据库操作对象</span></span><br><span class="line">        stat = conn.createStatement();</span><br><span class="line">        <span class="comment">// 4、执行sql</span></span><br><span class="line">          result = stat.executeQuery(<span class="string">&quot;select id,name,age from emp&quot;</span>);</span><br><span class="line">        <span class="comment">// 5、处理查询结果集</span></span><br><span class="line">        <span class="keyword">while</span> (result.next()) &#123;</span><br><span class="line">            <span class="keyword">int</span> id = result.getInt(<span class="string">&quot;id&quot;</span>);</span><br><span class="line">            String name = result.getString(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">            <span class="keyword">int</span> age = result.getInt(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">// 6、释放资源</span></span><br><span class="line">        <span class="keyword">if</span> (result != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                stat.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (stat != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                stat.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (conn != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                conn.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/18/mybatis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/18/mybatis/" class="post-title-link" itemprop="url">未命名</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-18 11:33:05" itemprop="dateCreated datePublished" datetime="2020-11-18T11:33:05+08:00">2020-11-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/18/mybatis%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/18/mybatis%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">mybatis使用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-18 11:32:07 / 修改时间：11:33:49" itemprop="dateCreated datePublished" datetime="2020-11-18T11:32:07+08:00">2020-11-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h1><p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/index.html">官网地址</a></p>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h2 id="Xml-方式"><a href="#Xml-方式" class="headerlink" title="Xml 方式"></a>Xml 方式</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span></span></span><br><span class="line"><span class="meta">  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">  <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/example/BlogMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>basRole.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;org.example.mapper.BasRoleMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getOne&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;org.example.entity.BasRole&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;int&quot;</span> <span class="attr">useCache</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">    SELECT id,role_code,role_name,descr FROM bas_role where id =#&#123;id&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>构建 SqlSessionFactory</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String resource = <span class="string">&quot;org/mybatis/example/mybatis-config.xml&quot;</span>;</span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="Java代码方式"><a href="#Java代码方式" class="headerlink" title="Java代码方式"></a>Java代码方式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DataSource dataSource = BasRoleDataSourceFactory.getDataSource();</span><br><span class="line">TransactionFactory transactionFactory = <span class="keyword">new</span> JdbcTransactionFactory();</span><br><span class="line">Environment environment = <span class="keyword">new</span> Environment(<span class="string">&quot;development&quot;</span>, transactionFactory, dataSource);</span><br><span class="line">Configuration configuration = <span class="keyword">new</span> Configuration(environment);</span><br><span class="line">configuration.addMapper(BlogMapper.class);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(configuration);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="获取SqlSession并执行"><a href="#获取SqlSession并执行" class="headerlink" title="获取SqlSession并执行"></a>获取SqlSession并执行</h2><blockquote>
+<p>SqlSessionFactory–&gt;SqlSession–&gt;sql</p>
+<p>SqlSessionFactory–&gt;SqlSession–&gt;Mapper–&gt;sql</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (SqlSession session = sqlSessionFactory.openSession()) &#123;</span><br><span class="line">  <span class="comment">// SqlSession执行sql</span></span><br><span class="line">  Blog blog1 = (Blog) session.selectOne(<span class="string">&quot;org.mybatis.example.BlogMapper.selectBlog&quot;</span>, <span class="number">101</span>);</span><br><span class="line">  <span class="comment">// Mapper执行sql</span></span><br><span class="line">  BlogMapper mapper = session.getMapper(BlogMapper.class);</span><br><span class="line">  Blog blog2 = mapper.selectBlog(<span class="number">101</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h1><ul>
+<li>SqlSessionFactoryBuilder：看名知意，产生SqlSessionFactory，一般是基于xml/Java配置方式构建SessionFactory。它的**生命周期在构建完SqlSessionFactory就结束了   </li>
+<li>SqlSessionFactory：看名知意，产生SqlSession，每次和db交互都需要从这里取sqlSession。它的<strong>生命周期是整个mybatis应用</strong>，一般一个数据库一个实例。</li>
+<li>SqlSession：它相当于JDBC里面的Connection，每次访问数据库的“回话”，它的<strong>生命周期是每次执行“回话”过程</strong>。使用完就关闭！</li>
+<li>Sql Mapper：一般我们可以认为它由Java接口+xml文件组成。负责执行sql并返回结果，<strong>生命周期为sqlSession的“回话”内，方法级别</strong>。</li>
+</ul>
+<h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (SqlSession session = sqlSessionFactory.openSession()) &#123;</span><br><span class="line">          BasRole basRole = (BasRole)session.selectOne(<span class="string">&quot;org.example.mapper.BasRoleMapper.getOne&quot;</span>, <span class="number">8</span>);</span><br><span class="line">          System.out.println(<span class="string">&quot;一级缓存，第一个session，第一次执行&quot;</span>);</span><br><span class="line">          BasRole basRole2 = (BasRole)session.selectOne(<span class="string">&quot;org.example.mapper.BasRoleMapper.getOne&quot;</span>, <span class="number">8</span>);</span><br><span class="line">          System.out.println(<span class="string">&quot;一级缓存，第一个session，第二次执行&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> (SqlSession session2 = sqlSessionFactory.openSession()) &#123;</span><br><span class="line">          BasRole basRole = (BasRole)session2.selectOne(<span class="string">&quot;org.example.mapper.BasRoleMapper.getOne&quot;</span>, <span class="number">8</span>);</span><br><span class="line">          System.out.println(<span class="string">&quot;一级缓存，第二个session，第一次执行&quot;</span>);</span><br><span class="line">          BasRole basRole4 = (BasRole)session2.selectOne(<span class="string">&quot;org.example.mapper.BasRoleMapper.getOne&quot;</span>, <span class="number">8</span>);</span><br><span class="line">          System.out.println(<span class="string">&quot;一级缓存，第二个session，第二次执行&quot;</span>);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><p>默认开启，在一个sqlSession的“回话里生效”。日志如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt;  Preparing: SELECT id,role_code,role_name,descr FROM bas_role where id =?  </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt; Parameters: <span class="number">8</span>(Integer) </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  &lt;==      Total: <span class="number">1</span> </span><br><span class="line">一级缓存，第一个session，第一次执行</span><br><span class="line">一级缓存，第一个session，第二次执行</span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Resetting autocommit to <span class="keyword">true</span> on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.datasource.pooled.PooledDataSource <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Returned connection <span class="number">1206569586</span> to pool. </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Opening JDBC Connection </span><br><span class="line">org.apache.ibatis.datasource.pooled.PooledDataSource <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Checked out connection <span class="number">1206569586</span> from pool. </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Setting autocommit to <span class="keyword">false</span> on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt;  Preparing: SELECT id,role_code,role_name,descr FROM bas_role where id =?  </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt; Parameters: <span class="number">8</span>(Integer) </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  &lt;==      Total: <span class="number">1</span> </span><br><span class="line">一级缓存，第二个session，第一次执行</span><br><span class="line">一级缓存，第二个session，第二次执行</span><br><span class="line"></span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt;  Preparing: SELECT id,role_code,role_name,descr FROM bas_role where id =?  </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt; Parameters: <span class="number">8</span>(Integer) </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  &lt;==      Total: <span class="number">1</span> </span><br><span class="line">一级缓存，第一个session，第一次执行</span><br><span class="line">一级缓存，第一个session，第二次执行</span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Resetting autocommit to <span class="keyword">true</span> on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.datasource.pooled.PooledDataSource <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Returned connection <span class="number">1206569586</span> to pool. </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Opening JDBC Connection </span><br><span class="line">org.apache.ibatis.datasource.pooled.PooledDataSource <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Checked out connection <span class="number">1206569586</span> from pool. </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Setting autocommit to <span class="keyword">false</span> on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt;  Preparing: SELECT id,role_code,role_name,descr FROM bas_role where id =?  </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt; Parameters: <span class="number">8</span>(Integer) </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  &lt;==      Total: <span class="number">1</span> </span><br><span class="line">一级缓存，第二个session，第一次执行</span><br><span class="line">一级缓存，第二个session，第二次执行</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><p>默认不开启，需要在SQL 映射文件中配置<code>&lt;cache/&gt;</code>,最好POJO对象是可序列化的，即实现 Serializable。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cache</span> <span class="attr">eviction</span>=<span class="string">&quot;FIFO&quot;</span> <span class="attr">flushInterval</span>=<span class="string">&quot;60000&quot;</span> <span class="attr">size</span>=<span class="string">&quot;512&quot;</span> <span class="attr">readOnly</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个更高级的配置创建了一个 FIFO 缓存，每隔 60 秒刷新，最多可以存储结果对象或列表的 512 个引用，而且返回的对象被认为是只读的，因此对它们进行修改可能会在不同线程中的调用者产生冲突。</p>
+<p>可用的清除策略有：</p>
+<ul>
+<li><code>LRU</code> – 最近最少使用：移除最长时间不被使用的对象。</li>
+<li><code>FIFO</code> – 先进先出：按对象进入缓存的顺序来移除它们。</li>
+<li><code>SOFT</code> – 软引用：基于垃圾回收器状态和软引用规则移除对象。</li>
+<li><code>WEAK</code> – 弱引用：更积极地基于垃圾收集器状态和弱引用规则移除对象。</li>
+</ul>
+<p>默认的清除策略是 LRU。</p>
+<p>flushInterval（刷新间隔）属性可以被设置为任意的正整数，设置的值应该是一个以毫秒为单位的合理时间量。 默认情况是不设置，也就是没有刷新间隔，缓存仅仅会在调用语句时刷新。</p>
+<p>size（引用数目）属性可以被设置为任意正整数，要注意欲缓存对象的大小和运行环境中可用的内存资源。默认值是 1024。</p>
+<p>readOnly（只读）属性可以被设置为 true 或 false。只读的缓存会给所有调用者返回缓存对象的相同实例。 因此这些对象不能被修改。这就提供了可观的性能提升。而可读写的缓存会（通过序列化）返回缓存对象的拷贝。 速度上会慢一些，但是更安全，因此默认值是 false。</p>
+<p>看看日志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger 2020-11-18 09:54:36  &#x3D;&#x3D;&gt;  Preparing: SELECT id,role_code,role_name,descr FROM bas_role where id &#x3D;?  </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger 2020-11-18 09:54:36  &#x3D;&#x3D;&gt; Parameters: 8(Integer) </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger 2020-11-18 09:54:36  &lt;&#x3D;&#x3D;      Total: 1 </span><br><span class="line">一级缓存，第一个session，第一次执行</span><br><span class="line">org.apache.ibatis.cache.decorators.LoggingCache 2020-11-18 09:54:36  Cache Hit Ratio [org.example.mapper.BasRoleMapper]: 0.0 </span><br><span class="line">一级缓存，第一个session，第二次执行</span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction 2020-11-18 09:54:36  Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@1bb5a082] </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction 2020-11-18 09:54:36  Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@1bb5a082] </span><br><span class="line">org.apache.ibatis.datasource.pooled.PooledDataSource 2020-11-18 09:54:36  Returned connection 464887938 to pool. </span><br><span class="line">org.apache.ibatis.cache.decorators.LoggingCache 2020-11-18 09:54:36  Cache Hit Ratio [org.example.mapper.BasRoleMapper]: 0.3333333333333333 </span><br><span class="line">一级缓存，第二个session，第一次执行</span><br><span class="line">org.apache.ibatis.cache.decorators.LoggingCache 2020-11-18 09:54:36  Cache Hit Ratio [org.example.mapper.BasRoleMapper]: 0.5 </span><br><span class="line">一级缓存，第二个session，第二次执行</span><br></pre></td></tr></table></figure>
+
+<p>总结：一级缓存默认开启，作用在一个sqlSession，二级缓存默认不开启，开启后作用域在一个所有sqlSession的一个mapper上。</p>
+<h2 id="自定义缓存"><a href="#自定义缓存" class="headerlink" title="自定义缓存"></a>自定义缓存</h2><p>可是实现 org.apache.ibatis.cache.Cache 的接口，覆盖mybaits自带的二级缓存。例如使用redis作为缓存介质。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCache</span> <span class="keyword">implements</span> <span class="title">Cache</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisUtil redisUtil;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">putObject</span><span class="params">(Object key, Object o1)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 自行发挥。。。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getObject</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 自行发挥。。。</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">removeObject</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ReadWriteLock <span class="title">getReadWriteLock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h1><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>if</td>
+<td>判断语句</td>
+<td>单条件分支</td>
+</tr>
+<tr>
+<td>choose(when、otherwise)</td>
+<td>类似Java里面 if(){}i … f(){}else{}</td>
+<td>多条件分支</td>
+</tr>
+<tr>
+<td>trim(where、set)</td>
+<td>辅助</td>
+<td>处理sql拼接</td>
+</tr>
+<tr>
+<td>foreach</td>
+<td>循环</td>
+<td>批量处理</td>
+</tr>
+<tr>
+<td>Bind</td>
+<td>定义ognl表达式</td>
+<td>like模糊查询、不同db函数不兼容问题（or || &amp;&amp; 等）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>if</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;author != null and author.name != null&quot;</span>&gt;</span></span><br><span class="line">    AND author_name like #&#123;author.name&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>choose</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findActiveBlogLike&quot;</span></span></span><br><span class="line"><span class="tag">     <span class="attr">resultType</span>=<span class="string">&quot;Blog&quot;</span>&gt;</span></span><br><span class="line">  SELECT * FROM BLOG WHERE state = ‘ACTIVE’</span><br><span class="line">  <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">&quot;title != null&quot;</span>&gt;</span></span><br><span class="line">      AND title like #&#123;title&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">&quot;author != null and author.name != null&quot;</span>&gt;</span></span><br><span class="line">      AND author_name like #&#123;author.name&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">otherwise</span>&gt;</span></span><br><span class="line">      AND featured = 1</span><br><span class="line">    <span class="tag">&lt;/<span class="name">otherwise</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>where</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;state != null&quot;</span>&gt;</span></span><br><span class="line">         state = #&#123;state&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;title != null&quot;</span>&gt;</span></span><br><span class="line">        AND title like #&#123;title&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;author != null and author.name != null&quot;</span>&gt;</span></span><br><span class="line">        AND author_name like #&#123;author.name&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>trim</p>
+<blockquote>
+<p>prefix:在trim标签内sql语句加上前缀。</p>
+<p>suffix: 在trim标签内sql语句加上后缀。</p>
+<p>suffixOverrides:指定去除多余的后缀内容，如：suffixOverrides=”,”，去除trim标签内sql语句多余的后缀”,”。</p>
+<p>prefixOverrides: 指定去除多余的前缀内容</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">&quot;values (&quot;</span> <span class="attr">suffix</span>=<span class="string">&quot;)&quot;</span> <span class="attr">suffixOverrides</span>=<span class="string">&quot;,&quot;</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;id != null&quot;</span>&gt;</span>  </span><br><span class="line">                #&#123;id,jdbcType=BIGINT&#125;,  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;userId != null&quot;</span>&gt;</span>  </span><br><span class="line">                #&#123;userId,jdbcType=BIGINT&#125;,  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;dealId != null&quot;</span>&gt;</span>  </span><br><span class="line">                #&#123;dealId,jdbcType=BIGINT&#125;,  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;dealSkuId != null&quot;</span>&gt;</span>  </span><br><span class="line">                #&#123;dealSkuId,jdbcType=BIGINT&#125;,  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;count != null&quot;</span>&gt;</span>  </span><br><span class="line">                #&#123;count,jdbcType=INTEGER&#125;,  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;createTime != null&quot;</span>&gt;</span>  </span><br><span class="line">                #&#123;createTime,jdbcType=TIMESTAMP&#125;,  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;updateTime != null&quot;</span>&gt;</span>  </span><br><span class="line">                #&#123;updateTime,jdbcType=TIMESTAMP&#125;,  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">trim</span>&gt;</span>  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>set</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;updateUserBySet&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;com.po.MyUser&quot;</span>&gt;</span>     </span><br><span class="line">    update user</span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;uname!=null&quot;</span>&gt;</span>uname=#&#123;uname&#125;<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;usex!=null&quot;</span>&gt;</span>usex=#&#123;usex&#125;<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    where uid=#&#123;uid&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>foreach</li>
+</ul>
+<blockquote>
+<p> item表示集合中每一个元素进行迭代时的别名，<br>  index指 定一个名字，用于表示在迭代过程中，每次迭代到的位置，<br>  open表示该语句以什么开始，<br>  separator表示在每次进行迭代之间以什么符号作为分隔 符，<br>  close表示以什么结束。</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;dynamicForeachTest&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;Blog&quot;</span>&gt;</span></span><br><span class="line">          select * from t_blog where id in</span><br><span class="line">       <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;list&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">               #&#123;item&#125;       </span><br><span class="line">       <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span>    </span><br><span class="line">   <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>bind</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUseIf&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;com.soft.test.model.DynamicTestModel&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;userMap&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;username != null and username neq &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">bind</span> <span class="attr">name</span>=<span class="string">&quot;pattern&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&#x27;%&#x27; + _parameter.getUsername() + &#x27;%&#x27;&quot;</span> /&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">       select * from t_user</span><br><span class="line">       <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;username != null and username neq &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">               username like #&#123;pattern&#125;</span><br><span class="line">           <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 不然就使用如下的concat函数--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--    &lt;if test=&quot;name!=null and name!=&#x27;&#x27;&quot;&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        username like CONCAT(&#x27;%&#x27;, &#x27;$&#123;username&#125;&#x27;, &#x27;%&#x27;)--&gt;</span></span><br><span class="line">			 <span class="comment">&lt;!--    &lt;/if&gt;--&gt;</span> </span><br><span class="line">       <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/13/Java8%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -255,10 +881,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-11-05 20:33:56 / 修改时间：20:39:29" itemprop="dateCreated datePublished" datetime="2020-11-05T20:33:56+08:00">2020-11-05</time>
+              <time title="创建时间：2020-11-05 20:33:56" itemprop="dateCreated datePublished" datetime="2020-11-05T20:33:56+08:00">2020-11-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-18 14:34:59" itemprop="dateModified" datetime="2020-11-18T14:34:59+08:00">2020-11-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -283,6 +915,7 @@
           <p>记录为MacOS 下的idea的快捷键，备忘</p>
 <ul>
 <li>optimize imports：⌃+⌥+o</li>
+<li>全屏/退出：⌃+⌘+F</li>
 </ul>
 
       
@@ -811,497 +1444,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/22/shiro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/22/shiro/" class="post-title-link" itemprop="url">shiro</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-22 17:07:52" itemprop="dateCreated datePublished" datetime="2020-10-22T17:07:52+08:00">2020-10-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-17 15:47:23" itemprop="dateModified" datetime="2020-11-17T15:47:23+08:00">2020-11-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="能做什么？"><a href="#能做什么？" class="headerlink" title="能做什么？"></a>能做什么？</h1><p><strong>Apache Shiro™</strong> is a powerful and easy-to-use Java security framework that performs authentication, authorization, cryptography, and session management. With Shiro’s easy-to-understand API, you can quickly and easily secure any application – from the smallest mobile applications to the largest web and enterprise applications.</p>
-<p> Apache Shiro是一个功能强大且易于使用的Java安全框架，用于执行身份验证，授权，加密和会话管理。使用Shiro易于理解的API，您可以快速轻松地保护任何应用程序-从最小的移动应用程序到最大的Web和企业应用程序。</p>
-<p>Shiro以Shiro开发团队称四大基石：身份验证，授权，会话管理、加密，和特性如下图</p>
-<img src="/2020/10/22/shiro/ShiroFeatures.png" class title="ShiroFeatures">
-
-
-
-<p>Shiro以Shiro开发团队所谓的“应用程序安全性的四个基石”：身份验证，授权，会话管理和加密</p>
-<ul>
-<li><strong>身份验证：</strong>有时称为“登录”，这是证明用户是他们所说的身份的行为。</li>
-<li><strong>授权：</strong>访问控制的过程，即确定“谁”有权访问“什么”。</li>
-<li><strong>会话管理：</strong>即使在非Web或EJB应用程序中，也管理用户特定的会话。</li>
-<li><strong>加密：</strong>使用密码算法保持数据安全，同时仍然易于使用。</li>
-</ul>
-<p>在不同的应用程序环境中，还具有其他功能来支持和加强这些问题，尤其是：</p>
-<ul>
-<li>Web支持：Shiro的Web支持API可帮助轻松保护Web应用程序。</li>
-<li>缓存：缓存是Apache Shiro API的第一层公民，可确保安全操作保持快速有效。</li>
-<li>并发性：Apache Shiro的并发功能支持多线程应用程序。</li>
-<li>测试：测试支持可以帮助您编写单元测试和集成测试，并确保您的代码将按预期进行保护。</li>
-<li>“运行方式”：一种功能，允许用户采用其他用户的身份（如果允许），有时在管理方案中很有用。</li>
-<li>“记住我”：在整个会话中记住用户的身份，因此他们仅在必要时登录。</li>
-</ul>
-<h1 id="架构和术语"><a href="#架构和术语" class="headerlink" title="架构和术语"></a>架构和术语</h1><h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><img src="/2020/10/22/shiro/ShiroArchitecture.png" class title="ShiroArchitecture">
-
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul>
-<li><strong>Subject：</strong> 当前与软件交互的实体（用户，第三方服务，计划任务等）</li>
-<li><strong>SecurityManager：</strong> Shiro体系结构的核心。它主要是一个“伞”对象，用于协调其托管组件以确保它们能够顺利协同工作。它还管理Shiro对每个应用程序用户的“视图”，因此它知道如何对每个用户执行安全性操作。</li>
-<li><strong>Authenticator：</strong> 认证器，说白了就是从Realms中认证subject的真实身份，另外如果配置了认证策略（AuthenticationStrategy），会根据策略（所有领域都必须成功吗？只有第一个领域？）</li>
-<li><strong>Authorizer：</strong>授权，负责确定用户在该应用程序的访问控制。它是最终表明是否允许用户做某事的机制</li>
-<li><strong>SessionManager：</strong>管理session的，可以整合现有的session机制，例如servlet容器，主要通过SessionDAO来CURD。</li>
-<li><strong>CacheManager：</strong>管理一个叫Cache的实例，可以缓存信息，方便使用。</li>
-<li><strong>Cryptography：</strong>一套加密API机制，比如加密密钥等</li>
-<li><strong>Realms：</strong>和数据库交互，例如认证、授权等需要从DB里数据来判断，就是通过它操作的。</li>
-</ul>
-<h1 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShiroTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> SimpleAccountRealm simpleAccountRealm = <span class="keyword">new</span> SimpleAccountRealm();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        simpleAccountRealm.addAccount(<span class="string">&quot;astilt&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLogin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.设置SecurityManager环境</span></span><br><span class="line">        DefaultSecurityManager defaultSecurityManager = <span class="keyword">new</span> DefaultSecurityManager();</span><br><span class="line">        defaultSecurityManager.setRealm(simpleAccountRealm);</span><br><span class="line">        SecurityUtils.setSecurityManager(defaultSecurityManager);</span><br><span class="line">        <span class="comment">// 3.登录（使用自带token，也可以基于JWT自定义实现token）</span></span><br><span class="line">        UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">&quot;astilt&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        subject.login(token);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>初始化一个用户，放到SimpleAccountRealm里</li>
-<li>SecurityUtils里设置SecurityManager环境，设置Realm为SimpleAccountRealm</li>
-<li>构建Token，这里使用shiro自带的UsernamePasswordToken</li>
-<li>SecurityUtils里获取Subject，使用subject的ogin方法登陆，参数为上一步的token</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/14/git%E5%88%86%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%92%8C%E9%82%AE%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/14/git%E5%88%86%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%92%8C%E9%82%AE%E4%BB%B6/" class="post-title-link" itemprop="url">git分环境配置提交用户信息</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-14 20:35:33 / 修改时间：20:47:33" itemprop="dateCreated datePublished" datetime="2020-10-14T20:35:33+08:00">2020-10-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>现在大部分公司使用git作为版本控制工具，有没有过在github上提交一个commit时候，发现提交记录信息是公司的，😄太不专业了！</p>
-<p>其实git可以针对不同的文件夹配置提交用户信息，下面是我自己的配置：</p>
-<ul>
-<li>全局配置文件（～/.gitconfig）</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[alias]</span><br><span class="line">    co = checkout</span><br><span class="line">    ci = commit</span><br><span class="line">    br = branch</span><br><span class="line">    st = status</span><br><span class="line"><span class="meta">#</span><span class="bash"> 默认的用户和邮箱</span></span><br><span class="line">[user]</span><br><span class="line">    name = astilt</span><br><span class="line">    email = astilt@163.com</span><br><span class="line"><span class="meta">#</span><span class="bash"> 公司项目的目录</span></span><br><span class="line">[includeIf &quot;gitdir:~/IdeaProjects/&quot;]</span><br><span class="line">  path = ~/.gitconfig-work</span><br><span class="line"><span class="meta">#</span><span class="bash"> 个人项目目录  </span></span><br><span class="line">[includeIf &quot;gitdir:~/MyProjects/&quot;]</span><br><span class="line">  path = ~/.gitconfig-play</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>个人配置文件（~/.gitconfig-play）</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">    name = astilt</span><br><span class="line">    email = astilt@163.com</span><br></pre></td></tr></table></figure>
-
-<p>同理~/.gitconfig-work 配置公司用户名和邮箱就可以了</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">数仓建模</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-13 17:06:27" itemprop="dateCreated datePublished" datetime="2020-10-13T17:06:27+08:00">2020-10-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-17 15:46:59" itemprop="dateModified" datetime="2020-11-17T15:46:59+08:00">2020-11-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>为什么写这个主题呢？因为最近一年多来，都是在做数据资产应用，说的更具体一点是：标签中心。我们可以给标签一个大方向的基调定义，标签是一种数据吐出的方式，本质它也是数据库里面一/几个字段。回归数据仓库(Data Warehouse) 建模问题，和做普通业务一样，数据结构的好坏直接关系到后续业务使用的便利和迭代。</p>
-<h2 id="数仓分层"><a href="#数仓分层" class="headerlink" title="数仓分层"></a>数仓分层</h2><ul>
-<li>ODS：数据引入层，一般是经过ETL后的，结构和数据基本与业务系统数据一致</li>
-<li>CMD：数据公共层（E-R建模：实体，关系；维度建模：DIM，DWD，DWS）</li>
-<li>ADS：业务</li>
-</ul>
-<p><img src="/Users/hf/blog/source/_posts/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="数据分层"></p>
-<h2 id="E-R模型"><a href="#E-R模型" class="headerlink" title="E-R模型"></a>E-R模型</h2><p>和传统DBMS一样，E-R模型在数仓建设中也占据了很大部分，选择它的好处就是各个实体之间的关系明了，需要仔细梳理各种关系错，它强调是3NF，在数据量大业务复杂的情况下，可谓是一个大“魔鬼”，很考验梳理人员耐心和业务熟悉情况。</p>
-<p>补充知识：3NF：列原子性，非主键列完全依赖主键，非主键列直接依赖主键。</p>
-<h3 id="构建步骤"><a href="#构建步骤" class="headerlink" title="构建步骤"></a>构建步骤</h3><ul>
-<li>抽象主体</li>
-<li>主体属性</li>
-<li>梳理主体之间关系</li>
-<li>画出E-R图</li>
-</ul>
-<h2 id="维度模型"><a href="#维度模型" class="headerlink" title="维度模型"></a>维度模型</h2><p>与E-R模型的区别，E-R模型需要从整体考虑，梳理出每个业务实体和之间关系，工作量很大。而维度是从一个基本事件出发，可以在不了解其他业务情况下，快速构建当前业务的数据模型，因为是围绕业务事件，所以它需要很多原子信息来满足无法预估的需求。</p>
-<h3 id="构建步骤-1"><a href="#构建步骤-1" class="headerlink" title="构建步骤"></a>构建步骤</h3><ul>
-<li>基于一个事件构建事实表，例如用户订单、用户近一个月购买次数、某商品2018-2020年销售额</li>
-<li>维度表：商品、支付方式、商品产地，订单金额</li>
-</ul>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
-<li>星型</li>
-</ul>
-<img src="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%98%9F%E5%9E%8B-2582216.png" class title="星型">
-
-<ul>
-<li>雪花型</li>
-</ul>
-<img src="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E9%9B%AA%E8%8A%B1.png" class title="雪花">
-
-<ul>
-<li>星座型</li>
-</ul>
-<img src="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%98%9F%E5%BA%A7.png" class title="星座">
-
-
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>选择什么模型进行建模，需要结合业务，没有谁好或坏。不过现在互联网公司，业务错综复杂，还需要快速应用构建，所以维度建模比较常见，而常见的类型又以星座型居多</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/09/nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/09/nginx/" class="post-title-link" itemprop="url">未命名</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-09 09:13:19" itemprop="dateCreated datePublished" datetime="2020-10-09T09:13:19+08:00">2020-10-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-12 19:52:06" itemprop="dateModified" datetime="2020-11-12T19:52:06+08:00">2020-11-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>title: nginx<br>date: 2020-09-15 19:57:38<br>categories: 服务器<br>tags: nginx</p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Nginx (engine x) 是一个高性能的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTTP">HTTP</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/7793488">反向代理</a>web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BF%84%E7%BD%97%E6%96%AF/125568">俄罗斯</a>访问量第二的Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004年10月4日</p>
-<img src="/2020/10/09/nginx/nginxer.jpg" class title="nginxer">
-
-<h1 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h1><ul>
-<li>docker-compose安装</li>
-</ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ mkdir docker_nginx &amp;&amp; <span class="built_in">cd</span> docker_nginx</span><br><span class="line">➜  ~ vim docker<span class="literal">-compose</span>.yml</span><br><span class="line"></span><br><span class="line">// docker<span class="literal">-compose</span>.yml的内容</span><br><span class="line">version: <span class="string">&#x27;3.1&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    restart: always</span><br><span class="line">    image: daocloud.io/library/nginx:latest</span><br><span class="line">    container_name: nginx</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="number">8087</span>:<span class="number">80</span></span><br><span class="line">      </span><br><span class="line">// 保存退出，运行如下命令</span><br><span class="line">➜  docker_nginx docker<span class="literal">-compose</span> up <span class="literal">-d</span></span><br><span class="line">Recreating nginx ... done</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>浏览器访问：<a target="_blank" rel="noopener" href="http://localhost:8087/">http://localhost:8087</a></li>
-</ul>
-<img src="/2020/10/09/nginx/image-20200915201202164.png" class title="nginxer">
-
-<h1 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h1><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  docker_nginx docker <span class="built_in">ps</span></span><br><span class="line">CONTAINER ID        IMAGE                              COMMAND                  CREATED             STATUS              PORTS                  NAMES</span><br><span class="line">dbe84a274189        daocloud.io/library/nginx:latest   <span class="string">&quot;/docker-entrypoint.…&quot;</span>   <span class="number">5</span> minutes ago       Up <span class="number">5</span> minutes        <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8087</span>-&gt;<span class="number">80</span>/tcp   nginx</span><br><span class="line"></span><br><span class="line">➜  docker_nginx docker exec <span class="literal">-it</span> dbe bash</span><br><span class="line">root@dbe84a274189:/<span class="comment"># ls</span></span><br><span class="line">bin  boot  dev	docker<span class="literal">-entrypoint</span>.d  docker<span class="literal">-entrypoint</span>.sh  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@dbe84a274189:/<span class="comment"># cd etc/nginx/</span></span><br><span class="line">root@dbe84a274189:/etc/nginx<span class="comment"># ls</span></span><br><span class="line">conf.d	fastcgi_params	koi<span class="literal">-utf</span>  koi<span class="literal">-win</span>  mime.types  modules  nginx.conf  scgi_params	uwsgi_params  win<span class="literal">-utf</span></span><br><span class="line">root@dbe84a274189:/etc/nginx<span class="comment"># cat nginx.conf</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>nginx.conf 内容</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker_processes和worker_connections 决定了nginx的并发能力</span></span><br><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span><br><span class="line">                      &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">                      &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    #gzip  on;</span><br><span class="line">  <span class="comment">// 注意，/etc/nginx/conf.d下.conf文件都会加载</span></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>default.conf 的内容</li>
-</ul>
-<blockquote>
-<p>配置文件中除了注释的内容，最重要的就是server 模块</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@dbe84a274189:/etc/nginx# cd conf.d/</span><br><span class="line">root@dbe84a274189:/etc/nginx/conf.d# ls</span><br><span class="line">default.conf</span><br><span class="line">root@dbe84a274189:/etc/nginx/conf.d# cat default.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>修改docker-compose.yml</li>
-</ul>
-<blockquote>
-<p>关联本地目录conf.d 到nginx配置文件目录</p>
-</blockquote>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.1&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">daocloud.io/library/nginx:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8087</span><span class="string">:80</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./conf.d:/etc/nginx/conf.d</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>添加default.conf</li>
-</ul>
-<blockquote>
-<p>需要添加default.conf，否则会访问不到nginx的首页</p>
-</blockquote>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  docker_nginx <span class="built_in">ls</span></span><br><span class="line">conf.d             docker<span class="literal">-compose</span>.yml</span><br><span class="line">➜  docker_nginx <span class="built_in">cd</span> conf.d</span><br><span class="line">➜  conf.d vim default.conf</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>重启nginx</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  conf.d docker-compose down</span><br><span class="line">➜  conf.d docker-compose build</span><br><span class="line">➜  conf.d docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<h1 id="Nginx功能"><a href="#Nginx功能" class="headerlink" title="Nginx功能"></a>Nginx功能</h1><h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p><strong>正向代理</strong></p>
-<ul>
-<li>客户端自己设置</li>
-<li>客户端了解背后的代理和目标服务器</li>
-<li>对目标服务器访问隐藏了客户端ip</li>
-</ul>
-<p><strong>反向代理</strong></p>
-<ul>
-<li>配置是在目标服务器端</li>
-<li>客户端不知道访问到的是哪一台目标服务器</li>
-<li>对客户端隐藏了目标服务器的ip</li>
-</ul>
-<h3 id="配置location"><a href="#配置location" class="headerlink" title="配置location"></a>配置location</h3><blockquote>
-<p>优先级关系： (location = ) &gt; (location /xxx/yyy/zzz) &gt; (location ^<del>) &gt; (location ~,</del>*) &gt; (location /起始路径) &gt; (location /)</p>
-</blockquote>
-<ul>
-<li>注释掉之前的location 模块，添加如下模块，让其跳转到百度首页</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">             proxy_pass https://www.baidu.com;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>其他配置</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 1. = 匹配</span><br><span class="line">location = / &#123;</span><br><span class="line">  # 精准匹配，主机名后面不能带任何的字符串</span><br><span class="line">&#125;</span><br><span class="line"># 2. 通用匹配</span><br><span class="line">location /xxx&#123;</span><br><span class="line">  # 匹配所有以/xxx开头的路径  </span><br><span class="line">&#125;</span><br><span class="line"># 3. 正则匹配</span><br><span class="line">location ~/xxx &#123;</span><br><span class="line">  # 匹配所有以/xxx开头的路径</span><br><span class="line">&#125;</span><br><span class="line"># 4. 匹配开头路径</span><br><span class="line">location ^~/images/ &#123;</span><br><span class="line">    # 匹配所有以 /images 开头的路径</span><br><span class="line">&#125;</span><br><span class="line"># 5. ~* \.(gif|jpg|png)$ &#123;</span><br><span class="line">  # 匹配以gif或者jpg或者png为结尾的路径</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ul>
-<li>轮询（默认）</li>
-<li>权重（weight=2，默认为1）</li>
-<li>ip_hash（按照客户端IP地址的分配方式，可以确保相同客户端的请求一直发送到相同的服务器。配置了，其他配置都没效果了）</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//配置要映射的服务器</span></span><br><span class="line"> upstream my_upstream &#123;</span><br><span class="line">        ip_hash;</span><br><span class="line">        server 192.168.90.01:8081 weight=2;;</span><br><span class="line">        server 192.168.90.02:8082 weight=3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">        listen       8080;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass http://my_upstream;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Nginx-常见命令"><a href="#Nginx-常见命令" class="headerlink" title="Nginx 常见命令"></a>Nginx 常见命令</h1><ul>
-<li><p>启动</p>
-<ol>
-<li>/usr/sbin/nginx</li>
-<li>nginx</li>
-</ol>
-</li>
-<li><p>停止</p>
-<p>nginx -s stop</p>
-</li>
-<li><p>查看nginx进程</p>
-<p>ps -ef | grep nginx</p>
-</li>
-<li><p>重新加载配置文件</p>
-<p>nginx -s reload</p>
-</li>
-<li><p>检配置文件是否正确</p>
-<p>nginx -t</p>
-</li>
-<li><p>查看nginx 版本</p>
-<p>nginx -v</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1367,7 +1514,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1380,7 +1527,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
