@@ -155,6 +155,538 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/Linux%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/21/Linux%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Linux命令</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-21 08:45:49" itemprop="dateCreated datePublished" datetime="2020-09-21T08:45:49+08:00">2020-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-10 17:14:53" itemprop="dateModified" datetime="2020-10-10T17:14:53+08:00">2020-10-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>日常使用了很多linux命令，有时候会忘了，这里列举常用的命令，使用系统如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[deploy@dev-node ~]$ lsb_release -a</span><br><span class="line">LSB Version:	:core-4.1-amd64:core-4.1-noarch:cxx-4.1-amd64:cxx-4.1-noarch:desktop-4.1-amd64:desktop-4.1-noarch:languages-4.1-amd64:languages-4.1-noarch:printing-4.1-amd64:printing-4.1-noarch</span><br><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS Linux release 7.3.1611 (Core)</span><br><span class="line">Release:	7.3.1611</span><br><span class="line">Codename:	Core</span><br></pre></td></tr></table></figure>
+
+<h1 id="关机、重启"><a href="#关机、重启" class="headerlink" title="关机、重启"></a>关机、重启</h1><h2 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h2><ul>
+<li>shutdown -h now：关机不掉电</li>
+<li>halt：同上意义</li>
+<li>init 0：同上意义</li>
+<li>poweroff：关闭电源</li>
+</ul>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><ul>
+<li>shutdown -r now：立即重启</li>
+<li>reboot：同上</li>
+<li>init：同上</li>
+</ul>
+<h1 id="用户和组"><a href="#用户和组" class="headerlink" title="用户和组"></a>用户和组</h1><ul>
+<li>查看用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id hf</span><br><span class="line">who</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>看所有用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建工作组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd ghf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除工作组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupdel ghf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd hf</span><br><span class="line">passwd 123</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel hf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用户与用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 新建用户并加入到用户组</span><br><span class="line">useradd -g ghf hf</span><br><span class="line">// 存在hf用户加入到ghf组，并移除其他所属组</span><br><span class="line">usermod -G ghf hf</span><br><span class="line">// 存在hf用户加入到ghd组，其他所属组不变</span><br><span class="line">usermod -a ghd hf</span><br></pre></td></tr></table></figure>
+
+<h1 id="文件和目录操作命令"><a href="#文件和目录操作命令" class="headerlink" title="文件和目录操作命令"></a>文件和目录操作命令</h1><h2 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h2><blockquote>
+<p>print working directory，显示当前目录</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost ~]$ pwd</span><br><span class="line">/home/deploy</span><br></pre></td></tr></table></figure>
+
+<h2 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h2><blockquote>
+<p>chang directory，切换目录。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt</span><br></pre></td></tr></table></figure>
+
+<h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><blockquote>
+<p>以树类目形式展示目录结构</p>
+</blockquote>
+<p>有些系统没有安装此命令，没有请安装。例如：只显示第一层的/opt 。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ tree -L 1 /opt</span><br><span class="line">/opt</span><br><span class="line">├── client</span><br><span class="line">├── code</span><br><span class="line">├── conf</span><br><span class="line">├── data</span><br><span class="line">├── keytab</span><br><span class="line">├── plugins</span><br><span class="line">├── third</span><br><span class="line">└── workspace</span><br></pre></td></tr></table></figure>
+
+<h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><blockquote>
+<p>Make directory 创建目录。</p>
+</blockquote>
+<p>-p 创建多级目录，-v 显示创建过程。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ mkdir -v  -p hf/fan</span><br><span class="line">mkdir: 已创建目录 &quot;hf&quot;</span><br><span class="line">mkdir: 已创建目录 &quot;hf/fan&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h2><blockquote>
+<p>创建文件，注意不是目录。</p>
+</blockquote>
+<p>创建2个文件，touch 后面可以接多个需要被新建的文件名。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ touch a.txt b.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><blockquote>
+<p>列出文件，最长用的命令了。</p>
+</blockquote>
+<p>列举几个本人常常使用的命令组合</p>
+<ul>
+<li>ls：列出当前位置文件</li>
+<li>ls -l 、ll ：2命令等同。都表示列出当前位置的所有文件，并列出目录的信息</li>
+<li>ls -al、ll -a : 2命令等同。意义同上，额外显示隐藏的.文件</li>
+<li>ls -ltr ：列出当前位置的所有文件，并列出目录的信息，且按照修改时间自然排序，即可以使文件最新创建/修改的在最后一个</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ ls</span><br><span class="line">a.txt  b.txt  workspace</span><br><span class="line">[deploy@localhost opt]$ ll</span><br><span class="line">总用量 8</span><br><span class="line">-rw-rw-r--  1 deploy deploy    0 9月  20 14:17 a.txt</span><br><span class="line">-rw-rw-r--  1 deploy deploy    0 9月  20 14:17 b.txt</span><br><span class="line">drwxrwxr-x  3 deploy deploy   17 9月  20 14:12 hf</span><br><span class="line">drwxrwxr-x 43 deploy deploy 4096 9月  18 22:42 workspace</span><br><span class="line"></span><br><span class="line">[deploy@localhost opt]$ ll -a</span><br><span class="line">总用量 8</span><br><span class="line">drwxr-xr-x. 11 deploy deploy  151 9月  20 14:17 .</span><br><span class="line">dr-xr-xr-x. 18 root   root    256 5月  19 09:21 ..</span><br><span class="line">-rw-rw-r--   1 deploy deploy    0 9月  20 14:17 a.txt</span><br><span class="line">-rw-rw-r--   1 deploy deploy    0 9月  20 14:17 b.txt</span><br><span class="line">drwxrwxr-x  3 deploy deploy   17 9月  20 14:12 hf</span><br><span class="line">drwxrwxr-x  43 deploy deploy 4096 9月  18 22:42 workspace</span><br><span class="line"></span><br><span class="line">[deploy@localhost opt]$ ls -ltr</span><br><span class="line">总用量 8</span><br><span class="line">drwxrwxr-x 43 deploy deploy 4096 9月  18 22:42 workspace</span><br><span class="line">drwxrwxr-x  3 deploy deploy   17 9月  20 14:12 hf</span><br><span class="line">-rw-rw-r--  1 deploy deploy    0 9月  20 14:17 b.txt</span><br><span class="line">-rw-rw-r--  1 deploy deploy    0 9月  20 14:17 a.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><blockquote>
+<p>copy，复制</p>
+</blockquote>
+<ul>
+<li>单个文件复制</li>
+<li>文件夹复制</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ cp a.txt hf/</span><br><span class="line">[deploy@localhost workspace]$ cp -r hf/ workspace/</span><br></pre></td></tr></table></figure>
+
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><blockquote>
+<p>move  剪切、重命名。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ mv b.txt hf/</span><br><span class="line">[deploy@localhost opt]$ cd hf/</span><br><span class="line">[deploy@localhost hf]$ mv b.txt bb.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><blockquote>
+<p>删除</p>
+</blockquote>
+<p>经常使用的命令，-rf 递归强制删除</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost hf]$ rm -rf bb.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h2><blockquote>
+<p>link 链接</p>
+</blockquote>
+<p>索引节点（inode）：在linux中所有的文件都有一个inode，且inode和文件的关系是：1:n。</p>
+<h3 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h3><blockquote>
+<p>类似windows上的快捷方式，是符号链接。<strong>目标文件不能存在</strong>，目标文件删除不影响源文件，源文件删除了，目标文件仍存在，但是不能访问了，也就是没入口了。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost hf]$ ln -s /home/deploy/fan /home/deploy/soft_fan</span><br><span class="line">[deploy@localhost hf]$ ls</span><br><span class="line">a.txt  fan  soft_fan</span><br></pre></td></tr></table></figure>
+
+<h3 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h3><p>索引节点（inode）：linux文件系统中（etx2，ext3，ext4）每个文件都有一个inode节点，且inode节点和文件的关系是1:n。硬链接就是通过inode共享方式存在的。源文件删除了，不影响硬链接，反之一样。只有硬链接和源文件都没了，文件实体彻底没了。</p>
+<p><strong>不能使用目录来作为硬链接</strong>，一般文件即可哦</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost fan]$ sudo ln /etc/hosts hard_fan</span><br></pre></td></tr></table></figure>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><blockquote>
+<p>查找目录下文件</p>
+</blockquote>
+<p>find [目录]  [参数] [限定条件] [执行动作]</p>
+<ul>
+<li>目录：符合linux规定的目录路径</li>
+<li>参数（基本不使用，这里只做介绍下）：<ul>
+<li>-depth：从指定目录喜爱最深的子目录开始查找</li>
+<li>-maxdepth levels：查找最大的目录级数，level为自然数</li>
+<li>-regxtype type：改变正则的模式，默认为emacs，可以有posix-awk、posix-basic、posix-egrep、posix-extened</li>
+</ul>
+</li>
+<li>限定条件（选项很多，介绍几个常用的）<ul>
+<li>-name：按照文件名字查找，支持 * ? [] 通配符（<strong>常用</strong>）</li>
+<li>-type：查找文件类型（f：普通文件；d 目录；l 符号链接；）（<strong>常用</strong>）</li>
+<li>！：反，例如 ! -type d，查找不是目录</li>
+<li>-regex：接受正则（<strong>常用</strong>）</li>
+<li>-atime -/+/ n：文件访问时间，单位天，-n天内，+n天之前，n距离现在n天（明确的）</li>
+<li>-ctime  -/+/ n：文件改变时间，单位天，-n天内，+n天之前，n距离现在n天（明确的）</li>
+<li>-size -n[bkMG]：查找指定大小的文件。bkMG为单位</li>
+<li>-perm xxx：按照权限，例如-perm 755</li>
+</ul>
+</li>
+<li>执行动作（使用的也很少）<ul>
+<li>-delete：查出后删除</li>
+<li>-exec：对查询出的文件执行后续的shell指令</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> // 查找log文件，且大小大于6M</span><br><span class="line"> [deploy@localhost opt]$ find . -name *.log -size +6M</span><br><span class="line"> // 查找当前路径下，只查找1级目录下，类型是文件的显示出</span><br><span class="line"> [deploy@localhost opt]$ find . -maxdepth 1 -type f | xargs ls -l</span><br><span class="line">-rw-rw-r-- 1 deploy deploy 0 9月  20 14:17 ./a.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="rename"><a href="#rename" class="headerlink" title="rename"></a>rename</h2><blockquote>
+<p> 通过字符串替换的方式修改文件名字</p>
+</blockquote>
+<p> 将当前路径下所有的txt文件修改为md文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ rename .txt .md *.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="md5sum"><a href="#md5sum" class="headerlink" title="md5sum"></a>md5sum</h2><blockquote>
+<p>计算文件md5值，一般用于检查传输的文件是否破坏</p>
+</blockquote>
+<h2 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h2><blockquote>
+<p>改变文件/目录的用户和用户组</p>
+</blockquote>
+<p>chown [-R]  [owner] [:[group]]  [file]</p>
+<ul>
+<li>更改文件所属用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R  deploy client</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更改用户所属用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// :和. 都可以</span><br><span class="line">chown -R  :deploy  client</span><br><span class="line">chown -R  .deploy  client</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更改用户所属用户和用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R  deploy:deploy  client</span><br></pre></td></tr></table></figure>
+
+<h2 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h2><blockquote>
+<p>改变文件权限，只有文件所主和root用户才能执行</p>
+</blockquote>
+<p>chmod [-R] [mode] [file]</p>
+<ul>
+<li>用户类型和操作符</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">权限位</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">用户类型</td>
+<td align="center">属主：u；属组：g；其他：o</td>
+</tr>
+<tr>
+<td align="center">操作字符</td>
+<td align="center">加：+；减-；设置：=</td>
+</tr>
+</tbody></table>
+<ul>
+<li>权限</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">权限字母</th>
+<th align="center">对应数字</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">r</td>
+<td align="center">4</td>
+<td align="center">读</td>
+</tr>
+<tr>
+<td align="center">w</td>
+<td align="center">2</td>
+<td align="center">写</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">1</td>
+<td align="center">执行</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">0</td>
+<td align="center">没有任何权限</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>权限解释</p>
+<blockquote>
+<p>例如：755/rwxr-xr-x</p>
+</blockquote>
+</li>
+<li><p>7 | rwx 属主权限</p>
+</li>
+<li><p>5 | r-x 属组权限</p>
+</li>
+<li><p>5 | r-x 其他用户权限</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ chmod 755 hf</span><br><span class="line">[deploy@localhost opt]$ chmod o+w  hf</span><br><span class="line">[deploy@localhost opt]$ chmod g+rwx hf</span><br><span class="line">[deploy@localhost opt]$ chmod o= hf</span><br><span class="line">[deploy@localhost opt]$ chmod u=rwx,g=rx,o= hf</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="文件过滤和内容编辑命令"><a href="#文件过滤和内容编辑命令" class="headerlink" title="文件过滤和内容编辑命令"></a>文件过滤和内容编辑命令</h1><h2 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h2><blockquote>
+<p>一般用作查看文件内容，或者重定向到指定文件。</p>
+</blockquote>
+<ul>
+<li>输出内容并编号</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$  cat -n  b</span><br><span class="line">     1  bb</span><br><span class="line">     2  bbb</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost opt]$ cat &gt;&gt;f&lt;&lt;EOF</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> 0908322</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> EOF</span></span><br><span class="line"></span><br><span class="line">[deploy@localhost opt]$ cat f</span><br><span class="line">0908322</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>编辑文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 覆盖，记得enter后ctr+c</span><br><span class="line">[deploy@localhost opt]$ cat &gt;f</span><br><span class="line">66666666</span><br><span class="line">^C</span><br><span class="line">[deploy@localhost opt]$ cat f</span><br><span class="line">66666666</span><br><span class="line">// 追加，记得enter后ctr+c</span><br><span class="line">[deploy@localhost opt]$ cat &gt;&gt;f</span><br><span class="line">77777777</span><br><span class="line">^C</span><br><span class="line">[deploy@localhost opt]$ cat f</span><br><span class="line">66666666</span><br><span class="line">77777777</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="more"><a href="#more" class="headerlink" title="more"></a>more</h2><blockquote>
+<p>一页页将文件内容显示</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost logs]$ more data.log</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>Enter: 向下一行</li>
+<li>空格 | f：向下滚一屏</li>
+<li>b：向上滚一屏</li>
+<li>-s：连续多个空行显示为一行</li>
+<li>/ 查找文本</li>
+<li>v：调用vi</li>
+<li>q：退出</li>
+</ul>
+<h2 id="less"><a href="#less" class="headerlink" title="less"></a>less</h2><blockquote>
+<p>more  的高级版本，包含more的参数</p>
+</blockquote>
+<ul>
+<li>-i：搜索时忽略大小写</li>
+<li>-m：类似more，可以显示百分比</li>
+<li>-N ：显示行号</li>
+<li>G：最后一行</li>
+<li>g：开头一行</li>
+</ul>
+<h2 id="head"><a href="#head" class="headerlink" title="head"></a>head</h2><blockquote>
+<p>显示文件头几行，默认10</p>
+</blockquote>
+<ul>
+<li><p>-n ：头几行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost logs]$ head -100 data.log</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h2><blockquote>
+<p>显示文件尾几行，默认10</p>
+</blockquote>
+<ul>
+<li><p>-n ：头几行</p>
+</li>
+<li><p>-f：实时显示文件变化后追加的数据</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost logs]$ tail -100f data.log</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="tailf"><a href="#tailf" class="headerlink" title="tailf"></a>tailf</h2><blockquote>
+<p>和tail -f 几乎等效，默认也是输出文件最后10行。但是如果文件不增长，不会去访问磁盘文件，也不更改文件访问时间。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[deploy@localhost logs]$ tailf -100 data.log</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h1><ul>
+<li>系统磁盘使用情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h [路径]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>目录使用情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh [路径]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>分区</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看</span></span><br><span class="line">[deploy<span class="meta">@dubhe</span>-node ~]$ sudo fdisk  -l /dev/sdb1</span><br><span class="line">磁盘 /dev/sdb1：<span class="number">53.7</span> GB, <span class="number">53686042624</span> 字节，<span class="number">104855552</span> 个扇区</span><br><span class="line">Units = 扇区 of <span class="number">1</span> * <span class="number">512</span> = <span class="number">512</span> bytes</span><br><span class="line">扇区大小(逻辑/物理)：<span class="number">512</span> 字节 / <span class="number">512</span> 字节</span><br><span class="line">I/O 大小(最小/最佳)：<span class="number">512</span> 字节 / <span class="number">512</span> 字节</span><br><span class="line"></span><br><span class="line"><span class="comment">// 管理</span></span><br><span class="line">命令使用格式：fdisk /dev/sd# ：创建，删除，保存磁盘分区配置。</span><br><span class="line">fdisk提供了一个交互式接口来管理分区，它有许多子命令，分别用于不同的管理功能；所有的操作均在内存中完成，没有直接同步到磁盘；直到使用w命令保存至磁盘上；</span><br><span class="line">以下命令选项为m中的常用选项：</span><br><span class="line">              n：创建新分区        d：删除已有分区</span><br><span class="line">              t：修改分区类型      l：查看所有已经ID</span><br><span class="line">              w：保存并退出        q：不保存并退出</span><br><span class="line">              m：查看帮助信息      p：显示现有分区信息</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/18/datax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/18/datax/" class="post-title-link" itemprop="url">datax</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-18 17:50:02" itemprop="dateCreated datePublished" datetime="2020-09-18T17:50:02+08:00">2020-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-24 16:40:59" itemprop="dateModified" datetime="2020-09-24T16:40:59+08:00">2020-09-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><blockquote>
+<p>GitHub 地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/DataX">https://github.com/alibaba/DataX</a></p>
+</blockquote>
+<p>DataX 是阿里巴巴集团内被广泛使用的离线数据同步工具/平台，实现包括 MySQL、Oracle、SqlServer、Postgre、HDFS、Hive、ADS、HBase、TableStore(OTS)、MaxCompute(ODPS)、DRDS 等各种异构数据源之间高效的数据同步功能。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><ul>
+<li>Linux｜Macos</li>
+<li><a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/cn/java/javase/downloads/index.html">JDK(1.8以上，推荐1.8)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.python.org/downloads/">Python(推荐Python2.6.X)</a></li>
+<li><a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">Apache Maven 3.x</a> (Compile DataX)</li>
+</ul>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><ul>
+<li><p>tar.gz包下载：<a target="_blank" rel="noopener" href="http://datax-opensource.oss-cn-hangzhou.aliyuncs.com/datax.tar.gz">http://datax-opensource.oss-cn-hangzhou.aliyuncs.com/datax.tar.gz</a></p>
+</li>
+<li><p>源码编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:alibaba&#x2F;DataX.git</span><br><span class="line">cd  &#123;DataX_source_code_home&#125;</span><br><span class="line">mvn -U clean package assembly:assembly -Dmaven.test.skip&#x3D;true</span><br><span class="line">&#x2F;&#x2F;打包成功后的DataX包位于 &#123;DataX_source_code_home&#125;&#x2F;target&#x2F;datax&#x2F;datax&#x2F;</span><br><span class="line">cd  &#123;DataX_source_code_home&#125;</span><br><span class="line">ls .&#x2F;target&#x2F;datax&#x2F;datax&#x2F;</span><br><span class="line">bin		conf		job		lib		log		log_perf	plugin		script		tmp</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h1><h2 id="怎么执行"><a href="#怎么执行" class="headerlink" title="怎么执行"></a>怎么执行</h2><p>datax 通过bin目录下的datax.py 文件 运行json文件来进行数据同步。解压缩包里有个测试datax的json文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd  &#123;DataX_source_code_home&#125;</span><br><span class="line">./bin/datax.py ./job/job.json</span><br><span class="line">// 运行后结果</span><br><span class="line">2020-09-18 18:22:47.282 [job-0] INFO  JobContainer -                                                                             </span><br><span class="line">任务启动时刻                    : 2020-09-18 18:22:37                                                                            │</span><br><span class="line">任务结束时刻                    : 2020-09-18 18:22:47                                                                            │</span><br><span class="line">任务总计耗时                    :                 10s                                                                            │</span><br><span class="line">任务平均流量                    :          253.91KB/s                                                                            │</span><br><span class="line">记录写入速度                    :          10000rec/s                                                                            │</span><br><span class="line">读出记录总数                    :              100000                                                                            │</span><br><span class="line">读写失败总数                    :                   0</span><br></pre></td></tr></table></figure>
+
+<h2 id="msyql-同步到es"><a href="#msyql-同步到es" class="headerlink" title="msyql 同步到es"></a>msyql 同步到es</h2><ul>
+<li>mysql 脚本</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">ROP TABLE IF EXISTS `test`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`test`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">&#x27;key&#x27;</span>,</span><br><span class="line">  <span class="string">`col_ip`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;projectcol_ipname&#x27;</span>,</span><br><span class="line">  <span class="string">`col_double`</span> <span class="keyword">double</span>(<span class="number">16</span>,<span class="number">2</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_double&#x27;</span>,</span><br><span class="line">  <span class="string">`col_long`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_long&#x27;</span>,</span><br><span class="line">  <span class="string">`col_integer`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;1&#x27;</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_integer&#x27;</span>,</span><br><span class="line">  <span class="string">`col_keyword`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_keyword&#x27;</span>,</span><br><span class="line">  <span class="string">`col_text`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_text&#x27;</span>,</span><br><span class="line">  <span class="string">`col_geo_point`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_geo_point&#x27;</span>,</span><br><span class="line">  <span class="string">`col_date`</span> datetime <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;col_date time&#x27;</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>) <span class="keyword">USING</span> BTREE</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4 ROW_FORMAT=DYNAMIC;</span><br><span class="line"></span><br><span class="line"><span class="keyword">LOCK</span> <span class="keyword">TABLES</span> <span class="string">`test`</span> WRITE;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span> (<span class="string">`id`</span>, <span class="string">`col_ip`</span>, <span class="string">`col_double`</span>, <span class="string">`col_long`</span>, <span class="string">`col_integer`</span>, <span class="string">`col_keyword`</span>, <span class="string">`col_text`</span>, <span class="string">`col_geo_point`</span>, <span class="string">`col_date`</span>)</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">	(<span class="number">1</span>,<span class="string">&#x27;1.1.1.1&#x27;</span>,<span class="number">19890604.00</span>,<span class="number">19890604</span>,<span class="number">19890604</span>,<span class="string">&#x27;hello world&#x27;</span>,<span class="string">&#x27;hello world&#x27;</span>,<span class="string">&#x27;41.12,-71.34&#x27;</span>,<span class="string">&#x27;2020-09-18 19:04:29&#x27;</span>);</span><br><span class="line"><span class="keyword">UNLOCK</span> <span class="keyword">TABLES</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>myql2es.json</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;job&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;setting&quot;</span>:&#123;</span><br><span class="line">            <span class="attr">&quot;speed&quot;</span>:&#123;</span><br><span class="line">                <span class="attr">&quot;channel&quot;</span>:<span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;content&quot;</span>:[</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">&quot;reader&quot;</span>:&#123;</span><br><span class="line">                    <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;mysqlreader&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;parameter&quot;</span>:&#123;</span><br><span class="line">                        <span class="attr">&quot;username&quot;</span>:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;password&quot;</span>:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;column&quot;</span>:[</span><br><span class="line">                            <span class="string">&quot;col_ip&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_double&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_long&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_integer&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_keyword&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_text&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_geo_point&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;col_date&quot;</span></span><br><span class="line">                        ],</span><br><span class="line">                        <span class="attr">&quot;splitPk&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;connection&quot;</span>:[</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;table&quot;</span>:[</span><br><span class="line">                                    <span class="string">&quot;test&quot;</span></span><br><span class="line">                                ],</span><br><span class="line">                                <span class="attr">&quot;jdbcUrl&quot;</span>:[</span><br><span class="line">                                    <span class="string">&quot;jdbc:mysql://127.0.0.1:3306/test&quot;</span></span><br><span class="line">                                ]</span><br><span class="line">                            &#125;</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">&quot;writer&quot;</span>:&#123;</span><br><span class="line">                    <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;elasticsearchwriter&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;parameter&quot;</span>:&#123;</span><br><span class="line">                        <span class="attr">&quot;endpoint&quot;</span>:<span class="string">&quot;http://192.168.90.124:9200&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;index&quot;</span>:<span class="string">&quot;mytest&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;default&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;accessId&quot;</span>: <span class="string">&quot;1&quot;</span>, <span class="comment">// 不写报错，，没有认证就随写个值</span></span><br><span class="line">                        <span class="attr">&quot;accessKey&quot;</span>: <span class="string">&quot;1&quot;</span>, <span class="comment">// 不写报错，没有认证就随写个值</span></span><br><span class="line">                        <span class="attr">&quot;cleanup&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">                        <span class="attr">&quot;settings&quot;</span>:&#123;</span><br><span class="line">                            <span class="attr">&quot;index&quot;</span>:&#123;</span><br><span class="line">                                <span class="attr">&quot;number_of_shards&quot;</span>:<span class="number">5</span>,</span><br><span class="line">                                <span class="attr">&quot;number_of_replicas&quot;</span>:<span class="number">0</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        <span class="attr">&quot;discovery&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">                        <span class="attr">&quot;batchSize&quot;</span>:<span class="number">1000</span>,</span><br><span class="line">                        <span class="attr">&quot;splitter&quot;</span>:<span class="string">&quot;,&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;column&quot;</span>:[</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_ip&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;ip&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_double&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;double&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_long&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;long&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_integer&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;integer&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_keyword&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;keyword&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_text&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;text&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_geo_point&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;geo_point&quot;</span></span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;col_date&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;date&quot;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用kibana查看，同步成功</li>
+</ul>
+<img src="/2020/09/18/datax/image-20200918192804137.png" class title="image-20200918192804137">
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>datax 解放了我们在数据开发时候异构数据源间etl处理，使用起来还是很简单的，更多高级功能或者坑遇到再写。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/Elasticsearch%E6%9F%A5%E8%AF%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1033,7 +1565,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1046,7 +1578,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

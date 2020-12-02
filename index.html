@@ -155,6 +155,232 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/02/%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/02/%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D/" class="post-title-link" itemprop="url">深度拷贝</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-02 11:24:35 / 修改时间：16:36:36" itemprop="dateCreated datePublished" datetime="2020-12-02T11:24:35+08:00">2020-12-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在说对象拷贝问题之前，我们先看看JVM内存模型，看看对象是怎么在内存里存在的。</p>
+<img src="/2020/12/02/%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D/image-20201202162511341.png" class title="image-20201202162511341">
+
+
+
+<p>对象实例存在堆内存里，它的引用（指针）在被使用时候，被栈里的user所持有。是不是明白了，我们平时在开发时候，所指对象属性被修改了，对应引用的对象值都会变化。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>深拷贝对应的反面是浅拷贝，先做个统一的大白话定义：</p>
+<ul>
+<li>浅拷贝：增加了一个指针，指向已存在的内存地址（原对象地址）</li>
+<li>深拷贝：增加了一个指针，指向<strong>新的内存地址</strong>（新对象地址）</li>
+</ul>
+<p>拷贝类型：基本类型（boolean、byte、char、int、short、float、long、double），引用类型（String、对象引用、数组等）。</p>
+<p>拷贝过程：对于基本类型它是直接拷贝值的，引用类型可以分为（直接引用赋值、开辟内存再引用赋值）</p>
+<p>区别：对于基本类型，深浅拷贝都是一样的，引用类型是不一样。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>为什么要有对象拷贝？深拷贝和浅拷贝，无非就是在权衡对象使用时候，对象间是否有互相影响问题（倘若属性值被改）。</p>
+<p>浅拷贝方式：</p>
+<ul>
+<li><code>BeanUtils.copyProperties(source,target);</code> spring 的和apache 都一样</li>
+<li><code>PropertyUtils.copyProperties(target, source)</code> apache的</li>
+<li><code> obj.clone()</code> 被拷贝对象需要实现<code>Cloneable</code>接口</li>
+</ul>
+<p>深拷贝方式：</p>
+<ul>
+<li>手动new，再赋值，属性过多时候搞死人</li>
+<li>json序列化 <code> JSON.parseObject(JSON.toJSONString(obj), Object.class)</code> fastjson 库</li>
+<li>字节流序列化 <code>SerializationUtils.clone</code> 被拷贝对象需要实现<code>Serializable</code>接口</li>
+</ul>
+<p>总结：对象深浅拷贝，属于比较容易忽略的点，理解它后对于Java是值传递or引用传递是有帮助的。上述列举的工具类和方式不是全部，可以按照自己的喜好选择其他。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/21/spring%E8%A3%85%E9%85%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/21/spring%E8%A3%85%E9%85%8D/" class="post-title-link" itemprop="url">spring装配</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-21 10:13:52 / 修改时间：15:41:36" itemprop="dateCreated datePublished" datetime="2020-11-21T10:13:52+08:00">2020-11-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>spring从一定层面上讲是Bean容器，那么它是怎么实现Bean的装配，这块对于理解springBoot自动装配有很大帮助。这里说的装配，我指的是基于注解/代码的方式，毕竟现在开发都是注解先行，至于xml方式就不讨论了。</p>
+<h1 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h1><ul>
+<li>模式注解 <code>@Component</code> 等（Spring2.5+）</li>
+<li>配置类 <code>@Configuration</code> 与 <code>@Bean</code> （Spring3.0+）</li>
+<li>模块装配 <code>@EnableXXX</code> 与 <code>@Import</code> （Spring3.1+）</li>
+</ul>
+<h2 id="模式注解"><a href="#模式注解" class="headerlink" title="模式注解"></a>模式注解</h2><p>使用它在我们日常开发中很常见，<code>@Component</code>、<code>@Service、</code>@Repository 等。但是它又个天然的缺陷，只能在我们自己写的代码中，对于jar包中组件，无能为力。</p>
+<h2 id="配置类"><a href="#配置类" class="headerlink" title="配置类"></a>配置类</h2><p><code>@Configuration</code> 与 <code>@Bean</code> 方式，这种方式我们在开发中也经常使用，例如配置数据源，一些中间件。但是它也有个天然的缺点，配置一多，类就显得很臃肿，编码和修改成本都比价高。</p>
+<h2 id="模块装配"><a href="#模块装配" class="headerlink" title="模块装配"></a>模块装配</h2><p>这是个杀手锏，特别对于需要装配较多的bean到容器，一般它的套路是：@Enablexxx、@Import 注解来完成。</p>
+<ul>
+<li>元注解@EnableBean</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Import(User.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableBean &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>实体</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> Integer userId;</span><br><span class="line">    <span class="keyword">private</span> Integer productId;</span><br><span class="line">    <span class="keyword">private</span> BigDecimal amount;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Order</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;order init ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;user init ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>配置类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableBean</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>启动容器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    AnnotationConfigApplicationContext ctx = <span class="keyword">new</span> AnnotationConfigApplicationContext(Config.class);</span><br><span class="line">    String[] beanDefinitionNames = ctx.getBeanDefinitionNames();</span><br><span class="line">    Stream.of(beanDefinitionNames).forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>打印的日志</li>
+</ul>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">user init ...</span><br><span class="line">10:38:50.701 [main] DEBUG org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean &#x27;com.hf.astilt.normal.Orange&#x27;</span><br><span class="line">10:38:50.702 [main] DEBUG org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean &#x27;com.hf.astilt.normal.Order&#x27;</span><br><span class="line">order init ...</span><br><span class="line">10:38:50.710 [main] DEBUG org.springframework.core.env.PropertySourcesPropertyResolver - Found key &#x27;spring.liveBeansView.mbeanDomain&#x27; in PropertySource &#x27;systemProperties&#x27; with value of type String</span><br><span class="line">org.springframework.context.annotation.internalConfigurationAnnotationProcessor</span><br><span class="line">org.springframework.context.annotation.internalAutowiredAnnotationProcessor</span><br><span class="line">org.springframework.context.annotation.internalCommonAnnotationProcessor</span><br><span class="line">org.springframework.context.event.internalEventListenerProcessor</span><br><span class="line">org.springframework.context.event.internalEventListenerFactory</span><br><span class="line">config</span><br><span class="line">com.hf.astilt.normal.User</span><br><span class="line">com.hf.astilt.normal.Orange</span><br><span class="line">com.hf.astilt.normal.Order</span><br></pre></td></tr></table></figure>
+
+<p>可以看到spring启动后，打印出了我配置的几个类，是不是简单很多。</p>
+<h2 id="Import"><a href="#Import" class="headerlink" title="@Import"></a>@Import</h2><p> 这个注解隐含了模块装配的秘密，我们看看。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Import &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * &#123;<span class="doctag">@link</span> Configuration <span class="doctag">@Configuration</span>&#125;, &#123;<span class="doctag">@link</span> ImportSelector&#125;,</span></span><br><span class="line"><span class="comment">	 * &#123;<span class="doctag">@link</span> ImportBeanDefinitionRegistrar&#125;, or regular component classes to import.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	Class&lt;?&gt;[] value();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 翻译下它的备注：@Import里面的值是个数组。被<code>@Configuration</code>修饰的配置类、实现<code>ImportSelector</code>的类，实现<code> ImportBeanDefinitionRegistrar</code>的类，普通的Java bean。</p>
+<p>配置类、普通Java类就不说了，简单易懂。重点看看实现了：<code>ImportSelector</code>和<code> ImportBeanDefinitionRegistrar</code>的类。</p>
+<ul>
+<li><code>ImportSelector</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserImport</span> <span class="keyword">implements</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String[] selectImports(AnnotationMetadata importingClassMetadata) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;User.class.getName()&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code> ImportBeanDefinitionRegistrar</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FruitImport</span> <span class="keyword">implements</span> <span class="title">ImportBeanDefinitionRegistrar</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerBeanDefinitions</span><span class="params">(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.registerBeanDefinition(<span class="string">&quot;apple&quot;</span>, <span class="keyword">new</span> RootBeanDefinition(Apple.class));</span><br><span class="line">        registry.registerBeanDefinition(<span class="string">&quot;orange&quot;</span>, <span class="keyword">new</span> RootBeanDefinition(Orange.class));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>@EnableBean</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableBean</span></span><br><span class="line"><span class="meta">@Import(&#123;UserImport.class, FruitImport.class&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>效果</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">user init ...</span><br><span class="line">15:06:34.692 [main] DEBUG org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean &#x27;apple&#x27;</span><br><span class="line">apple init ...</span><br><span class="line">15:06:34.692 [main] DEBUG org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean &#x27;orange&#x27;</span><br><span class="line">org.springframework.context.annotation.internalConfigurationAnnotationProcessor</span><br><span class="line">org.springframework.context.annotation.internalAutowiredAnnotationProcessor</span><br><span class="line">org.springframework.context.annotation.internalCommonAnnotationProcessor</span><br><span class="line">org.springframework.context.event.internalEventListenerProcessor</span><br><span class="line">org.springframework.context.event.internalEventListenerFactory</span><br><span class="line">config</span><br><span class="line">com.hf.astilt.normal.User</span><br><span class="line">apple</span><br><span class="line">orange</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在<code>@Import</code>里面配置<code>ImportBeanDefinitionRegistrar</code>和<code>ImportSelector</code> 的实现类，效果与直接导入Java Bean一样。 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/18/Java%E7%9A%84%E6%97%A5%E5%BF%97%E4%BD%93%E7%B3%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -186,7 +412,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-19 14:56:55" itemprop="dateModified" datetime="2020-11-19T14:56:55+08:00">2020-11-19</time>
+                <time title="修改时间：2020-11-20 10:40:49" itemprop="dateModified" datetime="2020-11-20T10:40:49+08:00">2020-11-20</time>
               </span>
 
           
@@ -268,7 +494,7 @@
 </ul>
 <p>不同的appender有的属性不同，动手点到类里瞧瞧。例如RollingFileAppender的 File、Append、Threshold等。</p>
 <ul>
-<li>伪装Java 代码</li>
+<li>伪Java 代码</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</span><br><span class="line"><span class="comment">// 获取logger</span></span><br><span class="line"> Logger logger = Logger.getLogger(App.class.getName());</span><br><span class="line"> logger.error(<span class="string">&quot;11111&quot;</span>);</span><br></pre></td></tr></table></figure>
 
@@ -591,10 +817,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-11-18 11:32:07 / 修改时间：11:33:49" itemprop="dateCreated datePublished" datetime="2020-11-18T11:32:07+08:00">2020-11-18</time>
+              <time title="创建时间：2020-11-18 11:32:07" itemprop="dateCreated datePublished" datetime="2020-11-18T11:32:07+08:00">2020-11-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-30 19:46:58" itemprop="dateModified" datetime="2020-11-30T19:46:58+08:00">2020-11-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -617,10 +849,10 @@
 
       
           <h1 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h1><p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/index.html">官网地址</a></p>
-<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h2 id="Xml-方式"><a href="#Xml-方式" class="headerlink" title="Xml 方式"></a>Xml 方式</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span></span></span><br><span class="line"><span class="meta">  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">  <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/example/BlogMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h2 id="Xml-方式"><a href="#Xml-方式" class="headerlink" title="Xml 方式"></a>Xml 方式</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span></span></span><br><span class="line"><span class="meta">  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">  <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/example/BasRole.xml&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>basRole.xml</li>
+<li>BasRole.xml</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;org.example.mapper.BasRoleMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getOne&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;org.example.entity.BasRole&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;int&quot;</span> <span class="attr">useCache</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">    SELECT id,role_code,role_name,descr FROM bas_role where id =#&#123;id&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -632,7 +864,7 @@
 
 </li>
 </ul>
-<h2 id="Java代码方式"><a href="#Java代码方式" class="headerlink" title="Java代码方式"></a>Java代码方式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DataSource dataSource = BasRoleDataSourceFactory.getDataSource();</span><br><span class="line">TransactionFactory transactionFactory = <span class="keyword">new</span> JdbcTransactionFactory();</span><br><span class="line">Environment environment = <span class="keyword">new</span> Environment(<span class="string">&quot;development&quot;</span>, transactionFactory, dataSource);</span><br><span class="line">Configuration configuration = <span class="keyword">new</span> Configuration(environment);</span><br><span class="line">configuration.addMapper(BlogMapper.class);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(configuration);</span><br></pre></td></tr></table></figure>
+<h2 id="Java代码方式"><a href="#Java代码方式" class="headerlink" title="Java代码方式"></a>Java代码方式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BasRoleDataSourceFactory可以替换成自己的，或者第三方的的链接池</span></span><br><span class="line">DataSource dataSource = BasRoleDataSourceFactory.getDataSource();</span><br><span class="line">TransactionFactory transactionFactory = <span class="keyword">new</span> JdbcTransactionFactory();</span><br><span class="line">Environment environment = <span class="keyword">new</span> Environment(<span class="string">&quot;development&quot;</span>, transactionFactory, dataSource);</span><br><span class="line">Configuration configuration = <span class="keyword">new</span> Configuration(environment);</span><br><span class="line">configuration.addMapper(BasRoleMapper.class);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(configuration);</span><br></pre></td></tr></table></figure>
 
 
 
@@ -640,7 +872,7 @@
 <p>SqlSessionFactory–&gt;SqlSession–&gt;sql</p>
 <p>SqlSessionFactory–&gt;SqlSession–&gt;Mapper–&gt;sql</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (SqlSession session = sqlSessionFactory.openSession()) &#123;</span><br><span class="line">  <span class="comment">// SqlSession执行sql</span></span><br><span class="line">  Blog blog1 = (Blog) session.selectOne(<span class="string">&quot;org.mybatis.example.BlogMapper.selectBlog&quot;</span>, <span class="number">101</span>);</span><br><span class="line">  <span class="comment">// Mapper执行sql</span></span><br><span class="line">  BlogMapper mapper = session.getMapper(BlogMapper.class);</span><br><span class="line">  Blog blog2 = mapper.selectBlog(<span class="number">101</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (SqlSession session = sqlSessionFactory.openSession()) &#123;</span><br><span class="line">  <span class="comment">// SqlSession执行sql</span></span><br><span class="line">  BasRole basRole = (BasRole)session.selectOne(<span class="string">&quot;org.example.mapper.BasRoleMapper.getOne&quot;</span>, <span class="number">8</span>);</span><br><span class="line">  <span class="comment">// Mapper执行sql</span></span><br><span class="line">  BasRoleMapper mapper = session.getMapper(BasRoleMapper.class);</span><br><span class="line">  BasRole bassRole2 = mapper.getOne(<span class="number">8</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h1><ul>
 <li>SqlSessionFactoryBuilder：看名知意，产生SqlSessionFactory，一般是基于xml/Java配置方式构建SessionFactory。它的**生命周期在构建完SqlSessionFactory就结束了   </li>
@@ -652,7 +884,7 @@
 
 
 
-<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><p>默认开启，在一个sqlSession的“回话里生效”。日志如下：</p>
+<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><p>默认开启，在一个sqlSession的“会话里生效”。日志如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt;  Preparing: SELECT id,role_code,role_name,descr FROM bas_role where id =?  </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt; Parameters: <span class="number">8</span>(Integer) </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  &lt;==      Total: <span class="number">1</span> </span><br><span class="line">一级缓存，第一个session，第一次执行</span><br><span class="line">一级缓存，第一个session，第二次执行</span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Resetting autocommit to <span class="keyword">true</span> on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.datasource.pooled.PooledDataSource <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Returned connection <span class="number">1206569586</span> to pool. </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Opening JDBC Connection </span><br><span class="line">org.apache.ibatis.datasource.pooled.PooledDataSource <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Checked out connection <span class="number">1206569586</span> from pool. </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Setting autocommit to <span class="keyword">false</span> on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt;  Preparing: SELECT id,role_code,role_name,descr FROM bas_role where id =?  </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt; Parameters: <span class="number">8</span>(Integer) </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  &lt;==      Total: <span class="number">1</span> </span><br><span class="line">一级缓存，第二个session，第一次执行</span><br><span class="line">一级缓存，第二个session，第二次执行</span><br><span class="line"></span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt;  Preparing: SELECT id,role_code,role_name,descr FROM bas_role where id =?  </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt; Parameters: <span class="number">8</span>(Integer) </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  &lt;==      Total: <span class="number">1</span> </span><br><span class="line">一级缓存，第一个session，第一次执行</span><br><span class="line">一级缓存，第一个session，第二次执行</span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Resetting autocommit to <span class="keyword">true</span> on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.datasource.pooled.PooledDataSource <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Returned connection <span class="number">1206569586</span> to pool. </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Opening JDBC Connection </span><br><span class="line">org.apache.ibatis.datasource.pooled.PooledDataSource <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Checked out connection <span class="number">1206569586</span> from pool. </span><br><span class="line">org.apache.ibatis.transaction.jdbc.JdbcTransaction <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  Setting autocommit to <span class="keyword">false</span> on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@<span class="number">47</span>eaca72] </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt;  Preparing: SELECT id,role_code,role_name,descr FROM bas_role where id =?  </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  ==&gt; Parameters: <span class="number">8</span>(Integer) </span><br><span class="line">org.apache.ibatis.logging.jdbc.BaseJdbcLogger <span class="number">2020</span>-<span class="number">11</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">53</span>:<span class="number">06</span>  &lt;==      Total: <span class="number">1</span> </span><br><span class="line">一级缓存，第二个session，第一次执行</span><br><span class="line">一级缓存，第二个session，第二次执行</span><br></pre></td></tr></table></figure>
 
 
@@ -1034,7 +1266,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-17 13:15:31" itemprop="dateModified" datetime="2020-11-17T13:15:31+08:00">2020-11-17</time>
+                <time title="修改时间：2020-11-24 18:10:17" itemprop="dateModified" datetime="2020-11-24T18:10:17+08:00">2020-11-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1106,7 +1338,7 @@
 <tr>
 <td align="left">查看Schema</td>
 <td align="left">无</td>
-<td align="left">\dn</td>
+<td align="left">\看··。</td>
 </tr>
 <tr>
 <td align="left">查看所用用户</td>
@@ -1269,181 +1501,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/03/aop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/03/aop/" class="post-title-link" itemprop="url">aop</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-11-03 19:02:10 / 修改时间：20:54:12" itemprop="dateCreated datePublished" datetime="2020-11-03T19:02:10+08:00">2020-11-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>之前经常使用spring的aop来做些自定义的动作，但是没有真正系统的了解过它，最近整理下。</p>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><blockquote>
-<p>Aspect-oriented Programming (AOP)，相对于Object-oriented Programming (OOP)来说是另外一种编程风格。在spring中，可以使用xml和aspectJ两种风格来定义切面。</p>
-</blockquote>
-<h2 id="Aspect"><a href="#Aspect" class="headerlink" title="Aspect"></a>Aspect</h2><ul>
-<li>添加了**@Aspect**的类</li>
-<li>基于xml配置的类</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">&quot;myAspect&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;aBean&quot;</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;aBean&quot;</span> <span class="attr">class</span>=<span class="string">&quot;...&quot;</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Join-Point"><a href="#Join-Point" class="headerlink" title="Join Point"></a>Join Point</h2><p>连接点，在spring代表一个方法的执行。spring中可以简单认为所有方法都是连接点。</p>
-<h2 id="PointCut"><a href="#PointCut" class="headerlink" title="PointCut"></a>PointCut</h2><p>切点，是用来描述连接点，通过它可以确定哪些连接点可以被增强。切点表达式，是aop的核心，稍后介绍。</p>
-<h2 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a>Advice</h2><p>由 aspect 添加到特定的Join Point(即满足 PointCut规则的 join point) 的一段代码。</p>
-<h1 id="Advice类型"><a href="#Advice类型" class="headerlink" title="Advice类型"></a>Advice类型</h1><ul>
-<li>@Before：在一个方法执行前被调用</li>
-<li>@AfterReturning：仅当方法成功完成后执行的通知，异常后不执行</li>
-<li>@AfterThrowing：方法抛出异常退出时执行的通知</li>
-<li>@After：方法执行之后调用的通知，无论方法执行是否成功</li>
-<li>@Around：方法执行之前和之后调用的通知（大而全的类型，可以替代很多类型）</li>
-</ul>
-<h1 id="切点定义"><a href="#切点定义" class="headerlink" title="切点定义"></a>切点定义</h1><h2 id="方法匹配模式：execution"><a href="#方法匹配模式：execution" class="headerlink" title="方法匹配模式：execution()"></a>方法匹配模式：execution()</h2><ul>
-<li>任意公共方法的执行：<code>execution(public * *(..))</code></li>
-<li>任何一个以“set”开始的方法的执行：<code>execution(* set*(..))</code></li>
-<li>AccountService 接口的任意方法的执行：<code>execution(* com.xyz.service.AccountService.*(..))</code></li>
-<li>定义在service包里的任意方法的执行：<code>execution(* com.xyz.service.*.*(..))</code></li>
-<li>定义在service包或者子包里的任意方法的执行：<code>execution(* com.xyz.service..*.*(..))</code></li>
-<li>在service包里的任意连接点（在Spring AOP中只是方法执行）：<code>within(com.xyz.service.*)</code></li>
-<li>在service包或者子包里的任意连接点（在Spring AOP中只是方法执行）：<code>within(com.xyz.service..*)</code></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/29/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/29/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">常用命令记录</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-29 20:46:58" itemprop="dateCreated datePublished" datetime="2020-10-29T20:46:58+08:00">2020-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-30 09:14:05" itemprop="dateModified" datetime="2020-10-30T09:14:05+08:00">2020-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">命令</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>查看mac上JDK路径</li>
-</ul>
-<p><code> /usr/libexec/java_home -V</code></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1514,7 +1571,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1527,7 +1584,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
