@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="参考：趣头条基于ClickHouse玩转每天1000亿数据量分享文档。 常用配置参数推荐 max_concurrent_queries 最大并发处理的请求数(包含select,insert等)，默认值100，推荐150(不够再加)，在我们的集群中出现过”max concurrent queries”的问题。  max_bytes_before_external_sort 当order by已使用m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="clickhouse常用配置参数和错误">
+<meta property="og:url" content="http://yoursite.com/2021/02/23/clickhouse%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%92%8C%E9%94%99%E8%AF%AF/index.html">
+<meta property="og:site_name" content="Astilt&#39;s blog">
+<meta property="og:description" content="参考：趣头条基于ClickHouse玩转每天1000亿数据量分享文档。 常用配置参数推荐 max_concurrent_queries 最大并发处理的请求数(包含select,insert等)，默认值100，推荐150(不够再加)，在我们的集群中出现过”max concurrent queries”的问题。  max_bytes_before_external_sort 当order by已使用m">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-23T08:32:22.000Z">
+<meta property="article:modified_time" content="2021-02-23T08:47:18.807Z">
+<meta property="article:author" content="Astilt">
+<meta property="article:tag" content="clickHouse">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/02/23/clickhouse%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%92%8C%E9%94%99%E8%AF%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>clickhouse常用配置参数和错误 | Astilt's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Astilt's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Astilt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/23/clickhouse%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%92%8C%E9%94%99%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          clickhouse常用配置参数和错误
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-23 16:32:22 / 修改时间：16:47:18" itemprop="dateCreated datePublished" datetime="2021-02-23T16:32:22+08:00">2021-02-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>参考：趣头条基于ClickHouse玩转每天1000亿数据量分享文档。</p>
+<h1 id="常用配置参数推荐"><a href="#常用配置参数推荐" class="headerlink" title="常用配置参数推荐"></a>常用配置参数推荐</h1><ul>
+<li><p>max_concurrent_queries</p>
+<p>最大并发处理的请求数(包含select,insert等)，默认值100，推荐150(不够再加)，在我们的集群中出现过”max concurrent queries”的问题。</p>
+</li>
+<li><p>max_bytes_before_external_sort</p>
+<p>当order by已使用max_bytes_before_external_sort内存就进行溢写磁盘(基于磁盘排序)，如果不设置该值，那么当内存不够时直接抛错，设置了该值order by可以正常完成，但是速度相对存内存来说肯定要慢点(实测慢的非常多，无法接受)。</p>
+</li>
+<li><p>background_pool_size</p>
+<p>后台线程池的大小，merge线程就是在该线程池中执行，当然该线程池不仅仅是给merge线程用的，默认值16，推荐32提升merge的速度(CPU允许的前提下)。</p>
+</li>
+<li><p>max_memory_usage</p>
+<p>单个SQL在单台机器最大内存使用量，该值可以设置的比较大，这样可以提升集群查询的上限。</p>
+</li>
+<li><p>max_memory_usage_for_all_queries</p>
+<p>单机最大的内存使用量可以设置略小于机器的物理内存(留一点内操作系统)。</p>
+</li>
+<li><p>max_bytes_before_external_group_by</p>
+<p>在进行group by的时候，内存使用量已经达到了max_bytes_before_external_group_by的时候就进行写磁盘(基于磁盘的group by相对于基于磁盘的order by性能损耗要好很多的)，一般max_bytes_before_external_group_by设置为max_memory_usage / 2，原因是在clickhouse中聚合分两个阶段：</p>
+<ul>
+<li>查询并且建立中间数据；</li>
+<li>合并中间数据 写磁盘在第一个阶段，如果无须写磁盘，clickhouse在第一个和第二个阶段需要使用相同的内存。</li>
+</ul>
+</li>
+</ul>
+<h1 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h1><h2 id="Too-many-parts-304-Merges-are-processing-significantly-slower-than-inserts"><a href="#Too-many-parts-304-Merges-are-processing-significantly-slower-than-inserts" class="headerlink" title="Too many parts(304). Merges are processing significantly slower than inserts"></a>Too many parts(304). Merges are processing significantly slower than inserts</h2><p>相信很多同学在刚开始使用clickhouse的时候都有遇到过该异常，出现异常的原因是因为MergeTree的merge的速度跟不上目录生成的速度, 数据目录越来越多就会抛出这个异常, 所以一般情况下遇到这个异常，降低一下插入频次就ok了，单纯调整background_pool_size的大小是治标不治本的。</p>
+<p>相信很多同学在刚开始使用clickhouse的时候都有遇到过该异常，出现异常的原因是因为MergeTree的merge的速度跟不上目录生成的速度, 数据目录越来越多就会抛出这个异常, 所以一般情况下遇到这个异常，降低一下插入频次就ok了，单纯调整background_pool_size的大小是治标不治本的。</p>
+<p><strong>我们的场景：</strong></p>
+<p>我们的插入速度是严格按照官方文档上面的推荐”每秒不超过1次的insert request”，但是有个插入程序在运行一段时间以后抛出了该异常，很奇怪。</p>
+<p><strong>问题排查：</strong></p>
+<p>排查发现失败的这个表的数据有一个特性，它虽然是实时数据但是数据的eventTime是最近一周内的任何时间点，我们的表又是按照day + hour组合分区的那么在极限情况下，我们的一个插入请求会涉及7*24分区的数据，也就是我们一次插入会在磁盘上生成168个数据目录(文件夹)，文件夹的生成速度太快，merge速度跟不上了，所以官方文档的上每秒不超过1个插入请求，更准确的说是每秒不超过1个数据目录。</p>
+<p><strong>case study：</strong></p>
+<p>分区字段的设置要慎重考虑，如果每次插入涉及的分区太多，那么不仅容易出现上面的异常，同时在插入的时候也比较耗时，原因是每个数据目录都需要和zookeeper进行交互。</p>
+<h2 id="DB-NetException-Connection-reset-by-peer-while-reading-from-socket-xxx"><a href="#DB-NetException-Connection-reset-by-peer-while-reading-from-socket-xxx" class="headerlink" title="DB::NetException: Connection reset by peer, while reading from socket xxx"></a>DB::NetException: Connection reset by peer, while reading from socket xxx</h2><p>查询过程中clickhouse-server进程挂掉。</p>
+<p><strong>问题排查：</strong></p>
+<p>排查发现在这个异常抛出的时间点有出现clickhouse-server的重启，通过监控系统看到机器的内存使用在该时间点出现高峰，在初期集群”裸奔”的时期，很多内存参数都没有进行限制，导致clickhouse-server内存使用量太高被OS KILL掉。</p>
+<p> <strong>case study：</strong></p>
+<p>上面推荐的内存参数强烈推荐全部加上，max_memory_usage_for_all_queries该参数没有正确设置是导致该case触发的主要原因。</p>
+<h2 id="Memory-limit-for-query-exceeded-would-use-9-37-GiB-attempt-to-allocate-chunk-of-301989888-bytes-maximum-9-31-GiB"><a href="#Memory-limit-for-query-exceeded-would-use-9-37-GiB-attempt-to-allocate-chunk-of-301989888-bytes-maximum-9-31-GiB" class="headerlink" title="Memory limit (for query) exceeded:would use 9.37 GiB (attempt to allocate chunk of 301989888 bytes), maximum: 9.31 GiB"></a>Memory limit (for query) exceeded:would use 9.37 GiB (attempt to allocate chunk of 301989888 bytes), maximum: 9.31 GiB</h2><p>该异常很直接，就是我们限制了SQL的查询内存(max_memory_usage)使用的上线，当内存使用量大于该值的时候，查询被强制KILL。</p>
+<p> 对于常规的如下简单的SQL, 查询的空间复杂度为O(1) 。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> condition1 <span class="keyword">and</span> condition2 </span><br><span class="line"><span class="keyword">select</span> c1, c2 <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> condition1 <span class="keyword">and</span> condition2</span><br></pre></td></tr></table></figure>
+
+<p> 对于group by, order by , count distinct，join这样的复杂的SQL，查询的空间复杂度就不是O(1)了，需要使用大量的内存。</p>
+<ul>
+<li>如果是group by内存不够，推荐配置上max_bytes_before_external_group_by参数，当使用内存到达该阈值，进行磁盘group by</li>
+<li>如果是order by内存不够，推荐配置上max_bytes_before_external_sort参数，当使用内存到达该阈值，进行磁盘order by</li>
+<li>如果是count distinct内存不够，推荐使用一些预估函数(如果业务场景允许)，这样不仅可以减少内存的使用同时还会提示查询速度</li>
+<li>对于JOIN场景，我们需要注意的是clickhouse在进行JOIN的时候都是将”右表”进行多节点的传输的(右表广播)，如果你已经遵循了该原则还是无法跑出来，那么好像也没有什么好办法了</li>
+</ul>
+<h2 id="zookeeper的snapshot文件太大，follower从leader同步文件时超时"><a href="#zookeeper的snapshot文件太大，follower从leader同步文件时超时" class="headerlink" title="zookeeper的snapshot文件太大，follower从leader同步文件时超时"></a>zookeeper的snapshot文件太大，follower从leader同步文件时超时</h2><p>上面有说过clickhouse对zookeeper的依赖非常的重，表的元数据信息，每个数据块的信息，每次插入的时候，数据同步的时候，都需要和zookeeper进行交互，上面存储的数据非常的多。</p>
+<p>就拿我们自己的集群举例，我们集群有60台机器30张左右的表，数据一般只存储2天，我们zookeeper集群的压力 已经非常的大了，zookeeper的节点数据已经到达500w左右，一个snapshot文件已经有2G+左右的大小了，zookeeper节点之间的数据同步已经经常性的出现超时。 </p>
+<p> <strong>问题解决：</strong></p>
+<ul>
+<li><p>zookeeper的snapshot文件存储盘不低于1T，注意清理策略，不然磁盘报警报到你怀疑人生，如果磁盘爆了那集群就处于“残废”状态； </p>
+</li>
+<li><p>zookeeper集群的znode最好能在400w以下； </p>
+</li>
+<li><p>建表的时候添加use_minimalistic_part_header_in_zookeeper参数，对元数据进行压缩存储，对于高版本的clickhouse可以直接在原表上面修改该setting信息，注意修改完了以后无法再回滚的。</p>
+</li>
+</ul>
+<h2 id="zookeeper压力太大，clickhouse表处于”read-only-mode”，插入失败"><a href="#zookeeper压力太大，clickhouse表处于”read-only-mode”，插入失败" class="headerlink" title="zookeeper压力太大，clickhouse表处于”read only mode”，插入失败"></a>zookeeper压力太大，clickhouse表处于”read only mode”，插入失败</h2><ul>
+<li>zookeeper机器的snapshot文件和log文件最好分盘存储(推荐SSD)提高ZK的响应；</li>
+<li>做好zookeeper集群和clickhouse集群的规划，可以多套zookeeper集群服务一套clickhouse集群。</li>
+</ul>
+<h1 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h1><h2 id="实时写入使用本地表，不要使用分布式表"><a href="#实时写入使用本地表，不要使用分布式表" class="headerlink" title="实时写入使用本地表，不要使用分布式表"></a>实时写入使用本地表，不要使用分布式表</h2><p>分布式表引擎会帮我们将数据自动路由到健康的数据表进行数据的存储，所以使用分布式表相对来说比较简单，对于Producer不需要有太多的考虑，但是分布式表有些致命的缺点。 </p>
+<ul>
+<li>数据的一致性问题，先在分布式表所在的机器进行落盘，然后异步的发送到本地表所在机器进行存储，中间没有一致性的校验，而且在分布式表所在机器时如果机器出现down机，会存在数据丢失风险；</li>
+<li>据说对zookeeper的压力比较大(待验证)。</li>
+</ul>
+<h2 id="推荐使用-MergeTree引擎，该引擎是clickhouse最核心的组件，也是社区优化的重点"><a href="#推荐使用-MergeTree引擎，该引擎是clickhouse最核心的组件，也是社区优化的重点" class="headerlink" title="推荐使用(*)MergeTree引擎，该引擎是clickhouse最核心的组件，也是社区优化的重点"></a>推荐使用(*)MergeTree引擎，该引擎是clickhouse最核心的组件，也是社区优化的重点</h2><p> 数据有保障，查询有保障，升级无感知。</p>
+<h2 id="谨慎使用on-cluster的SQL"><a href="#谨慎使用on-cluster的SQL" class="headerlink" title="谨慎使用on cluster的SQL"></a>谨慎使用on cluster的SQL</h2><p>使用该类型SQL hang住的案例不少，我们也有遇到，可以直接写个脚本直接操作集群的每台进行处理。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/clickHouse/" rel="tag"># clickHouse</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/" rel="prev" title="clickhouse分享">
+      <i class="fa fa-chevron-left"></i> clickhouse分享
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/03/tmux/" rel="next" title="tmux">
+      tmux <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E6%8E%A8%E8%8D%90"><span class="nav-number">1.</span> <span class="nav-text">常用配置参数推荐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF"><span class="nav-number">2.</span> <span class="nav-text">常见错误</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Too-many-parts-304-Merges-are-processing-significantly-slower-than-inserts"><span class="nav-number">2.1.</span> <span class="nav-text">Too many parts(304). Merges are processing significantly slower than inserts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DB-NetException-Connection-reset-by-peer-while-reading-from-socket-xxx"><span class="nav-number">2.2.</span> <span class="nav-text">DB::NetException: Connection reset by peer, while reading from socket xxx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-limit-for-query-exceeded-would-use-9-37-GiB-attempt-to-allocate-chunk-of-301989888-bytes-maximum-9-31-GiB"><span class="nav-number">2.3.</span> <span class="nav-text">Memory limit (for query) exceeded:would use 9.37 GiB (attempt to allocate chunk of 301989888 bytes), maximum: 9.31 GiB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper%E7%9A%84snapshot%E6%96%87%E4%BB%B6%E5%A4%AA%E5%A4%A7%EF%BC%8Cfollower%E4%BB%8Eleader%E5%90%8C%E6%AD%A5%E6%96%87%E4%BB%B6%E6%97%B6%E8%B6%85%E6%97%B6"><span class="nav-number">2.4.</span> <span class="nav-text">zookeeper的snapshot文件太大，follower从leader同步文件时超时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper%E5%8E%8B%E5%8A%9B%E5%A4%AA%E5%A4%A7%EF%BC%8Cclickhouse%E8%A1%A8%E5%A4%84%E4%BA%8E%E2%80%9Dread-only-mode%E2%80%9D%EF%BC%8C%E6%8F%92%E5%85%A5%E5%A4%B1%E8%B4%A5"><span class="nav-number">2.5.</span> <span class="nav-text">zookeeper压力太大，clickhouse表处于”read only mode”，插入失败</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%97%B6%E5%86%99%E5%85%A5%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E8%A1%A8%EF%BC%8C%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%88%86%E5%B8%83%E5%BC%8F%E8%A1%A8"><span class="nav-number">3.1.</span> <span class="nav-text">实时写入使用本地表，不要使用分布式表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-MergeTree%E5%BC%95%E6%93%8E%EF%BC%8C%E8%AF%A5%E5%BC%95%E6%93%8E%E6%98%AFclickhouse%E6%9C%80%E6%A0%B8%E5%BF%83%E7%9A%84%E7%BB%84%E4%BB%B6%EF%BC%8C%E4%B9%9F%E6%98%AF%E7%A4%BE%E5%8C%BA%E4%BC%98%E5%8C%96%E7%9A%84%E9%87%8D%E7%82%B9"><span class="nav-number">3.2.</span> <span class="nav-text">推荐使用(*)MergeTree引擎，该引擎是clickhouse最核心的组件，也是社区优化的重点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%A8%E6%85%8E%E4%BD%BF%E7%94%A8on-cluster%E7%9A%84SQL"><span class="nav-number">3.3.</span> <span class="nav-text">谨慎使用on cluster的SQL</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Astilt</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Astilt</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
