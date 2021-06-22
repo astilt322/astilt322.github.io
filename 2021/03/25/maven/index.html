@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. 概述Maven 里对于构建过程抽象3个生命周期，每个周期包含很多阶段，但是这只是一种抽象，具体的实现是由插件完成，更准备的说是插件的目标完成。所以他们之间关系 生命周期:阶段—&gt; 插件:目标 在Maven里使用的命令格式：mvn 插件 : 目标，在maven中若干常用的阶段都会被绑定到插件的目标上，因此我们可以通过 mvn 阶段 运行命令。 2. 三套生命周期Maven总共拥有三套相互">
+<meta property="og:type" content="article">
+<meta property="og:title" content="maven">
+<meta property="og:url" content="http://yoursite.com/2021/03/25/maven/index.html">
+<meta property="og:site_name" content="Astilt&#39;s blog">
+<meta property="og:description" content="1. 概述Maven 里对于构建过程抽象3个生命周期，每个周期包含很多阶段，但是这只是一种抽象，具体的实现是由插件完成，更准备的说是插件的目标完成。所以他们之间关系 生命周期:阶段—&gt; 插件:目标 在Maven里使用的命令格式：mvn 插件 : 目标，在maven中若干常用的阶段都会被绑定到插件的目标上，因此我们可以通过 mvn 阶段 运行命令。 2. 三套生命周期Maven总共拥有三套相互">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/Users/hf/blog/source/_posts/maven/image-20210513132005069.png">
+<meta property="article:published_time" content="2021-03-25T02:14:55.000Z">
+<meta property="article:modified_time" content="2021-06-17T08:36:10.112Z">
+<meta property="article:author" content="Astilt">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/Users/hf/blog/source/_posts/maven/image-20210513132005069.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/03/25/maven/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>maven | Astilt's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Astilt's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Astilt's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/25/maven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Astilt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Astilt's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          maven
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-25 10:14:55" itemprop="dateCreated datePublished" datetime="2021-03-25T10:14:55+08:00">2021-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-17 16:36:10" itemprop="dateModified" datetime="2021-06-17T16:36:10+08:00">2021-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/maven/" itemprop="url" rel="index"><span itemprop="name">maven</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>Maven 里对于构建过程抽象3个生命周期，每个周期包含很多阶段，但是这只是一种抽象，具体的实现是由插件完成，更准备的说是插件的目标完成。所以他们之间关系</p>
+<p>生命周期:阶段—&gt; 插件:目标</p>
+<p>在Maven里使用的命令格式：mvn 插件 : 目标，在maven中若干常用的阶段都会被绑定到插件的目标上，因此我们可以通过 mvn 阶段 运行命令。</p>
+<h1 id="2-三套生命周期"><a href="#2-三套生命周期" class="headerlink" title="2. 三套生命周期"></a>2. 三套生命周期</h1><p>Maven总共拥有三套<strong>相互独立</strong>的生命周期，分别为<code>clean、default、site</code>。每个生命周期包含一些阶段（phase），这些阶段是有顺序的，并且后面的阶段依赖于前面的阶段。</p>
+<h2 id="2-1-clean-生命周期，分为3个阶段"><a href="#2-1-clean-生命周期，分为3个阶段" class="headerlink" title="2.1 clean 生命周期，分为3个阶段"></a>2.1 clean 生命周期，分为3个阶段</h2><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pre-clean</td>
+<td>执行一些需要在clean之前完成的工作</td>
+</tr>
+<tr>
+<td>clean</td>
+<td>移除所有上一次构建生成的文件</td>
+</tr>
+<tr>
+<td>post-clean</td>
+<td>执行一些需要在clean之后立刻完成的工作</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-default生命周期，分为23个阶段"><a href="#2-2-default生命周期，分为23个阶段" class="headerlink" title="2.2 default生命周期，分为23个阶段"></a>2.2 default生命周期，分为23个阶段</h2><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>validate</td>
+<td>验证项目结构是否正常，必要的配置文件是否存在</td>
+</tr>
+<tr>
+<td>initialize</td>
+<td>做构建前的初始化操作，比如初始化参数、创建必要的目录等</td>
+</tr>
+<tr>
+<td>generate-sources</td>
+<td>产生在编译过程中需要的源代码</td>
+</tr>
+<tr>
+<td>process-sources</td>
+<td>处理源代码，比如过滤值</td>
+</tr>
+<tr>
+<td>generate-resources</td>
+<td>产生主代码中的资源在 classpath 中的包</td>
+</tr>
+<tr>
+<td>process-resources</td>
+<td>将资源文件复制到 classpath 的对应包中</td>
+</tr>
+<tr>
+<td>compile</td>
+<td>编译项目中的源代码</td>
+</tr>
+<tr>
+<td>process-classes</td>
+<td>产生编译过程中生成的文件</td>
+</tr>
+<tr>
+<td>generate-test-sources</td>
+<td>产生编译过程中测试相关的代码</td>
+</tr>
+<tr>
+<td>process-test-sources</td>
+<td>处理测试代码</td>
+</tr>
+<tr>
+<td>generate-test-resources</td>
+<td>产生测试中资源在 classpath 中的包</td>
+</tr>
+<tr>
+<td>process-test-resources</td>
+<td>将测试资源复制到 classpath 中</td>
+</tr>
+<tr>
+<td>test-compile</td>
+<td>编译测试源码放入测试目标文件夹中</td>
+</tr>
+<tr>
+<td>process-test-classes</td>
+<td>后处理测试编译生成的文件，例如：对class文件进行字节码增强，对Maven 2.0.5及以上有效</td>
+</tr>
+<tr>
+<td>test</td>
+<td>运行测试案例</td>
+</tr>
+<tr>
+<td>prepare-package</td>
+<td>执行必要的操作，在真正打包前准备一个包。这通常会产生一个未打包、处理过版本。（Maven 2.1及以上）</td>
+</tr>
+<tr>
+<td>package</td>
+<td>将编译后的 class 和资源打包成压缩文件，比如 rar</td>
+</tr>
+<tr>
+<td>pre-integration-test</td>
+<td>做好集成测试前的准备工作，比如集成环境的参数设置</td>
+</tr>
+<tr>
+<td>integration-test</td>
+<td>集成测试</td>
+</tr>
+<tr>
+<td>post-integration-test</td>
+<td>完成集成测试后的收尾工作，比如清理集成环境的值</td>
+</tr>
+<tr>
+<td>verify</td>
+<td>检测测试后的包是否完好</td>
+</tr>
+<tr>
+<td>install</td>
+<td>将打包的组件以构件的形式，安装到本地依赖仓库中，以便共享给本地的其他项目</td>
+</tr>
+<tr>
+<td>deploy</td>
+<td>运行集成和发布环境，将测试后的最终包以构件的方式发布到远程仓库中，方便所有程序员共享</td>
+</tr>
+</tbody></table>
+<h2 id="2-3-site-生命周期，分为4个阶段"><a href="#2-3-site-生命周期，分为4个阶段" class="headerlink" title="2.3 site 生命周期，分为4个阶段"></a>2.3 site 生命周期，分为4个阶段</h2><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pre-site</td>
+<td>执行一些需要在生成站点文档之前完成的工作</td>
+</tr>
+<tr>
+<td>site</td>
+<td>生成项目的站点文档</td>
+</tr>
+<tr>
+<td>post-site</td>
+<td>执行一些需要在生成站点文档之后完成的工作，并且为部署做准备</td>
+</tr>
+<tr>
+<td>site-deploy</td>
+<td>将生成的站点文档部署到特定的服务器上</td>
+</tr>
+</tbody></table>
+<h2 id="3-插件和目标"><a href="#3-插件和目标" class="headerlink" title="3. 插件和目标"></a>3. 插件和目标</h2><p>maven 的构建是基于插件的，每个插件包含若干个目标，介绍几个常用插件，其他参考：<a target="_blank" rel="noopener" href="http://maven.apache.org/plugins/index.html">插件</a></p>
+<h2 id="3-1-maven-resources-plugin"><a href="#3-1-maven-resources-plugin" class="headerlink" title="3.1 maven-resources-plugin"></a>3.1 maven-resources-plugin</h2><p>该插件的作用 主要是处理将<strong>主程序与测试程序</strong>所需的源文件复制到输出编译文件夹中。</p>
+<ul>
+<li>默认</li>
+</ul>
+<p>会将resources文件夹下的文件全部copy到target的classes里。</p>
+<ul>
+<li>指定特定（默认失效了）</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">// 使用resources标签处理</span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 资源目录 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 设定主资源目录  --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>**/*.yaml<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 指定处理后的资源文件输出目录，默认是$&#123;build.outputDirectory&#125;指定的目录--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;targetPath&gt;$&#123;build.outputDirectory&#125;&lt;/targetPath&gt; --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 处理主资源目下的资源文件时，是否对主资源目录开启资源过滤 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span> 	</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 使用maven-resources-plugin 插件处理</span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!-- 在default生命周期的 validate阶段就执行resources插件的copy-resources目标 --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">phase</span>&gt;</span>validate<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 指定resources插件处理资源文件到哪个目录下 --&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.outputDirectory&#125;<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 也可以用下面这样的方式（指定相对url的方式指定outputDirectory） &lt;outputDirectory&gt;target/classes&lt;/outputDirectory&gt; --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 待处理的资源定义 --&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                                <span class="comment">&lt;!-- 指定resources插件处理哪个目录下的资源文件 --&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/$&#123;deploy.env&#125;/applicationContext.xml<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                                <span class="comment">&lt;!-- 指定不需要处理的资源 &lt;excludes&gt;&lt;exclude&gt;WEB-INF/*.*&lt;/exclude&gt;&lt;/excludes&gt; --&gt;</span></span><br><span class="line">                                <span class="comment">&lt;!-- 是否对待处理的资源开启过滤模式 (resources插件的copy-resources目标也有资源过滤的功能，这里配置的 </span></span><br><span class="line"><span class="comment">                        这个功能的效果跟&lt;build&gt;&lt;resources&gt;&lt;resource&gt;下配置的资源过滤是一样的，只不过可能执行的阶段不一样， 这里执行的阶段是插件指定的validate阶段，&lt;build&gt;&lt;resources&gt;&lt;resource&gt;下的配置将是在resources插件的resources目标执行时起作用（在process-resources阶段）) --&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>false<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">inherited</span>&gt;</span><span class="tag">&lt;/<span class="name">inherited</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上传jar到Nexus</li>
+</ul>
+<p>前提是setting里面有上传的server账户</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>release<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">username</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span>yyyyy<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn deploy:deploy-file -DgroupId=com.dtwave.asset -DartifactId=gp-jdbc -Dversion=1.0.0 -Dpackaging=jar -Dfile=/Users/hf/IdeaProjects/tag-hub-server/lib/greenplum.jar -Durl=http://repo2.dtwave-inc.com/repository/maven-releases/ -DrepositoryId=release</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>自动切换mirror</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirrors&gt;</span><br><span class="line">    &lt;mirror&gt;</span><br><span class="line">        &lt;id&gt;dtwave&lt;/id&gt;</span><br><span class="line">        &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</span><br><span class="line">        &lt;name&gt;dtwavemaven&lt;/name&gt;</span><br><span class="line">        &lt;url&gt;http://repo2.dtwave-inc.com/repository/public/&lt;/url&gt;</span><br><span class="line">    &lt;/mirror&gt;</span><br><span class="line">    &lt;mirror&gt;</span><br><span class="line">        &lt;id&gt;aliyun&lt;/id&gt;</span><br><span class="line">        &lt;mirrorOf&gt;$&#123;aliyun&#125;&lt;/mirrorOf&gt;</span><br><span class="line">        &lt;name&gt;aliyunmaven&lt;/name&gt;</span><br><span class="line">        &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</span><br><span class="line">    &lt;/mirror&gt;</span><br><span class="line">    &lt;mirror&gt;</span><br><span class="line">        &lt;id&gt;aliyunApache&lt;/id&gt;</span><br><span class="line">        &lt;mirrorOf&gt;$&#123;aliyunApache&#125;&lt;/mirrorOf&gt;</span><br><span class="line">        &lt;name&gt;aliyunApacheMaven&lt;/name&gt;</span><br><span class="line">        &lt;url&gt;https://maven.aliyun.com/repository/apache-snapshots&lt;/url&gt;</span><br><span class="line">    &lt;/mirror&gt;</span><br><span class="line">    &lt;mirror&gt;</span><br><span class="line">        &lt;id&gt;netease&lt;/id&gt;</span><br><span class="line">        &lt;url&gt;http://mirrors.163.com/maven/repository/maven-public/&lt;/url&gt;</span><br><span class="line">        &lt;name&gt;neteaseMaven&lt;/name&gt;</span><br><span class="line">        &lt;mirrorOf&gt;$&#123;netease&#125;&lt;/mirrorOf&gt;</span><br><span class="line">    &lt;/mirror&gt;</span><br><span class="line">&lt;/mirrors&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>使用阿里云作为默认（需要在某个项目下执行，即有pom）    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn help:effective-settings -Daliyun=central</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="/Users/hf/blog/source/_posts/maven/image-20210513132005069.png" alt="image-20210513132005069"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/" rel="prev" title="堡垒机传输文件">
+      <i class="fa fa-chevron-left"></i> 堡垒机传输文件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/25/maven%E9%BB%98%E8%AE%A4%E5%86%85%E7%BD%AE%E5%B1%9E%E6%80%A7/" rel="next" title="maven默认内置属性">
+      maven默认内置属性 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%B8%89%E5%A5%97%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.</span> <span class="nav-text">2. 三套生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-clean-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%8C%E5%88%86%E4%B8%BA3%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 clean 生命周期，分为3个阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-default%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%8C%E5%88%86%E4%B8%BA23%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 default生命周期，分为23个阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-site-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%8C%E5%88%86%E4%B8%BA4%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 site 生命周期，分为4个阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8F%92%E4%BB%B6%E5%92%8C%E7%9B%AE%E6%A0%87"><span class="nav-number">2.4.</span> <span class="nav-text">3. 插件和目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-maven-resources-plugin"><span class="nav-number">2.5.</span> <span class="nav-text">3.1 maven-resources-plugin</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Astilt</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Astilt</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

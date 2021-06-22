@@ -28,13 +28,15 @@
 <meta property="og:description" content="1. 简介ClickHouse是一个用于联机分析(OLAP)的列式数据库管理系统(DBMS)，由俄罗斯“百度”之称的Yandex公司于2016年6月15日开源。它的诞生是在一款叫着metrica流量分析工具，基于前方探针采集回来的行为数据，进行一系列的数据分析，类似数仓(data warehouse)的OLAP分析。   在Metrca系统中探针采集的数据模型中，一次页面点击(click),会产生">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223111621102.png">
-<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223152329944.png">
-<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223152148314.png">
-<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223152752918.png">
-<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223185448210.png">
-<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223151514876.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/%E5%90%88%E5%B9%B6%E6%A0%91%E7%B3%BB%E5%88%97%E5%BC%95%E6%93%8E.jpg">
+<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308175452825.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308182538473.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308193030162.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308195150141.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308201521592.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308205929398.png">
 <meta property="article:published_time" content="2021-02-23T03:02:41.000Z">
-<meta property="article:modified_time" content="2021-02-23T10:54:55.777Z">
+<meta property="article:modified_time" content="2021-03-15T01:33:27.975Z">
 <meta property="article:author" content="Astilt">
 <meta property="article:tag" content="clickHouse">
 <meta name="twitter:card" content="summary">
@@ -189,10 +191,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-02-23 11:02:41 / 修改时间：18:54:55" itemprop="dateCreated datePublished" datetime="2021-02-23T11:02:41+08:00">2021-02-23</time>
+              <time title="创建时间：2021-02-23 11:02:41" itemprop="dateCreated datePublished" datetime="2021-02-23T11:02:41+08:00">2021-02-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-15 09:33:27" itemprop="dateModified" datetime="2021-03-15T09:33:27+08:00">2021-03-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -218,58 +226,357 @@
 <img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223111621102.png" class title="image-20210223111621102">
 
 <p>在Metrca系统中探针采集的数据模型中，一次页面点击(click),会产生一个event事件，基于页面的点击事件流，面向数据仓库进行OLAP分析。</p>
+<table>
+<thead>
+<tr>
+<th><strong>历程</strong></th>
+<th><strong>olap架构</strong></th>
+<th><strong>Yandex.Metrica形态</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mysql时期</td>
+<td>ROLAP</td>
+<td>固定报告</td>
+</tr>
+<tr>
+<td>自主研发Metrage</td>
+<td>MLOAP</td>
+<td>固定报告</td>
+</tr>
+<tr>
+<td>OLAPServer</td>
+<td>HOLAP（Metrage+OLAPServer）</td>
+<td>自助报告</td>
+</tr>
+<tr>
+<td>ClickHouse</td>
+<td>ROLAP</td>
+<td>自助报告</td>
+</tr>
+</tbody></table>
 <h1 id="2-为什么是它"><a href="#2-为什么是它" class="headerlink" title="2. 为什么是它"></a>2. 为什么是它</h1><p>市面上OLAP分析引擎很多，为什么偏偏ClickHouse能够被大众趋之若鹜？</p>
 <ul>
-<li>完备的DBMS：不仅是个数据库，也是个数据库系统</li>
-<li>关系模型：有数据库、表、视图和函数。更好清晰的描述实体间的关系</li>
-<li>SQL：极高的群众基础</li>
-<li>列存储和数据压缩：典型的olap数据库特性</li>
-<li>向量化并行：利用CPU的SIMD（Single INstruction MUltiple Data），单条指令操作多条数据</li>
-<li>多线程并行：向量化并行利用硬件采取数据并行（缺陷：不适应较多分支的判断），多线程级并行提高并发</li>
-<li>多样化表引擎：合并树、内存、文件、接口等20多种表引擎</li>
-<li>多主架构：天然避免单点故障，服务端对客户端都是“孪生兄弟”</li>
-<li>分布式：分区、分片</li>
-<li>实战型产品：Yandex有大量数据测试回归，不是纸上谈兵</li>
+<li><p>完备的DBMS：不仅是个数据库，也是个数据库系统</p>
+</li>
+<li><p>关系模型：有数据库、表、视图和函数。更好清晰的描述实体间的关系</p>
+</li>
+<li><p>SQL：极高的群众基础</p>
+</li>
+<li><p>列存储和数据压缩：典型的olap数据库特性。列式存储有效减少查询时所需扫描的数据量，且一般一列具有相同的数据结构，可以更好支持数据压缩。</p>
+</li>
+<li><p>向量化并行：利用CPU的SIMD（Single Instruction MUltiple Data），单条指令操作多条数据</p>
+</li>
+<li><p>多线程并行：向量化并行利用硬件采取数据并行（缺陷：不适应较多分支的判断），多线程级并行提高并发</p>
+</li>
+<li><p>多样化表引擎：合并树、内存、文件、接口等类型的20多种表引擎</p>
+</li>
+<li><p>算法在前，抽象再后：“选择大于努力”，按需选择，例如对于常量，使用Volnitsky算法；对于非常量，使用SIMDS暴力优化；正则匹配，使用re2和hyperscan算法。所有的选择都是性能排第一！</p>
+</li>
+<li><p>勇于尝鲜，不行就换：时刻关注高性能的算法，验证测试。</p>
+</li>
+<li><p>特定场景，特殊优化：例如：去重计算uniqCombined函数，会根据数据量不同选择不同算法，小数据量Array保存，中等数据量使用HashSet；大数据量使用HyperLogLog</p>
+</li>
+<li><p>多主架构：天然避免单点故障，服务端对客户端都是“孪生兄弟”</p>
+</li>
+<li><p>分布式：分区、分片</p>
+</li>
+<li><p>实战型产品：Yandex有大量数据测试回归，不是纸上谈兵</p>
+</li>
 </ul>
 <p><strong>总结</strong>：ROLAP，易懂易建模，SQL操作；多种硬件软件层面优化，查询极快；引擎多样化，按需选择；分布式，可水平扩展和高可用；经得起考验的实战型产品。</p>
-<h1 id="3-业内最佳实践"><a href="#3-业内最佳实践" class="headerlink" title="3. 业内最佳实践"></a>3. 业内最佳实践</h1><p><a target="_blank" rel="noopener" href="https://github.com/ClickHouse/clickhouse-presentations">gitHub上clickHouse主页下meetup[n]文件夹下有大量实践案例资料</a></p>
-<h2 id="3-1-ClickHouse在B站用户行为分析实战"><a href="#3-1-ClickHouse在B站用户行为分析实战" class="headerlink" title="3.1 ClickHouse在B站用户行为分析实战"></a>3.1 ClickHouse在B站用户行为分析实战</h2><p><a target="_blank" rel="noopener" href="https://github.com/ClickHouse/clickhouse-presentations/blob/master/meetup50/4_blibli.pdf">地址</a></p>
-<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223152329944.png" class title="image-20210223152329944">
+<h1 id="3-表引擎"><a href="#3-表引擎" class="headerlink" title="3. 表引擎"></a>3. 表引擎</h1><h2 id="3-1-总览"><a href="#3-1-总览" class="headerlink" title="3.1 总览"></a>3.1 总览</h2><table>
+<thead>
+<tr>
+<th>表引擎类型</th>
+<th>引擎名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MergeTree系列</td>
+<td>MergeTree 、ReplacingMergeTree 、SummingMergeTree 、 AggregatingMergeTree、CollapsingMergeTree 、 VersionedCollapsingMergeTree 、GraphiteMergeTree</td>
+</tr>
+<tr>
+<td>外部存储类型</td>
+<td>HDFS、Mysql、Kafa、JDBC、File</td>
+</tr>
+<tr>
+<td>内存类型</td>
+<td>Memory、Set、Join、Buffer</td>
+</tr>
+<tr>
+<td>日志类型</td>
+<td>TinyLog、StripLog、Log</td>
+</tr>
+<tr>
+<td>接口类型</td>
+<td>Merge、Dictionary、Distributed</td>
+</tr>
+<tr>
+<td>其他类型</td>
+<td>Live View、Null、URL</td>
+</tr>
+</tbody></table>
+<p>下面着重介绍下MergeTree引擎，其他引擎请阅读我在语雀写的<a target="_blank" rel="noopener" href="https://dtwave.yuque.com/bdqg0v/sfor25/elrub0">ClickHouse表引擎</a></p>
+<h2 id="3-2-MergeTree"><a href="#3-2-MergeTree" class="headerlink" title="3.2 MergeTree"></a>3.2 MergeTree</h2><p>MergeTree在写入一批数据时，数据总会以数据片段的形式写入磁盘，且数据片段不可修改。为了避免 片段过多，ClickHouse会通过后台线程，定期合并这些数据片段，属于相同分区的数据片段会被合成一个新的片段。这种数据片段往复合并的特点，也正是合并树名称的由来</p>
+<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/%E5%90%88%E5%B9%B6%E6%A0%91%E7%B3%BB%E5%88%97%E5%BC%95%E6%93%8E.jpg" class title="合并树系列引擎">
 
+<h2 id="3-2-1-语法"><a href="#3-2-1-语法" class="headerlink" title="3.2.1 语法"></a>3.2.1 语法</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> [<span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>] [db_name.]table_name ( name1 [<span class="keyword">type</span>] [<span class="keyword">DEFAULT</span>|<span class="keyword">MATERIALIZED</span>|<span class="keyword">ALIAS</span> expr], name2 [<span class="keyword">type</span>] [<span class="keyword">DEFAULT</span>|<span class="keyword">MATERIALIZED</span>|<span class="keyword">ALIAS</span> expr], 省略...</span><br><span class="line">) <span class="keyword">ENGINE</span> = MergeTree() [<span class="keyword">PARTITION</span> <span class="keyword">BY</span> expr]</span><br><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> expr]</span><br><span class="line">[PRIMARY <span class="keyword">KEY</span> expr]</span><br><span class="line">[<span class="keyword">SAMPLE</span> <span class="keyword">BY</span> expr]</span><br><span class="line">[<span class="keyword">SETTINGS</span> <span class="keyword">name</span>=<span class="keyword">value</span>, 省略...]</span><br></pre></td></tr></table></figure>
 
-
-<h2 id="3-2-Clickhouse在腾讯音乐敏捷数据分析实践"><a href="#3-2-Clickhouse在腾讯音乐敏捷数据分析实践" class="headerlink" title="3.2 Clickhouse在腾讯音乐敏捷数据分析实践"></a>3.2 Clickhouse在腾讯音乐敏捷数据分析实践</h2><p><a target="_blank" rel="noopener" href="https://github.com/ClickHouse/clickhouse-presentations/blob/master/meetup50/2_tencent.pdf">地址</a></p>
-<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223152148314.png" class title="image-20210223152148314">
-
-
-
-<h2 id="3-3-ClickHouse在苏宁用户画像场景的实践"><a href="#3-3-ClickHouse在苏宁用户画像场景的实践" class="headerlink" title="3.3 ClickHouse在苏宁用户画像场景的实践"></a>3.3 ClickHouse在苏宁用户画像场景的实践</h2><p><a target="_blank" rel="noopener" href="https://github.com/ClickHouse/clickhouse-presentations/blob/master/meetup33/%E5%9C%A8%E8%8B%8F%E5%AE%81%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%9C%BA%E6%99%AF%E7%9A%84%E5%AE%9E%E8%B7%B5.pptx">地址</a></p>
-<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223152752918.png" class title="image-20210223152752918">
-
-
-
-<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223185448210.png" class title="image-20210223185448210">
-
-
-
-<h2 id="3-4-ClickHouse在趣头条每天千亿数据实时指标的计算实践"><a href="#3-4-ClickHouse在趣头条每天千亿数据实时指标的计算实践" class="headerlink" title="3.4 ClickHouse在趣头条每天千亿数据实时指标的计算实践"></a>3.4 ClickHouse在趣头条每天千亿数据实时指标的计算实践</h2><img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210223151514876.png" class title="image-20210223151514876">
-
-
-
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>ClickHouse擅长读，在写方面稍弱，从若干行业应用案例，我总结了下在数据接入的时候可以有以下几种选择。</p>
 <ul>
-<li>对接实时计算引擎</li>
+<li>ENGINE：引擎名称。</li>
+<li>ORDER BY：必选，col1,col2,… 默认情况它和主键一样（声明了它主键不需要设置）</li>
+<li>PARTITION BY：可选，分区键，合理使用分区有效减少数据查询扫描范围。</li>
+<li>PRIMARY KEY：可选，默认主键是排序字段。若想排序字段与主键不一致，可以单独指定主键字段。可以重复，不要与我们之前熟知的主键观念混淆！</li>
+<li>SAMPLE BY：可选，采样字段，如果指定了该字段，那么主键中也必须包含该字段。比如SAMPLE BY intHash32(UserID) ORDER BY (CounterID, EventDate, intHash32(UserID))</li>
+<li>TTL：可选，可以是列也可以是表级别。时间到达会删除设置作用域的数据。</li>
+<li>SETTINGS：可选。<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/engines/table-engines/mergetree-family/mergetree/#table_engine-mergetree-ttl">参考</a></li>
 </ul>
-<p>Stream–&gt;kafka–&gt;spark/flink–&gt;ck。攒一会，批量写，避免Merge合并速度小于Insert数据生成分区目录的速度。</p>
+<h3 id="3-2-2-示例"><a href="#3-2-2-示例" class="headerlink" title="3.2.2 示例"></a>3.2.2 示例</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> emp_mergetree ( </span><br><span class="line">emp_id UInt16 <span class="keyword">COMMENT</span> <span class="string">&#x27;员工id&#x27;</span>, </span><br><span class="line"><span class="keyword">name</span> <span class="keyword">String</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;员工姓名&#x27;</span>, </span><br><span class="line">work_place <span class="keyword">String</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;工作地点&#x27;</span>,</span><br><span class="line">age UInt8 <span class="keyword">COMMENT</span> <span class="string">&#x27;员工年龄&#x27;</span>, </span><br><span class="line">depart <span class="keyword">String</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;部门&#x27;</span>, </span><br><span class="line">salary Decimal32(<span class="number">2</span>) <span class="keyword">COMMENT</span> <span class="string">&#x27;工资&#x27;</span> </span><br><span class="line">)<span class="keyword">ENGINE</span> = MergeTree() </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> emp_id </span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> work_place; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp_mergetree <span class="keyword">VALUES</span> </span><br><span class="line">(<span class="number">1</span>, <span class="string">&#x27;tom&#x27;</span>, <span class="string">&#x27;上海&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;技术部&#x27;</span>, <span class="number">20000</span>),</span><br><span class="line">(<span class="number">2</span>, <span class="string">&#x27;jack&#x27;</span>, <span class="string">&#x27;上海&#x27;</span>, <span class="number">26</span>, <span class="string">&#x27;人事部&#x27;</span>, <span class="number">10000</span>),</span><br><span class="line">(<span class="number">3</span>, <span class="string">&#x27;bob&#x27;</span>, <span class="string">&#x27;北京&#x27;</span>, <span class="number">33</span>, <span class="string">&#x27;财务部&#x27;</span>, <span class="number">50000</span>),</span><br><span class="line">(<span class="number">4</span>, <span class="string">&#x27;tony&#x27;</span>, <span class="string">&#x27;杭州&#x27;</span>, <span class="number">28</span>, <span class="string">&#x27;销售事部&#x27;</span>, <span class="number">50000</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-3-数据目录"><a href="#3-2-3-数据目录" class="headerlink" title="3.2.3 数据目录"></a>3.2.3 数据目录</h3><p>├── 1c89a3ba9fe5fd53379716a776c5ac34_3_3_0     // 分区<br>│   ├── checksums.txt<br>│   ├── columns.txt<br>│   ├── count.txt<br>│   ├── data.bin<br>│   ├── data.mrk3<br>│   ├── default_compression_codec.txt<br>│   ├── minmax_work_place.idx<br>│   ├── partition.dat<br>│   └── primary.idx<br>├── 40d45822dbd7fa81583d715338929da9_1_1_0    // 分区<br>│   ├── checksums.txt<br>│   ├── columns.txt<br>│   ├── count.txt<br>│   ├── data.bin<br>│   ├── data.mrk3<br>│   ├── default_compression_codec.txt<br>│   ├── minmax_work_place.idx<br>│   ├── partition.dat<br>│   └── primary.idx<br>├── a6155dcc1997eda1a348cd98b17a93e9_2_2_0    // 分区<br>│   ├── checksums.txt<br>│   ├── columns.txt<br>│   ├── count.txt<br>│   ├── data.bin<br>│   ├── data.mrk3<br>│   ├── default_compression_codec.txt<br>│   ├── minmax_work_place.idx<br>│   ├── partition.dat<br>│   └── primary.idx<br>├── detached<br>└── format_version.txt</p>
 <ul>
-<li>对接kafka消息源</li>
+<li><p>partition:分区目录，余下各类数据文件(primary.idx、[Column].mrk、[Column].bin等)都是以分</p>
+<p>区目录的形式被组织存放的，属于相同分区的数据，最终会被合并到同一个分区目录，而不同分区的数 据，永远不会被合并在一起。</p>
+</li>
+<li><p>checksums.txt:校验文件，使用二进制格式存储。它保存了余下各类文件(primary.idx、count.txt 等)的size大小及size的哈希值，用于快速校验文件的完整性和正确性。</p>
+</li>
+<li><p>columns.txt:列信息文件，使用明文格式存储。用于保存此数据分区下的列字段信息。</p>
+</li>
 </ul>
-<p>Stream–&gt;kafka—&gt;ck。利用ck的kafka引擎。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@ck1 emp_mergetree]# cat 1c89a3ba9fe5fd53379716a776c5ac34_3_3_0/columns.txt</span><br><span class="line">columns format version: 1</span><br><span class="line">6 columns:</span><br><span class="line">`emp_id` UInt16</span><br><span class="line">`name` String</span><br><span class="line">`work_place` String</span><br><span class="line">`age` UInt8</span><br><span class="line">`depart` String</span><br><span class="line">`salary` Decimal(9, 2)</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>对接数据源本身</li>
+<li>count.txt:计数文件，使用明文格式存储。用于记录当前数据分区目录下数据的总行数。</li>
 </ul>
-<p>hdfs/mysql/jdbc–&gt;ck。利用ck自带的这些引擎。</p>
-<h1 id="示例TODO"><a href="#示例TODO" class="headerlink" title="示例TODO"></a>示例TODO</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@ck1 emp_mergetree]# cat 1c89a3ba9fe5fd53379716a776c5ac34_3_3_0/count.txt</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>primary.idx:一级索引文件，使用二进制格式存储。用于存放稀疏索引，一张MergeTree表只能声明一次一级索引(通过ORDER BY或者PRIMARY KEY)。借助稀疏索引，在数据查询的时能够排除主键条件范围之外的数据文件，从而有效减少数据扫描范围，加速查询速度。</li>
+<li>data.bin: 数据文件，使用压缩格式存储，默认为LZ4压缩格式。</li>
+<li>.mrk:列字段标记文件，使用二进制格式存储。标记文件中保存了.bin文件中数据的偏移 量信息。</li>
+<li>partition.dat与minmax_[Column].idx：如果使用了分区键，我们这里 PARTITION BY work_place，则会额外生成partition.dat与minmax索引文件，它们均使用二进制格式存储。partition.dat用于保存当前分区下分区表达式最终生成的值；而minmax索引用于记录当前分区下分区字段对应原始数据的最小和最大值。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ck1 a6155dcc1997eda1a348cd98b17a93e9_2_2_0]# cat minmax_work_place.idx</span><br><span class="line">北京北京</span><br><span class="line">[root@ck1 a6155dcc1997eda1a348cd98b17a93e9_2_2_0]# cat  partition.dat</span><br><span class="line">北京</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-3-数据分区目录"><a href="#3-2-3-数据分区目录" class="headerlink" title="3.2.3 数据分区目录"></a>3.2.3 数据分区目录</h3><p>MergeTree数据分区的规则由分区ID决定，而具体到每个数据分区所对应的ID，则是由分区键的取值决定的。分区键支持使用任何一个或一组字段表达式声明，其业务语义可以是年、月、日或者组织单位等任 何一种规则。针对取值数据类型的不同，分区ID的生成逻辑目前拥有四种规则:</p>
+<ul>
+<li>不指定分区键:如果不使用分区键，即不使用PARTITION BY声明任何分区表达式，则分区ID默认取名为all，所有的数据都会被写入这个all分区。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> no_partition</span><br><span class="line">(</span><br><span class="line">    <span class="string">`id`</span> UInt8</span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span> = MergeTree</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> no_partition <span class="keyword">values</span>(<span class="number">1</span>),(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">[root@ck1 no_partition]<span class="comment"># tree .</span></span><br><span class="line">.</span><br><span class="line">├── all_1_1_0</span><br><span class="line">│   ├── checksums.txt</span><br><span class="line">│   ├── columns.txt</span><br><span class="line">│   ├── count.txt</span><br><span class="line">│   ├── data.bin</span><br><span class="line">│   ├── data.mrk3</span><br><span class="line">│   ├── default_compression_codec.txt</span><br><span class="line">│   └── primary.idx</span><br><span class="line">├── detached</span><br><span class="line">└── format_version.txt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用整型:如果分区键取值属于整型(兼容UInt64，包括有符号整型和无符号整型)，且无法转换为日期类型YYYYMMDD格式，则直接按照该整型的字符形式输出，作为分区ID的取值。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> partition_int</span><br><span class="line">(</span><br><span class="line">    <span class="string">`id`</span> UInt8</span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span> = MergeTree</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">id</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> partition_int <span class="keyword">values</span>(<span class="number">1</span>),(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">[root@ck1 partition_int]<span class="comment"># tree .</span></span><br><span class="line">.</span><br><span class="line">├── 1_1_1_0</span><br><span class="line">│   ├── checksums.txt</span><br><span class="line">│   ├── columns.txt</span><br><span class="line">│   ├── count.txt</span><br><span class="line">│   ├── data.bin</span><br><span class="line">│   ├── data.mrk3</span><br><span class="line">│   ├── default_compression_codec.txt</span><br><span class="line">│   ├── minmax_id.idx</span><br><span class="line">│   ├── partition.dat</span><br><span class="line">│   └── primary.idx</span><br><span class="line">├── 2_2_2_0</span><br><span class="line">│   ├── checksums.txt</span><br><span class="line">│   ├── columns.txt</span><br><span class="line">│   ├── count.txt</span><br><span class="line">│   ├── data.bin</span><br><span class="line">│   ├── data.mrk3</span><br><span class="line">│   ├── default_compression_codec.txt</span><br><span class="line">│   ├── minmax_id.idx</span><br><span class="line">│   ├── partition.dat</span><br><span class="line">│   └── primary.idx</span><br><span class="line">├── detached</span><br><span class="line">└── format_version.txt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用日期类型:如果分区键取值属于日期类型，或者是能够转换为YYYYMMDD格式的整型，则使用按照YYYYMMDD进行格式化后的字符形式输出，并作为分区ID的取值。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> partition_date</span><br><span class="line">(</span><br><span class="line">    <span class="string">`id`</span> UInt8,</span><br><span class="line">    <span class="string">`name`</span> <span class="keyword">String</span>,</span><br><span class="line">    <span class="string">`birthday`</span> <span class="built_in">Date</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span> = MergeTree()</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> birthday</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> partition_date <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">&#x27;zs&#x27;</span>,<span class="string">&#x27;1999-09-09&#x27;</span>),(<span class="number">2</span>,<span class="string">&#x27;ls&#x27;</span>,<span class="string">&#x27;1999-08-08&#x27;</span>);</span><br><span class="line"></span><br><span class="line">[root@ck1 partition_date]<span class="comment"># tree .</span></span><br><span class="line">.</span><br><span class="line">├── 19990808_2_2_0</span><br><span class="line">│   ├── checksums.txt</span><br><span class="line">│   ├── columns.txt</span><br><span class="line">│   ├── count.txt</span><br><span class="line">│   ├── data.bin</span><br><span class="line">│   ├── data.mrk3</span><br><span class="line">│   ├── default_compression_codec.txt</span><br><span class="line">│   ├── minmax_birthday.idx</span><br><span class="line">│   ├── partition.dat</span><br><span class="line">│   └── primary.idx</span><br><span class="line">├── 19990909_1_1_0</span><br><span class="line">│   ├── checksums.txt</span><br><span class="line">│   ├── columns.txt</span><br><span class="line">│   ├── count.txt</span><br><span class="line">│   ├── data.bin</span><br><span class="line">│   ├── data.mrk3</span><br><span class="line">│   ├── default_compression_codec.txt</span><br><span class="line">│   ├── minmax_birthday.idx</span><br><span class="line">│   ├── partition.dat</span><br><span class="line">│   └── primary.idx</span><br><span class="line">├── detached</span><br><span class="line">└── format_version.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用其他类型:如果分区键取值既不属于整型，也不属于日期类型，例如String、Float等，则通 过128位Hash算法取其Hash值作为分区ID的取值。</li>
+</ul>
+<p>如上创建的<code>emp_mergetree</code>表。</p>
+<h3 id="3-2-4-数据分区目录合并规则"><a href="#3-2-4-数据分区目录合并规则" class="headerlink" title="3.2.4 数据分区目录合并规则"></a>3.2.4 数据分区目录合并规则</h3><p>数据表所在的磁盘目录后， 会发现MergeTree分区目录的完整物理名称并不是只有ID而已，在ID之后还跟着一串奇怪的数字，例如 201905_1_1_0。那么这些数字又代表着什么呢? 对于MergeTree而言，它最核心的特点是其分区目录的合并动作。但是我们可曾想过，从分 区目录的命名中便能够解读出它的合并逻辑。</p>
+<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308175452825.png" class title="image-20210308175452825">
+
+<p>上图中，19990808表示分区目录的ID；2_2_0分别表示最小的数据块编号与最大的数据块编号；而最后的_0，则表示目前合并的层级。接下来开始分别解释它们的含义。</p>
+<ul>
+<li>PartitionID：根据分区键生成。</li>
+<li>MinBlockNum和MaxBlockNum：BlockNum是一个整型的自增长编号，n从1开始，每当新创建一个分区目录时，计数n就会累积加1。对于一个新的分区目录而言， MinBlockNum与MaxBlockNum取值一样。当分区目录发生合并时，对于新产生的合并目录MinBlockNum与MaxBlockNum有着另外的取值规则，稍后介绍。</li>
+<li>Level：合并的层级，可以理解为某个分区被合并过的次数，或者这个分区的年龄。数值越高表示 年龄越大。Level计数与BlockNum有所不同，它并不是全局累加的。对于每一个新创建的分区目录而言，其初始值均为0。之后，以分区为单位，如果相同分区发生合并动作，则在相应分区内计数累积加1。</li>
+</ul>
+<p><strong>分区特点</strong></p>
+<ul>
+<li>在数据写入时候创建</li>
+<li>不同批次写入同一个分区，也会生成不同分区目录</li>
+<li>写入后（10-15分钟），ck会合并分区，也可以手动执行optimize，会生成一个新的分区目录</li>
+<li>合并后的之前分区，不会立即删除，默认8分钟后被删除</li>
+</ul>
+<p><strong>合并后分区命名规则</strong></p>
+<ul>
+<li>MinBlockNum：取同一分区内所有目录中最小的MinBlockNum值。 </li>
+<li>MaxBlockNum:取同一分区内所有目录中最大的MaxBlockNum值。 </li>
+<li>Level:取同一分区内最大Level值并加1</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 新增数据</span><br><span class="line">ck1 :) insert into partition_date values(3,&#x27;ww&#x27;,&#x27;1999-09-09&#x27;),(4,&#x27;zl&#x27;,&#x27;1999-08-08&#x27;);</span><br><span class="line">[root@ck1 partition_date]# ls -ltr</span><br><span class="line">总用量 4</span><br><span class="line">-rw-r----- 1 clickhouse clickhouse   1 3月   8 17:31 format_version.t</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse   6 3月   8 17:31 detached</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 17:32 19990909_1_1_0</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 17:32 19990808_2_2_0</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 18:07 19990909_3_3_0 --insert 后新分区</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 18:07 19990808_4_4_0 --insert 后新分区</span><br><span class="line"></span><br><span class="line">// 手动执行合并</span><br><span class="line">ck1 :) optimize table partition_date  final</span><br><span class="line">[root@ck1 partition_date]# ls -ltr</span><br><span class="line">总用量 4</span><br><span class="line">-rw-r----- 1 clickhouse clickhouse   1 3月   8 17:31 format_version.txt</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse   6 3月   8 17:31 detached</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 17:32 19990909_1_1_0</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 17:32 19990808_2_2_0</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 18:07 19990909_3_3_0</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 18:07 19990808_4_4_0</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 18:08 19990909_1_3_1 ---合并后新分区</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 18:08 19990808_2_4_1 ---合并后新分区</span><br><span class="line"></span><br><span class="line">// 等了一会</span><br><span class="line">[root@ck1 partition_date]# ls -ltr</span><br><span class="line">总用量 4</span><br><span class="line">-rw-r----- 1 clickhouse clickhouse   1 3月   8 17:31 format_version.txt</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse   6 3月   8 17:31 detached</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 18:08 19990909_1_3_1</span><br><span class="line">drwxr-x--- 2 clickhouse clickhouse 200 3月   8 18:08 19990808_2_4_1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-5-索引"><a href="#3-2-5-索引" class="headerlink" title="3.2.5 索引"></a>3.2.5 索引</h3><p><strong>一级索引</strong></p>
+<p>MergeTree的主键使用PRIMARY KEY定义，待主键定义之后，MergeTree会依据index_granularity间隔 (默认8192行)，为数据表生成一级索引并保存至primary.idx文件内，索引数据按照PRIMARY KEY排序。 相比使用PRIMARY KEY定义，更为常见的简化形式是通过ORDER BY指代主键。在此种情形下， PRIMARY KEY与ORDER BY定义相同，所以索引(primary.idx)和数据(.bin)会按照完全相同的规则排序。</p>
+<p>primary.idx文件内的一级索引采用稀疏索引实现。此时有人可能会问，既然提到了稀疏索引，那么是不是也有稠密索引呢?还真有!稀疏索引和稠密索引的区别。</p>
+<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308182538473.png" class title="image-20210308182538473">
+
+<p>稀疏索引的优势是显而易见的，它仅需使用少量的索引标记就能够记录大量数据的区间位置信息，且数据量越大优势越为明显。以默认的索引粒度(8192，index_granularity参数设置)为例，MergeTree只需要12208行索引标记就能为1亿 行数据记录提供索引。由于稀疏索引占用空间小，所以primary.idx内的索引数据常驻内存，取用速度自然极快。</p>
+<p><strong>二级索引</strong></p>
+<p>除了一级索引之外，MergeTree同样支持二级索引。二级索引又称跳数索引，由数据的聚合信息构建而成。根据索引类型的不同，其聚合信息的内容也不同。跳数索引的目的与一级索引一样，也是帮助查询时 减少数据扫描的范围。</p>
+<p>跳数索引在默认情况下是关闭的，需要设置allow_experimental_data_skipping_indices(该参数在新版本中已被取消)才能使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET allow_experimental_data_skipping_indices = 1</span><br></pre></td></tr></table></figure>
+
+<p>跳数索引需要在CREATE语句内定义，它支持使用元组和表达式的形式声明，其完整的定义语法如下所示:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//语法</span><br><span class="line">INDEX index_name expr TYPE index_type(...) GRANULARITY granularity</span><br><span class="line">// 示例</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> skip_test ( </span><br><span class="line"><span class="keyword">ID</span> <span class="keyword">String</span>,</span><br><span class="line"><span class="keyword">URL</span> <span class="keyword">String</span>,</span><br><span class="line">Code <span class="keyword">String</span>,</span><br><span class="line">EventTime <span class="built_in">Date</span>,</span><br><span class="line"><span class="keyword">INDEX</span> a <span class="keyword">ID</span> <span class="keyword">TYPE</span> minmax GRANULARITY <span class="number">5</span>,</span><br><span class="line"><span class="keyword">INDEX</span> b(<span class="keyword">length</span>(<span class="keyword">ID</span>) * <span class="number">8</span>) <span class="keyword">TYPE</span> <span class="keyword">set</span>(<span class="number">2</span>) GRANULARITY <span class="number">5</span>,</span><br><span class="line"><span class="keyword">INDEX</span> c(<span class="keyword">ID</span>，Code) <span class="keyword">TYPE</span> ngrambf_v1(<span class="number">3</span>, <span class="number">256</span>, <span class="number">2</span>, <span class="number">0</span>) GRANULARITY <span class="number">5</span>, <span class="keyword">INDEX</span> d <span class="keyword">ID</span> <span class="keyword">TYPE</span> tokenbf_v1(<span class="number">256</span>, <span class="number">2</span>, <span class="number">0</span>) GRANULARITY <span class="number">5</span></span><br><span class="line">) <span class="keyword">ENGINE</span> = MergeTree()</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">ID</span>;</span><br></pre></td></tr></table></figure>
+
+<p>不同的跳数索引之间，除了它们自身独有的参数之外，还都共同拥有granularity参数。初次接触时，很容易将granularity与index_granularity的概念弄混淆。对于跳数索引而言，index_granularity定义了数据的粒度，而granularity定义了聚合信息汇总的粒度。换言之，granularity定义了一行跳数索引能够跳过多少个 index_granularity区间的数据。</p>
+<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308193030162.png" class title="image-20210308193030162">
+
+
+
+<ul>
+<li>minmax:minmax索引记录了一段数据内的最小和最大极值，其索引的作用类似分区目录的minmax索引，能够快速跳过无用的数据区间，示例如下所示: </li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INDEX a ID TYPE minmax GRANULARITY 5</span><br></pre></td></tr></table></figure>
+
+<p>述示例中minmax索引会记录这段数据区间内ID字段的极值。极值的计算涉及每5个index_granularity 区间中的数据</p>
+<ul>
+<li>set:set索引直接记录了声明字段或表达式的取值(唯一值，无重复)，其完整形式为 set(max_rows)，其中max_rows是一个阈值，表示在一个index_granularity内，索引最多记录的数据行数。如果max_rows=0，则表示无限制，例如:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INDEX b(length(ID) * 8) TYPE set(100) GRANULARITY 5</span><br></pre></td></tr></table></figure>
+
+<p>上述示例中set索引会记录数据中ID的长度*8后的取值。其中，每个index_granularity内最多记录100条。</p>
+<ul>
+<li>ngrambf_v1:ngrambf_v1索引记录的是数据短语的布隆表过滤器，只支持String和FixedString数据类型。ngrambf_v1只能够提升in、notIn、like、equals和notEquals查询的性能，其完整形式为</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// n: token长度，依据n的长度将数据切割为token短语。</span><br><span class="line">//size_of_bloom_filter_in_bytes:布隆过滤器的大小。</span><br><span class="line">// number_of_hash_functions:布隆过滤器中使用Hash函数的个数。</span><br><span class="line">// random_seed:Hash函数的随机种子。</span><br><span class="line">ngrambf_v1(n,size_of_bloom_filter_in_bytes,number_of_hash_functions,random_seed)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>tokenbf_v1:tokenbf_v1索引是ngrambf_v1的变种，同样也是一种布隆过滤器索引。tokenbf_v1除 了短语token的处理方法外，其他与ngrambf_v1是完全一样的。tokenbf_v1会自动按照非字符的、数字的字符串分割token，具体用法如下所示:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INDEX d ID TYPE tokenbf_v1(256, 2, 0) GRANULARITY 5</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-6-数据存储"><a href="#3-2-6-数据存储" class="headerlink" title="3.2.6 数据存储"></a>3.2.6 数据存储</h3><p>MergeTree也并不是一股脑地将数据直接写入.bin文件，而是经过了一 番精心设计：首先，数据是经过压缩的，目前支持LZ4、ZSTD、Multiple和Delta几种算法，默认使用LZ4算法；其次，数据会事先依照ORDER BY的声明排序；最后，数据是以压缩数据块的形式被组织并写入.bin文 件中的。</p>
+<ul>
+<li>压缩</li>
+</ul>
+<p>一个<strong>压缩数据块</strong>由头信息和压缩数据两部分组成。头信息固定使用9个字节表示，具体由1个UInt8(1 字节)整型和2个UInt32(4字节)整型组成，分别代表使用的压缩算法类型、压缩后的数据大小和压缩前 的数据大小。</p>
+<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308195150141.png" class title="image-20210308195150141">
+
+<p>ClickHouse提供的clickhouse-compressor工具，能够查询某个.bin文件中压缩数据的统计信息，每一行数据代表着一个<strong>压缩数据块</strong>的头信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@ck1 40d45822dbd7fa81583d715338929da9_1_1_0]# clickhouse-compressor --stat &lt; data.bin</span><br><span class="line">4       14</span><br><span class="line">9       19</span><br><span class="line">14      24</span><br><span class="line">2       12</span><br><span class="line">20      31</span><br><span class="line">8       18</span><br></pre></td></tr></table></figure>
+
+<p>每个压缩数据块的体积，按照其压缩前的数据字节大小，都被严格控制在64KB~1MB，其上下限分别由min_compress_block_size(默认65536)与max_compress_block_size(默认1048576)参数指定。</p>
+<p>在.bin文件中引入压缩数据块的目的至少有以下两个:</p>
+<p>其一，虽然数据被压缩后能够有效减少数据大小，降低存储空间并加速数据传输效率，但数据的压缩和解压动作，其本身也会带来额外的性能损耗。所以需要控制被压缩数据的大小，以求在性能损耗和压缩率之间寻求一种平衡。</p>
+<p>其二，在具体读取某一列数据时(.bin文件)，首先需要将压缩数据加载到内存并解压，这样才能进行后续的数据处理。通过压缩数据块，可以在不读取整个.bin文件的情况下将读取粒度降低到压缩数据块级别，从而进一步缩小数据读取的范围。</p>
+<ul>
+<li>数据标记</li>
+</ul>
+<p>如果把MergeTree比作一本书，primary.idx一级索引好比这本书的一级章节目录，.bin文件中的数据好比这本书中的文字，那么数据标记(.mrk)会为一级章节目录和具体的文字之间建立关联。对于数据标记而言， 它记录了两点重要信息：</p>
+<p>其一，一级章节对应的页码信息;</p>
+<p>其二，一段文字在某一页中的起始位置信息。这样一来，通过数据标记就能够很快地从一本书中立即翻到关注内容所在的那一页，并知道从第几行开始阅读。</p>
+<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308201521592.png" class title="image-20210308201521592">
+
+<p>为了能够与数据衔接，数据标记文件也与.bin文件一一对应。即每一个列字段[Column].bin文件都有一 个与之对应的[Column].mrk数据标记文件，用于记录数据在.bin文件中的偏移量信息。</p>
+<p>一行标记数据使用一个元组表示，元组内包含两个整型数值的偏移量信息。它们分别表示在此段数据区间内，在对应的.bin压缩文件中，<strong>压缩数据块</strong>的起始偏移量；以及将该数据压缩块解压后，其未压缩数据的起始偏移量。</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>压缩文件中的偏移量</th>
+<th>解压缩文件中的偏移量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>08192</td>
+<td>8192</td>
+</tr>
+<tr>
+<td>2</td>
+<td>12016</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<ul>
+<li>读取压缩数据块: 在查询某一列数据时，MergeTree无须一次性加载整个.bin文件，而是可以根据需要，只加载特定的压缩数据块。而这项特性需要借助标记文件中所保存的压缩文件中的偏移量。</li>
+<li>读取数据: 在读取解压后的数据时，MergeTree并不需要一次性扫描整段解压数据，它可以根据 需要，以index_granularity的粒度加载特定的一小段。为了实现这项特性，需要借助标记文件中保存的解压 数据块中的偏移量。</li>
+</ul>
+<p><strong>多对一</strong></p>
+<p>多个数据标记对应一个压缩数据块，当一个间隔(index_granularity)内的数据未压缩大小size小于64KB时，会出现这种对应关系</p>
+<p><strong>一对一</strong></p>
+<p>一个数据标记对应一个压缩数据块，当一个间隔(index_granularity)内的数据未压缩大小size大于等于64KB且小于等于1MB时，会出现这种对应关系</p>
+<p><strong>一对多</strong></p>
+<p>一个数据标记对应多个压缩数据块，当一个间隔(index_granularity)内的数据未压缩大小size直接大于1MB时，会出现这种对应关系。</p>
+<h3 id="3-2-7-分区、索引、标记、压缩"><a href="#3-2-7-分区、索引、标记、压缩" class="headerlink" title="3.2.7 分区、索引、标记、压缩"></a>3.2.7 分区、索引、标记、压缩</h3><ul>
+<li>生成分区目录</li>
+<li>index_granularity索引粒度生成primary.idx</li>
+<li>index_granularity索引粒度生成.mrk</li>
+<li>生成.bin，每个块64KB-1MB。</li>
+</ul>
+<img src="/2021/02/23/clickhouse%E5%88%86%E4%BA%AB/image-20210308205929398.png" class title="image-20210308205929398">
+
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h1 id="用户留存"><a href="#用户留存" class="headerlink" title="用户留存"></a>用户留存</h1><ul>
+<li>用户登陆表</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> login_log(</span><br><span class="line">    user_id <span class="built_in">INT</span> ,</span><br><span class="line">    log_time <span class="built_in">TIMESTAMP</span> </span><br><span class="line">) <span class="keyword">engine</span>=MergeTree() <span class="keyword">order</span> <span class="keyword">by</span> user_id;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数据</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> login_log <span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-21 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-20 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-19 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-17 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-16 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-21 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-21 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-20 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-19 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-17 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-16 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-21 23:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">4101</span>,<span class="string">&#x27;2021-01-20 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">4101</span>,<span class="string">&#x27;2021-01-19 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">4101</span>,<span class="string">&#x27;2021-01-17 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">4101</span>,<span class="string">&#x27;2021-01-16 22:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-16 14:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-15 23:04:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-21 18:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-20 21:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-21 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-20 23:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-21 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-19 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-18 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-17 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-16 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-15 23:00:00&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如需查询用户在2021-01-17至2021-01-21登录流失情况，则SQL语句如下：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    user_id,</span><br><span class="line">  <span class="keyword">retention</span>(</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-21&#x27;</span>,</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-20&#x27;</span>,</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-19&#x27;</span>,</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-18&#x27;</span>,</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-17&#x27;</span></span><br><span class="line">    ) <span class="keyword">AS</span> r</span><br><span class="line"><span class="keyword">FROM</span> login_log </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> user_id <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">user_id|r          |</span><br><span class="line"><span class="comment">-------|-----------|</span></span><br><span class="line">   1101|[1,1,1,0,1]|</span><br><span class="line">   2201|[1,1,0,0,0]|</span><br><span class="line">   3301|[1,0,1,1,1]|</span><br><span class="line">   4101|[0,0,0,0,0]|</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询留存</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">  <span class="built_in">DATE</span>(<span class="built_in">TIMESTAMP</span> <span class="string">&#x27;2021-01-15 00:00:00&#x27;</span>) <span class="keyword">AS</span> first_date, </span><br><span class="line">  <span class="keyword">SUM</span>(r[<span class="number">1</span>]) <span class="keyword">AS</span> <span class="string">&quot;第一天活跃用户&quot;</span>, </span><br><span class="line">  <span class="keyword">SUM</span>(r[<span class="number">2</span>])/ <span class="keyword">SUM</span>(r[<span class="number">1</span>]) <span class="keyword">AS</span> <span class="string">&quot;次日留存&quot;</span>, </span><br><span class="line">  <span class="keyword">SUM</span>(r[<span class="number">3</span>])/ <span class="keyword">SUM</span>(r[<span class="number">1</span>]) <span class="keyword">AS</span> <span class="string">&quot;3日留存&quot;</span>, </span><br><span class="line">  <span class="keyword">SUM</span>(r[<span class="number">4</span>])/ <span class="keyword">SUM</span>(r[<span class="number">1</span>]) <span class="keyword">AS</span> <span class="string">&quot;7日留存&quot;</span> </span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line"><span class="comment">-- 计算2021-01-15活跃用户在第2、3、7日的登录情况，1/0 =&gt; 登录/未登录</span></span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">WITH</span> first_day_table <span class="keyword">AS</span> (</span><br><span class="line">      <span class="keyword">SELECT</span> </span><br><span class="line">        <span class="built_in">TIMESTAMP</span> <span class="string">&#x27;2021-01-15 00:00:00&#x27;</span> <span class="keyword">AS</span> first_day</span><br><span class="line">    ) </span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">      user_id, </span><br><span class="line">      <span class="keyword">retention</span>(</span><br><span class="line">                <span class="built_in">DATE</span>(log_time) = (<span class="keyword">SELECT</span> <span class="built_in">DATE</span>(first_day) <span class="keyword">FROM</span> first_day_table),</span><br><span class="line">                <span class="built_in">DATE</span>(log_time) = (<span class="keyword">SELECT</span> <span class="built_in">DATE</span>(first_day + <span class="built_in">INTERVAL</span> <span class="string">&#x27;1 day&#x27;</span>) <span class="keyword">FROM</span> first_day_table),</span><br><span class="line">                <span class="built_in">DATE</span>(log_time) = (<span class="keyword">SELECT</span> <span class="built_in">DATE</span>(first_day + <span class="built_in">INTERVAL</span> <span class="string">&#x27;2 day&#x27;</span>) <span class="keyword">FROM</span> first_day_table),</span><br><span class="line">                <span class="built_in">DATE</span>(log_time) = (<span class="keyword">SELECT</span> <span class="built_in">DATE</span>(first_day + <span class="built_in">INTERVAL</span> <span class="string">&#x27;6 day&#x27;</span>) <span class="keyword">FROM</span> first_day_table)</span><br><span class="line">                ) <span class="keyword">AS</span> r </span><br><span class="line">    <span class="comment">-- 过滤2021-01-15活跃用户在后续 1～7 日登录数据</span></span><br><span class="line">    <span class="keyword">FROM</span> </span><br><span class="line">      login_log </span><br><span class="line">    <span class="keyword">WHERE</span> </span><br><span class="line">      (</span><br><span class="line">        log_time &gt;= <span class="built_in">TIMESTAMP</span> <span class="string">&#x27;2021-01-15 00:00:00&#x27;</span></span><br><span class="line">      ) </span><br><span class="line">      <span class="keyword">AND</span> (</span><br><span class="line">        log_time &lt;= <span class="built_in">TIMESTAMP</span> <span class="string">&#x27;2021-01-15 00:00:00&#x27;</span> + <span class="built_in">INTERVAL</span> <span class="string">&#x27;6 day&#x27;</span></span><br><span class="line">      ) </span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">      user_id</span><br><span class="line">  ) <span class="keyword">AS</span> basic_table </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">  first_date;</span><br><span class="line">  </span><br><span class="line">first_date|第一天活跃用户|次日留存|3日留存|7日留存|</span><br><span class="line"><span class="comment">----------|-------|----|----|----|</span></span><br><span class="line">2021-01-15|      2| 1.0| 0.5| 0.0|  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数分析</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">语法：retention(cond1, cond2, ..., cond32);</span><br><span class="line">// 示例</span><br><span class="line">r1: date=2020-01-01（ cond1 条件）。</span><br><span class="line">r2: 2020-01-01=&lt;date&lt;=2020-01-02 (cond1 和 cond2 条件）。</span><br><span class="line">r3: 2020-01-01=&lt;date&lt;=2020-01-03 (cond1 和 cond3 条件）。</span><br><span class="line">retention(date = &#x27;2020-01-01&#x27;, date = &#x27;2020-01-02&#x27;, date = &#x27;2020-01-03&#x27;) as r</span><br></pre></td></tr></table></figure>
+
+<h1 id="行为漏斗转化"><a href="#行为漏斗转化" class="headerlink" title="行为漏斗转化"></a>行为漏斗转化</h1><ul>
+<li>用户行为表</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>  user_action</span><br><span class="line">(</span><br><span class="line">    <span class="string">`uid`</span> Int32,</span><br><span class="line">    <span class="string">`event_type`</span> <span class="keyword">String</span>,</span><br><span class="line">    <span class="string">`time`</span> datetime</span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span> = MergeTree()</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> uid;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数据</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> user_action <span class="keyword">values</span></span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 11:10:00&#x27;</span>),</span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;下单&#x27;</span>,<span class="string">&#x27;2021-01-02 11:20:00&#x27;</span>),</span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;支付&#x27;</span>,<span class="string">&#x27;2021-01-02 11:30:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">2</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 10:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 10:10:00&#x27;</span>),</span><br><span class="line">(<span class="number">2</span>,<span class="string">&#x27;下单&#x27;</span>,<span class="string">&#x27;2021-01-02 11:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2</span>,<span class="string">&#x27;支付&#x27;</span>,<span class="string">&#x27;2021-01-02 11:10:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">3</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:20:00&#x27;</span>),</span><br><span class="line">(<span class="number">3</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 12:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">4</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:50:00&#x27;</span>),</span><br><span class="line">(<span class="number">4</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 12:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:50:00&#x27;</span>),</span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 12:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;下单&#x27;</span>,<span class="string">&#x27;2021-01-02 12:10:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:50:00&#x27;</span>),</span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 12:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;下单&#x27;</span>,<span class="string">&#x27;2021-01-02 12:10:00&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>30分钟作为一个时间窗口，查看窗口数据</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    uid,</span><br><span class="line">    windowFunnel(<span class="number">1800</span>)(<span class="built_in">time</span>, event_type = <span class="string">&#x27;浏览&#x27;</span>, event_type = <span class="string">&#x27;点击&#x27;</span>, event_type = <span class="string">&#x27;下单&#x27;</span>, event_type = <span class="string">&#x27;支付&#x27;</span>) <span class="keyword">AS</span> <span class="keyword">level</span></span><br><span class="line"><span class="keyword">FROM</span> user_action</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> uid <span class="keyword">order</span> <span class="keyword">by</span> uid</span><br><span class="line"></span><br><span class="line">uid|<span class="keyword">level</span>|</span><br><span class="line"><span class="comment">---|-----|</span></span><br><span class="line">  <span class="number">1</span>|    <span class="number">4</span>|</span><br><span class="line">  <span class="number">2</span>|    <span class="number">2</span>|</span><br><span class="line">  <span class="number">3</span>|    <span class="number">1</span>|</span><br><span class="line">  <span class="number">4</span>|    <span class="number">2</span>|</span><br><span class="line">  <span class="number">5</span>|    <span class="number">3</span>|</span><br><span class="line">  <span class="number">6</span>|    <span class="number">3</span>|</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>分析”2021-01-02”这天 路径为“浏览-&gt;点击-&gt;下单-&gt;支付”的转化情况</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> level_index,<span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">FROM</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">SELECT</span>  </span><br><span class="line">        uid, </span><br><span class="line">        arrayWithConstant(<span class="keyword">level</span>, <span class="number">1</span>) <span class="keyword">levels</span>, </span><br><span class="line">        arrayJoin(arrayEnumerate(<span class="keyword">levels</span>)) level_index</span><br><span class="line">      <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span></span><br><span class="line">          uid,</span><br><span class="line">          windowFunnel(<span class="number">1800</span>)(</span><br><span class="line">            <span class="built_in">time</span>,</span><br><span class="line">            event_type = <span class="string">&#x27;浏览&#x27;</span>,</span><br><span class="line">            event_type = <span class="string">&#x27;点击&#x27;</span> ,</span><br><span class="line">            event_type = <span class="string">&#x27;下单&#x27;</span>,</span><br><span class="line">            event_type = <span class="string">&#x27;支付&#x27;</span></span><br><span class="line">          ) <span class="keyword">AS</span> <span class="keyword">level</span></span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">          <span class="keyword">SELECT</span>  <span class="built_in">time</span>,  event_type , uid </span><br><span class="line">          <span class="keyword">FROM</span> user_action </span><br><span class="line">          <span class="keyword">WHERE</span> toDate(<span class="built_in">time</span>) = <span class="string">&#x27;2021-01-02&#x27;</span> </span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">GROUP</span> <span class="keyword">BY</span> uid</span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> level_index <span class="keyword">order</span> <span class="keyword">by</span> level_index</span><br><span class="line"></span><br><span class="line">// 内部数据</span><br><span class="line">uid|<span class="keyword">levels</span>   |level_index|</span><br><span class="line"><span class="comment">---|---------|-----------|</span></span><br><span class="line">  <span class="number">4</span>|[<span class="number">1</span>,<span class="number">1</span>]    |          <span class="number">1</span>|</span><br><span class="line">  <span class="number">4</span>|[<span class="number">1</span>,<span class="number">1</span>]    |          <span class="number">2</span>|</span><br><span class="line">  <span class="number">3</span>|<span class="number">1</span>        |          <span class="number">1</span>|</span><br><span class="line">  <span class="number">2</span>|[<span class="number">1</span>,<span class="number">1</span>]    |          <span class="number">1</span>|</span><br><span class="line">  <span class="number">2</span>|[<span class="number">1</span>,<span class="number">1</span>]    |          <span class="number">2</span>|</span><br><span class="line">  <span class="number">5</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]  |          <span class="number">1</span>|</span><br><span class="line">  <span class="number">5</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]  |          <span class="number">2</span>|</span><br><span class="line">  <span class="number">5</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]  |          <span class="number">3</span>|</span><br><span class="line">  <span class="number">1</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]|          <span class="number">1</span>|</span><br><span class="line">  <span class="number">1</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]|          <span class="number">2</span>|</span><br><span class="line">  <span class="number">1</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]|          <span class="number">3</span>|</span><br><span class="line">  <span class="number">1</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]|          <span class="number">4</span>|</span><br><span class="line">  <span class="number">6</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]  |          <span class="number">1</span>|</span><br><span class="line">  <span class="number">6</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]  |          <span class="number">2</span>|</span><br><span class="line">  <span class="number">6</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]  |          <span class="number">3</span>|</span><br><span class="line"></span><br><span class="line">// 结果    </span><br><span class="line">level_index|<span class="keyword">count</span>(<span class="number">1</span>)|</span><br><span class="line"><span class="comment">-----------|--------|</span></span><br><span class="line">          <span class="number">1</span>|       <span class="number">6</span>|</span><br><span class="line">          <span class="number">2</span>|       <span class="number">5</span>|</span><br><span class="line">          <span class="number">3</span>|       <span class="number">3</span>|</span><br><span class="line">          <span class="number">4</span>|       <span class="number">1</span>|   </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数分析</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arrayWithConstant(len,const) 构造len长度的，内容是const的数组</span><br><span class="line">arrayJoin(arr) ，拆分arr为多行</span><br><span class="line">arrayEnumerate(arr)，返回 Array [1, 2, 3, …, index]</span><br></pre></td></tr></table></figure>
+
+<h1 id="路径分析"><a href="#路径分析" class="headerlink" title="路径分析"></a>路径分析</h1><ul>
+<li>关键路径分析：已经明确了要分析的路径，需要看下这些访问路径上的用户数据</li>
+<li>智能路径分析：不确定有哪些路径，但是清楚目标路径是什么，需要知道用户在指定时间范围内都是通过哪些途径触达目标路径的</li>
+</ul>
+<p><strong>下单超过10分钟才支付</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--明确了要分析的路径</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">AS</span> <span class="string">&quot;userCount&quot;</span>,</span><br><span class="line">    <span class="keyword">sum</span>(cn) <span class="keyword">AS</span> <span class="string">&quot;actionCount&quot;</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">(</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        uid,</span><br><span class="line">        sequenceCount</span><br><span class="line">  			   (<span class="string">&#x27;(?1)(?t&gt;=600)(?2)&#x27;</span>)</span><br><span class="line">           (</span><br><span class="line">            toDateTime(<span class="built_in">time</span>), </span><br><span class="line">            event_type = <span class="string">&#x27;下单&#x27;</span>, </span><br><span class="line">            event_type = <span class="string">&#x27;支付&#x27;</span></span><br><span class="line">           ) <span class="keyword">AS</span> cn</span><br><span class="line">    <span class="keyword">FROM</span> user_action</span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> uid</span><br><span class="line">)</span><br><span class="line"><span class="keyword">WHERE</span> cn &gt;= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">// 子查询数据</span><br><span class="line">uid|cn|</span><br><span class="line"><span class="comment">---|--|</span></span><br><span class="line">  <span class="number">4</span>| <span class="number">0</span>|</span><br><span class="line">  <span class="number">3</span>| <span class="number">0</span>|</span><br><span class="line">  <span class="number">2</span>| <span class="number">1</span>|</span><br><span class="line">  <span class="number">5</span>| <span class="number">0</span>|</span><br><span class="line">  <span class="number">1</span>| <span class="number">1</span>|</span><br><span class="line">  <span class="number">6</span>| <span class="number">0</span>|</span><br><span class="line"></span><br><span class="line">// 结果</span><br><span class="line">userCount|actionCount|</span><br><span class="line"><span class="comment">---------|-----------|</span></span><br><span class="line">        <span class="number">2</span>|          <span class="number">2</span>|</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数分析</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 计算与模式匹配的事件链的数量</span><br><span class="line">语法：sequenceCount(pattern)(time, cond1, cond2, …)</span><br><span class="line">模式：</span><br><span class="line">(?N) — 在位置N匹配条件参数。 条件在编号 [1, 32] 范围。 例如, (?1) 匹配传递给 cond1 参数。</span><br><span class="line">.* — 匹配任何事件的数字。 不需要条件参数来匹配这个模式。</span><br><span class="line">(?t operator value) — 分开两个事件的时间。 例如： (?1)(?t&gt;1800)(?2) 匹配彼此发生超过1800秒的事件。 这些事件之间可以存在任意数量的任何事件。 您可以使用 &gt;=, &gt;, &lt;, &lt;= 运算符。</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -353,7 +660,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%83"><span class="nav-number">2.</span> <span class="nav-text">2. 为什么是它</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E4%B8%9A%E5%86%85%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">3. 业内最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-ClickHouse%E5%9C%A8B%E7%AB%99%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 ClickHouse在B站用户行为分析实战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Clickhouse%E5%9C%A8%E8%85%BE%E8%AE%AF%E9%9F%B3%E4%B9%90%E6%95%8F%E6%8D%B7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Clickhouse在腾讯音乐敏捷数据分析实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-ClickHouse%E5%9C%A8%E8%8B%8F%E5%AE%81%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%9C%BA%E6%99%AF%E7%9A%84%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 ClickHouse在苏宁用户画像场景的实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-ClickHouse%E5%9C%A8%E8%B6%A3%E5%A4%B4%E6%9D%A1%E6%AF%8F%E5%A4%A9%E5%8D%83%E4%BA%BF%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E6%8C%87%E6%A0%87%E7%9A%84%E8%AE%A1%E7%AE%97%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 ClickHouse在趣头条每天千亿数据实时指标的计算实践</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8BTODO"><span class="nav-number">5.</span> <span class="nav-text">示例TODO</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%83"><span class="nav-number">2.</span> <span class="nav-text">2. 为什么是它</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%A1%A8%E5%BC%95%E6%93%8E"><span class="nav-number">3.</span> <span class="nav-text">3. 表引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%80%BB%E8%A7%88"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 总览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-MergeTree"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 MergeTree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-1-%E8%AF%AD%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">3.2.1 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.2.2 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E6%95%B0%E6%8D%AE%E7%9B%AE%E5%BD%95"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.2.3 数据目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA%E7%9B%AE%E5%BD%95"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.2.3 数据分区目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA%E7%9B%AE%E5%BD%95%E5%90%88%E5%B9%B6%E8%A7%84%E5%88%99"><span class="nav-number">3.3.4.</span> <span class="nav-text">3.2.4 数据分区目录合并规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-5-%E7%B4%A2%E5%BC%95"><span class="nav-number">3.3.5.</span> <span class="nav-text">3.2.5 索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-6-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="nav-number">3.3.6.</span> <span class="nav-text">3.2.6 数据存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-7-%E5%88%86%E5%8C%BA%E3%80%81%E7%B4%A2%E5%BC%95%E3%80%81%E6%A0%87%E8%AE%B0%E3%80%81%E5%8E%8B%E7%BC%A9"><span class="nav-number">3.3.7.</span> <span class="nav-text">3.2.7 分区、索引、标记、压缩</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%95%99%E5%AD%98"><span class="nav-number">5.</span> <span class="nav-text">用户留存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E6%BC%8F%E6%96%97%E8%BD%AC%E5%8C%96"><span class="nav-number">6.</span> <span class="nav-text">行为漏斗转化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%88%86%E6%9E%90"><span class="nav-number">7.</span> <span class="nav-text">路径分析</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -367,20 +674,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
