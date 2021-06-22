@@ -170,6 +170,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2020/10/09/nginx/</loc>
+    
+    <lastmod>2021-04-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2021/03/25/maven%E9%BB%98%E8%AE%A4%E5%86%85%E7%BD%AE%E5%B1%9E%E6%80%A7/</loc>
     
     <lastmod>2021-03-25</lastmod>
@@ -380,13 +387,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/10/09/nginx/</loc>
-    
-    <lastmod>2020-11-12</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2020/11/03/aop/</loc>
     
     <lastmod>2020-11-03</lastmod>
@@ -508,6 +508,20 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/redis/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/brew/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/clickHouse/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
@@ -516,6 +530,27 @@
   
   <url>
     <loc>http://yoursite.com/tags/datax/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/docker/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/fastjson/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/git/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -557,6 +592,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/Mac/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
@@ -592,6 +634,20 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/Linux/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/zookeeper/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/Mac-%E3%80%81linux/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
@@ -607,62 +663,6 @@
   
   <url>
     <loc>http://yoursite.com/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/redis/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/brew/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/docker/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/fastjson/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/git/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/Mac/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/zookeeper/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/Linux/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -706,6 +706,20 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/categories/python/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/redis/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/categories/spring/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
@@ -713,7 +727,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/python/</loc>
+    <loc>http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -734,55 +748,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/git/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/IDEA/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/%E5%9F%BA%E7%A1%80%E3%80%81%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/redis/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/categories/docker/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
@@ -791,6 +756,13 @@
   
   <url>
     <loc>http://yoursite.com/categories/fastjson/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/git/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -811,6 +783,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/categories/IDEA/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/categories/Mac/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
@@ -825,6 +804,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/categories/%E5%9F%BA%E7%A1%80%E3%80%81%E6%A1%86%E6%9E%B6/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/categories/zookeeper/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
@@ -833,6 +819,20 @@
   
   <url>
     <loc>http://yoursite.com/categories/linux/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2021-06-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/%E9%98%85%E8%AF%BB/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
