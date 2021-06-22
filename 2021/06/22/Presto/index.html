@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang=zh>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="1、简介Hadoop提供了大数据存储和计算一套解决方案，完美地解决了大数据的存储和计算问题。但是Hadoop提供的Map-Reduce计算框架，适用于大数据量的离线和批量计算，它关注的吞吐量不是计算效率，在大数据量快速实时Ad-Hoc查询计算上表现很不友好。继Hive后，facebook公司在2012年开始开发Presto，与2013年正式开源，给Ad-Hoc查询带来了一股清凉的春风。Presto">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Presto | Hexo</title>
+  <meta name="description" content="1、简介 Hadoop提供了大数据存储和计算一套解决方案，完美地解决了大数据的存储和计算问题。但是Hadoop提供的Map-Reduce计算框架，适用于大数据量的离线和批量计算，它关注的吞吐量不是计算效率，在大数据量快速实时Ad-Hoc查询计算上表现很不友好。继Hive后，facebook公司在2012年开始开发Presto，与2013年正式开源，给Ad-Hoc查询带来了一股清凉的春风。Pres">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Presto">
 <meta property="og:url" content="http://yoursite.com/2021/06/22/Presto/index.html">
 <meta property="og:site_name" content="Astilt&#39;s blog">
-<meta property="og:description" content="1、简介Hadoop提供了大数据存储和计算一套解决方案，完美地解决了大数据的存储和计算问题。但是Hadoop提供的Map-Reduce计算框架，适用于大数据量的离线和批量计算，它关注的吞吐量不是计算效率，在大数据量快速实时Ad-Hoc查询计算上表现很不友好。继Hive后，facebook公司在2012年开始开发Presto，与2013年正式开源，给Ad-Hoc查询带来了一股清凉的春风。Presto">
+<meta property="og:description" content="1、简介 Hadoop提供了大数据存储和计算一套解决方案，完美地解决了大数据的存储和计算问题。但是Hadoop提供的Map-Reduce计算框架，适用于大数据量的离线和批量计算，它关注的吞吐量不是计算效率，在大数据量快速实时Ad-Hoc查询计算上表现很不友好。继Hive后，facebook公司在2012年开始开发Presto，与2013年正式开源，给Ad-Hoc查询带来了一股清凉的春风。Pres">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjBhMGZkZTRiMDcwMDNmZTA0NWI2Mi5wbmc?x-oss-process=image/format,png">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjA5OTRiZTRiMDA4NTk2NzZmMTA1OS5wbmc?x-oss-process=image/format,png">
@@ -33,220 +31,409 @@
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjFiNTA0ZTRiMDhkZDU2NTk0OGFjMS5wbmc?x-oss-process=image/format,png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191213100550170.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1YW5nZmFuMzIy,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2021-06-22T06:04:04.000Z">
-<meta property="article:modified_time" content="2021-06-22T06:44:11.431Z">
+<meta property="article:modified_time" content="2021-06-22T06:54:27.704Z">
 <meta property="article:author" content="Astilt">
 <meta property="article:tag" content="Presto">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjBhMGZkZTRiMDcwMDNmZTA0NWI2Mi5wbmc?x-oss-process=image/format,png">
-
-<link rel="canonical" href="http://yoursite.com/2021/06/22/Presto/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
-
-  <title>Presto | Astilt's blog</title>
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2021/06/22/Presto/index.html">
   
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Astilt's blog" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Astilt's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-<nav class="site-nav">
+    <link rel="alternate" href="/atom.xml" title="Astilt&#39;s blog" type="application/atom+xml">
   
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-
-</nav>
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content">
-            
-
-  <div class="posts-expand">
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
       
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/22/Presto/">
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/astilt322" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">astilt</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">一行代码一包烟</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> HangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Presto
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-06-22 14:04:04 / 修改时间：14:44:11" itemprop="dateCreated datePublished" datetime="2021-06-22T14:04:04+08:00">2021-06-22</time>
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
             </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-
         </div>
-      </header>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/astilt322" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/u/3984800033?is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
 
     
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">30</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/">多线程/并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
     
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-%E3%80%81linux/" rel="tag">Mac 、linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Presto/" rel="tag">Presto</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPI/" rel="tag">SPI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">aop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brew/" rel="tag">brew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clickHouse/" rel="tag">clickHouse</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datax/" rel="tag">datax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastjson/" rel="tag">fastjson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greenplum/" rel="tag">greenplum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop/" rel="tag">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/" rel="tag">hive</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/" rel="tag">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda/" rel="tag">lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myBatis/" rel="tag">myBatis</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/" rel="tag">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag">单元测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/" rel="tag">多线程/并发</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" rel="tag">权限管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%9B%E5%9E%8B/" rel="tag">泛型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" rel="tag">经济学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
     
-    <div class="post-body" itemprop="articleBody">
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Elasticsearch/" style="font-size: 13.4px;">Elasticsearch</a> <a href="/tags/Mac/" style="font-size: 13px;">Mac</a> <a href="/tags/Mac-%E3%80%81linux/" style="font-size: 13px;">Mac 、linux</a> <a href="/tags/Presto/" style="font-size: 13px;">Presto</a> <a href="/tags/SPI/" style="font-size: 13px;">SPI</a> <a href="/tags/aop/" style="font-size: 13px;">aop</a> <a href="/tags/brew/" style="font-size: 13px;">brew</a> <a href="/tags/clickHouse/" style="font-size: 14px;">clickHouse</a> <a href="/tags/datax/" style="font-size: 13px;">datax</a> <a href="/tags/docker/" style="font-size: 13.8px;">docker</a> <a href="/tags/fastjson/" style="font-size: 13px;">fastjson</a> <a href="/tags/git/" style="font-size: 13.2px;">git</a> <a href="/tags/greenplum/" style="font-size: 13px;">greenplum</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13.2px;">hive</a> <a href="/tags/idea/" style="font-size: 13px;">idea</a> <a href="/tags/lambda/" style="font-size: 13px;">lambda</a> <a href="/tags/maven/" style="font-size: 13.4px;">maven</a> <a href="/tags/myBatis/" style="font-size: 13.6px;">myBatis</a> <a href="/tags/mysql/" style="font-size: 13px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/postgresql/" style="font-size: 13px;">postgresql</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/spring/" style="font-size: 13.6px;">spring</a> <a href="/tags/tmux/" style="font-size: 13px;">tmux</a> <a href="/tags/vim/" style="font-size: 13px;">vim</a> <a href="/tags/zookeeper/" style="font-size: 13px;">zookeeper</a> <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">单元测试</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">命令</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 13.2px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/" style="font-size: 13.8px;">多线程/并发</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 13px;">方法论</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13px;">日志</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 13px;">权限管理</a> <a href="/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 13px;">泛型</a> <a href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" style="font-size: 13px;">经济学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="title">设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:33:14.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/springBoot%E6%89%93%E5%8C%85/" class="title">springBoot打包</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:29:41.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/LockSupport/" class="title">LockSupport</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:45.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E4%BF%A1%E5%8F%B7%E9%87%8F/" class="title">信号量</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:39.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/">多线程/并发</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E5%BE%AA%E7%8E%AF%E6%A0%85%E6%A0%8F/" class="title">循环栅栏</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:32.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Presto" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Presto
+    </h1>
+  
 
       
-        <h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><p>Hadoop提供了大数据存储和计算一套解决方案，完美地解决了大数据的存储和计算问题。但是Hadoop提供的Map-Reduce计算框架，适用于大数据量的离线和批量计算，它关注的吞吐量不是计算效率，在大数据量快速实时Ad-Hoc查询计算上表现很不友好。继Hive后，facebook公司在2012年开始开发Presto，与2013年正式开源，给Ad-Hoc查询带来了一股清凉的春风。Presto基于Java语言开发，在多数据源支持上，易用性，可扩展性上搜事大数据实时查询计算产品中的佼佼者。</p>
-<h2 id="2、特性"><a href="#2、特性" class="headerlink" title="2、特性"></a>2、特性</h2><table>
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/06/22/Presto/" class="article-date">
+	  <time datetime="2021-06-22T06:04:04.000Z" itemprop="datePublished">2021-06-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Presto/" rel="tag">Presto</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/06/22/Presto/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="1-简介"><a class="markdownIt-Anchor" href="#1-简介"></a> 1、简介</h2>
+<p>Hadoop提供了大数据存储和计算一套解决方案，完美地解决了大数据的存储和计算问题。但是Hadoop提供的Map-Reduce计算框架，适用于大数据量的离线和批量计算，它关注的吞吐量不是计算效率，在大数据量快速实时Ad-Hoc查询计算上表现很不友好。继Hive后，facebook公司在2012年开始开发Presto，与2013年正式开源，给Ad-Hoc查询带来了一股清凉的春风。Presto基于Java语言开发，在多数据源支持上，易用性，可扩展性上搜事大数据实时查询计算产品中的佼佼者。</p>
+<h2 id="2-特性"><a class="markdownIt-Anchor" href="#2-特性"></a> 2、特性</h2>
+<table>
 <thead>
 <tr>
-<th align="center">特点</th>
-<th align="center">说明</th>
+<th style="text-align:center">特点</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">多数据源</td>
-<td align="center">目前Presto支持Mysql、PostgreSQL、Cassandra、Hive、Kafa等</td>
+<tbody>
+<tr>
+<td style="text-align:center">多数据源</td>
+<td style="text-align:center">目前Presto支持Mysql、PostgreSQL、Cassandra、Hive、Kafa等</td>
 </tr>
 <tr>
-<td align="center">SQL</td>
-<td align="center">完全兼容ANSI SQL，并提供sql shell 给用户</td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center">完全兼容ANSI SQL，并提供sql shell 给用户</td>
 </tr>
 <tr>
-<td align="center">扩展性</td>
-<td align="center">基于SPI机制，易开发特定数据源连接器Connector</td>
+<td style="text-align:center">扩展性</td>
+<td style="text-align:center">基于SPI机制，易开发特定数据源连接器Connector</td>
 </tr>
 <tr>
-<td align="center">混合计算</td>
-<td align="center">多数据的混合计算</td>
+<td style="text-align:center">混合计算</td>
+<td style="text-align:center">多数据的混合计算</td>
 </tr>
 <tr>
-<td align="center">高性能</td>
-<td align="center">Presto官方测试是Hive性能的10倍以上</td>
+<td style="text-align:center">高性能</td>
+<td style="text-align:center">Presto官方测试是Hive性能的10倍以上</td>
 </tr>
 <tr>
-<td align="center">PipeLine</td>
-<td align="center">终端用户不用等待结果集处理完才看到结果，从一开始计算就可以产出一部分结果给终端</td>
+<td style="text-align:center">PipeLine</td>
+<td style="text-align:center">终端用户不用等待结果集处理完才看到结果，从一开始计算就可以产出一部分结果给终端</td>
 </tr>
-</tbody></table>
-<h2 id="3、基本概念"><a href="#3、基本概念" class="headerlink" title="3、基本概念"></a>3、基本概念</h2><h3 id="3-1-服务进程"><a href="#3-1-服务进程" class="headerlink" title="3.1 服务进程"></a>3.1 服务进程</h3><ul>
+</tbody>
+</table>
+<h2 id="3-基本概念"><a class="markdownIt-Anchor" href="#3-基本概念"></a> 3、基本概念</h2>
+<h3 id="31-服务进程"><a class="markdownIt-Anchor" href="#31-服务进程"></a> 3.1 服务进程</h3>
+<ul>
 <li>Coordinator</li>
 </ul>
 <p>一般Coordinator部署在集群中一个单独节点，是整个Presto集群的管理节点。它主要用户接受客户端提交的查询，解析查询并生成查询计划，对任务进行调度，对worker管理。</p>
@@ -255,31 +442,36 @@
 </ul>
 <p>工作节点，一般多个，主要进行数据的处理和Task的执行，它会周期性的向Coordinator进行Restful “沟通”，即心跳。</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjBhMGZkZTRiMDcwMDNmZTA0NWI2Mi5wbmc?x-oss-process=image/format,png" alt="img"></p>
-<h3 id="3-2-Presto模型"><a href="#3-2-Presto模型" class="headerlink" title="3.2 Presto模型"></a>3.2 Presto模型</h3><table>
+<h3 id="32-presto模型"><a class="markdownIt-Anchor" href="#32-presto模型"></a> 3.2 Presto模型</h3>
+<table>
 <thead>
 <tr>
-<th align="center">名称</th>
-<th align="center">说明</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">Connector</td>
-<td align="center">Presto是通过Connector来访问不同的数据源的，可以将Connector当作访问不同数据源的驱动程序，每种Connector都实现了Presto里面的SPI接口。当需要使用某种Connnector时候需要在${PRESTO_HOME}/etc/catalog中配置。</td>
+<tbody>
+<tr>
+<td style="text-align:center">Connector</td>
+<td style="text-align:center">Presto是通过Connector来访问不同的数据源的，可以将Connector当作访问不同数据源的驱动程序，每种Connector都实现了Presto里面的SPI接口。当需要使用某种Connnector时候需要在${PRESTO_HOME}/etc/catalog中配置。</td>
 </tr>
 <tr>
-<td align="center">Catalog</td>
-<td align="center">类似我们常规关系数据库Mysql里面实列。</td>
+<td style="text-align:center">Catalog</td>
+<td style="text-align:center">类似我们常规关系数据库Mysql里面实列。</td>
 </tr>
 <tr>
-<td align="center">Schema</td>
-<td align="center">类似我们常规关系数据库Mysql里面的database。</td>
+<td style="text-align:center">Schema</td>
+<td style="text-align:center">类似我们常规关系数据库Mysql里面的database。</td>
 </tr>
 <tr>
-<td align="center">Table</td>
-<td align="center">类似我们常规关系数据库Mysql里面的table。</td>
+<td style="text-align:center">Table</td>
+<td style="text-align:center">类似我们常规关系数据库Mysql里面的table。</td>
 </tr>
-</tbody></table>
-<h3 id="3-3-Presto查询模型"><a href="#3-3-Presto查询模型" class="headerlink" title="3.3 Presto查询模型"></a>3.3 Presto查询模型</h3><h4 id="3-3-1-模型术语"><a href="#3-3-1-模型术语" class="headerlink" title="3.3.1 模型术语"></a>3.3.1 模型术语</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjA5OTRiZTRiMDA4NTk2NzZmMTA1OS5wbmc?x-oss-process=image/format,png" alt="img"></p>
+</tbody>
+</table>
+<h3 id="33-presto查询模型"><a class="markdownIt-Anchor" href="#33-presto查询模型"></a> 3.3 Presto查询模型</h3>
+<h4 id="331-模型术语"><a class="markdownIt-Anchor" href="#331-模型术语"></a> 3.3.1 模型术语</h4>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjA5OTRiZTRiMDA4NTk2NzZmMTA1OS5wbmc?x-oss-process=image/format,png" alt="img"></p>
 <ul>
 <li>Statement</li>
 </ul>
@@ -312,7 +504,8 @@
 <li>Split</li>
 </ul>
 <p>分片，大的数据集中一个小的数据集。</p>
-<h4 id="3-3-1-查询过程"><a href="#3-3-1-查询过程" class="headerlink" title="3.3.1 查询过程"></a>3.3.1 查询过程</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjBhOGJjZTRiMDNjOGU0OTNkODM4YS5wbmc?x-oss-process=image/format,png" alt="img"></p>
+<h4 id="331-查询过程"><a class="markdownIt-Anchor" href="#331-查询过程"></a> 3.3.1 查询过程</h4>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjBhOGJjZTRiMDNjOGU0OTNkODM4YS5wbmc?x-oss-process=image/format,png" alt="img"></p>
 <p>整个过程大致分为7步</p>
 <ul>
 <li>客户端通过Http请求发送查询语句给Coordinator。</li>
@@ -323,32 +516,37 @@
 <li>Coordinator从分发Task后就可以从最顶层的Stage（Single Stage）里面获取Task计算结果，缓存到buffer，直到所有计算结束。</li>
 <li>Client从提交语句之后，会不停从Coordinator中获取本次查询的结果，不是等到查询结果都产生完毕才获取显示。</li>
 </ul>
-<h2 id="4、查询流程解析"><a href="#4、查询流程解析" class="headerlink" title="4、查询流程解析"></a>4、查询流程解析</h2><blockquote>
+<h2 id="4-查询流程解析"><a class="markdownIt-Anchor" href="#4-查询流程解析"></a> 4、查询流程解析</h2>
+<blockquote>
 <p>presto 构建Restful服务使用的airlift框框。</p>
 </blockquote>
-<h3 id="4-1-客户端发起请求"><a href="#4-1-客户端发起请求" class="headerlink" title="4.1 客户端发起请求"></a>4.1 客户端发起请求</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Presto</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Presto</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Console console = singleCommand(Console.class).parse(args);</span><br><span class="line">		<span class="keyword">if</span> (console.helpOption.showHelpIfRequested() ||</span><br><span class="line">				console.versionOption.showVersionIfRequested()) &#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		System.exit(console.run() ? <span class="number">0</span> : <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-2-执行客户端命令"><a href="#4-2-执行客户端命令" class="headerlink" title="4.2 执行客户端命令"></a>4.2 执行客户端命令</h3><p>类：Console</p>
+<h3 id="41-客户端发起请求"><a class="markdownIt-Anchor" href="#41-客户端发起请求"></a> 4.1 客户端发起请求</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Presto</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Presto</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Console console = singleCommand(Console.class).parse(args);</span><br><span class="line">		<span class="keyword">if</span> (console.helpOption.showHelpIfRequested() ||</span><br><span class="line">				console.versionOption.showVersionIfRequested()) &#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		System.exit(console.run() ? <span class="number">0</span> : <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="42-执行客户端命令"><a class="markdownIt-Anchor" href="#42-执行客户端命令"></a> 4.2 执行客户端命令</h3>
+<p>类：Console</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">		<span class="keyword">if</span> (hasQuery) &#123;</span><br><span class="line">			<span class="keyword">return</span> executeCommand(queryRunner, query, clientOptions.outputFormat, clientOptions.ignoreErrors);</span><br><span class="line">		&#125;</span><br><span class="line">         	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-3-发送Http请求"><a href="#4-3-发送Http请求" class="headerlink" title="4.3 发送Http请求"></a>4.3 发送Http请求</h3><p>类：StatementClientV1</p>
+<h3 id="43-发送http请求"><a class="markdownIt-Anchor" href="#43-发送http请求"></a> 4.3 发送Http请求</h3>
+<p>类：StatementClientV1</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Request <span class="title">buildQueryRequest</span><span class="params">(ClientSession session, String query)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     HttpUrl url = HttpUrl.get(session.getServer());</span><br><span class="line">     <span class="keyword">if</span> (url == <span class="keyword">null</span>) &#123;</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> ClientException(<span class="string">&quot;Invalid server URL: &quot;</span> + session.getServer());</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">// 注意路径</span></span><br><span class="line">     url = url.newBuilder().encodedPath(<span class="string">&quot;/v1/statement&quot;</span>).build();</span><br><span class="line">     Request.Builder builder = prepareRequest(url).post(RequestBody.create(MEDIA_TYPE_TEXT, query));</span><br><span class="line">		...</span><br><span class="line">     <span class="keyword">return</span> builder.build();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-4-Coordinator处理请求"><a href="#4-4-Coordinator处理请求" class="headerlink" title="4.4 Coordinator处理请求"></a>4.4 Coordinator处理请求</h3><p>类：StatementResource</p>
+<h3 id="44-coordinator处理请求"><a class="markdownIt-Anchor" href="#44-coordinator处理请求"></a> 4.4 Coordinator处理请求</h3>
+<p>类：StatementResource</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Path(&quot;/v1/statement&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StatementResource</span> </span>&#123;</span><br><span class="line"><span class="meta">@POST</span></span><br><span class="line">	<span class="meta">@Produces(MediaType.APPLICATION_JSON)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Response <span class="title">createQuery</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">			String statement,</span></span></span><br><span class="line"><span class="function"><span class="params">			<span class="meta">@HeaderParam(X_FORWARDED_PROTO)</span> String proto,</span></span></span><br><span class="line"><span class="function"><span class="params">			<span class="meta">@Context</span> HttpServletRequest servletRequest,</span></span></span><br><span class="line"><span class="function"><span class="params">			<span class="meta">@Context</span> UriInfo uriInfo)</span> </span>&#123;</span><br><span class="line">       ...</span><br><span class="line">       <span class="comment">// 核心</span></span><br><span class="line">		Query query = Query.create(</span><br><span class="line">				sessionContext,</span><br><span class="line">				statement,</span><br><span class="line">				queryManager,</span><br><span class="line">				sessionPropertyManager,</span><br><span class="line">				exchangeClient,</span><br><span class="line">				responseExecutor,</span><br><span class="line">				timeoutExecutor,</span><br><span class="line">				blockEncodingSerde);</span><br><span class="line">		queries.put(query.getQueryId(), query);</span><br><span class="line">		<span class="comment">// 获取结果</span></span><br><span class="line">		QueryResults queryResults = query.getNextResult(OptionalLong.empty(), uriInfo, proto, DEFAULT_TARGET_RESULT_SIZE);</span><br><span class="line">		...</span><br><span class="line">		<span class="keyword">return</span> toResponse(query, queryResults);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>后面逻辑较多，具体怎么个处理，有兴趣的可以参考：<a target="_blank" rel="noopener" href="https://github.com/leoChaoGlut/presto-research/blob/master/presto-research-doc/%E4%B8%80%E6%9D%A1sql%E5%A6%82%E4%BD%95%E8%A2%ABpresto%E6%89%A7%E8%A1%8C.yml">一条sql如何倍presto执行的。</a></p>
-<h2 id="5、Hive-Connector"><a href="#5、Hive-Connector" class="headerlink" title="5、Hive Connector"></a>5、Hive Connector</h2><p>Presto查询过程和Hive不同，它是从Hive-Metastore里面获取表的元数据信息和与之关联的数据文件信息，然后利用HdfsEnvironment操作HDFS文件。</p>
+<h2 id="5-hive-connector"><a class="markdownIt-Anchor" href="#5-hive-connector"></a> 5、Hive Connector</h2>
+<p>Presto查询过程和Hive不同，它是从Hive-Metastore里面获取表的元数据信息和与之关联的数据文件信息，然后利用HdfsEnvironment操作HDFS文件。</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2Fzc2V0cy5wcm9jZXNzb24uY29tL2NoYXJ0X2ltYWdlLzVkZjFiNTA0ZTRiMDhkZDU2NTk0OGFjMS5wbmc?x-oss-process=image/format,png" alt="img"></p>
 <ul>
-<li><p>persto配置的hive.properties文件</p>
+<li>
+<p>persto配置的hive.properties文件</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">connector.name=hive-hadoop2</span><br><span class="line">hive.metastore.uri=thrift:<span class="comment">//p1:9083</span></span><br><span class="line">hive.metastore-cache-ttl=<span class="number">0</span>s</span><br><span class="line">hive.metastore-refresh-interval=<span class="number">0</span>s</span><br><span class="line"><span class="comment">// hdfs信息相关配置文件位置</span></span><br><span class="line">hive.config.resources=/etc/hive/conf/core-site.xml,/etc/hive/conf/hdfs-site.xml</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>获取Hive Metastore元数据</p>
+<li>
+<p>获取Hive Metastore元数据</p>
 <p>类：HiveMetastoreClientFactory</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> HiveMetastoreClient <span class="title">create</span><span class="params">(HostAndPort address)</span><span class="keyword">throws</span> TTransportException </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ThriftHiveMetastoreClient(Transport.create(address, sslContext, socksProxy, timeoutMillis, metastoreAuthentication));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>HiveMetastoreClient 里面方法，curd操作</p>
+<li>
+<p>HiveMetastoreClient 里面方法，curd操作</p>
 </li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/20191213100550170.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1YW5nZmFuMzIy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
@@ -357,15 +555,14 @@
 </ul>
 <p>类：CachingHiveMetastore</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CachingHiveMetastore</span> <span class="keyword">implements</span> <span class="title">ExtendedHiveMetastore</span></span>&#123;</span><br><span class="line"> <span class="comment">//这里面有2个关键配置项，其他配置可以参看MetastoreClientConfig里面配置</span></span><br><span class="line"> <span class="comment">// hive.metastore-refresh-interval，默认0</span></span><br><span class="line"> <span class="comment">// hive.metastore-cache-ttl，默认0</span></span><br><span class="line">  <span class="keyword">public</span> CachingHiveMetastore（...）&#123;</span><br><span class="line">   <span class="comment">// 主要的逻辑都是在构造函数里面完成的，太多了，省略了</span></span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>获取FileSystem</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> FileSystem <span class="title">getFileSystem</span><span class="params">(String user, Path path, Configuration configuration)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> hdfsAuthentication.doAs(user, () -&gt; &#123;</span><br><span class="line">		<span class="comment">// 从我们配置的hive的catalog文件里面读取hdfs相关信息</span></span><br><span class="line">			FileSystem fileSystem = path.getFileSystem(configuration);</span><br><span class="line">			fileSystem.setVerifyChecksum(verifyChecksum);</span><br><span class="line">			<span class="keyword">return</span> fileSystem;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="6、插件开发"><a href="#6、插件开发" class="headerlink" title="6、插件开发"></a>6、插件开发</h2><h3 id="6-1-Connector开发"><a href="#6-1-Connector开发" class="headerlink" title="6.1 Connector开发"></a>6.1 Connector开发</h3><p>Presto目前支持很多的数据源，数据源都是以plugin形式添加的。下面是我安装的presto里面的plugin</p>
+<h2 id="6-插件开发"><a class="markdownIt-Anchor" href="#6-插件开发"></a> 6、插件开发</h2>
+<h3 id="61-connector开发"><a class="markdownIt-Anchor" href="#61-connector开发"></a> 6.1 Connector开发</h3>
+<p>Presto目前支持很多的数据源，数据源都是以plugin形式添加的。下面是我安装的presto里面的plugin</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> tpch</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> mongodb</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> session-property-managers</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> postgresql</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> kudu</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> geospatial</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> example-http</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> localfile</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> mysql</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> atop</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> accumulo</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> sqlserver</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> redis</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> presto-elasticsearch</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> password-authenticators</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> blackhole</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> redshift</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> kafka</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> jmx</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> teradata-functions</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> resource-group-managers</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> presto-thrift</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> memory</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> tpcds</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> raptor</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> ml</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Oct <span class="number">29</span> <span class="number">13</span>:<span class="number">34</span> cassandra</span><br><span class="line">drwxr-xr-x <span class="number">2</span> root root <span class="number">4096</span> Nov <span class="number">25</span> <span class="number">21</span>:<span class="number">39</span> hive-hadoop2</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>源代码里面有presto-example-http 的自定义connector代码示例。</p>
 </blockquote>
@@ -373,33 +570,32 @@
 <li>添加插件</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">presto-main&#x2F;etc&#x2F;config.properties下</span><br><span class="line"></span><br><span class="line">plugin.bundles&#x3D;\</span><br><span class="line">  ..&#x2F;presto-blackhole&#x2F;pom.xml,\</span><br><span class="line">  ..&#x2F;presto-memory&#x2F;pom.xml,\</span><br><span class="line">  ..&#x2F;presto-jmx&#x2F;pom.xml,\</span><br><span class="line">  ..&#x2F;presto-raptor&#x2F;pom.xml,\</span><br><span class="line">  ..&#x2F;presto-hive-hadoop2&#x2F;pom.xml,\</span><br><span class="line">  &#x2F;&#x2F;*******官方示例 example-http *********</span><br><span class="line">  ..&#x2F;presto-example-http&#x2F;pom.xml,\</span><br><span class="line">  ..&#x2F;presto-kafka&#x2F;pom.xml, \</span><br><span class="line">  ..&#x2F;presto-tpch&#x2F;pom.xml, \</span><br><span class="line">  ..&#x2F;presto-local-file&#x2F;pom.xml, \</span><br><span class="line">  ..&#x2F;presto-mysql&#x2F;pom.xml,\</span><br><span class="line">  ..&#x2F;presto-sqlserver&#x2F;pom.xml, \</span><br><span class="line">  ..&#x2F;presto-postgresql&#x2F;pom.xml, \</span><br><span class="line">  ..&#x2F;presto-tpcds&#x2F;pom.xml</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>需要实现的接口</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; presto 会加载所有实现了Plugin的实现类</span><br><span class="line">Plugin</span><br><span class="line">&#x2F;&#x2F; 实例化Connector工厂</span><br><span class="line">ConnectorFactory</span><br><span class="line">&#x2F;&#x2F; connector连接器，里面有metadata、splitManager、recordSetProvider等实例</span><br><span class="line">Connector</span><br><span class="line">&#x2F;&#x2F; 元数据管理（schemas、tables等）</span><br><span class="line">ConnectorMetadata</span><br><span class="line">&#x2F;&#x2F; 数据分片</span><br><span class="line">ConnectorSplitManager</span><br><span class="line">&#x2F;&#x2F; 数据读取类</span><br><span class="line">ConnectorRecordSetProvider</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>示例代码</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插件</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExamplePlugin</span> <span class="keyword">implements</span> <span class="title">Plugin</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Iterable&lt;ConnectorFactory&gt; <span class="title">getConnectorFactories</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ImmutableList.of(<span class="keyword">new</span> ExampleConnectorFactory());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接器工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleConnectorFactory</span> <span class="keyword">implements</span> <span class="title">ConnectorFactory</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Connector <span class="title">create</span><span class="params">(String catalogName, Map&lt;String, String&gt; requiredConfig, ConnectorContext context)</span> </span>&#123;</span><br><span class="line">			...</span><br><span class="line">			<span class="comment">// 获取Connector 实例</span></span><br><span class="line">			<span class="keyword">return</span> injector.getInstance(ExampleConnector.class);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接器，里面包含元数据管理，数据分片，数据读取类 等实例变量</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleConnector</span> <span class="keyword">implements</span> <span class="title">Connector</span></span>&#123;</span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger log = Logger.get(ExampleConnector.class);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> LifeCycleManager lifeCycleManager;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ExampleMetadata metadata;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ExampleSplitManager splitManager;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ExampleRecordSetProvider recordSetProvider;</span><br><span class="line">    <span class="comment">// get/set 方法 ...</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="6-2-函数开发"><a href="#6-2-函数开发" class="headerlink" title="6.2 函数开发"></a>6.2 函数开发</h3><p>Presto自定义了很多函数，在</p>
+<h3 id="62-函数开发"><a class="markdownIt-Anchor" href="#62-函数开发"></a> 6.2 函数开发</h3>
+<p>Presto自定义了很多函数，在</p>
 <ul>
-<li><p>函数分类：</p>
+<li>
+<p>函数分类：</p>
 <ul>
 <li>标量函数（scalar）</li>
 <li>聚合函数（aggregation）</li>
 <li>开窗函数（window）</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>代码示例</li>
+<li>
+<p>代码示例</p>
+</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标量函数</span></span><br><span class="line"><span class="meta">@Description(“return array containing elements that match the given predicate”)</span><span class="comment">//函数描述</span></span><br><span class="line"><span class="meta">@ScalarFunction(value = “filter”, deterministic = false)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayFilterFunction</span></span>&#123;</span><br><span class="line"><span class="meta">@TypeParameter(&quot;T&quot;)</span></span><br><span class="line"><span class="meta">@TypeParameterSpecialization(name = &quot;T&quot;, nativeContainerType = long.class)</span> <span class="comment">// 参数类型</span></span><br><span class="line"><span class="meta">@SqlType(&quot;array(T)&quot;)</span><span class="comment">// 返回函数类型</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Block <span class="title">filterLong</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="meta">@TypeParameter(&quot;T&quot;)</span> Type elementType,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="meta">@SqlType(&quot;array(T)&quot;)</span> Block arrayBlock,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="meta">@SqlType(&quot;function(T, boolean)&quot;)</span> FilterLongLambda function)</span></span>&#123;</span><br><span class="line">     ...</span><br><span class="line">     实现逻辑</span><br><span class="line">     ...</span><br><span class="line">    BlockBuilder resultBuilder = elementType.createBlockBuilder(<span class="keyword">null</span>, positionCount);</span><br><span class="line">    <span class="keyword">return</span> resultBuilder.build();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 开窗函数</span></span><br><span class="line"><span class="meta">@WindowFunctionSignature(name = “rank”, returnType = “bigint”)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RankFunction</span> <span class="keyword">extends</span> <span class="title">RankingWindowFunction</span></span>&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">long</span> rank;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">long</span> count;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span></span>&#123;</span><br><span class="line">    rank = <span class="number">0</span>;</span><br><span class="line">    count = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processRow</span><span class="params">(BlockBuilder output, <span class="keyword">boolean</span> newPeerGroup, <span class="keyword">int</span> peerGroupCount, <span class="keyword">int</span> currentPosition)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (newPeerGroup) &#123;</span><br><span class="line">        rank += count;</span><br><span class="line">        count = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    BIGINT.writeLong(output, rank);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 聚合函数</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@AggregationFunction(“count”)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">CountAggregation</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">CountAggregation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 数据在每个worker上分片输入</span></span><br><span class="line"><span class="meta">@InputFunction</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">(<span class="meta">@AggregationState</span> LongState state)</span> </span>&#123;</span><br><span class="line">state.setLong(state.getLong() + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// worker间数据聚合</span></span><br><span class="line"><span class="meta">@CombineFunction</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">combine</span><span class="params">(<span class="meta">@AggregationState</span> LongState state, <span class="meta">@AggregationState</span> LongState otherState)</span> </span>&#123;</span><br><span class="line">state.setLong(state.getLong() + otherState.getLong());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 规约输出结果</span></span><br><span class="line"><span class="meta">@OutputFunction(StandardTypes.BIGINT)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">output</span><span class="params">(<span class="meta">@AggregationState</span> LongState state, BlockBuilder out)</span> </span>&#123;</span><br><span class="line">BIGINT.writeLong(out, state.getLong());</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="7、性能优化"><a href="#7、性能优化" class="headerlink" title="7、性能优化"></a>7、性能优化</h2><ul>
+<h2 id="7-性能优化"><a class="markdownIt-Anchor" href="#7-性能优化"></a> 7、性能优化</h2>
+<ul>
 <li>Order by + limit</li>
 </ul>
 <p>order by 会扫描worker上表数据，耗内存，结合limit 使用减少计算消耗。</p>
@@ -408,21 +604,17 @@
 </ul>
 <p>需要分组的字段，distinct后数量倒序放置</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">select <span class="title">count</span><span class="params">(<span class="number">1</span>)</span>,uid,age from user_sales group by uid,age</span>;</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>使用模糊聚合函数</p>
+<li>使用模糊聚合函数</li>
+</ul>
 <blockquote>
 <p>用精准误差换性能。</p>
 </blockquote>
-</li>
-</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不推荐</span></span><br><span class="line"><span class="function">select <span class="title">count</span><span class="params">(distinct(age)</span>) from user_sales</span>;</span><br><span class="line"><span class="comment">//推荐</span></span><br><span class="line"><span class="function">select <span class="title">count</span><span class="params">(approx_distinct(age)</span>) from user_sales</span>;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>合并like</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不推荐</span></span><br><span class="line">select *from user_sales where name like ‘%a%’ or name like ‘%b%’ or name like ‘%c%’;</span><br><span class="line"><span class="comment">//推荐</span></span><br><span class="line">select* <span class="function">from user_sales where name <span class="title">regexp_like</span><span class="params">(name, a|b|c)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>大表 join 小表</li>
 </ul>
@@ -436,203 +628,229 @@
 </ul>
 <p>针对hive创建表，建议使用orc格式存储，preto在代码层面对orc格式做了很多优化。 数据压缩可以减少节点间数据传输对IO带宽压力，对于即席查询需要快速解压，snappy比较合适。</p>
 
+      
     </div>
-
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
     
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2021/06/22/Presto/" title="Presto" target="_blank" rel="external">http://yoursite.com/2021/06/22/Presto/</a>
+    </li>
     
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Presto/" rel="tag"># Presto</a>
-          </div>
-
-        
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
 
 
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/06/22/SPI/" rel="prev" title="SPI">
-      <i class="fa fa-chevron-left"></i> SPI
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/22/%E8%AF%BB%E5%86%99%E9%94%81/" rel="next" title="读写锁">
-      读写锁 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-  </div>
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1、简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">2、特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">3、基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%9C%8D%E5%8A%A1%E8%BF%9B%E7%A8%8B"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 服务进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Presto%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Presto模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Presto%E6%9F%A5%E8%AF%A2%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 Presto查询模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-%E6%A8%A1%E5%9E%8B%E6%9C%AF%E8%AF%AD"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1 模型术语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.1 查询过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E6%9F%A5%E8%AF%A2%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">4、查询流程解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 客户端发起请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%89%A7%E8%A1%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 执行客户端命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E5%8F%91%E9%80%81Http%E8%AF%B7%E6%B1%82"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 发送Http请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-Coordinator%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 Coordinator处理请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81Hive-Connector"><span class="nav-number">5.</span> <span class="nav-text">5、Hive Connector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="nav-number">6.</span> <span class="nav-text">6、插件开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Connector%E5%BC%80%E5%8F%91"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 Connector开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E5%87%BD%E6%95%B0%E5%BC%80%E5%8F%91"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 函数开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">7.</span> <span class="nav-text">7、性能优化</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Astilt</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">77</span>
-          <span class="site-state-item-name">日志</span>
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/astilt322" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">分类</span></a>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/astilt322" target="_blank"><span class="text-dark">astilt</span><small class="ml-1x">一行代码一包烟</small></a></h3>
+        <div>是一个好人。</div>
       </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">39</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
+    </figure>
+  </div>
 </div>
 
-
-
-      </div>
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
+  </article>
   
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Astilt</span>
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/06/22/%E8%AF%BB%E5%86%99%E9%94%81/" title="读写锁"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/06/22/SPI/" title="SPI"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
   </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
-
-        
-
-
-
-
-
-
-
-
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </footer>
+    </div>
   </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
+</div>
 
 
 
+</main>
 
-  
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/astilt322" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/u/3984800033?is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
 
 
 
 
 
 
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
 
 
 
-
-
-
-  
-
-  
 
 </body>
 </html>

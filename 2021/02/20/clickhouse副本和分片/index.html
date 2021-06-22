@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang=zh>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="副本和分片是在很多分布式系统中都有，首先简单来看看他们的概念。 副本：数据结构相同，数据相同（数据层面的备份冗余） 分片：数据结构相同，数据不同。（数据量层面水平切分）   集群是副本和分片的基础，它将ClickHouse的服务拓扑由单节点延伸到多个节点，但它并不像Hadoop 生态的某些系统那样，要求所有节点组成一个单一的大集群。ClickHouse的集群配置非常灵活，用户既可以 将所有节点组成">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>clickhouse副本和分片 | Hexo</title>
+  <meta name="description" content="副本和分片是在很多分布式系统中都有，首先简单来看看他们的概念。 副本：数据结构相同，数据相同（数据层面的备份冗余） 分片：数据结构相同，数据不同。（数据量层面水平切分）  集群是副本和分片的基础，它将ClickHouse的服务拓扑由单节点延伸到多个节点，但它并不像Hadoop 生态的某些系统那样，要求所有节点组成一个单一的大集群。ClickHouse的集群配置非常灵活，用户既可以 将所有节点组成一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="clickhouse副本和分片">
 <meta property="og:url" content="http://yoursite.com/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/index.html">
 <meta property="og:site_name" content="Astilt&#39;s blog">
-<meta property="og:description" content="副本和分片是在很多分布式系统中都有，首先简单来看看他们的概念。 副本：数据结构相同，数据相同（数据层面的备份冗余） 分片：数据结构相同，数据不同。（数据量层面水平切分）   集群是副本和分片的基础，它将ClickHouse的服务拓扑由单节点延伸到多个节点，但它并不像Hadoop 生态的某些系统那样，要求所有节点组成一个单一的大集群。ClickHouse的集群配置非常灵活，用户既可以 将所有节点组成">
+<meta property="og:description" content="副本和分片是在很多分布式系统中都有，首先简单来看看他们的概念。 副本：数据结构相同，数据相同（数据层面的备份冗余） 分片：数据结构相同，数据不同。（数据量层面水平切分）  集群是副本和分片的基础，它将ClickHouse的服务拓扑由单节点延伸到多个节点，但它并不像Hadoop 生态的某些系统那样，要求所有节点组成一个单一的大集群。ClickHouse的集群配置非常灵活，用户既可以 将所有节点组成一">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/image-20210222111724554.png">
 <meta property="og:image" content="http://yoursite.com/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/image-20210222112107307.png">
@@ -37,196 +35,372 @@
 <meta property="article:tag" content="clickHouse">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/image-20210222111724554.png">
-
-<link rel="canonical" href="http://yoursite.com/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
-
-  <title>clickhouse副本和分片 | Astilt's blog</title>
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/index.html">
   
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Astilt's blog" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Astilt's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-<nav class="site-nav">
+    <link rel="alternate" href="/atom.xml" title="Astilt&#39;s blog" type="application/atom+xml">
   
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-
-</nav>
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content">
-            
-
-  <div class="posts-expand">
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
       
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/">
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/astilt322" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">astilt</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">一行代码一包烟</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> HangZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          clickhouse副本和分片
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-20 16:48:02" itemprop="dateCreated datePublished" datetime="2021-02-20T16:48:02+08:00">2021-02-20</time>
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-22 17:36:25" itemprop="dateModified" datetime="2021-02-22T17:36:25+08:00">2021-02-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-
         </div>
-      </header>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/astilt322" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/u/3984800033?is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">30</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/">多线程/并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
 
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-%E3%80%81linux/" rel="tag">Mac 、linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Presto/" rel="tag">Presto</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPI/" rel="tag">SPI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">aop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brew/" rel="tag">brew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clickHouse/" rel="tag">clickHouse</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datax/" rel="tag">datax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastjson/" rel="tag">fastjson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greenplum/" rel="tag">greenplum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop/" rel="tag">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/" rel="tag">hive</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/" rel="tag">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda/" rel="tag">lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myBatis/" rel="tag">myBatis</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/" rel="tag">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag">单元测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/" rel="tag">多线程/并发</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" rel="tag">权限管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%9B%E5%9E%8B/" rel="tag">泛型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" rel="tag">经济学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Elasticsearch/" style="font-size: 13.4px;">Elasticsearch</a> <a href="/tags/Mac/" style="font-size: 13px;">Mac</a> <a href="/tags/Mac-%E3%80%81linux/" style="font-size: 13px;">Mac 、linux</a> <a href="/tags/Presto/" style="font-size: 13px;">Presto</a> <a href="/tags/SPI/" style="font-size: 13px;">SPI</a> <a href="/tags/aop/" style="font-size: 13px;">aop</a> <a href="/tags/brew/" style="font-size: 13px;">brew</a> <a href="/tags/clickHouse/" style="font-size: 14px;">clickHouse</a> <a href="/tags/datax/" style="font-size: 13px;">datax</a> <a href="/tags/docker/" style="font-size: 13.8px;">docker</a> <a href="/tags/fastjson/" style="font-size: 13px;">fastjson</a> <a href="/tags/git/" style="font-size: 13.2px;">git</a> <a href="/tags/greenplum/" style="font-size: 13px;">greenplum</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13.2px;">hive</a> <a href="/tags/idea/" style="font-size: 13px;">idea</a> <a href="/tags/lambda/" style="font-size: 13px;">lambda</a> <a href="/tags/maven/" style="font-size: 13.4px;">maven</a> <a href="/tags/myBatis/" style="font-size: 13.6px;">myBatis</a> <a href="/tags/mysql/" style="font-size: 13px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/postgresql/" style="font-size: 13px;">postgresql</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/spring/" style="font-size: 13.6px;">spring</a> <a href="/tags/tmux/" style="font-size: 13px;">tmux</a> <a href="/tags/vim/" style="font-size: 13px;">vim</a> <a href="/tags/zookeeper/" style="font-size: 13px;">zookeeper</a> <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">单元测试</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">命令</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 13.2px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/" style="font-size: 13.8px;">多线程/并发</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 13px;">方法论</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13px;">日志</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 13px;">权限管理</a> <a href="/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 13px;">泛型</a> <a href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" style="font-size: 13px;">经济学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="title">设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:33:14.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/springBoot%E6%89%93%E5%8C%85/" class="title">springBoot打包</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:29:41.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/LockSupport/" class="title">LockSupport</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:45.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E4%BF%A1%E5%8F%B7%E9%87%8F/" class="title">信号量</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:39.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/">多线程/并发</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E5%BE%AA%E7%8E%AF%E6%A0%85%E6%A0%8F/" class="title">循环栅栏</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:32.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-clickhouse副本和分片" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      clickhouse副本和分片
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/" class="article-date">
+	  <time datetime="2021-02-20T08:48:02.000Z" itemprop="datePublished">2021-02-20</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/clickHouse/" rel="tag">clickHouse</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
       
         <p>副本和分片是在很多分布式系统中都有，首先简单来看看他们的概念。</p>
 <p>副本：数据结构相同，数据相同（数据层面的备份冗余）</p>
 <p>分片：数据结构相同，数据不同。（数据量层面水平切分）</p>
 <img src="/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/image-20210222111724554.png" class title="image-20210222111724554">
-
 <p>集群是副本和分片的基础，它将ClickHouse的服务拓扑由单节点延伸到多个节点，但它并不像Hadoop 生态的某些系统那样，要求所有节点组成一个单一的大集群。ClickHouse的集群配置非常灵活，用户既可以 将所有节点组成一个单一集群，也可以按照业务的诉求，把节点划分为多个小的集群。在每个小的集群区 域之间，它们的节点、分区和副本数量可以各不相同。</p>
-<h2 id="副本"><a href="#副本" class="headerlink" title="副本"></a>副本</h2><p>在clickhouse中实现副本可以使用下面引擎系列</p>
+<h2 id="副本"><a class="markdownIt-Anchor" href="#副本"></a> 副本</h2>
+<p>在clickhouse中实现副本可以使用下面引擎系列</p>
 <img src="/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/image-20210222112107307.png" class title="image-20210222112107307">
-
 <p><strong>换言之，若使用了ReplicatedMergeTree复制表系列引擎，就能应用副本的能力（后面会介绍另一种副本的实现方式）。</strong></p>
 <p>ReplicatedMergeTree是MergeTree的派生引擎，它是依靠zookeeper监听节点实现副本在节点间的传输。</p>
 <ul>
@@ -234,23 +408,19 @@
 </ul>
 <p>首先，在服务器的/etc/clickhouse-server/config.d目录下创建一个名为metrika.xml的配置文件</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">yandex</span>&gt;</span></span><br><span class="line">	   <span class="tag">&lt;<span class="name">!—ZooKeeper配置，名称自定义，一般就用这个名字就好</span> <span class="attr">--</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">node</span> <span class="attr">index</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">!—节点配置，可以配置多个地址--</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">host</span>&gt;</span>127.0.0.1<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">port</span>&gt;</span>2181<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">yandex</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>接着，在全局配置config.xml中使用<include_from>标签导入刚才定义的配置:</include_from></p>
+<p>接着，在全局配置config.xml中使用&lt;include_from&gt;标签导入刚才定义的配置:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">include_from</span>&gt;</span>/etc/clickhouse-server/config.d/metrika.xml<span class="tag">&lt;/<span class="name">include_from</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <p>并引用ZooKeeper配置的定义 ，incl与metrika.xml配置文件内的节点名称要彼此对应</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">zookeeper</span> <span class="attr">incl</span>=<span class="string">&quot;zookeeper-servers&quot;</span> <span class="attr">optional</span>=<span class="string">&quot;false&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
 <p>在clickhouse中一切皆表，重启后会有一张zookeeper代理表，通过它可以查询zk内的数据</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> system.zookeeper <span class="keyword">where</span> <span class="keyword">path</span> = <span class="string">&#x27;/&#x27;</span> </span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>副本的定义</p>
+<li>
+<p>副本的定义</p>
 <blockquote>
 <p>ReplicatedMergeTree 系列引擎</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENGINE = ReplicatedMergeTree(&#x27;zk_path&#x27;, &#x27;replica_name&#x27;)</span><br></pre></td></tr></table></figure>
-
 <p><code>zk_path</code>：用于指定在ZooKeeper中创建的数据表的路径，路径名称是自定义的，并没有固定规则，但是ck中一般约定俗成为<code>/clickhouse/tables/&#123;shard&#125;/table_name</code></p>
 <ul>
 <li>/clickhouse/tables/是约定俗成的路径固定前缀，表示存放数据表的根路径</li>
@@ -258,16 +428,12 @@
 <li>table_name表示数据表的名称，为了方便维护，通常与物理表的名字相同（也是不强制）</li>
 </ul>
 <figure class="highlight plain"><figcaption><span>称是区分不同副本实例的唯一标识，一种约定成俗的命名方式是使用所在服务器的域名称。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">例如：</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;sql</span><br><span class="line">&#x2F;&#x2F;1分片，1副本. zk_path相同，replica_name不同 </span><br><span class="line">ENGINE &#x3D; ReplicatedMergeTree(&#39;&#x2F;clickhouse&#x2F;tables&#x2F;01&#x2F;test_1, &#39;linux01&#39;);</span><br><span class="line">ENGINE &#x3D; ReplicatedMergeTree(&#39;&#x2F;clickhouse&#x2F;tables&#x2F;01&#x2F;test_1, &#39;linux02&#39;);</span><br></pre></td></tr></table></figure>
-
-
-
+</li>
+<li>
+<p>实践</p>
 </li>
 </ul>
-<ul>
-<li>实践</li>
-</ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// linux01</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> replicated_sales_1( <span class="keyword">id</span> <span class="keyword">String</span>,</span><br><span class="line">price Float64,</span><br><span class="line">create_time DateTime</span><br><span class="line">) <span class="keyword">ENGINE</span> = ReplicatedMergeTree(<span class="string">&#x27;/clickhouse/tables/01/replicated_sales_1&#x27;</span>,<span class="string">&#x27;linux01&#x27;</span>) <span class="keyword">PARTITION</span> <span class="keyword">BY</span> toYYYYMM(create_time)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span></span><br><span class="line"></span><br><span class="line">// linux02</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> replicated_sales_1( <span class="keyword">id</span> <span class="keyword">String</span>,</span><br><span class="line">price Float64,</span><br><span class="line">create_time DateTime</span><br><span class="line">) <span class="keyword">ENGINE</span> = ReplicatedMergeTree(<span class="string">&#x27;/clickhouse/tables/01/replicated_sales_1&#x27;</span>,<span class="string">&#x27;linux01&#x27;</span>) <span class="keyword">PARTITION</span> <span class="keyword">BY</span> toYYYYMM(create_time)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span></span><br></pre></td></tr></table></figure>
-
 <p>这样后续在任何一个副本上执行INSERT、MERGE、MUTATION和ALTER操作都会影响另外一个副本。</p>
 <ul>
 <li>实现原理</li>
@@ -276,43 +442,43 @@
 <p>上述linux01和linux02机器创建为例，大概步骤：</p>
 <p><strong>linux01</strong></p>
 <ul>
-<li>根据zk_path初始化所有的ZooKeeper节点。 </li>
-<li>在/replicas/节点下注册自己的副本实例linux01。 </li>
+<li>根据zk_path初始化所有的ZooKeeper节点。</li>
+<li>在/replicas/节点下注册自己的副本实例linux01。</li>
 <li>启动监听任务，监听/log日志节点。</li>
 <li>参与副本选举，选举出主副本，选举的方式是向/leader_election/插入子节点，第一个插入成功的副本 就是主副本。</li>
 </ul>
 <p><strong>linux02</strong></p>
 <ul>
-<li>在/replicas/节点下注册自己的副本实例linux02。 </li>
-<li>启动监听任务，监听/log日志节点。 </li>
+<li>在/replicas/节点下注册自己的副本实例linux02。</li>
+<li>启动监听任务，监听/log日志节点。</li>
 <li>参与副本选举，选举出主副本。在这个例子中，linux01副本成为主副本。</li>
 </ul>
 <p>后续操作任何一个节点，都会在zk上有对应的log目录，另外一个节点实时监控到log目录的变动，会动态拉取log日志，主动从主副本那里拉取数据更新自己。实际上可能会出现更新操作比较频繁，所以都是将任务放入到队列中，排队拉取更新。</p>
-<h2 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h2><p>分片可以简单理解为是表结构相同，数据不同一系列表集合。这里就可以延伸出2个问题，写入时候怎么分配，查询时候如何合并结果集。在clickhouse中引入一个Distributed表引擎，充当读写门面，它作为分布式表的一层透明代理，在集群内部自动开展数 据的写入、分发、查询、路由等工作。</p>
-<h3 id="集群配置"><a href="#集群配置" class="headerlink" title="集群配置"></a>集群配置</h3><p>Distributed表引擎需要读取集群的信息，所以首先必须为ClickHouse添加集群的配置。找到前面在 介绍ZooKeeper配置时增加的metrika.xml配置文件，在ClickHouse中，集群配置用shard代表分片、用replica代表副本。</p>
+<h2 id="分片"><a class="markdownIt-Anchor" href="#分片"></a> 分片</h2>
+<p>分片可以简单理解为是表结构相同，数据不同一系列表集合。这里就可以延伸出2个问题，写入时候怎么分配，查询时候如何合并结果集。在clickhouse中引入一个Distributed表引擎，充当读写门面，它作为分布式表的一层透明代理，在集群内部自动开展数 据的写入、分发、查询、路由等工作。</p>
+<h3 id="集群配置"><a class="markdownIt-Anchor" href="#集群配置"></a> 集群配置</h3>
+<p>Distributed表引擎需要读取集群的信息，所以首先必须为ClickHouse添加集群的配置。找到前面在 介绍ZooKeeper配置时增加的metrika.xml配置文件，在ClickHouse中，集群配置用shard代表分片、用replica代表副本。</p>
 <p>语义的配置如下所示:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 1分片、0副本</span><br><span class="line"><span class="tag">&lt;<span class="name">shard</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 分片 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">replica</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">!—副本</span> <span class="attr">--</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">shard</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 1分片、1副本</span><br><span class="line"><span class="tag">&lt;<span class="name">shard</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 分片 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">replica</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">!—副本</span> <span class="attr">--</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">replica</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">!—副本</span> <span class="attr">--</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">shard</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <p>shard更像是逻辑层面的分组，而无论是副本还是分片，它们 的载体都是replica。</p>
 <p>集群有两种配置形式：</p>
 <p><strong>1、不包含副本的分片</strong></p>
 <p>如果直接使用node标签定义分片节点，那么该集群将只包含分片，不包含副本。以下面的配置为例</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 2个分片、0个副本</span><br><span class="line"><span class="tag">&lt;<span class="name">yandex</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--自定义配置名，与config.xml配置的incl属性对应即可 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--自定义集群名称--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cluster1</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!--定义ClickHouse节点--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">node</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">host</span>&gt;</span>linux01<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">port</span>&gt;</span>9000<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--选填参数</span></span><br><span class="line"><span class="comment">                &lt;weight&gt;1&lt;/weight&gt;</span></span><br><span class="line"><span class="comment">                &lt;user&gt;&lt;/user&gt;</span></span><br><span class="line"><span class="comment">                &lt;password&gt;&lt;/password&gt;</span></span><br><span class="line"><span class="comment">                &lt;secure&gt;&lt;/secure&gt;</span></span><br><span class="line"><span class="comment">                &lt;compression&gt;&lt;/compression&gt; </span></span><br><span class="line"><span class="comment">								--&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">node</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">node</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">host</span>&gt;</span>linux02<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">port</span>&gt;</span>9000<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">cluster1</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">yandex</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>该配置定义了一个名为cluster1的集群，其包含了2个分片节点，它们分别指向了是linux01和linux02服务器。 </p>
+<p>该配置定义了一个名为cluster1的集群，其包含了2个分片节点，它们分别指向了是linux01和linux02服务器。</p>
 <p>现在分别对配置项进行说明:</p>
 <ul>
 <li>cluster1表示自定义的集群名称，全局唯一，是后续引用集群配置的唯一标识。在一个配置文件内，可以定义任意组集群。</li>
-<li>node用于定义分片节点，不包含副本。 </li>
+<li>node用于定义分片节点，不包含副本。</li>
 <li>host指定部署了ClickHouse节点的服务器地址。</li>
 <li>port指定ClickHouse服务的TCP端口。</li>
 </ul>
-<p>接下来介绍选填参数: </p>
+<p>接下来介绍选填参数:</p>
 <ul>
-<li>weight分片权重默认为1，在后续小节中会对其详细介绍。 </li>
-<li>user为ClickHouse用户，默认为default。 </li>
-<li>password为ClickHouse的用户密码，默认为空字符串。 </li>
-<li>secure为SSL连接的端口，默认为9440。 </li>
+<li>weight分片权重默认为1，在后续小节中会对其详细介绍。</li>
+<li>user为ClickHouse用户，默认为default。</li>
+<li>password为ClickHouse的用户密码，默认为空字符串。</li>
+<li>secure为SSL连接的端口，默认为9440。</li>
 <li>compression表示是否开启数据压缩功能，默认为true。</li>
 </ul>
 <p><strong>2、自定义分片与副本</strong></p>
@@ -324,74 +490,67 @@
 <p>效果与先前介绍的cluster1集群相同.</p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 2个分片、0个副本  </span><br><span class="line"><span class="tag">&lt;<span class="name">yandex</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--自定义配置名，与config.xml配置的incl属性对应即可 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 自定义集群名称 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cluster1</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 分片 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">shard</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">replica</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!-- 副本 --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">host</span>&gt;</span>linux01<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">port</span>&gt;</span>9000<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">shard</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">shard</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">replica</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">host</span>&gt;</span>linux02<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">port</span>&gt;</span>9000<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">shard</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">cluster1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">yandex</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>N个分片和N个副本</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 1个分片、1个副本  </span><br><span class="line"><span class="tag">&lt;<span class="name">yandex</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--自定义配置名，与config.xml配置的incl属性对应即可 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 自定义集群名称 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cluster1</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 分片 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">shard</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">replica</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!-- 副本 --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">host</span>&gt;</span>linux01<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">port</span>&gt;</span>9000<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">replica</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">host</span>&gt;</span>linux02<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">port</span>&gt;</span>9000<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">shard</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">cluster1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">yandex</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>查询：</strong>完成上述配置之后，可以查询系统表验证集群配置是否已被加载</p>
+<p>**查询：**完成上述配置之后，可以查询系统表验证集群配置是否已被加载</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cluster, host_name <span class="keyword">FROM</span> system.clusters;</span><br></pre></td></tr></table></figure>
-
-<h3 id="分布式DDL"><a href="#分布式DDL" class="headerlink" title="分布式DDL"></a>分布式DDL</h3><p>在副本中，我们利用ReplicatedMergeTree操作副本表，需要登陆到2台机器上，分别操作，麻烦。在引入集群配置后，在ck中可以执行分布式DDL。</p>
+<h3 id="分布式ddl"><a class="markdownIt-Anchor" href="#分布式ddl"></a> 分布式DDL</h3>
+<p>在副本中，我们利用ReplicatedMergeTree操作副本表，需要登陆到2台机器上，分别操作，麻烦。在引入集群配置后，在ck中可以执行分布式DDL。</p>
 <ul>
 <li>语法</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// cluster_name对应了配置文件中的集群名称，这里也就是cluster1</span><br><span class="line"><span class="keyword">CREATE</span>/<span class="keyword">DROP</span>/<span class="keyword">RENAME</span>/<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">ON</span> CLUSTER cluster_name</span><br></pre></td></tr></table></figure>
-
 <p>ReplicatedMergeTree中示例，可以替换成分布式DDL</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 一个分片，1个副本</span><br><span class="line">ENGINE = ReplicatedMergeTree(&#x27;/clickhouse/tables/01/test_1, &#x27;linux01&#x27;);</span><br><span class="line">ENGINE = ReplicatedMergeTree(&#x27;/clickhouse/tables/01/test_1, &#x27;linux02&#x27;);</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test_1 <span class="keyword">ON</span> CLUSTER cluster1( </span><br><span class="line"><span class="keyword">id</span> <span class="keyword">String</span>,</span><br><span class="line">price Float64,</span><br><span class="line">create_time DateTime</span><br><span class="line">) <span class="keyword">ENGINE</span> = ReplicatedMergeTree(<span class="string">&#x27;/clickhouse/tables/&#123;shard&#125;/test_1&#x27;</span>,<span class="string">&#x27;&#123;replica&#125;&#x27;</span>) </span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> toYYYYMM(create_time)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span></span><br></pre></td></tr></table></figure>
-
 <p>利用宏变量，用{shard}和{replica}两个动态宏变量代替了硬编码方式。具体是在config.xml配置变量</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// linux01</span><br><span class="line"><span class="tag">&lt;<span class="name">macros</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">shard</span>&gt;</span>01<span class="tag">&lt;/<span class="name">shard</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">replica</span>&gt;</span>linux01<span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">macros</span>&gt;</span></span><br><span class="line">// linux02</span><br><span class="line"><span class="tag">&lt;<span class="name">macros</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">shard</span>&gt;</span>02<span class="tag">&lt;/<span class="name">shard</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">replica</span>&gt;</span>linux02<span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">macros</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>原理</li>
 </ul>
 <p>与ReplicatedMergeTree类似，分布式DDL语句在执行的过程中也需要借助ZooKeeper的协同能力，以实现日志分发。在默认情况下，分布式DDL在ZooKeeper内使用的根路径为:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/clickhouse/task_queue/ddl</span><br></pre></td></tr></table></figure>
-
 <p>该路径由config.xml内的distributed_ddl配置指定:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">distributed_ddl</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Path in ZooKeeper to queue with DDL queries --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span>&gt;</span>/clickhouse/task_queue/ddl<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">distributed_ddl</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Distributed引擎"><a href="#Distributed引擎" class="headerlink" title="Distributed引擎"></a>Distributed引擎</h3><h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>Distributed表引擎是分布式表的代名词，它自身不存储任何数据，而是作为数据分片的透明代理，能够 自动路由数据至集群中的各个节点，所以Distributed表引擎需要和其他数据表引擎一起协同工作。</p>
+<h3 id="distributed引擎"><a class="markdownIt-Anchor" href="#distributed引擎"></a> Distributed引擎</h3>
+<h4 id="结构"><a class="markdownIt-Anchor" href="#结构"></a> 结构</h4>
+<p>Distributed表引擎是分布式表的代名词，它自身不存储任何数据，而是作为数据分片的透明代理，能够 自动路由数据至集群中的各个节点，所以Distributed表引擎需要和其他数据表引擎一起协同工作。</p>
 <img src="/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/image-20210222163659175.png" class title="image-20210222163659175">
-
 <ul>
-<li><p>本地表:通常以<em>local为后缀进行命名。本地表是承接数据的载体，可以使用非Distributed的任意表引 擎，一张本地表对应了一个数据分片。</em></p>
+<li>
+<p>本地表:通常以_local为后缀进行命名。本地表是承接数据的载体，可以使用非Distributed的任意表引 擎，一张本地表对应了一个数据分片。_</p>
 </li>
-<li><p>分布式表:通常以_all为后缀进行命名。分布式表只能使用Distributed表引擎，它与本地表形成一对多 的映射关系，日后将通过分布式表代理操作多张本地表。</p>
+<li>
+<p>分布式表:通常以_all为后缀进行命名。分布式表只能使用Distributed表引擎，它与本地表形成一对多 的映射关系，日后将通过分布式表代理操作多张本地表。</p>
 </li>
 </ul>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENGINE = Distributed(cluster, database, table [,sharding_key])</span><br></pre></td></tr></table></figure>
-
+<h4 id="定义"><a class="markdownIt-Anchor" href="#定义"></a> 定义</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENGINE = Distributed(cluster, database, table [,sharding_key])</span><br></pre></td></tr></table></figure>
 <ul>
 <li>cluster:集群名称，与集群配置中的自定义名称相对应。在对分布式表执行写入和查询的过程中，它会使用集群的配置信息来找到相应的host节点。</li>
 <li>database和table:分别对应数据库和表的名称，分布式表使用这组配置映射到本地表。</li>
 <li>sharding_key:分片键，选填参数。在数据写入的过程中，分布式表会依据分片键的规则，将数据分布 到各个host节点的本地表。</li>
 </ul>
-<h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><blockquote>
+<h4 id="创建"><a class="markdownIt-Anchor" href="#创建"></a> 创建</h4>
+<blockquote>
 <p>Distributed表运用的是读时检查的机制，对创建分 布式表和本地表的顺序并没有强制要求。</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test_shard_2_all <span class="keyword">ON</span> CLUSTER sharding_simple ( <span class="keyword">id</span> UInt64</span><br><span class="line">)<span class="keyword">ENGINE</span> = <span class="keyword">Distributed</span>(sharding_simple, <span class="keyword">default</span>, test_shard_2_local,<span class="keyword">rand</span>())</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test_shard_2_local <span class="keyword">ON</span> CLUSTER sharding_simple ( <span class="keyword">id</span> UInt64</span><br><span class="line">)<span class="keyword">ENGINE</span> = MergeTree() <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span></span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">id</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="操作影响"><a href="#操作影响" class="headerlink" title="操作影响"></a>操作影响</h4><ul>
+<h4 id="操作影响"><a class="markdownIt-Anchor" href="#操作影响"></a> 操作影响</h4>
+<ul>
 <li>INSERT和SELECT查询：Distributed将会以分布式的方式作用于local本 地表。</li>
 <li>CREATE、DROP、RENAME和ALTER：只会修改Distributed表自身，并不会修改local本地表。</li>
 </ul>
-<h4 id="分片规则"><a href="#分片规则" class="headerlink" title="分片规则"></a>分片规则</h4><p>分片键要求返回一个整型类型的取值，包括Int系列和UInt系列。如果不声明分片键，那么分布式表只能包含一个分片，这意味着只能映射一张本地表，否则，在写入数据时将会异常。</p>
+<h4 id="分片规则"><a class="markdownIt-Anchor" href="#分片规则"></a> 分片规则</h4>
+<p>分片键要求返回一个整型类型的取值，包括Int系列和UInt系列。如果不声明分片键，那么分布式表只能包含一个分片，这意味着只能映射一张本地表，否则，在写入数据时将会异常。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--按照随机数划分</span></span><br><span class="line">Distributed(cluster, database, table ,rand())</span><br><span class="line"><span class="comment">--按照用户id的散列值划分</span></span><br><span class="line">Distributed(cluster, database, table , intHash64(userid))</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>分片权重</li>
 </ul>
 <p>在集群的配置中，有一项weight(分片权重)的设置:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">sharding_simple</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 自定义集群名称 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">shard</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 分片 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">weight</span>&gt;</span>10<span class="tag">&lt;/<span class="name">weight</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 分片权重 --&gt;</span> ......</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">shard</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">shard</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">weight</span>&gt;</span>20<span class="tag">&lt;/<span class="name">weight</span>&gt;</span> ......</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">shard</span>&gt;</span> ...</span><br></pre></td></tr></table></figure>
-
 <p>weight默认为1，虽然可以将它设置成任意整数，但官方建议应该尽可能设置成较小的值。分片权重会 影响数据在分片中的倾斜程度，一个分片权重值越大，那么它被写入的数据就会越多。</p>
 <ul>
 <li>slot(槽)</li>
@@ -404,211 +563,237 @@
 <p>(1)它会找出slot的取值，其计算公式如下:</p>
 <p>其中，shard_value是分片键的取值;sum_weight是所有分片的权重之和;slot等于shard_value和 sum_weight的余数。假设某一行数据的shard_value是10，sum_weight是30(两个分片，第一个分片权重为 10，第二个分片权重为20)，那么slot值等于10(10%30=10)。</p>
 <p>(2)基于slot值找到对应的数据分片。当slot值等于10的时候，它属于[10,20)区间，所以这行数据会对 应到第二个Shard分片。</p>
-<h3 id="副本复制"><a href="#副本复制" class="headerlink" title="副本复制"></a>副本复制</h3><p>如果在集群的配置中包含了副本，那么除了分片写入流程，还会触发副本数据的复制流程。数据在多个副本之间，有两种复制实现方式:</p>
+<h3 id="副本复制"><a class="markdownIt-Anchor" href="#副本复制"></a> 副本复制</h3>
+<p>如果在集群的配置中包含了副本，那么除了分片写入流程，还会触发副本数据的复制流程。数据在多个副本之间，有两种复制实现方式:</p>
 <ul>
 <li>借助Distributed表引擎，由它将数据写入副本，Distributed节点需要同时负责分片和副本的写入</li>
 <li>在集群的shard配置中增加internal_replication参数并将其设置为true(默认为false)，那么 Distributed表在该shard中只会选择一个合适的replica并对其写入数据。此时，如果使用ReplicatedMergeTree 作为本地表的引擎，则在该shard内，多个replica副本之间的数据复制会交由ReplicatedMergeTree自己处理</li>
 </ul>
 <img src="/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/image-20210222170328623.png" class title="image-20210222170328623">
 
-
+      
     </div>
-
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
     
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2021/02/20/clickhouse%E5%89%AF%E6%9C%AC%E5%92%8C%E5%88%86%E7%89%87/" title="clickhouse副本和分片" target="_blank" rel="external">http://yoursite.com/2021/02/20/clickhouse副本和分片/</a>
+    </li>
     
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/clickHouse/" rel="tag"># clickHouse</a>
-          </div>
-
-        
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
 
 
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/02/20/clickhouse%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/" rel="prev" title="clickhouse数据查询">
-      <i class="fa fa-chevron-left"></i> clickhouse数据查询
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/02/20/clickhouse%E8%BF%90%E7%BB%B4/" rel="next" title="clickhouse运维">
-      clickhouse运维 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-  </div>
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%AF%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">副本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%89%87"><span class="nav-number">2.</span> <span class="nav-text">分片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">集群配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8FDDL"><span class="nav-number">2.2.</span> <span class="nav-text">分布式DDL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Distributed%E5%BC%95%E6%93%8E"><span class="nav-number">2.3.</span> <span class="nav-text">Distributed引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%84"><span class="nav-number">2.3.1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-number">2.3.3.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%BD%B1%E5%93%8D"><span class="nav-number">2.3.4.</span> <span class="nav-text">操作影响</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%89%87%E8%A7%84%E5%88%99"><span class="nav-number">2.3.5.</span> <span class="nav-text">分片规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AF%E6%9C%AC%E5%A4%8D%E5%88%B6"><span class="nav-number">2.4.</span> <span class="nav-text">副本复制</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Astilt</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">77</span>
-          <span class="site-state-item-name">日志</span>
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/astilt322" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">分类</span></a>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/astilt322" target="_blank"><span class="text-dark">astilt</span><small class="ml-1x">一行代码一包烟</small></a></h3>
+        <div>是一个好人。</div>
       </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">39</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
+    </figure>
+  </div>
 </div>
 
-
-
-      </div>
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
+  </article>
   
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Astilt</span>
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/02/20/clickhouse%E8%BF%90%E7%BB%B4/" title="clickhouse运维"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/02/20/clickhouse%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/" title="clickhouse数据查询"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
   </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
-
-        
-
-
-
-
-
-
-
-
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </footer>
+    </div>
   </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
+</div>
 
 
 
+</main>
 
-  
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/astilt322" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/u/3984800033?is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
 
 
 
 
 
 
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
 
 
 
-
-
-
-  
-
-  
 
 </body>
 </html>

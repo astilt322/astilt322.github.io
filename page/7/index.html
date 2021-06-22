@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang=zh>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Hexo</title>
   <meta property="og:type" content="website">
 <meta property="og:title" content="Astilt&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/page/7/index.html">
@@ -27,1666 +25,780 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Astilt">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://yoursite.com/page/7/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: true,
-    isPost: false
-  };
-</script>
-
-  <title>Astilt's blog</title>
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/page/7/index.html">
   
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Astilt's blog" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Astilt's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-<nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-
-</nav>
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content">
-            
-
-  <div class="posts-expand">
-        
+    <link rel="alternate" href="/atom.xml" title="Astilt&#39;s blog" type="application/atom+xml">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/13/Java8%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/13/Java8%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">Java8经典用法</a>
-        </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-13 14:04:45" itemprop="dateCreated datePublished" datetime="2020-11-13T14:04:45+08:00">2020-11-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:41:59" itemprop="dateModified" datetime="2021-06-22T14:41:59+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
       
-          <h1 id="List-–-gt-Map"><a href="#List-–-gt-Map" class="headerlink" title="List –&gt; Map"></a>List –&gt; Map</h1><ul>
-<li>Map &lt;属性，属性&gt;</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; = getUsers();</span><br><span class="line">Map&lt;String,Integer&gt; userMap = Maps.newHashMap();</span><br><span class="line">userMap = list.stream().collect(Collectors.toMap(User::getName, User::getAge));</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Map &lt;属性，集合&gt;</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import com.google.common.collect.Lists;</span></span><br><span class="line">Map&lt;String, List&lt;User&gt;&gt; mapList = userList.stream()</span><br><span class="line">                .collect(Collectors.toMap(</span><br><span class="line">                        User::getUserNumber,</span><br><span class="line">                        Lists::newArrayList,</span><br><span class="line">                        (List&lt;User&gt; newList, List&lt;User&gt; oldList) -&gt; &#123;</span><br><span class="line">                            oldList.addAll(newList);</span><br><span class="line">                            <span class="keyword">return</span> oldList;</span><br><span class="line">                        &#125;));</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="List-根据属性去重"><a href="#List-根据属性去重" class="headerlink" title="List 根据属性去重"></a>List 根据属性去重</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.util.stream.Collectors.collectingAndThen;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.util.stream.Collectors.toCollection;</span><br><span class="line"></span><br><span class="line">List&lt;AdmCustBuyHis&gt; all = buyHisService.list();</span><br><span class="line"></span><br><span class="line">all = all.stream().collect(collectingAndThen(toCollection(() -&gt; <span class="keyword">new</span> TreeSet&lt;&gt;(Comparator.comparing(AdmCustBuyHis::getCustId))), ArrayList::<span class="keyword">new</span>));</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 交集</span></span><br><span class="line">        List&lt;String&gt; intersection = list1.stream().filter(item -&gt; list2.contains(item)).collect(toList());</span><br><span class="line">        System.out.println(<span class="string">&quot;---交集 intersection---&quot;</span>);</span><br><span class="line">        intersection.parallelStream().forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 差集 (list1 - list2)</span></span><br><span class="line">        List&lt;String&gt; reduce1 = list1.stream().filter(item -&gt; !list2.contains(item)).collect(toList());</span><br><span class="line">        System.out.println(<span class="string">&quot;---差集 reduce1 (list1 - list2)---&quot;</span>);</span><br><span class="line">        reduce1.parallelStream().forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 差集 (list2 - list1)</span></span><br><span class="line">        List&lt;String&gt; reduce2 = list2.stream().filter(item -&gt; !list1.contains(item)).collect(toList());</span><br><span class="line">        System.out.println(<span class="string">&quot;---差集 reduce2 (list2 - list1)---&quot;</span>);</span><br><span class="line">        reduce2.parallelStream().forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 并集</span></span><br><span class="line">        List&lt;String&gt; listAll = list1.parallelStream().collect(toList());</span><br><span class="line">        List&lt;String&gt; listAll2 = list2.parallelStream().collect(toList());</span><br><span class="line">        listAll.addAll(listAll2);</span><br><span class="line">        System.out.println(<span class="string">&quot;---并集 listAll---&quot;</span>);</span><br><span class="line">        listAll.parallelStream().forEachOrdered(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 去重并集</span></span><br><span class="line">        List&lt;String&gt; listAllDistinct = listAll.stream().distinct().collect(toList());</span><br><span class="line">        System.out.println(<span class="string">&quot;---得到去重并集 listAllDistinct---&quot;</span>);</span><br><span class="line">        listAllDistinct.parallelStream().forEachOrdered(System.out::println);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
       
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/05/idea%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%87%E5%BF%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/05/idea%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%87%E5%BF%98/" class="post-title-link" itemprop="url">idea快捷键备忘</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-05 20:33:56" itemprop="dateCreated datePublished" datetime="2020-11-05T20:33:56+08:00">2020-11-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:41:48" itemprop="dateModified" datetime="2021-06-22T14:41:48+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录为MacOS 下的idea的快捷键，备忘</p>
-<ul>
-<li>optimize imports：⌃+⌥+o</li>
-<li>全屏/退出：⌃+⌘+F</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/04/postgresql%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/04/postgresql%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">未命名</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-04 11:54:46" itemprop="dateCreated datePublished" datetime="2020-11-04T11:54:46+08:00">2020-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-03 16:47:57" itemprop="dateModified" datetime="2021-06-03T16:47:57+08:00">2021-06-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在pg里面有schema的概念。这里我们可以简单理解下：database（仓库）–&gt; schema（房间）–&gt;对象（表、视图、触发器）</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it greenplum psql -h 127.0.0.1 -p 5432：5432 -U postgres</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>拉取镜像并运行：<code>docker run -it --name greenplum  -p 5432:5432 -d kevinmtrowbridge/greenplumdb_singlenode</code></li>
-<li>进入到容器内：<code>docker exec -it greenplum /bin/bash</code> </li>
-<li><code>su - gpadmin</code></li>
-<li>登陆：<code>psql -h localhost -p 5432 -U gpadmin template1</code></li>
-<li>切换到 postgres库：<code> \c  postgres</code></li>
-<li>创建用户：<code>CREATE USER astilt PASSWORD &#39;astilt&#39;;</code></li>
-<li>修改密码：<code>alter user postgres with password &#39;new password&#39;; </code></li>
-<li>授权：<code>GRANT ALL PRIVILEGES ON DATABASE postgres TO astilt;</code></li>
-<li>客户端navicat登陆吧，username：astilt，pwd：astilt</li>
-</ul>
-<h1 id="配置允许远程客户端连接"><a href="#配置允许远程客户端连接" class="headerlink" title="配置允许远程客户端连接"></a>配置允许远程客户端连接</h1><ul>
-<li>使用find  [pg的安装目录] -name pg_hba.conf</li>
-<li>最后一行加：<strong>host  all       all       0.0.0.0/0       md5</strong></li>
-<li>切换到gpadmin，执行gpstop -u 重新加载配置文件</li>
-</ul>
-<h1 id="mysql对比"><a href="#mysql对比" class="headerlink" title="mysql对比"></a>mysql对比</h1><h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><table>
-<thead>
-<tr>
-<th align="left">操作</th>
-<th align="left">MySQL</th>
-<th align="left">GP</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">退出</td>
-<td align="left"></td>
-<td align="left">\q</td>
-</tr>
-<tr>
-<td align="left">切换数据库</td>
-<td align="left">USE {dbname}</td>
-<td align="left">\c {dbname}</td>
-</tr>
-<tr>
-<td align="left">查看当前库/用户</td>
-<td align="left">无</td>
-<td align="left">\c</td>
-</tr>
-<tr>
-<td align="left">查看所有数据库</td>
-<td align="left">SHOW DATABASE</td>
-<td align="left">\l</td>
-</tr>
-<tr>
-<td align="left">切换Schema</td>
-<td align="left">无</td>
-<td align="left">SET search_path={schemaname}</td>
-</tr>
-<tr>
-<td align="left">查看Schema</td>
-<td align="left">无</td>
-<td align="left">\dn</td>
-</tr>
-<tr>
-<td align="left">列出某个schema的表</td>
-<td align="left"></td>
-<td align="left">\dt public.*</td>
-</tr>
-<tr>
-<td align="left">列出所有schema的表</td>
-<td align="left"></td>
-<td align="left">\dt <em>.</em></td>
-</tr>
-<tr>
-<td align="left">查看所用用户</td>
-<td align="left">select * from mysql.user</td>
-<td align="left">\du</td>
-</tr>
-<tr>
-<td align="left">查看所有表</td>
-<td align="left">SHOW TABLES</td>
-<td align="left">\d</td>
-</tr>
-<tr>
-<td align="left">查看表结构</td>
-<td align="left">DESC {tablename}</td>
-<td align="left">\d  {tablename}</td>
-</tr>
-<tr>
-<td align="left">按列展示结果</td>
-<td align="left">\G（跟在SQL语句后）</td>
-<td align="left">\x（单独运行，再次运行切回按行）</td>
-</tr>
-<tr>
-<td align="left">查看运行时间</td>
-<td align="left">默认展示</td>
-<td align="left">\timing</td>
-</tr>
-<tr>
-<td align="left">查看客户端连接</td>
-<td align="left">SHOW PROCESSLIST</td>
-<td align="left">SELECT * FROM pg_stat_activity</td>
-</tr>
-<tr>
-<td align="left">客户端工具</td>
-<td align="left">mysql -h{hostname} -P{port} -u{user} -p{pwd} {dbname}</td>
-<td align="left">PGPASSWORD={pwd} psql -h{hostname} -p{port} -U{user} -d {dbname}</td>
-</tr>
-</tbody></table>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="自增长"><a href="#自增长" class="headerlink" title="自增长"></a>自增长</h3><ul>
-<li>Mysql</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`mysql_test`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>  <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT, </span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="string">`id`</span>)</span><br><span class="line">  ) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>pg</p>
-<blockquote>
-<p>使用的 <a target="_blank" rel="noopener" href="https://www.postgresql.org/docs/8.3/sql-createsequence.html">Sequence</a></p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 1</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> gp_test (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">SERIAL</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">  <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>)</span><br><span class="line">  ) </span><br><span class="line">  // <span class="number">2</span></span><br><span class="line"> <span class="keyword">CREATE</span> <span class="keyword">SEQUENCE</span> users_id_seq <span class="keyword">INCREMENT</span> <span class="keyword">BY</span> <span class="number">2</span> <span class="keyword">MINVALUE</span>  <span class="number">10000</span> MAXVALUE <span class="number">99999</span>;</span><br><span class="line"> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> gp_test (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">bigint</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NEXTVAL</span> (<span class="string">&#x27;users_id_seq&#x27;</span>),</span><br><span class="line">  <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>)</span><br><span class="line">  )   </span><br></pre></td></tr></table></figure>
-
-<h2 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h2><table>
-<thead>
-<tr>
-<th align="left">MySQL</th>
-<th align="left">GP</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">TINYINT</td>
-<td align="left">SMALLINT</td>
-</tr>
-<tr>
-<td align="left">MEDIUMINT</td>
-<td align="left">INTEGER</td>
-</tr>
-<tr>
-<td align="left">TINYINT UNSIGNED</td>
-<td align="left">SMALLINT check({columnname} &gt;= 0)</td>
-</tr>
-<tr>
-<td align="left">FLOAT</td>
-<td align="left">REAL</td>
-</tr>
-<tr>
-<td align="left">DATETIME</td>
-<td align="left">TIMESTAMP</td>
-</tr>
-<tr>
-<td align="left">LONGTEXT</td>
-<td align="left">TEXT</td>
-</tr>
-<tr>
-<td align="left">MEDIUMTEXT</td>
-<td align="left">TEXT</td>
-</tr>
-<tr>
-<td align="left">BLOB</td>
-<td align="left">BYTEA</td>
-</tr>
-</tbody></table>
-<h1 id="PG-常用创建"><a href="#PG-常用创建" class="headerlink" title="PG 常用创建"></a>PG 常用创建</h1><ul>
-<li>用户/角色</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">ROLE</span> custom <span class="keyword">PASSWORD</span> <span class="string">&#x27;custom&#x27;</span>; (创建后不能登陆)</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> custom <span class="keyword">PASSWORD</span> <span class="string">&#x27;custom&#x27;</span>;（创建后能登陆）</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">ROLE</span> custom LOGIN;（新增login权限，可以登陆了）</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> hf <span class="keyword">TO</span> custom;（将hf数据库的所有权限都赋予custom用户）</span><br><span class="line">// 登陆</span><br><span class="line">psql -U custom -d hf -h 192.168.90.112 -p 5432</span><br><span class="line">// 修改密码</span><br><span class="line">\password [USERNAME]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>schema</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 创建一个新模式ord，对应于登录用户custom：</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">SCHEMA</span> <span class="keyword">ord</span>; </span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">SCHEMA</span> <span class="keyword">ord</span> OWNER <span class="keyword">TO</span> custom;</span><br><span class="line">// 再次创建一张test表，这次这张表要指明模式ord</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> ord.test (<span class="keyword">id</span> <span class="built_in">integer</span> <span class="keyword">not</span> <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">schema</span> gpadmin;  <span class="comment">--空schema</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">schema</span> gpadmin <span class="keyword">cascade</span>;<span class="comment">--一起删除</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>database</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 数据库所有者是当前创建数据库的角色，默认的表空间是系统的默认表空间pg_default。在`PostgreSQL`中，数据的创建是通过**克隆**数据库模板来实现的，这与SQL SERVER是同样的机制。由于`CREATE DATABASE dbname`并没有指明数据库模板，所以系统将默认克隆`template1`数据库，得到新的数据库`dbname`，template1`数据库的默认表空间是`pg_default</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> hf;</span><br><span class="line"><span class="keyword">drop</span> databasem hf;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>表空间</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLESPACE</span> ts OWNER custom LOCATION <span class="string">&#x27;/tmp/data/tsmars&#x27;</span>;</span><br><span class="line">// 指定模版和表空间创建数据库</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> hf <span class="keyword">TEMPLATE</span> template1 <span class="keyword">TABLESPACE</span> ts;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> hf OWNER <span class="keyword">TO</span> custom;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>表</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 新建</span><br><span class="line">create table ([字段名1] [类型1] &lt;references 关联表名(关联的字段名)&gt;;,[字段名2] [类型2],......&lt;,primary key (字段名m,字段名n,...)&gt;;); </span><br><span class="line">// 删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> [表名]; </span><br><span class="line">// 重命名一个表</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名A] <span class="keyword">rename</span> <span class="keyword">to</span> [表名B]; </span><br><span class="line">// 在已有的表里添加字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">add</span> <span class="keyword">column</span> [字段名] [类型]; </span><br><span class="line">//删除表中的字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">drop</span> <span class="keyword">column</span> [字段名]; </span><br><span class="line">//重命名一个字段</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">rename</span> <span class="keyword">column</span> [字段名A] <span class="keyword">to</span> [字段名B]; </span><br><span class="line">//给一个字段设置缺省值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">alter</span> <span class="keyword">column</span> [字段名] <span class="keyword">set</span> <span class="keyword">default</span> [新的默认值];</span><br><span class="line">//去除缺省值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> [表名] <span class="keyword">alter</span> <span class="keyword">column</span> [字段名] <span class="keyword">drop</span> <span class="keyword">default</span>; </span><br><span class="line">//表中插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名 ([字段名m],[字段名n],......) <span class="keyword">values</span> ([列m的值],[列n的值],......); </span><br><span class="line">//修改表中的某行某列的数据</span><br><span class="line"><span class="keyword">update</span> [表名] <span class="keyword">set</span> [目标字段名]=[目标值] <span class="keyword">where</span> [该行特征]; </span><br><span class="line">//删除表中某行数据</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> [表名] <span class="keyword">where</span> [该行特征]; </span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>执行sql文件</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -h localhost -p 5432 -U gpadmin -d tag_hub -f /sql在容器内的路径</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="日期和时间间字段"><a href="#日期和时间间字段" class="headerlink" title="日期和时间间字段"></a>日期和时间间字段</h1><ul>
-<li><p>date:日期字段，格式:2016-04-15</p>
-</li>
-<li><p>timestamp:时间字段，格式:2016-04-15 20:00:00</p>
-</li>
-<li><p>获取当时时间函数</p>
-<ul>
-<li>select now();</li>
-<li>select current_timestamp;</li>
-<li>select CURRENT_TIME;</li>
-<li>select LOCALTIME;</li>
-<li>select LOCALTIMESTAMP;</li>
-</ul>
-</li>
-<li><p>获取当天日期</p>
-<ul>
-<li>select now()+interval ‘2 day’;</li>
-</ul>
-</li>
-<li><p>时间截取</p>
-<ul>
-<li>select extract(year from now()); </li>
-</ul>
-</li>
-<li><p>时间转换: </p>
-<ul>
-<li>select timestamp ‘2012-05-12 18:54:54’;</li>
-<li>select date ‘2012-05-12 18:54:54’; </li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/03/aop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/03/aop/" class="post-title-link" itemprop="url">aop</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-03 19:02:10" itemprop="dateCreated datePublished" datetime="2020-11-03T19:02:10+08:00">2020-11-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:47:56" itemprop="dateModified" datetime="2021-06-22T14:47:56+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>之前经常使用spring的aop来做些自定义的动作，但是没有真正系统的了解过它，最近整理下。</p>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><blockquote>
-<p>Aspect-oriented Programming (AOP)，相对于Object-oriented Programming (OOP)来说是另外一种编程风格。在spring中，可以使用xml和aspectJ两种风格来定义切面。</p>
-</blockquote>
-<h2 id="Aspect"><a href="#Aspect" class="headerlink" title="Aspect"></a>Aspect</h2><ul>
-<li>添加了**@Aspect**的类</li>
-<li>基于xml配置的类</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">&quot;myAspect&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;aBean&quot;</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;aBean&quot;</span> <span class="attr">class</span>=<span class="string">&quot;...&quot;</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Join-Point"><a href="#Join-Point" class="headerlink" title="Join Point"></a>Join Point</h2><p>连接点，在spring代表一个方法的执行。spring中可以简单认为所有方法都是连接点。</p>
-<h2 id="PointCut"><a href="#PointCut" class="headerlink" title="PointCut"></a>PointCut</h2><p>切点，是用来描述连接点，通过它可以确定哪些连接点可以被增强。切点表达式，是aop的核心，稍后介绍。</p>
-<h2 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a>Advice</h2><p>由 aspect 添加到特定的Join Point(即满足 PointCut规则的 join point) 的一段代码。</p>
-<h1 id="Advice类型"><a href="#Advice类型" class="headerlink" title="Advice类型"></a>Advice类型</h1><ul>
-<li>@Before：在一个方法执行前被调用</li>
-<li>@AfterReturning：仅当方法成功完成后执行的通知，异常后不执行</li>
-<li>@AfterThrowing：方法抛出异常退出时执行的通知</li>
-<li>@After：方法执行之后调用的通知，无论方法执行是否成功</li>
-<li>@Around：方法执行之前和之后调用的通知（大而全的类型，可以替代很多类型）</li>
-</ul>
-<h1 id="切点定义"><a href="#切点定义" class="headerlink" title="切点定义"></a>切点定义</h1><h2 id="方法匹配模式：execution"><a href="#方法匹配模式：execution" class="headerlink" title="方法匹配模式：execution()"></a>方法匹配模式：execution()</h2><ul>
-<li>任意公共方法的执行：<code>execution(public * *(..))</code></li>
-<li>任何一个以“set”开始的方法的执行：<code>execution(* set*(..))</code></li>
-<li>AccountService 接口的任意方法的执行：<code>execution(* com.xyz.service.AccountService.*(..))</code></li>
-<li>定义在service包里的任意方法的执行：<code>execution(* com.xyz.service.*.*(..))</code></li>
-<li>定义在service包或者子包里的任意方法的执行：<code>execution(* com.xyz.service..*.*(..))</code></li>
-<li>在service包里的任意连接点（在Spring AOP中只是方法执行）：<code>within(com.xyz.service.*)</code></li>
-<li>在service包或者子包里的任意连接点（在Spring AOP中只是方法执行）：<code>within(com.xyz.service..*)</code></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/29/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/29/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">常用命令记录</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-29 20:46:58" itemprop="dateCreated datePublished" datetime="2020-10-29T20:46:58+08:00">2020-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:38:04" itemprop="dateModified" datetime="2021-06-22T14:38:04+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>查看mac上JDK路径</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;libexec&#x2F;java_home -V</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>mac 下ping IP和Port</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ping 172.18.100.220</span><br><span class="line">nc -vz -w  172.18.100.220 5007</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Linux下centos版本号</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/redhat-release</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Linux修改主机名</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//临时生效</span><br><span class="line">hostname yourname</span><br><span class="line"></span><br><span class="line">// 永久生效</span><br><span class="line">vim  /etc/sysconfig/network</span><br><span class="line">NETWORKING=yes</span><br><span class="line">HOSTNAME=yourname  #在这修改hostname</span><br><span class="line"></span><br><span class="line">vim  /etc/hosts</span><br><span class="line">127.0.0.1 localhost.localdomain localhost</span><br><span class="line">127.0.0.1  yourname   #在这修改hostname,若没有这一行，则添加</span><br><span class="line"></span><br><span class="line">// 重启</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>查看<strong>分区</strong>和<strong>磁盘</strong></li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br><span class="line"></span><br><span class="line">NAME                MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">sda                   8:0    0  200G  0 disk</span><br><span class="line">├─sda1                8:1    0    1M  0 part</span><br><span class="line">├─sda2                8:2    0  512M  0 part /boot</span><br><span class="line">└─sda3                8:3    0 99.5G  0 part</span><br><span class="line">  └─vg_root-lv_root 253:0    0 99.5G  0 lvm  /</span><br><span class="line">sr0                  11:0    1 1024M  0 rom</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><p>grep</p>
-<p>查找${app}进程，但是去掉grep的进程</p>
-</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep $&#123;app&#125; | grep -v grep</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/22/shiro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/22/shiro/" class="post-title-link" itemprop="url">shiro</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-22 17:07:52" itemprop="dateCreated datePublished" datetime="2020-10-22T17:07:52+08:00">2020-10-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:44:35" itemprop="dateModified" datetime="2021-06-22T14:44:35+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="能做什么？"><a href="#能做什么？" class="headerlink" title="能做什么？"></a>能做什么？</h1><p><strong>Apache Shiro™</strong> is a powerful and easy-to-use Java security framework that performs authentication, authorization, cryptography, and session management. With Shiro’s easy-to-understand API, you can quickly and easily secure any application – from the smallest mobile applications to the largest web and enterprise applications.</p>
-<p> Apache Shiro是一个功能强大且易于使用的Java安全框架，用于执行身份验证，授权，加密和会话管理。使用Shiro易于理解的API，您可以快速轻松地保护任何应用程序-从最小的移动应用程序到最大的Web和企业应用程序。</p>
-<p>Shiro以Shiro开发团队称四大基石：身份验证，授权，会话管理、加密，和特性如下图</p>
-<img src="/2020/10/22/shiro/ShiroFeatures.png" class title="ShiroFeatures">
-
-
-
-<p>Shiro以Shiro开发团队所谓的“应用程序安全性的四个基石”：身份验证，授权，会话管理和加密</p>
-<ul>
-<li><strong>身份验证：</strong>有时称为“登录”，这是证明用户是他们所说的身份的行为。</li>
-<li><strong>授权：</strong>访问控制的过程，即确定“谁”有权访问“什么”。</li>
-<li><strong>会话管理：</strong>即使在非Web或EJB应用程序中，也管理用户特定的会话。</li>
-<li><strong>加密：</strong>使用密码算法保持数据安全，同时仍然易于使用。</li>
-</ul>
-<p>在不同的应用程序环境中，还具有其他功能来支持和加强这些问题，尤其是：</p>
-<ul>
-<li>Web支持：Shiro的Web支持API可帮助轻松保护Web应用程序。</li>
-<li>缓存：缓存是Apache Shiro API的第一层公民，可确保安全操作保持快速有效。</li>
-<li>并发性：Apache Shiro的并发功能支持多线程应用程序。</li>
-<li>测试：测试支持可以帮助您编写单元测试和集成测试，并确保您的代码将按预期进行保护。</li>
-<li>“运行方式”：一种功能，允许用户采用其他用户的身份（如果允许），有时在管理方案中很有用。</li>
-<li>“记住我”：在整个会话中记住用户的身份，因此他们仅在必要时登录。</li>
-</ul>
-<h1 id="架构和术语"><a href="#架构和术语" class="headerlink" title="架构和术语"></a>架构和术语</h1><h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><img src="/2020/10/22/shiro/ShiroArchitecture.png" class title="ShiroArchitecture">
-
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul>
-<li><strong>Subject：</strong> 当前与软件交互的实体（用户，第三方服务，计划任务等）</li>
-<li><strong>SecurityManager：</strong> Shiro体系结构的核心。它主要是一个“伞”对象，用于协调其托管组件以确保它们能够顺利协同工作。它还管理Shiro对每个应用程序用户的“视图”，因此它知道如何对每个用户执行安全性操作。</li>
-<li><strong>Authenticator：</strong> 认证器，说白了就是从Realms中认证subject的真实身份，另外如果配置了认证策略（AuthenticationStrategy），会根据策略（所有领域都必须成功吗？只有第一个领域？）</li>
-<li><strong>Authorizer：</strong>授权，负责确定用户在该应用程序的访问控制。它是最终表明是否允许用户做某事的机制</li>
-<li><strong>SessionManager：</strong>管理session的，可以整合现有的session机制，例如servlet容器，主要通过SessionDAO来CURD。</li>
-<li><strong>CacheManager：</strong>管理一个叫Cache的实例，可以缓存信息，方便使用。</li>
-<li><strong>Cryptography：</strong>一套加密API机制，比如加密密钥等</li>
-<li><strong>Realms：</strong>和数据库交互，例如认证、授权等需要从DB里数据来判断，就是通过它操作的。</li>
-</ul>
-<h1 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShiroTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> SimpleAccountRealm simpleAccountRealm = <span class="keyword">new</span> SimpleAccountRealm();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        simpleAccountRealm.addAccount(<span class="string">&quot;astilt&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLogin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.设置SecurityManager环境</span></span><br><span class="line">        DefaultSecurityManager defaultSecurityManager = <span class="keyword">new</span> DefaultSecurityManager();</span><br><span class="line">        defaultSecurityManager.setRealm(simpleAccountRealm);</span><br><span class="line">        SecurityUtils.setSecurityManager(defaultSecurityManager);</span><br><span class="line">        <span class="comment">// 3.登录（使用自带token，也可以基于JWT自定义实现token）</span></span><br><span class="line">        UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">&quot;astilt&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        subject.login(token);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>初始化一个用户，放到SimpleAccountRealm里</li>
-<li>SecurityUtils里设置SecurityManager环境，设置Realm为SimpleAccountRealm</li>
-<li>构建Token，这里使用shiro自带的UsernamePasswordToken</li>
-<li>SecurityUtils里获取Subject，使用subject的ogin方法登陆，参数为上一步的token</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/14/git%E5%88%86%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%92%8C%E9%82%AE%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/14/git%E5%88%86%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%92%8C%E9%82%AE%E4%BB%B6/" class="post-title-link" itemprop="url">git分环境配置提交用户信息</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-14 20:35:33" itemprop="dateCreated datePublished" datetime="2020-10-14T20:35:33+08:00">2020-10-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:41:04" itemprop="dateModified" datetime="2021-06-22T14:41:04+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>现在大部分公司使用git作为版本控制工具，有没有过在github上提交一个commit时候，发现提交记录信息是公司的，😄太不专业了！</p>
-<p>其实git可以针对不同的文件夹配置提交用户信息，下面是我自己的配置：</p>
-<ul>
-<li>全局配置文件（～/.gitconfig）</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[alias]</span><br><span class="line">    co = checkout</span><br><span class="line">    ci = commit</span><br><span class="line">    br = branch</span><br><span class="line">    st = status</span><br><span class="line"><span class="meta">#</span><span class="bash"> 默认的用户和邮箱</span></span><br><span class="line">[user]</span><br><span class="line">    name = astilt</span><br><span class="line">    email = astilt@163.com</span><br><span class="line"><span class="meta">#</span><span class="bash"> 公司项目的目录</span></span><br><span class="line">[includeIf &quot;gitdir:~/IdeaProjects/&quot;]</span><br><span class="line">  path = ~/.gitconfig-work</span><br><span class="line"><span class="meta">#</span><span class="bash"> 个人项目目录  </span></span><br><span class="line">[includeIf &quot;gitdir:~/MyProjects/&quot;]</span><br><span class="line">  path = ~/.gitconfig-play</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>个人配置文件（~/.gitconfig-play）</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">    name = astilt</span><br><span class="line">    email = astilt@163.com</span><br></pre></td></tr></table></figure>
-
-<p>同理~/.gitconfig-work 配置公司用户名和邮箱就可以了</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">数仓建模</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-13 17:06:27" itemprop="dateCreated datePublished" datetime="2020-10-13T17:06:27+08:00">2020-10-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-17 15:46:59" itemprop="dateModified" datetime="2020-11-17T15:46:59+08:00">2020-11-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>为什么写这个主题呢？因为最近一年多来，都是在做数据资产应用，说的更具体一点是：标签中心。我们可以给标签一个大方向的基调定义，标签是一种数据吐出的方式，本质它也是数据库里面一/几个字段。回归数据仓库(Data Warehouse) 建模问题，和做普通业务一样，数据结构的好坏直接关系到后续业务使用的便利和迭代。</p>
-<h2 id="数仓分层"><a href="#数仓分层" class="headerlink" title="数仓分层"></a>数仓分层</h2><ul>
-<li>ODS：数据引入层，一般是经过ETL后的，结构和数据基本与业务系统数据一致</li>
-<li>CMD：数据公共层（E-R建模：实体，关系；维度建模：DIM，DWD，DWS）</li>
-<li>ADS：业务</li>
-</ul>
-<p><img src="/Users/hf/blog/source/_posts/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="数据分层"></p>
-<h2 id="E-R模型"><a href="#E-R模型" class="headerlink" title="E-R模型"></a>E-R模型</h2><p>和传统DBMS一样，E-R模型在数仓建设中也占据了很大部分，选择它的好处就是各个实体之间的关系明了，需要仔细梳理各种关系错，它强调是3NF，在数据量大业务复杂的情况下，可谓是一个大“魔鬼”，很考验梳理人员耐心和业务熟悉情况。</p>
-<p>补充知识：3NF：列原子性，非主键列完全依赖主键，非主键列直接依赖主键。</p>
-<h3 id="构建步骤"><a href="#构建步骤" class="headerlink" title="构建步骤"></a>构建步骤</h3><ul>
-<li>抽象主体</li>
-<li>主体属性</li>
-<li>梳理主体之间关系</li>
-<li>画出E-R图</li>
-</ul>
-<h2 id="维度模型"><a href="#维度模型" class="headerlink" title="维度模型"></a>维度模型</h2><p>与E-R模型的区别，E-R模型需要从整体考虑，梳理出每个业务实体和之间关系，工作量很大。而维度是从一个基本事件出发，可以在不了解其他业务情况下，快速构建当前业务的数据模型，因为是围绕业务事件，所以它需要很多原子信息来满足无法预估的需求。</p>
-<h3 id="构建步骤-1"><a href="#构建步骤-1" class="headerlink" title="构建步骤"></a>构建步骤</h3><ul>
-<li>基于一个事件构建事实表，例如用户订单、用户近一个月购买次数、某商品2018-2020年销售额</li>
-<li>维度表：商品、支付方式、商品产地，订单金额</li>
-</ul>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
-<li>星型</li>
-</ul>
-<img src="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%98%9F%E5%9E%8B-2582216.png" class title="星型">
-
-<ul>
-<li>雪花型</li>
-</ul>
-<img src="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E9%9B%AA%E8%8A%B1.png" class title="雪花">
-
-<ul>
-<li>星座型</li>
-</ul>
-<img src="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/%E6%98%9F%E5%BA%A7.png" class title="星座">
-
-
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>选择什么模型进行建模，需要结合业务，没有谁好或坏。不过现在互联网公司，业务错综复杂，还需要快速应用构建，所以维度建模比较常见，而常见的类型又以星座型居多</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/29/Java%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/29/Java%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Java单元测试</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-29 11:11:37" itemprop="dateCreated datePublished" datetime="2020-09-29T11:11:37+08:00">2020-09-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:42:07" itemprop="dateModified" datetime="2021-06-22T14:42:07+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h1><p>阿里巴巴Java开发手册，对于单元测试有如下描述，我大致抽象了下：</p>
-<h2 id="错误意识"><a href="#错误意识" class="headerlink" title="错误意识"></a>错误意识</h2><ul>
-<li>那是测试同学干的事情，单元测试代码是多余的！汽车的整体功能与各单元部件的测试正常与否是强相关？（认知需转变）</li>
-<li>单元测试代码不需要维护！一年半载后，那么单元测试几乎处于废弃状态。（跟随业务维护）</li>
-<li>单元测试与线上故障没有辩证关系！好的单元测试能够最大限度地规避线上故障（做比没做要好）</li>
-</ul>
-<h2 id="AIR-原则"><a href="#AIR-原则" class="headerlink" title="AIR 原则"></a>AIR 原则</h2><blockquote>
-<p>单元测试在线上运行时候，感觉像空气（air）一样并不存在，但是在质量保证上却又十分关键。</p>
-</blockquote>
-<ul>
-<li>A：Automatic（测试框架通常是定期执行的，执行过程必须完全自动化才有意义）</li>
-<li>I：Independent（单元测试用例之间决不能互相调用，也不能依赖执行的先后次序）</li>
-<li>R：Repeatable（单元测试是可以重复执行的，不能受到外界环境的影响）</li>
-</ul>
-<h2 id="BCDE-原则"><a href="#BCDE-原则" class="headerlink" title="BCDE 原则"></a>BCDE 原则</h2><ul>
-<li>B: Border，边界值测试，包括循环边界、特殊取值、特殊时间点，数据顺序。</li>
-<li>C: Correct，正确的输入，并得到预期的结果。</li>
-<li>D: Design，与设计文档相结合，来编写单元测试。</li>
-<li>E: Error，单元测试的目的是证明程序有错，而不是证明程序无错。为了发现代码中潜在的错误，我们需要在编写测试用例时有一些强制的错误输入（如非法数据、异常流程、非业务允许输入等）来得到预期的错误结果</li>
-</ul>
-<h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><p><strong>强制</strong></p>
-<ul>
-<li>粒度尽量小，最大至方法级别</li>
-<li>核心业务、核心应用、核心模块确保有单元测试</li>
-<li>代码必须写在如下工程目录：src/test/java</li>
-</ul>
-<p><strong>推荐</strong></p>
-<ul>
-<li>DAO层，Manager层，可重用度高的Service，都应该进行单元测试</li>
-<li>不手动操作数据库，请使用用程序准备符合业务的数据</li>
-<li>数据库相关的单元测试，可以设置自动回滚机制，不造脏数据</li>
-<li>不可测的代码需要做重构，不要为了要求测试而写不规范的测试代码</li>
-<li>在设计评审阶段，开发人员需要和测试人员一起确定单元测试范围，单元测试最好覆盖所有测试用例（UC）</li>
-</ul>
-<h2 id="业务代码"><a href="#业务代码" class="headerlink" title="业务代码"></a>业务代码</h2><blockquote>
-<p>为了更方便地进行单元测试，业务代码应避免以下情况</p>
-</blockquote>
-<ul>
-<li>构造方法中做的事情过多</li>
-<li>存在过多的全局变量和静态方法</li>
-<li>存在过多的外部依赖</li>
-<li>存在过多的条件语句</li>
-</ul>
-<h1 id="Junit-Mockito"><a href="#Junit-Mockito" class="headerlink" title="Junit+Mockito"></a>Junit+Mockito</h1><blockquote>
-<p>基于springBoot 1.5.19</p>
-</blockquote>
-<p>一般我们开发都是使用springBoot，引入了类似如下的依赖：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><a target="_blank" rel="noopener" href="https://junit.org/junit4/">JUnit</a> —用于 Java 应用程序的单元测试的事实上的标准。（4.x版本）</li>
-<li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/4.3.13.RELEASE/spring-framework-reference/htmlsingle/#integration-testing">Spring Test</a> 和 Spring Boot 测试—对 Spring Boot 应用程序的 Util 和集成测试支持。</li>
-<li><a target="_blank" rel="noopener" href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a> —匹配器对象库(也称为约束或谓词)。</li>
-<li><a target="_blank" rel="noopener" href="http://mockito.org/">Mockito</a> — Java 模拟框架。（1.x版本）</li>
-<li><a target="_blank" rel="noopener" href="https://joel-costigliola.github.io/assertj/">AssertJ</a> —流畅的 assert 库。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/skyscreamer/JSONassert">JSONassert</a> — JSON 的 assert 库。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/jayway/JsonPath">JsonPath</a> — JSON 的 XPath。</li>
-</ul>
-<h2 id="Junit"><a href="#Junit" class="headerlink" title="Junit"></a>Junit</h2><blockquote>
-<p>参考：<a target="_blank" rel="noopener" href="https://github.com/junit-team/junit4/wiki/Getting-started">https://github.com/junit-team/junit4/wiki/Getting-started</a></p>
-</blockquote>
-<p>JUnit 是一个 Java 编程语言的单元测试框架。JUnit 在测试驱动的开发方面有很重要的发展，是起源于 JUnit 的一个统称为 xUnit 的单元测试框架之一。</p>
-<h4 id="相关注解"><a href="#相关注解" class="headerlink" title="相关注解"></a>相关注解</h4><table>
-<thead>
-<tr>
-<th align="center">注解</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">@Test(excepted==xx.class,timeout=毫秒数)</td>
-<td align="center">修饰一个方法为测试方法，excepted参数可以忽略某些异常类</td>
-</tr>
-<tr>
-<td align="center">@Before</td>
-<td align="center">在每一个测试方法被运行前执行一次</td>
-</tr>
-<tr>
-<td align="center">@BeforeClass</td>
-<td align="center">在所有测试方法执行前执行</td>
-</tr>
-<tr>
-<td align="center">@After</td>
-<td align="center">在每一个测试方法运行后执行一次</td>
-</tr>
-<tr>
-<td align="center">@AfterClass</td>
-<td align="center">在所有测试方法执行后执行</td>
-</tr>
-<tr>
-<td align="center">@Ignore</td>
-<td align="center">修饰的类或方法会被测试运行器忽略</td>
-</tr>
-<tr>
-<td align="center">@RunWith</td>
-<td align="center">更改测试运行器</td>
-</tr>
-</tbody></table>
-<h4 id="常规用法"><a href="#常规用法" class="headerlink" title="常规用法"></a>常规用法</h4><h5 id="套件"><a href="#套件" class="headerlink" title="套件"></a>套件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskOneTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Task one do.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskTwoTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Task two do.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskThreeTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Task Three.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 更改测试运行方式为 Suite</span></span><br><span class="line"><span class="meta">@RunWith(Suite.class)</span> </span><br><span class="line"><span class="comment">// 2. 将测试类传入进来</span></span><br><span class="line"><span class="meta">@Suite</span>.SuiteClasses(&#123;TaskOneTest.class, TaskTwoTest.class, TaskThreeTest.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuitTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试套件的入口类只是组织测试类一起进行测试，无任何测试方法，</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="参数化测试"><a href="#参数化测试" class="headerlink" title="参数化测试"></a>参数化测试</h5><blockquote>
-<p>参数化测试允许开发人员使用不同的值反复运行同一个测试，遵循 5 个步骤来创建<strong>参数化测试</strong>。</p>
-</blockquote>
-<ul>
-<li>用 <code>@RunWith(Parameterized.class)</code>来注释 <strong>test 类</strong></li>
-<li>创建一个由 <code>@Parameters</code> 注释的<strong>公共的静态方法</strong>，始化所有需要测试的参数对</li>
-<li>为测试类声明几个变量，分别用于存放期望值和测试所用数据</li>
-<li>创建一个公共的构造函数，为上述声明的几个变量赋值</li>
-<li>类有一个测试，它需要注解@Test到方法。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="meta">@RunWith(Parameterized.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FibonacciTest</span> </span>&#123;</span><br><span class="line">     <span class="comment">//2</span></span><br><span class="line">    <span class="meta">@Parameterized</span>.Parameters</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Collection&lt;Object[]&gt; data() &#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.asList(<span class="keyword">new</span> Object[][]&#123;</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">2</span>, <span class="number">1</span>&#125;, &#123;<span class="number">3</span>, <span class="number">2</span>&#125;, &#123;<span class="number">4</span>, <span class="number">3</span>&#125;, &#123;<span class="number">5</span>, <span class="number">5</span>&#125;, &#123;<span class="number">6</span>, <span class="number">8</span>&#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> fInput, fExpected;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FibonacciTest</span><span class="params">(<span class="keyword">int</span> input, <span class="keyword">int</span> expected)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.fInput = input;</span><br><span class="line">        <span class="keyword">this</span>.fExpected = expected;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//5</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        assertEquals(fExpected, Fibonacci.compute(fInput));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 被测试的类的方法    </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fibonacci</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">compute</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">    	</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123; </span><br><span class="line">        	result = n; </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">        	result = compute(n - <span class="number">1</span>) + compute(n - <span class="number">2</span>); </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>若参数为单个的还可以这样做：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Parameters</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Iterable&lt;? extends Object&gt; data() &#123;</span><br><span class="line">    <span class="keyword">return</span> Arrays.asList(<span class="string">&quot;first test&quot;</span>, <span class="string">&quot;second test&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Parameters</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Object[] data() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Object[] &#123; <span class="string">&quot;first test&quot;</span>, <span class="string">&quot;second test&quot;</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h3><p>junit 断言，表格里面和assertThat。</p>
-<h6 id><a href="#" class="headerlink" title></a></h6><table>
-<thead>
-<tr>
-<th align="center">断言</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">assertArrayEquals(expecteds, actuals)</td>
-<td align="center">查看两个数组是否相等。</td>
-</tr>
-<tr>
-<td align="center">assertEquals(expected, actual)</td>
-<td align="center">查看两个对象是否相等。类似于字符串比较使用的equals()方法。</td>
-</tr>
-<tr>
-<td align="center">assertNotEquals(first, second)</td>
-<td align="center">查看两个对象是否不相等。</td>
-</tr>
-<tr>
-<td align="center">assertNull(object)</td>
-<td align="center">查看对象是否为空。</td>
-</tr>
-<tr>
-<td align="center">assertNotNull(object)</td>
-<td align="center">查看对象是否不为空。</td>
-</tr>
-<tr>
-<td align="center">assertSame(expected, actual)</td>
-<td align="center">查看两个对象的引用是否相等。类似于使用“==”比较两个对象。</td>
-</tr>
-<tr>
-<td align="center">assertNotSame(unexpected, actual)</td>
-<td align="center">查看两个对象的引用是否不相等。类似于使用“!=”比较两个对象。</td>
-</tr>
-<tr>
-<td align="center">assertTrue(condition)</td>
-<td align="center">查看运行结果是否为true。</td>
-</tr>
-<tr>
-<td align="center">assertFalse(condition)</td>
-<td align="center">查看运行结果是否为false。</td>
-</tr>
-</tbody></table>
-<h6 id="assertThat与Matcher"><a href="#assertThat与Matcher" class="headerlink" title="assertThat与Matcher"></a>assertThat与Matcher</h6><p>包括两个包org.hamcrest.CoreMatchers和org.hamcrest.Matchers</p>
-<ol>
-<li>org.hamcrest.CoreMatchers</li>
-</ol>
-<ul>
-<li>assertThat( number, allOf( greaterThan(10), lessThan(15) ) ):相当于“与”（&amp;&amp;）,即allOf中条件都必须成立</li>
-<li>assertThat( number, anyOf( greaterThan(30), lessThan(1) ) )：相当于“或”（||），即只要anyOf中有一个条件成立就可以了</li>
-<li>assertThat( number, anything() )：无论什么条件，永远为true</li>
-<li>assertThat( string, is( “engine” ) )和assertThat( string, equalTo( expectedValue ) )：两个作用是一样的，只是写法不同，都是Object的equals方法</li>
-<li>assertThat( string, not( “engine” ) ):not匹配符和is匹配符正好相反</li>
-</ul>
-<ol start="2">
-<li>org.hamcrest.Matchers</li>
-</ol>
-<p>（1）字符串相关匹配符</p>
-<ul>
-<li>assertThat( string, containsString( “engine” ) ):包含子字符串”engine”则测试通过</li>
-<li>assertThat( string, endsWith( “engine” ) )：以子字符串”engine”结尾则测试通过</li>
-<li>assertThat( string, startsWith( “engine” ) )：以子字符串”engine”开始则测试通过</li>
-<li>assertThat( testedString, equalToIgnoringCase( “engine” ) ); 忽略大小写的情况</li>
-<li>assertThat( testedString, equalToIgnoringWhiteSpace( “engine” ) )：忽略头尾的任意个空格</li>
-<li>assertThat( string, is( “engine” ) )：判断两个字符串相等</li>
-</ul>
-<p>（2）数值相关匹配符</p>
-<ul>
-<li>assertThat( number, closeTo( 10.0, 0.1 ) ):在10.0±0.1范围之内则测试通过</li>
-<li>assertThat( number, greaterThan(11) ):大于11则测试通过</li>
-<li>assertThat( number, lessThan (11) ):小于11则测试通过</li>
-<li>assertThat( number, greaterThanOrEqualTo (11) )：大于等于11则测试通过</li>
-<li>assertThat( number, lessThanOrEqualTo (11) )：小于等于11则测试通过</li>
-</ul>
-<p>（3）collection相关匹配符</p>
-<ul>
-<li>assertThat( map, hasEntry( “key”, “value” ) ):mapObject含有一个键值为”key”对应元素值为”value”测试通过</li>
-<li>assertThat( list, hasItem ( “element” ) )：iterableObject含有元素“element”项则测试通过</li>
-<li>assertThat( map, hasKey ( “key” ) )：mapObject含有键值“key”则测试通过</li>
-<li>assertThat( map, hasValue ( “key” ) )：mapObject含有元素值“value”则测试通过</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AssertTests</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertArrayEquals</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] expected = <span class="string">&quot;trial&quot;</span>.getBytes();</span><br><span class="line">    <span class="keyword">byte</span>[] actual = <span class="string">&quot;trial&quot;</span>.getBytes();</span><br><span class="line">    org.junit.Assert.assertArrayEquals(<span class="string">&quot;failure - byte arrays not same&quot;</span>, expected, actual);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertEquals</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertEquals(<span class="string">&quot;failure - strings are not equal&quot;</span>, <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertFalse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertFalse(<span class="string">&quot;failure - should be false&quot;</span>, <span class="keyword">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertNotNull</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertNotNull(<span class="string">&quot;should not be null&quot;</span>, <span class="keyword">new</span> Object());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertNotSame</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertNotSame(<span class="string">&quot;should not be same Object&quot;</span>, <span class="keyword">new</span> Object(), <span class="keyword">new</span> Object());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertNull</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertNull(<span class="string">&quot;should be null&quot;</span>, <span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertSame</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Integer aNumber = Integer.valueOf(<span class="number">768</span>);</span><br><span class="line">    org.junit.Assert.assertSame(<span class="string">&quot;should be same&quot;</span>, aNumber, aNumber);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// JUnit Matchers assertThat</span></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertThatBothContainsString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertThat(<span class="string">&quot;albumen&quot;</span>, both(containsString(<span class="string">&quot;a&quot;</span>)).and(containsString(<span class="string">&quot;b&quot;</span>)));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertThathasItemsContainsString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertThat(Arrays.asList(<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>), hasItems(<span class="string">&quot;one&quot;</span>, <span class="string">&quot;three&quot;</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertThatEveryItemContainsString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertThat(Arrays.asList(<span class="keyword">new</span> String[] &#123; <span class="string">&quot;fun&quot;</span>, <span class="string">&quot;ban&quot;</span>, <span class="string">&quot;net&quot;</span> &#125;), everyItem(containsString(<span class="string">&quot;n&quot;</span>)));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Core Hamcrest Matchers with assertThat</span></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertThatHamcrestCoreMatchers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    assertThat(<span class="string">&quot;good&quot;</span>, allOf(equalTo(<span class="string">&quot;good&quot;</span>), startsWith(<span class="string">&quot;good&quot;</span>)));</span><br><span class="line">    assertThat(<span class="string">&quot;good&quot;</span>, not(allOf(equalTo(<span class="string">&quot;bad&quot;</span>), equalTo(<span class="string">&quot;good&quot;</span>))));</span><br><span class="line">    assertThat(<span class="string">&quot;good&quot;</span>, anyOf(equalTo(<span class="string">&quot;bad&quot;</span>), equalTo(<span class="string">&quot;good&quot;</span>)));</span><br><span class="line">    assertThat(<span class="number">7</span>, not(CombinableMatcher.&lt;Integer&gt; either(equalTo(<span class="number">3</span>)).or(equalTo(<span class="number">4</span>))));</span><br><span class="line">    assertThat(<span class="keyword">new</span> Object(), not(sameInstance(<span class="keyword">new</span> Object())));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAssertTrue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    org.junit.Assert.assertTrue(<span class="string">&quot;failure - should be true&quot;</span>, <span class="keyword">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/25/hive%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/25/hive%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">hive安装</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-25 10:33:12" itemprop="dateCreated datePublished" datetime="2020-09-25T10:33:12+08:00">2020-09-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-15 12:08:53" itemprop="dateModified" datetime="2021-06-15T12:08:53+08:00">2021-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h1><p>上一篇安装了hadoop，这次我们来使用hive操作haddop。</p>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li>macOS Catalina 10.15.6</li>
-<li>JDK 1.8.0_261</li>
-<li>homebrew</li>
-</ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>brew install hive</li>
-</ul>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><ul>
-<li>环境变量</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo export HIVE_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;hive&#x2F;3.1.2_1 &gt;&gt; ~&#x2F;.zshrc</span><br><span class="line">export PATH&#x3D;$HIVE_HOME&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><h3 id="hive-site-xml"><a href="#hive-site-xml" class="headerlink" title="hive-site.xml"></a>hive-site.xml</h3><blockquote>
-<p>cd /usr/local/Cellar/hive/3.1.2_1/libexec/conf，没有就：mv hive-default.xml.template hive-site.xml，然后添加如下configuration</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.local<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://localhost:3306/metastore<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.cj.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">　　<span class="comment">&lt;!--mysql用户名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>root<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">　　<span class="comment">&lt;!--mysql密码--&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>root<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- hive用来存储不同阶段的map/reduce的执行计划的目录，同时也存储中间输出结果</span></span><br><span class="line"><span class="comment">	，默认是/tmp/&lt;user.name&gt;/hive,我们实际一般会按组区分，然后组内自建一个tmp目录存&gt;储 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.exec.local.scratchdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.downloaded.resources.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.warehouse.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/data/hive/warehouse<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.server2.logging.operation.log.location<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/tmp/hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<ul>
-<li><p>配置元数据库存</p>
-<ul>
-<li>装好mysql，创建数据库metastore。</li>
-<li>下载mysql驱动放到hive的lib目录下：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/file/?id=496588">https://dev.mysql.com/downloads/file/?id=496588</a></li>
-<li>到bin目录下，schematool -initSchema -dbType mysql</li>
-</ul>
-</li>
-</ul>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><ul>
-<li>启动metastore：hive –service metastore &amp; </li>
-<li>nohup hiveserver2 &amp; (若需要jdbc连接)</li>
-<li>运行：hive</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-  </div>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Astilt</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">77</span>
-          <span class="site-state-item-name">日志</span>
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/astilt322" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
+        <h2 id="name" class="hidden-xs hidden-sm">astilt</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">一行代码一包烟</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> HangZhou, China</small>
       </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">39</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
+      
+      <div class="search" id="search-form-wrap">
 
-
-
-      </div>
-
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Astilt</span>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
-  </div>
 
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
         
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/astilt322" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/u/3984800033?is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">30</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/">多线程/并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
 
 
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-%E3%80%81linux/" rel="tag">Mac 、linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Presto/" rel="tag">Presto</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPI/" rel="tag">SPI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">aop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brew/" rel="tag">brew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clickHouse/" rel="tag">clickHouse</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datax/" rel="tag">datax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastjson/" rel="tag">fastjson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greenplum/" rel="tag">greenplum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop/" rel="tag">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/" rel="tag">hive</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/" rel="tag">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda/" rel="tag">lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myBatis/" rel="tag">myBatis</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/" rel="tag">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag">单元测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/" rel="tag">多线程/并发</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" rel="tag">权限管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%9B%E5%9E%8B/" rel="tag">泛型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" rel="tag">经济学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
 
 
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Elasticsearch/" style="font-size: 13.4px;">Elasticsearch</a> <a href="/tags/Mac/" style="font-size: 13px;">Mac</a> <a href="/tags/Mac-%E3%80%81linux/" style="font-size: 13px;">Mac 、linux</a> <a href="/tags/Presto/" style="font-size: 13px;">Presto</a> <a href="/tags/SPI/" style="font-size: 13px;">SPI</a> <a href="/tags/aop/" style="font-size: 13px;">aop</a> <a href="/tags/brew/" style="font-size: 13px;">brew</a> <a href="/tags/clickHouse/" style="font-size: 14px;">clickHouse</a> <a href="/tags/datax/" style="font-size: 13px;">datax</a> <a href="/tags/docker/" style="font-size: 13.8px;">docker</a> <a href="/tags/fastjson/" style="font-size: 13px;">fastjson</a> <a href="/tags/git/" style="font-size: 13.2px;">git</a> <a href="/tags/greenplum/" style="font-size: 13px;">greenplum</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13.2px;">hive</a> <a href="/tags/idea/" style="font-size: 13px;">idea</a> <a href="/tags/lambda/" style="font-size: 13px;">lambda</a> <a href="/tags/maven/" style="font-size: 13.4px;">maven</a> <a href="/tags/myBatis/" style="font-size: 13.6px;">myBatis</a> <a href="/tags/mysql/" style="font-size: 13px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/postgresql/" style="font-size: 13px;">postgresql</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/spring/" style="font-size: 13.6px;">spring</a> <a href="/tags/tmux/" style="font-size: 13px;">tmux</a> <a href="/tags/vim/" style="font-size: 13px;">vim</a> <a href="/tags/zookeeper/" style="font-size: 13px;">zookeeper</a> <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">单元测试</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">命令</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 13.2px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/" style="font-size: 13.8px;">多线程/并发</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 13px;">方法论</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13px;">日志</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 13px;">权限管理</a> <a href="/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 13px;">泛型</a> <a href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" style="font-size: 13px;">经济学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
 
 
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="title">设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:33:14.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/springBoot%E6%89%93%E5%8C%85/" class="title">springBoot打包</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:29:41.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/LockSupport/" class="title">LockSupport</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:45.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E4%BF%A1%E5%8F%B7%E9%87%8F/" class="title">信号量</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:39.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/">多线程/并发</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E5%BE%AA%E7%8E%AF%E6%A0%85%E6%A0%8F/" class="title">循环栅栏</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:32.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  <main class="main" role="main">
+  
+  <div class="content article-list">
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/13/Java8%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/">Java8经典用法</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/11/13/Java8%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/" class="article-date">
+	  <time datetime="2020-11-13T06:04:45.000Z" itemprop="datePublished">11月 13</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/lambda/" rel="tag">lambda</a>
+  </span>
 
 
-      </div>
-    </footer>
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/11/13/Java8%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/05/idea%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%87%E5%BF%98/">idea快捷键备忘</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/11/05/idea%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%87%E5%BF%98/" class="article-date">
+	  <time datetime="2020-11-05T12:33:56.000Z" itemprop="datePublished">11月 5</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/idea/" rel="tag">idea</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/11/05/idea%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%87%E5%BF%98/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/11/04/postgresql%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="article-date">
+	  <time datetime="2020-11-04T03:54:46.000Z" itemprop="datePublished">11月 4</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/postgresql/" rel="tag">postgresql</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/11/04/postgresql%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/03/aop/">aop</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/11/03/aop/" class="article-date">
+	  <time datetime="2020-11-03T11:02:10.000Z" itemprop="datePublished">11月 3</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/aop/" rel="tag">aop</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/11/03/aop/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/29/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/">常用命令记录</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/10/29/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" class="article-date">
+	  <time datetime="2020-10-29T12:46:58.000Z" itemprop="datePublished">10月 29</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Mac-%E3%80%81linux/" rel="tag">Mac 、linux</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/29/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/22/shiro/">shiro</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/10/22/shiro/" class="article-date">
+	  <time datetime="2020-10-22T09:07:52.000Z" itemprop="datePublished">10月 22</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" rel="tag">权限管理</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/22/shiro/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/14/git%E5%88%86%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%92%8C%E9%82%AE%E4%BB%B6/">git分环境配置提交用户信息</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/10/14/git%E5%88%86%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%92%8C%E9%82%AE%E4%BB%B6/" class="article-date">
+	  <time datetime="2020-10-14T12:35:33.000Z" itemprop="datePublished">10月 14</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/git/" rel="tag">git</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/14/git%E5%88%86%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%92%8C%E9%82%AE%E4%BB%B6/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/">数仓建模</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/" class="article-date">
+	  <time datetime="2020-10-13T09:06:27.000Z" itemprop="datePublished">10月 13</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/13/%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/29/Java%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">Java单元测试</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/09/29/Java%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="article-date">
+	  <time datetime="2020-09-29T03:11:37.000Z" itemprop="datePublished">9月 29</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag">单元测试</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/29/Java%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/25/hive%E5%AE%89%E8%A3%85/">hive安装</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/09/25/hive%E5%AE%89%E8%A3%85/" class="article-date">
+	  <time datetime="2020-09-25T02:33:12.000Z" itemprop="datePublished">9月 25</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/hive/" rel="tag">hive</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/25/hive%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
   </div>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+    
+    <nav class="bar bar-footer clearfix" data-stick-bottom>
+        <div class="bar-inner">
+        <ul class="pager pull-left">
+            
+            <li class="prev">
+                <a href="/page/6/">
+                    <i class="icon icon-angle-left"></i>
+                    上一页
+                </a>
+            </li>
+            
+            
+            <li class="next">
+                <a href="/page/8/">
+                    下一页
+                    <i class="icon icon-angle-right"></i>
+                </a>
+            </li>
+            
+        </ul>
+        <div class="total-article bar-right">Page 7 of 8</div>
+        </div>
+    </nav>
+    
+ 
+</main>
 
-<script src="/js/utils.js"></script>
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/astilt322" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/u/3984800033?is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
 
-<script src="/js/motion.js"></script>
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/application.js"></script>
 
 
-<script src="/js/next-boot.js"></script>
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
 
 
 
 
-  
+
+
+   
 
 
 
@@ -1695,16 +807,6 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-  
 
 </body>
 </html>

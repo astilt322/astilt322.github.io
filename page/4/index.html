@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang=zh>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Hexo</title>
   <meta property="og:type" content="website">
 <meta property="og:title" content="Astilt&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/page/4/index.html">
@@ -27,1684 +25,786 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Astilt">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://yoursite.com/page/4/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: true,
-    isPost: false
-  };
-</script>
-
-  <title>Astilt's blog</title>
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/page/4/index.html">
   
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="Astilt's blog" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Astilt's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-<nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-
-</nav>
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content">
-            
-
-  <div class="posts-expand">
-        
+    <link rel="alternate" href="/atom.xml" title="Astilt&#39;s blog" type="application/atom+xml">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/19/docker%E5%AE%89%E8%A3%85/">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/19/docker%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">docker安装</a>
-        </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-19 14:56:35" itemprop="dateCreated datePublished" datetime="2021-04-19T14:56:35+08:00">2021-04-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:39:47" itemprop="dateModified" datetime="2021-06-22T14:39:47+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
       
-          
       
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/16/zk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/16/zk/" class="post-title-link" itemprop="url">zk</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-16 15:12:00" itemprop="dateCreated datePublished" datetime="2021-04-16T15:12:00+08:00">2021-04-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:46:16" itemprop="dateModified" datetime="2021-06-22T14:46:16+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Zk命令"><a href="#Zk命令" class="headerlink" title="Zk命令"></a>Zk命令</h2><p><strong>一、zk服务命令</strong></p>
-<ol>
-<li>启动ZK服务: bin/zkServer.sh start</li>
-<li>查看ZK服务状态: bin/zkServer.sh status</li>
-<li>停止ZK服务: bin/zkServer.sh stop</li>
-<li>重启ZK服务: bin/zkServer.sh restart</li>
-<li>连接服务器: zkCli.sh -server 127.0.0.1:2181</li>
-</ol>
-<p><strong>二、zk客户端命令</strong></p>
-<ul>
-<li><p>帮助：help</p>
-</li>
-<li><p>退出客户端： quit</p>
-</li>
-<li><p>创建顺序节点：<strong>create -s /zk-test 123</strong></p>
-</li>
-<li><p>创建临时节点：<strong>create -e /zk-temp 123</strong></p>
-</li>
-<li><p>创建永久节点： <strong>create /zk-permanent 123</strong></p>
-</li>
-<li><p>读取节点</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 指定节点下的所有子节点</span><br><span class="line">ls path [watch]</span><br><span class="line">// 节点数据内容和属性信息</span><br><span class="line">get path [watch]</span><br><span class="line">// 详细点较ls</span><br><span class="line">ls2 path [watch]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更新节点：<strong>set /zk-permanent 456</strong></p>
-</li>
-<li><p>删除节点：<strong>delete /zk-permanent</strong>（<strong>若删除节点存在子节点，那么无法删除该节点，必须先删除子节点，再删除父节点。</strong>）</p>
-</li>
-</ul>
-<h2 id="znode节点的状态信息"><a href="#znode节点的状态信息" class="headerlink" title="znode节点的状态信息"></a>znode节点的状态信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">czxid. 节点创建时的zxid.</span><br><span class="line">mzxid. 节点最新一次更新发生时的zxid.</span><br><span class="line">ctime. 节点创建时的时间戳.</span><br><span class="line">mtime. 节点最新一次更新发生时的时间戳.</span><br><span class="line">dataVersion. 节点数据的更新次数.</span><br><span class="line">cversion. 其子节点的更新次数.</span><br><span class="line">aclVersion. 节点ACL(授权信息)的更新次数.</span><br><span class="line">ephemeralOwner. 如果该节点为ephemeral节点, ephemeralOwner值表示与该节点绑定的session id. 如果该节点不是ephemeral节点, ephemeralOwner值为0. 至于什么是ephemeral节点, 请看后面的讲述.</span><br><span class="line">dataLength. 节点数据的字节数.</span><br><span class="line">numChildren. 子节点个数.</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/25/maven%E9%BB%98%E8%AE%A4%E5%86%85%E7%BD%AE%E5%B1%9E%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/25/maven%E9%BB%98%E8%AE%A4%E5%86%85%E7%BD%AE%E5%B1%9E%E6%80%A7/" class="post-title-link" itemprop="url">maven默认内置属性</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-25 17:42:06" itemprop="dateCreated datePublished" datetime="2021-03-25T17:42:06+08:00">2021-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:42:49" itemprop="dateModified" datetime="2021-06-22T14:42:49+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Maven 服务的内置属性有六个类别，分别是内置属性、POM 属性、自定义属性、Settings 属性、Java 系统属性和环境属性。</p>
-<h3 id="一、内置属性"><a href="#一、内置属性" class="headerlink" title="一、内置属性"></a>一、内置属性</h3><p>Maven 服务的内置属性，Maven预定义,用户可以直接使用。</p>
-<table>
-<thead>
-<tr>
-<th align="center">变量</th>
-<th align="center">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">${basedir}</td>
-<td align="center">表示项目根目录，即包含pom.xml文件的目录</td>
-</tr>
-<tr>
-<td align="center">${version}</td>
-<td align="center">表示项目版本</td>
-</tr>
-<tr>
-<td align="center">${project.basedir}</td>
-<td align="center">同${basedir}</td>
-</tr>
-<tr>
-<td align="center">${project.baseUri}</td>
-<td align="center">表示项目文件地址</td>
-</tr>
-<tr>
-<td align="center">${maven.build.timestamp}</td>
-<td align="center">表示项目构件开始时间</td>
-</tr>
-<tr>
-<td align="center">${maven.build.timestamp.format}</td>
-<td align="center">表示属性${maven.build.timestamp}的展示格式,默认值为yyyyMMdd-HHmm</td>
-</tr>
-</tbody></table>
-<h3 id="二、POM-属性"><a href="#二、POM-属性" class="headerlink" title="二、POM 属性"></a>二、POM 属性</h3><p>使用pom属性可以引用到pom.xml文件对应元素的值。例如${project.artifactId}对应了元素的值。<br>常用的POM属性包括：</p>
-<table>
-<thead>
-<tr>
-<th align="center">变量</th>
-<th align="center">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">${project.build.sourceDirectory}</td>
-<td align="center">项目的主源码目录，默认为src/main/java/</td>
-</tr>
-<tr>
-<td align="center">${project.build.testSourceDirectory}</td>
-<td align="center">项目的测试源码目录，默认为/src/test/java/</td>
-</tr>
-<tr>
-<td align="center">${project.build.directory}</td>
-<td align="center">项目构建输出目录，默认为target/</td>
-</tr>
-<tr>
-<td align="center">${project.build.outputDirectory}</td>
-<td align="center">项目主代码编译输出目录，默认为target/classes/</td>
-</tr>
-<tr>
-<td align="center">${project.build.testOutputDirectory}</td>
-<td align="center">项目测试代码编译输出目录，默认为target/testclasses/</td>
-</tr>
-<tr>
-<td align="center">${project.groupId}</td>
-<td align="center">项目的groupId.${project.artifactId}:项目的artifactId</td>
-</tr>
-<tr>
-<td align="center">${project.version}</td>
-<td align="center">项目的version,于${version}等价</td>
-</tr>
-<tr>
-<td align="center">${project.build.finalName}</td>
-<td align="center">项目打包输出文件的名称，默认为${project.artifactId}${project.version}</td>
-</tr>
-<tr>
-<td align="center">${project.packaging}</td>
-<td align="center">打包类型，缺省为jar</td>
-</tr>
-</tbody></table>
-<h3 id="三、自定义属性"><a href="#三、自定义属性" class="headerlink" title="三、自定义属性"></a>三、自定义属性</h3><p>在pom.xml文件的<properties>标签下定义的Maven属性。</properties></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mydiy.prop</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">mydiy.prop</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">projec</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="四、Settings属性"><a href="#四、Settings属性" class="headerlink" title="四、Settings属性"></a>四、Settings属性</h3><p>与pom属性同理,用户使用以<code>settings.</code>开头的属性引用settings.xml文件中的XML元素值。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 表示本地仓库的地址</span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;settings.localRepository&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="五、Java系统属性"><a href="#五、Java系统属性" class="headerlink" title="五、Java系统属性"></a>五、Java系统属性</h3><p>所有Java系统属性都可以使用Maven属性引用，可以通过命令行mvn help:system查看所有的Java系统属性。</p>
-<p>例如${user.home}指向了用户目录。</p>
-<h3 id="六、环境变量属性"><a href="#六、环境变量属性" class="headerlink" title="六、环境变量属性"></a>六、环境变量属性</h3><p>所有环境变量都可以使用以<code>env.</code>开头的Maven属性引用。可以通过命令行mvn help:system查看所有环境变量。</p>
-<p>例如${env.JAVA_HOME}指代了JAVA_HOME环境变量的值。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/25/maven/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/25/maven/" class="post-title-link" itemprop="url">maven</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-25 10:14:55" itemprop="dateCreated datePublished" datetime="2021-03-25T10:14:55+08:00">2021-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:42:43" itemprop="dateModified" datetime="2021-06-22T14:42:43+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>Maven 里对于构建过程抽象3个生命周期，每个周期包含很多阶段，但是这只是一种抽象，具体的实现是由插件完成，更准备的说是插件的目标完成。所以他们之间关系</p>
-<p>生命周期:阶段—&gt; 插件:目标</p>
-<p>在Maven里使用的命令格式：mvn 插件 : 目标，在maven中若干常用的阶段都会被绑定到插件的目标上，因此我们可以通过 mvn 阶段 运行命令。</p>
-<h1 id="2-三套生命周期"><a href="#2-三套生命周期" class="headerlink" title="2. 三套生命周期"></a>2. 三套生命周期</h1><p>Maven总共拥有三套<strong>相互独立</strong>的生命周期，分别为<code>clean、default、site</code>。每个生命周期包含一些阶段（phase），这些阶段是有顺序的，并且后面的阶段依赖于前面的阶段。</p>
-<h2 id="2-1-clean-生命周期，分为3个阶段"><a href="#2-1-clean-生命周期，分为3个阶段" class="headerlink" title="2.1 clean 生命周期，分为3个阶段"></a>2.1 clean 生命周期，分为3个阶段</h2><table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pre-clean</td>
-<td>执行一些需要在clean之前完成的工作</td>
-</tr>
-<tr>
-<td>clean</td>
-<td>移除所有上一次构建生成的文件</td>
-</tr>
-<tr>
-<td>post-clean</td>
-<td>执行一些需要在clean之后立刻完成的工作</td>
-</tr>
-</tbody></table>
-<h2 id="2-2-default生命周期，分为23个阶段"><a href="#2-2-default生命周期，分为23个阶段" class="headerlink" title="2.2 default生命周期，分为23个阶段"></a>2.2 default生命周期，分为23个阶段</h2><table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>validate</td>
-<td>验证项目结构是否正常，必要的配置文件是否存在</td>
-</tr>
-<tr>
-<td>initialize</td>
-<td>做构建前的初始化操作，比如初始化参数、创建必要的目录等</td>
-</tr>
-<tr>
-<td>generate-sources</td>
-<td>产生在编译过程中需要的源代码</td>
-</tr>
-<tr>
-<td>process-sources</td>
-<td>处理源代码，比如过滤值</td>
-</tr>
-<tr>
-<td>generate-resources</td>
-<td>产生主代码中的资源在 classpath 中的包</td>
-</tr>
-<tr>
-<td>process-resources</td>
-<td>将资源文件复制到 classpath 的对应包中</td>
-</tr>
-<tr>
-<td>compile</td>
-<td>编译项目中的源代码</td>
-</tr>
-<tr>
-<td>process-classes</td>
-<td>产生编译过程中生成的文件</td>
-</tr>
-<tr>
-<td>generate-test-sources</td>
-<td>产生编译过程中测试相关的代码</td>
-</tr>
-<tr>
-<td>process-test-sources</td>
-<td>处理测试代码</td>
-</tr>
-<tr>
-<td>generate-test-resources</td>
-<td>产生测试中资源在 classpath 中的包</td>
-</tr>
-<tr>
-<td>process-test-resources</td>
-<td>将测试资源复制到 classpath 中</td>
-</tr>
-<tr>
-<td>test-compile</td>
-<td>编译测试源码放入测试目标文件夹中</td>
-</tr>
-<tr>
-<td>process-test-classes</td>
-<td>后处理测试编译生成的文件，例如：对class文件进行字节码增强，对Maven 2.0.5及以上有效</td>
-</tr>
-<tr>
-<td>test</td>
-<td>运行测试案例</td>
-</tr>
-<tr>
-<td>prepare-package</td>
-<td>执行必要的操作，在真正打包前准备一个包。这通常会产生一个未打包、处理过版本。（Maven 2.1及以上）</td>
-</tr>
-<tr>
-<td>package</td>
-<td>将编译后的 class 和资源打包成压缩文件，比如 rar</td>
-</tr>
-<tr>
-<td>pre-integration-test</td>
-<td>做好集成测试前的准备工作，比如集成环境的参数设置</td>
-</tr>
-<tr>
-<td>integration-test</td>
-<td>集成测试</td>
-</tr>
-<tr>
-<td>post-integration-test</td>
-<td>完成集成测试后的收尾工作，比如清理集成环境的值</td>
-</tr>
-<tr>
-<td>verify</td>
-<td>检测测试后的包是否完好</td>
-</tr>
-<tr>
-<td>install</td>
-<td>将打包的组件以构件的形式，安装到本地依赖仓库中，以便共享给本地的其他项目</td>
-</tr>
-<tr>
-<td>deploy</td>
-<td>运行集成和发布环境，将测试后的最终包以构件的方式发布到远程仓库中，方便所有程序员共享</td>
-</tr>
-</tbody></table>
-<h2 id="2-3-site-生命周期，分为4个阶段"><a href="#2-3-site-生命周期，分为4个阶段" class="headerlink" title="2.3 site 生命周期，分为4个阶段"></a>2.3 site 生命周期，分为4个阶段</h2><table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pre-site</td>
-<td>执行一些需要在生成站点文档之前完成的工作</td>
-</tr>
-<tr>
-<td>site</td>
-<td>生成项目的站点文档</td>
-</tr>
-<tr>
-<td>post-site</td>
-<td>执行一些需要在生成站点文档之后完成的工作，并且为部署做准备</td>
-</tr>
-<tr>
-<td>site-deploy</td>
-<td>将生成的站点文档部署到特定的服务器上</td>
-</tr>
-</tbody></table>
-<h2 id="3-插件和目标"><a href="#3-插件和目标" class="headerlink" title="3. 插件和目标"></a>3. 插件和目标</h2><p>maven 的构建是基于插件的，每个插件包含若干个目标，介绍几个常用插件，其他参考：<a target="_blank" rel="noopener" href="http://maven.apache.org/plugins/index.html">插件</a></p>
-<h2 id="3-1-maven-resources-plugin"><a href="#3-1-maven-resources-plugin" class="headerlink" title="3.1 maven-resources-plugin"></a>3.1 maven-resources-plugin</h2><p>该插件的作用 主要是处理将<strong>主程序与测试程序</strong>所需的源文件复制到输出编译文件夹中。</p>
-<ul>
-<li>默认</li>
-</ul>
-<p>会将resources文件夹下的文件全部copy到target的classes里。</p>
-<ul>
-<li>指定特定（默认失效了）</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">// 使用resources标签处理</span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 资源目录 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 设定主资源目录  --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>**/*.yaml<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 指定处理后的资源文件输出目录，默认是$&#123;build.outputDirectory&#125;指定的目录--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;targetPath&gt;$&#123;build.outputDirectory&#125;&lt;/targetPath&gt; --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 处理主资源目下的资源文件时，是否对主资源目录开启资源过滤 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span> 	</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 使用maven-resources-plugin 插件处理</span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!-- 在default生命周期的 validate阶段就执行resources插件的copy-resources目标 --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">phase</span>&gt;</span>validate<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 指定resources插件处理资源文件到哪个目录下 --&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.outputDirectory&#125;<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 也可以用下面这样的方式（指定相对url的方式指定outputDirectory） &lt;outputDirectory&gt;target/classes&lt;/outputDirectory&gt; --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!-- 待处理的资源定义 --&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                                <span class="comment">&lt;!-- 指定resources插件处理哪个目录下的资源文件 --&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/$&#123;deploy.env&#125;/applicationContext.xml<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                                <span class="comment">&lt;!-- 指定不需要处理的资源 &lt;excludes&gt;&lt;exclude&gt;WEB-INF/*.*&lt;/exclude&gt;&lt;/excludes&gt; --&gt;</span></span><br><span class="line">                                <span class="comment">&lt;!-- 是否对待处理的资源开启过滤模式 (resources插件的copy-resources目标也有资源过滤的功能，这里配置的 </span></span><br><span class="line"><span class="comment">                        这个功能的效果跟&lt;build&gt;&lt;resources&gt;&lt;resource&gt;下配置的资源过滤是一样的，只不过可能执行的阶段不一样， 这里执行的阶段是插件指定的validate阶段，&lt;build&gt;&lt;resources&gt;&lt;resource&gt;下的配置将是在resources插件的resources目标执行时起作用（在process-resources阶段）) --&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>false<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">inherited</span>&gt;</span><span class="tag">&lt;/<span class="name">inherited</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>上传jar到Nexus</li>
-</ul>
-<p>前提是setting里面有上传的server账户</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>release<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">username</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span>yyyyy<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn deploy:deploy-file -DgroupId=com.dtwave.asset -DartifactId=gp-jdbc -Dversion=1.0.0 -Dpackaging=jar -Dfile=/Users/hf/IdeaProjects/tag-hub-server/lib/greenplum.jar -Durl=http://repo2.dtwave-inc.com/repository/maven-releases/ -DrepositoryId=release</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>自动切换mirror</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirrors&gt;</span><br><span class="line">    &lt;mirror&gt;</span><br><span class="line">        &lt;id&gt;dtwave&lt;/id&gt;</span><br><span class="line">        &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</span><br><span class="line">        &lt;name&gt;dtwavemaven&lt;/name&gt;</span><br><span class="line">        &lt;url&gt;http://repo2.dtwave-inc.com/repository/public/&lt;/url&gt;</span><br><span class="line">    &lt;/mirror&gt;</span><br><span class="line">    &lt;mirror&gt;</span><br><span class="line">        &lt;id&gt;aliyun&lt;/id&gt;</span><br><span class="line">        &lt;mirrorOf&gt;$&#123;aliyun&#125;&lt;/mirrorOf&gt;</span><br><span class="line">        &lt;name&gt;aliyunmaven&lt;/name&gt;</span><br><span class="line">        &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</span><br><span class="line">    &lt;/mirror&gt;</span><br><span class="line">    &lt;mirror&gt;</span><br><span class="line">        &lt;id&gt;aliyunApache&lt;/id&gt;</span><br><span class="line">        &lt;mirrorOf&gt;$&#123;aliyunApache&#125;&lt;/mirrorOf&gt;</span><br><span class="line">        &lt;name&gt;aliyunApacheMaven&lt;/name&gt;</span><br><span class="line">        &lt;url&gt;https://maven.aliyun.com/repository/apache-snapshots&lt;/url&gt;</span><br><span class="line">    &lt;/mirror&gt;</span><br><span class="line">    &lt;mirror&gt;</span><br><span class="line">        &lt;id&gt;netease&lt;/id&gt;</span><br><span class="line">        &lt;url&gt;http://mirrors.163.com/maven/repository/maven-public/&lt;/url&gt;</span><br><span class="line">        &lt;name&gt;neteaseMaven&lt;/name&gt;</span><br><span class="line">        &lt;mirrorOf&gt;$&#123;netease&#125;&lt;/mirrorOf&gt;</span><br><span class="line">    &lt;/mirror&gt;</span><br><span class="line">&lt;/mirrors&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>使用阿里云作为默认（需要在某个项目下执行，即有pom）    </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn help:effective-settings -Daliyun=central</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p><img src="/Users/hf/blog/source/_posts/maven/image-20210513132005069.png" alt="image-20210513132005069"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">堡垒机传输文件</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-11 12:03:30" itemprop="dateCreated datePublished" datetime="2021-03-11T12:03:30+08:00">2021-03-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-12 11:05:41" itemprop="dateModified" datetime="2021-03-12T11:05:41+08:00">2021-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="堡垒机传输文件"><a href="#堡垒机传输文件" class="headerlink" title="堡垒机传输文件"></a>堡垒机传输文件</h1><p>我使用的macoX系统，所以本次演示也是在mac上，使用homebrew 安装软件。</p>
-<ul>
-<li>下载 </li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// iterm2</span><br><span class="line">brew cask install iterm2</span><br><span class="line">// rz/sz</span><br><span class="line">brew install lrzsz</span><br><span class="line">// linux</span><br><span class="line">yum install lrzsz -y</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>iterm2-recv-zmodem.sh</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">FILE=`osascript -e &#x27;tell application &quot;iTerm&quot; to activate&#x27; -e &#x27;tell application &quot;iTerm&quot; to set thefile to choose folder with prompt &quot;Choose a folder to place received files in&quot;&#x27; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</span><br><span class="line">if [[ $FILE = &quot;&quot; ]]; then</span><br><span class="line">        echo Cancelled.</span><br><span class="line">        # Send ZModem cancel</span><br><span class="line">        echo -e \\x18\\x18\\x18\\x18\\x18</span><br><span class="line">        echo \# Cancelled transfer</span><br><span class="line">        echo</span><br><span class="line">else</span><br><span class="line">        echo $FILE</span><br><span class="line">        cd &quot;$FILE&quot;</span><br><span class="line">        /usr/local/bin/rz</span><br><span class="line">        echo \# Received $FILE</span><br><span class="line">        echo</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>item2-send-zmodem.sh</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">osascript -e &#x27;tell application &quot;iTerm2&quot; to version&#x27; &gt; /dev/null 2&gt;&amp;1 &amp;&amp; NAME=iTerm2 || NAME=iTerm</span><br><span class="line">if [[ $NAME = &quot;iTerm&quot; ]]; then</span><br><span class="line">        FILE=`osascript -e &#x27;tell application &quot;iTerm&quot; to activate&#x27; -e &#x27;tell application &quot;iTerm&quot; to set thefile to choose file with prompt &quot;Choose a file to send&quot;&#x27; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</span><br><span class="line">else</span><br><span class="line">        FILE=`osascript -e &#x27;tell application &quot;iTerm2&quot; to activate&#x27; -e &#x27;tell application &quot;iTerm2&quot; to set thefile to choose file with prompt &quot;Choose a file to send&quot;&#x27; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</span><br><span class="line">fi</span><br><span class="line">if [[ $FILE = &quot;&quot; ]]; then</span><br><span class="line">        echo Cancelled.</span><br><span class="line">        # Send ZModem cancel</span><br><span class="line">        echo -e \\x18\\x18\\x18\\x18\\x18</span><br><span class="line">        sleep 1</span><br><span class="line">        echo</span><br><span class="line">        echo \# Cancelled transfer</span><br><span class="line">else</span><br><span class="line">        /usr/local/bin/sz &quot;$FILE&quot; -e -b</span><br><span class="line">        sleep 1</span><br><span class="line">        echo</span><br><span class="line">        echo \# Received $FILE</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>文件</li>
-</ul>
-<p>新建好上述2个文件：iterm2-recv-zmodem.sh，item2-send-zmodem.sh ，然后放到/usr/local/bin 目录下，并修改mod为777。</p>
-<ul>
-<li><p>配置</p>
-<ul>
-<li>iterm2：Profiles-&gt;Edit Profiles -&gt; Advanced-&gt;Triggers-&gt;Edit</li>
-<li>选择你需要配置的Profiles，例如我这里事先配置好了跳板机的Profile</li>
-</ul>
-</li>
-</ul>
-   <img src="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/image-20210311111858819-5435521.png" class title="image-20210311111858819">
-
-
-
-<ul>
-<li><p>添加2行配置，顺序不能错</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Regular expression: \*\*B0100</span><br><span class="line">Action: Run Silent Coprocess</span><br><span class="line">Parameters: /usr/local/bin/iterm2-send-zmodem.sh</span><br><span class="line"></span><br><span class="line">Regular expression: \*\*B00000000000000</span><br><span class="line">Action: Run Silent Coprocess</span><br><span class="line">Parameters: /usr/local/bin/iterm2-recv-zmodem.sh </span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<img src="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/image-20210311112048418-5435521.png" class title="image-20210311112048418">
-
-<ul>
-<li>连接堡垒机</li>
-</ul>
-<p>Iterm2 使用command+o 快捷键调出配置好的Profiles界面，选择你刚配置的堡垒机Profile，效果如下</p>
-<img src="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/image-20210311112321022-5435521.png" class title="image-20210311112321022">
-
-<p>然后输入堡垒机密码，到选择内网服务器界面，选择你要进去一个。</p>
-<ul>
-<li>本地上传</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /你要要存放文件的目录</span><br><span class="line">// root 用户可以不用sudo, rz 具体命令可以 rz --h 查看</span><br><span class="line">sudo rz</span><br></pre></td></tr></table></figure>
-
-<p>后续就会有弹框出来，选择你需要上传的文件，传输过程可能比较慢，耐心等待</p>
-<img src="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/image-20210311112747217-5435521.png" class title="image-20210311112747217">
-
-
-
-<ul>
-<li>下载到本地</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// root 用户可以不用sudo, sz 具体命令可以 sz --h 查看</span><br><span class="line">sudo sz /你要要下载文件路径</span><br></pre></td></tr></table></figure>
-
-<img src="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/image-20210311113013298-5435521.png" class title="image-20210311113013298">
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/09/clickhouse%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/09/clickhouse%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" class="post-title-link" itemprop="url">clickhouse实践案例</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-09 09:45:16" itemprop="dateCreated datePublished" datetime="2021-03-09T09:45:16+08:00">2021-03-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-10 10:16:18" itemprop="dateModified" datetime="2021-03-10T10:16:18+08:00">2021-03-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="用户留存"><a href="#用户留存" class="headerlink" title="用户留存"></a>用户留存</h1><ul>
-<li>用户登陆表</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> login_log(</span><br><span class="line">    user_id <span class="built_in">INT</span> ,</span><br><span class="line">    log_time <span class="built_in">TIMESTAMP</span> </span><br><span class="line">) <span class="keyword">engine</span>=MergeTree() <span class="keyword">order</span> <span class="keyword">by</span> user_id;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>数据</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> login_log <span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-21 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-20 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-19 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-17 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-16 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-21 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-21 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-20 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-19 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-17 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-16 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1101</span>,<span class="string">&#x27;2021-01-21 23:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">4101</span>,<span class="string">&#x27;2021-01-20 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">4101</span>,<span class="string">&#x27;2021-01-19 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">4101</span>,<span class="string">&#x27;2021-01-17 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">4101</span>,<span class="string">&#x27;2021-01-16 22:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-16 14:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-15 23:04:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-21 18:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-20 21:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-21 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2201</span>,<span class="string">&#x27;2021-01-20 23:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-21 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-19 22:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-18 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-17 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-16 23:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">3301</span>,<span class="string">&#x27;2021-01-15 23:00:00&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>如需查询用户在2021-01-17至2021-01-21登录流失情况，则SQL语句如下：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    user_id,</span><br><span class="line">  <span class="keyword">retention</span>(</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-21&#x27;</span>,</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-20&#x27;</span>,</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-19&#x27;</span>,</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-18&#x27;</span>,</span><br><span class="line">    <span class="built_in">date</span>(log_time) = <span class="string">&#x27;2021-01-17&#x27;</span></span><br><span class="line">    ) <span class="keyword">AS</span> r</span><br><span class="line"><span class="keyword">FROM</span> login_log </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> user_id <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">user_id|r          |</span><br><span class="line"><span class="comment">-------|-----------|</span></span><br><span class="line">   1101|[1,1,1,0,1]|</span><br><span class="line">   2201|[1,1,0,0,0]|</span><br><span class="line">   3301|[1,0,1,1,1]|</span><br><span class="line">   4101|[0,0,0,0,0]|</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查询留存</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">  <span class="built_in">DATE</span>(<span class="built_in">TIMESTAMP</span> <span class="string">&#x27;2021-01-15 00:00:00&#x27;</span>) <span class="keyword">AS</span> first_date, </span><br><span class="line">  <span class="keyword">SUM</span>(r[<span class="number">1</span>]) <span class="keyword">AS</span> <span class="string">&quot;第一天活跃用户&quot;</span>, </span><br><span class="line">  <span class="keyword">SUM</span>(r[<span class="number">2</span>])/ <span class="keyword">SUM</span>(r[<span class="number">1</span>]) <span class="keyword">AS</span> <span class="string">&quot;次日留存&quot;</span>, </span><br><span class="line">  <span class="keyword">SUM</span>(r[<span class="number">3</span>])/ <span class="keyword">SUM</span>(r[<span class="number">1</span>]) <span class="keyword">AS</span> <span class="string">&quot;3日留存&quot;</span>, </span><br><span class="line">  <span class="keyword">SUM</span>(r[<span class="number">4</span>])/ <span class="keyword">SUM</span>(r[<span class="number">1</span>]) <span class="keyword">AS</span> <span class="string">&quot;7日留存&quot;</span> </span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line"><span class="comment">-- 计算2021-01-15活跃用户在第2、3、7日的登录情况，1/0 =&gt; 登录/未登录</span></span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">WITH</span> first_day_table <span class="keyword">AS</span> (</span><br><span class="line">      <span class="keyword">SELECT</span> </span><br><span class="line">        <span class="built_in">TIMESTAMP</span> <span class="string">&#x27;2021-01-15 00:00:00&#x27;</span> <span class="keyword">AS</span> first_day</span><br><span class="line">    ) </span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">      user_id, </span><br><span class="line">      <span class="keyword">retention</span>(</span><br><span class="line">                <span class="built_in">DATE</span>(log_time) = (<span class="keyword">SELECT</span> <span class="built_in">DATE</span>(first_day) <span class="keyword">FROM</span> first_day_table),</span><br><span class="line">                <span class="built_in">DATE</span>(log_time) = (<span class="keyword">SELECT</span> <span class="built_in">DATE</span>(first_day + <span class="built_in">INTERVAL</span> <span class="string">&#x27;1 day&#x27;</span>) <span class="keyword">FROM</span> first_day_table),</span><br><span class="line">                <span class="built_in">DATE</span>(log_time) = (<span class="keyword">SELECT</span> <span class="built_in">DATE</span>(first_day + <span class="built_in">INTERVAL</span> <span class="string">&#x27;2 day&#x27;</span>) <span class="keyword">FROM</span> first_day_table),</span><br><span class="line">                <span class="built_in">DATE</span>(log_time) = (<span class="keyword">SELECT</span> <span class="built_in">DATE</span>(first_day + <span class="built_in">INTERVAL</span> <span class="string">&#x27;6 day&#x27;</span>) <span class="keyword">FROM</span> first_day_table)</span><br><span class="line">                ) <span class="keyword">AS</span> r </span><br><span class="line">    <span class="comment">-- 过滤2021-01-15活跃用户在后续 1～7 日登录数据</span></span><br><span class="line">    <span class="keyword">FROM</span> </span><br><span class="line">      login_log </span><br><span class="line">    <span class="keyword">WHERE</span> </span><br><span class="line">      (</span><br><span class="line">        log_time &gt;= <span class="built_in">TIMESTAMP</span> <span class="string">&#x27;2021-01-15 00:00:00&#x27;</span></span><br><span class="line">      ) </span><br><span class="line">      <span class="keyword">AND</span> (</span><br><span class="line">        log_time &lt;= <span class="built_in">TIMESTAMP</span> <span class="string">&#x27;2021-01-15 00:00:00&#x27;</span> + <span class="built_in">INTERVAL</span> <span class="string">&#x27;6 day&#x27;</span></span><br><span class="line">      ) </span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">      user_id</span><br><span class="line">  ) <span class="keyword">AS</span> basic_table </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">  first_date;</span><br><span class="line">  </span><br><span class="line">first_date|第一天活跃用户|次日留存|3日留存|7日留存|</span><br><span class="line"><span class="comment">----------|-------|----|----|----|</span></span><br><span class="line">2021-01-15|      2| 1.0| 0.5| 0.0|  </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>函数分析</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">语法：retention(cond1, cond2, ..., cond32);</span><br><span class="line">// 示例</span><br><span class="line">r1: date=2020-01-01（ cond1 条件）。</span><br><span class="line">r2: 2020-01-01=&lt;date&lt;=2020-01-02 (cond1 和 cond2 条件）。</span><br><span class="line">r3: 2020-01-01=&lt;date&lt;=2020-01-03 (cond1 和 cond3 条件）。</span><br><span class="line">retention(date = &#x27;2020-01-01&#x27;, date = &#x27;2020-01-02&#x27;, date = &#x27;2020-01-03&#x27;) as r</span><br></pre></td></tr></table></figure>
-
-<h1 id="行为漏斗转化"><a href="#行为漏斗转化" class="headerlink" title="行为漏斗转化"></a>行为漏斗转化</h1><ul>
-<li>用户行为表</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>  user_action</span><br><span class="line">(</span><br><span class="line">    <span class="string">`uid`</span> Int32,</span><br><span class="line">    <span class="string">`event_type`</span> <span class="keyword">String</span>,</span><br><span class="line">    <span class="string">`time`</span> datetime</span><br><span class="line">)</span><br><span class="line"><span class="keyword">ENGINE</span> = MergeTree()</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> uid;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>数据</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> user_action <span class="keyword">values</span></span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 11:10:00&#x27;</span>),</span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;下单&#x27;</span>,<span class="string">&#x27;2021-01-02 11:20:00&#x27;</span>),</span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;支付&#x27;</span>,<span class="string">&#x27;2021-01-02 11:30:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">2</span>,<span class="string">&#x27;下单&#x27;</span>,<span class="string">&#x27;2021-01-02 11:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">2</span>,<span class="string">&#x27;支付&#x27;</span>,<span class="string">&#x27;2021-01-02 11:10:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">3</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:20:00&#x27;</span>),</span><br><span class="line">(<span class="number">3</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 12:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">4</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:50:00&#x27;</span>),</span><br><span class="line">(<span class="number">4</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 12:00:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:50:00&#x27;</span>),</span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 12:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;下单&#x27;</span>,<span class="string">&#x27;2021-01-02 11:10:00&#x27;</span>),</span><br><span class="line"></span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;浏览&#x27;</span>,<span class="string">&#x27;2021-01-02 11:50:00&#x27;</span>),</span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;点击&#x27;</span>,<span class="string">&#x27;2021-01-02 12:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;下单&#x27;</span>,<span class="string">&#x27;2021-01-02 12:10:00&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>30分钟作为一个时间窗口，查看窗口数据</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    user_id,</span><br><span class="line">    windowFunnel(<span class="number">1800</span>)(<span class="built_in">time</span>, event_type = <span class="string">&#x27;浏览&#x27;</span>, event_type = <span class="string">&#x27;点击&#x27;</span>, event_type = <span class="string">&#x27;下单&#x27;</span>, event_type = <span class="string">&#x27;支付&#x27;</span>) <span class="keyword">AS</span> <span class="keyword">level</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">(</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        <span class="built_in">time</span>,</span><br><span class="line">        event_type,</span><br><span class="line">        uid <span class="keyword">AS</span> user_id</span><br><span class="line">    <span class="keyword">FROM</span> <span class="keyword">action</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id</span><br><span class="line"></span><br><span class="line">user_id|<span class="keyword">level</span>|</span><br><span class="line"><span class="comment">-------|-----|</span></span><br><span class="line">      <span class="number">4</span>|    <span class="number">2</span>|</span><br><span class="line">      <span class="number">3</span>|    <span class="number">1</span>|</span><br><span class="line">      <span class="number">2</span>|    <span class="number">0</span>|</span><br><span class="line">      <span class="number">5</span>|    <span class="number">2</span>|</span><br><span class="line">      <span class="number">1</span>|    <span class="number">4</span>|</span><br><span class="line">      <span class="number">6</span>|    <span class="number">3</span>|</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>分析”2021-01-02”这天 路径为“浏览-&gt;点击-&gt;下单-&gt;支付”的转化情况</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> level_index,<span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">FROM</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">SELECT</span>  user_id, </span><br><span class="line">        arrayWithConstant(<span class="keyword">level</span>, <span class="number">1</span>) <span class="keyword">levels</span>, </span><br><span class="line">        arrayJoin(arrayEnumerate( <span class="keyword">levels</span> )) level_index</span><br><span class="line">      <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span></span><br><span class="line">          user_id,</span><br><span class="line">          windowFunnel(<span class="number">1800</span>)(</span><br><span class="line">            <span class="built_in">time</span>,</span><br><span class="line">            event_type = <span class="string">&#x27;浏览&#x27;</span>,</span><br><span class="line">            event_type = <span class="string">&#x27;点击&#x27;</span> ,</span><br><span class="line">            event_type = <span class="string">&#x27;下单&#x27;</span>,</span><br><span class="line">            event_type = <span class="string">&#x27;支付&#x27;</span></span><br><span class="line">          ) <span class="keyword">AS</span> <span class="keyword">level</span></span><br><span class="line">        <span class="keyword">FROM</span> (</span><br><span class="line">          <span class="keyword">SELECT</span>  <span class="built_in">time</span>,  event_type , uid <span class="keyword">as</span> user_id</span><br><span class="line">          <span class="keyword">FROM</span> user_action </span><br><span class="line">          <span class="keyword">WHERE</span> toDate(<span class="built_in">time</span>) = <span class="string">&#x27;2020-01-02&#x27;</span> </span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id</span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> level_index</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> level_index</span><br><span class="line"></span><br><span class="line">// 内部数据</span><br><span class="line">user_id|<span class="keyword">levels</span>   |level_index|</span><br><span class="line"><span class="comment">-------|---------|-----------|</span></span><br><span class="line">      <span class="number">4</span>|[<span class="number">1</span>,<span class="number">1</span>]    |          <span class="number">1</span>|</span><br><span class="line">      <span class="number">4</span>|[<span class="number">1</span>,<span class="number">1</span>]    |          <span class="number">2</span>|</span><br><span class="line">      <span class="number">3</span>|<span class="number">1</span>        |          <span class="number">1</span>|</span><br><span class="line">      <span class="number">5</span>|[<span class="number">1</span>,<span class="number">1</span>]    |          <span class="number">1</span>|</span><br><span class="line">      <span class="number">5</span>|[<span class="number">1</span>,<span class="number">1</span>]    |          <span class="number">2</span>|</span><br><span class="line">      <span class="number">1</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]|          <span class="number">1</span>|</span><br><span class="line">      <span class="number">1</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]|          <span class="number">2</span>|</span><br><span class="line">      <span class="number">1</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]|          <span class="number">3</span>|</span><br><span class="line">      <span class="number">1</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]|          <span class="number">4</span>|</span><br><span class="line">      <span class="number">6</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]  |          <span class="number">1</span>|</span><br><span class="line">      <span class="number">6</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]  |          <span class="number">2</span>|</span><br><span class="line">      <span class="number">6</span>|[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]  |          <span class="number">3</span>|</span><br><span class="line"></span><br><span class="line">// 结果    </span><br><span class="line">level_index|<span class="keyword">count</span>(<span class="number">1</span>)|</span><br><span class="line"><span class="comment">-----------|--------|</span></span><br><span class="line">          <span class="number">1</span>|       <span class="number">5</span>|</span><br><span class="line">          <span class="number">2</span>|       <span class="number">4</span>|</span><br><span class="line">          <span class="number">3</span>|       <span class="number">2</span>|</span><br><span class="line">          <span class="number">4</span>|       <span class="number">1</span>|       </span><br></pre></td></tr></table></figure>
-
-<h1 id="路径分析"><a href="#路径分析" class="headerlink" title="路径分析"></a>路径分析</h1><ul>
-<li>关键路径分析：已经明确了要分析的路径，需要看下这些访问路径上的用户数据</li>
-<li>智能路径分析：不确定有哪些路径，但是清楚目标路径是什么，需要知道用户在指定时间范围内都是通过哪些途径触达目标路径的</li>
-</ul>
-<p><strong>下单超过10分钟才支付</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--明确了要分析的路径</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">AS</span> <span class="string">&quot;userCount&quot;</span>,</span><br><span class="line">    <span class="keyword">sum</span>(cn) <span class="keyword">AS</span> <span class="string">&quot;actionCount&quot;</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">(</span><br><span class="line">    <span class="keyword">SELECT</span> </span><br><span class="line">        uid,</span><br><span class="line">        sequenceCount(<span class="string">&#x27;(?1)(?t&gt;=600)(?2)&#x27;</span>)(toDateTime(<span class="built_in">time</span>), event_type = <span class="string">&#x27;下单&#x27;</span>, event_type = <span class="string">&#x27;支付&#x27;</span>) <span class="keyword">AS</span> cn</span><br><span class="line">    <span class="keyword">FROM</span> user_action</span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> uid</span><br><span class="line">)</span><br><span class="line"><span class="keyword">WHERE</span> cn &gt;= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--智能路径分析</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/04/clickhouse%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/04/clickhouse%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">clickhouse集群安装</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-04 15:21:17" itemprop="dateCreated datePublished" datetime="2021-03-04T15:21:17+08:00">2021-03-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-05 14:43:15" itemprop="dateModified" datetime="2021-03-05T14:43:15+08:00">2021-03-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-准备"><a href="#1-准备" class="headerlink" title="1 准备"></a>1 准备</h1><h2 id="1-1-机器"><a href="#1-1-机器" class="headerlink" title="1.1 机器"></a>1.1 机器</h2><ul>
-<li>192.168.90.41 16G 4C</li>
-<li>192.168.90.42 16G 4C</li>
-</ul>
-<h2 id="1-2-检查cpu指令集"><a href="#1-2-检查cpu指令集" class="headerlink" title="1.2 检查cpu指令集"></a>1.2 检查cpu指令集</h2><blockquote>
-<p>官方预构建的二进制文件通常针对x86_64进行编译，并利用<code>SSE 4.2</code>指令集。</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -q sse4_2 /proc/cpuinfo &amp;&amp; echo &quot;SSE 4.2 supported&quot; || echo &quot;SSE 4.2 not supported&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>要在不支持<code>SSE 4.2</code>或<code>AArch64</code>，<code>PowerPC64LE</code>架构的处理器上运行ClickHouse，您应该通过适当的配置调整从<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/getting-started/install/#from-sources">源代码构建ClickHouse</a></strong></p>
-<h2 id="1-3-关闭防火墙"><a href="#1-3-关闭防火墙" class="headerlink" title="1.3 关闭防火墙"></a>1.3 关闭防火墙</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status firewalld.service #查看防火墙状态</span><br><span class="line">sudo systemctl stop firewalld.service #关闭防火墙</span><br><span class="line">sudo systemctl disable firewalld.service #永久关闭防火墙</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-4-设置时钟同步"><a href="#1-4-设置时钟同步" class="headerlink" title="1.4 设置时钟同步"></a>1.4 设置时钟同步</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 安装</span></span></span><br><span class="line">sudo yum install -y ntp</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 启动定时任务</span></span></span><br><span class="line">crontab -e</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 输入界面键入</span></span></span><br><span class="line">*/1 * * * * /usr/sbin/ntpdate ntp4.aliyun.com;</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-5-安装JDK"><a href="#1-5-安装JDK" class="headerlink" title="1.5 安装JDK"></a>1.5 安装JDK</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">下载 jdk-8u281-linux-x64.tar.gz</span><br><span class="line">vim ~/.bash_profile</span><br><span class="line">export JAVA_HOME=/opt/jdk_1.8/jdk1.8.0_281</span><br><span class="line">export PATH=:$JAVA_HOME/bin:$PATH</span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-6-安装zookeeper"><a href="#1-6-安装zookeeper" class="headerlink" title="1.6 安装zookeeper"></a>1.6 安装zookeeper</h2><p>不说了。。。</p>
-<h1 id="2-rpm包安装"><a href="#2-rpm包安装" class="headerlink" title="2 rpm包安装"></a>2 rpm包安装</h1><h2 id="2-1-添加依赖和储库"><a href="#2-1-添加依赖和储库" class="headerlink" title="2.1 添加依赖和储库"></a>2.1 添加依赖和储库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 依赖</span><br><span class="line">sudo yum install -y unixODBC libicudata</span><br><span class="line">sudo yum install -y libxml2-devel expat-devel libicu-devel</span><br><span class="line">// 储库</span><br><span class="line">sudo yum install yum-utils</span><br><span class="line">sudo rpm --import https://repo.clickhouse.tech/CLICKHOUSE-KEY.GPG</span><br><span class="line">sudo yum-config-manager --add-repo https://repo.clickhouse.tech/rpm/stable/x86_64</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-安装"><a href="#2-2-安装" class="headerlink" title="2.2 安装"></a>2.2 安装</h2><blockquote>
-<p>安装后默认会创建一个clickhoue用户</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install clickhouse-server clickhouse-client</span><br><span class="line">cd /etc/clickhouse-server</span><br><span class="line">ll</span><br><span class="line">config.d  config.xml  users.d  users.xml</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-3-修改配置文件"><a href="#2-3-修改配置文件" class="headerlink" title="2.3 修改配置文件"></a>2.3 修改配置文件</h2><ul>
-<li>zk配置</li>
-</ul>
-<p>在服务器的/etc/clickhouse-server/config.d目录下创建一个名为metrika.xml的配置文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">yandex</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">!—ZooKeeper配置，名称自定义，一般就用这个名字就好</span> <span class="attr">--</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">node</span> <span class="attr">index</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">!—节点配置，可以配置多个地址--</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">host</span>&gt;</span>127.0.0.1<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">port</span>&gt;</span>2181<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">zookeeper-servers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">yandex</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>接着，在全局配置config.xml中使用<include_from>标签导入刚才定义的配置:</include_from></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">include_from</span>&gt;</span>/etc/clickhouse-server/config.d/metrika.xml<span class="tag">&lt;/<span class="name">include_from</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>并引用ZooKeeper配置的定义 ，incl与metrika.xml配置文件内的节点名称要彼此对应</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">zookeeper</span> <span class="attr">incl</span>=<span class="string">&quot;zookeeper-servers&quot;</span> <span class="attr">optional</span>=<span class="string">&quot;false&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置日志和数据路径到较大的空间的目录</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /clickhouse/data </span><br><span class="line">sudo mkdir -p /clickhouse/log</span><br><span class="line">sudo chown -R clickhouse:clickhouse /clickhouse</span><br><span class="line">sudo vim /etc/clickhouse-server/config.xml</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span>&gt;</span>/clickhouse/data<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tmp_path</span>&gt;</span>/clickhouse/data/tmp/<span class="tag">&lt;/<span class="name">tmp_path</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">log</span>&gt;</span>/clickhouse/log/clickhouse-server.log<span class="tag">&lt;/<span class="name">log</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">errorlog</span>&gt;</span>/clickhouse/log/clickhouse-server.err.log<span class="tag">&lt;/<span class="name">errorlog</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>配置集群</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 1个分片、1个副本  </span><br><span class="line"><span class="tag">&lt;<span class="name">yandex</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- 之前的zk配置 --&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- 自定义集群名称 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">clickhouse_remote_servers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cluster1</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 分片 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">shard</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">replica</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!-- 副本 --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">host</span>&gt;</span>ck1<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">port</span>&gt;</span>9000<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">replica</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">host</span>&gt;</span>ck2<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">port</span>&gt;</span>9000<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">replica</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">shard</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">cluster1</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">clickhouse_remote_servers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">yandex</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>接着，在全局配置config.xml中使用<include_from>标签导入刚才定义的配置:</include_from></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">remote_servers</span> <span class="attr">incl</span>=<span class="string">&quot;clickhouse_remote_servers&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">remote_servers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>启动</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 服务端</span><br><span class="line">sudo systemctl start clickhouse-server</span><br><span class="line">sudo systemctl status clickhouse-server</span><br><span class="line">sudo systemctl stop clickhouse-server</span><br><span class="line">// 若失败查看日志</span><br><span class="line">sudo journalctl -f</span><br><span class="line">// 客户端</span><br><span class="line">CREATE TABLE test_1 ON CLUSTER cluster1( </span><br><span class="line">id String,</span><br><span class="line">price Float64,</span><br><span class="line">create_time DateTime</span><br><span class="line">) ENGINE = ReplicatedMergeTree(&#x27;/clickhouse/tables/01/test_1&#x27;,&#x27;ck1&#x27;) </span><br><span class="line">PARTITION BY toYYYYMM(create_time)</span><br><span class="line">ORDER BY id</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/04/vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/04/vim/" class="post-title-link" itemprop="url">vim</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-04 11:02:00" itemprop="dateCreated datePublished" datetime="2021-03-04T11:02:00+08:00">2021-03-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:46:07" itemprop="dateModified" datetime="2021-06-22T14:46:07+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h1><p>VI = Visual editor（可视化编辑器），VIM=VI+improved。</p>
-<h2 id="1-模式"><a href="#1-模式" class="headerlink" title="1 模式"></a>1 模式</h2><ul>
-<li>正常模式：进入vim默认的模式</li>
-<li>插入模式：正常模式下，按i、a、o等</li>
-<li>可视模式：正常模式下，按v</li>
-<li>可视块模式：正常模式下，按ctr+v</li>
-<li>替换模式：正常模式下，按R</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/03/tmux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/03/tmux/" class="post-title-link" itemprop="url">tmux</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-03 16:25:47" itemprop="dateCreated datePublished" datetime="2021-03-03T16:25:47+08:00">2021-03-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-22 14:45:48" itemprop="dateModified" datetime="2021-06-22T14:45:48+08:00">2021-06-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Tmux"><a href="#Tmux" class="headerlink" title="Tmux"></a>Tmux</h1><h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><p>都说程序员不关电脑，但是电脑不关，session也会失效。对于后端程序员来说，连接服务器操作太多了，基本上我们会遇到几个问题：</p>
-<ul>
-<li>session失效，连接中断了，又是一顿操作<code>ssh xx@xxx.xxx.xxx</code>。</li>
-<li>需要分屏在不同窗口操作！</li>
-<li>多个连接混乱，怎么“一目了然”？</li>
-</ul>
-<p>tmux是在终端中运行的程序，并允许在其内部运行多个其他终端程序。tmux内部的每个程序都有自己的终端，该终端由tmux管理，可以从运行tmux的单个终端访问该终端-这称为多路复用，而tmux是终端多路复用器。<strong>实质Tmux 就是会话与窗口的”解绑”工具，将它们彻底分离。</strong></p>
-<p><strong>安装</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install tmux</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2、概念"><a href="#2、概念" class="headerlink" title="2、概念"></a>2、概念</h2><ul>
-<li>会话：可以理解成我们服务器的”session”，每次开启tmux都是打开一个会话</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s hf</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>窗口：进入会话里看到的终端界面</li>
-<li>窗格：在窗口里分屏出来的窗口</li>
-</ul>
-<img src="/2021/03/03/tmux/image-20210303170751425.png" class title="image-20210303170751425">
-
-<p>**Tmux 窗口有大量的快捷键。所有快捷键都要通过前缀键唤起。默认的前缀键是<code>Ctrl+b</code>，即先按下<code>Ctrl+b</code>，快捷键才会生效 **</p>
-<h1 id="3、使用"><a href="#3、使用" class="headerlink" title="3、使用"></a>3、使用</h1><h2 id="3-1-会话"><a href="#3-1-会话" class="headerlink" title="3.1 会话"></a>3.1 会话</h2><p>会话是tmux里面很重要的概念，它是个联系我们窗口的钥匙。下次我们再操作可以拿着它开启之前窗口。</p>
-<ul>
-<li>新建</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>断开会话</li>
-</ul>
-<p>想会话和窗口分离，可以有：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+b d 或者 tmux detach</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>重连会话</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux attach -t  &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>枪毙会话</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux kill-session  &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>切换会话</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux switch-session  -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>重命名会话</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux rename-session -t &lt;session-name&gt; &lt;new-session-name&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux ls 或者 tmux list-session</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>快捷键</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+b d：分离当前会话。</span><br><span class="line">Ctrl+b s：列出所有会话。</span><br><span class="line">Ctrl+b $：重命名当前会话。</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="3-2-窗口-amp-窗格"><a href="#3-2-窗口-amp-窗格" class="headerlink" title="3.2 窗口&amp; 窗格"></a>3.2 窗口&amp; 窗格</h2><p>在session里面默认只有一个窗口，我们也可以新建其他（用的比较少），通常是通过创建多个窗格。因为它们命令英文单词都比较长，所以就看看怎么使用快捷键。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 窗口</span><br><span class="line">Ctrl+b c：创建一个新窗口，状态栏会显示多个窗口的信息。</span><br><span class="line">Ctrl+b p：切换到上一个窗口（按照状态栏上的顺序）。</span><br><span class="line">Ctrl+b n：切换到下一个窗口。</span><br><span class="line">Ctrl+b &lt;number&gt;：切换到指定编号的窗口，其中的&lt;number&gt;是状态栏上的窗口编号。</span><br><span class="line">Ctrl+b w：从列表中选择窗口。</span><br><span class="line">Ctrl+b ,：窗口重命名。</span><br><span class="line">// 窗格</span><br><span class="line">Ctrl+b %：划分左右两个窗格。</span><br><span class="line">Ctrl+b &quot;：划分上下两个窗格。</span><br><span class="line">Ctrl+b &lt;arrow key&gt;：光标切换到其他窗格。&lt;arrow key&gt;是指向要切换到的窗格的方向键，比如切换到下方窗格，就按方向键↓。</span><br><span class="line">Ctrl+b ;：光标切换到上一个窗格。</span><br><span class="line">Ctrl+b o：光标切换到下一个窗格。</span><br><span class="line">Ctrl+b &#123;：当前窗格与上一个窗格交换位置。</span><br><span class="line">Ctrl+b &#125;：当前窗格与下一个窗格交换位置。</span><br><span class="line">Ctrl+b Ctrl+o：所有窗格向前移动一个位置，第一个窗格变成最后一个窗格。</span><br><span class="line">Ctrl+b Alt+o：所有窗格向后移动一个位置，最后一个窗格变成第一个窗格。</span><br><span class="line">Ctrl+b x：关闭当前窗格。</span><br><span class="line">Ctrl+b !：将当前窗格拆分为一个独立窗口。</span><br><span class="line">Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。</span><br><span class="line">Ctrl+b Ctrl+&lt;arrow key&gt;：按箭头方向调整窗格大小。</span><br><span class="line">Ctrl+b q：显示窗格编号。</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="4、配置"><a href="#4、配置" class="headerlink" title="4、配置"></a>4、配置</h1><h2 id="4-1-快捷键配置"><a href="#4-1-快捷键配置" class="headerlink" title="4.1 快捷键配置"></a>4.1 快捷键配置</h2><p>上述写的各种快捷键盘，例如：前缀快捷键、分屏快捷键、窗口移动快捷键等，都是可以通过配置文件设置的，文件的位置一般在</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">～/.tmux.conf</span><br></pre></td></tr></table></figure>
-
-<p>具体怎么设置就不赘述，自行解决。</p>
-<h2 id="4-2-插件"><a href="#4-2-插件" class="headerlink" title="4.2 插件"></a>4.2 插件</h2><p>tmux插件很多，这里就演示一个会话保存插件（防止意外关机死机，会话没保存），其他安装方式类似。</p>
-<ul>
-<li>插件管理器</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;tmux-plugins&#x2F;tpm ~&#x2F;.tmux&#x2F;plugins&#x2F;tpm</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>新增插件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim ～&#x2F;.tmux.conf</span><br><span class="line">&#x2F;&#x2F; 最后一行新增</span><br><span class="line">set -g @plugin &#39;tmux-plugins&#x2F;tmux-resurrect&#39;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prefix + I</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>使用</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 保存</span><br><span class="line">Ctrl+b + Ctrl-s </span><br><span class="line">// 恢复</span><br><span class="line">Ctrl+b + Ctrl-</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/23/clickhouse%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%92%8C%E9%94%99%E8%AF%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Astilt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Astilt's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/23/clickhouse%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%92%8C%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">clickhouse常用配置参数和错误</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-02-23 16:32:22 / 修改时间：16:47:18" itemprop="dateCreated datePublished" datetime="2021-02-23T16:32:22+08:00">2021-02-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>参考：趣头条基于ClickHouse玩转每天1000亿数据量分享文档。</p>
-<h1 id="常用配置参数推荐"><a href="#常用配置参数推荐" class="headerlink" title="常用配置参数推荐"></a>常用配置参数推荐</h1><ul>
-<li><p>max_concurrent_queries</p>
-<p>最大并发处理的请求数(包含select,insert等)，默认值100，推荐150(不够再加)，在我们的集群中出现过”max concurrent queries”的问题。</p>
-</li>
-<li><p>max_bytes_before_external_sort</p>
-<p>当order by已使用max_bytes_before_external_sort内存就进行溢写磁盘(基于磁盘排序)，如果不设置该值，那么当内存不够时直接抛错，设置了该值order by可以正常完成，但是速度相对存内存来说肯定要慢点(实测慢的非常多，无法接受)。</p>
-</li>
-<li><p>background_pool_size</p>
-<p>后台线程池的大小，merge线程就是在该线程池中执行，当然该线程池不仅仅是给merge线程用的，默认值16，推荐32提升merge的速度(CPU允许的前提下)。</p>
-</li>
-<li><p>max_memory_usage</p>
-<p>单个SQL在单台机器最大内存使用量，该值可以设置的比较大，这样可以提升集群查询的上限。</p>
-</li>
-<li><p>max_memory_usage_for_all_queries</p>
-<p>单机最大的内存使用量可以设置略小于机器的物理内存(留一点内操作系统)。</p>
-</li>
-<li><p>max_bytes_before_external_group_by</p>
-<p>在进行group by的时候，内存使用量已经达到了max_bytes_before_external_group_by的时候就进行写磁盘(基于磁盘的group by相对于基于磁盘的order by性能损耗要好很多的)，一般max_bytes_before_external_group_by设置为max_memory_usage / 2，原因是在clickhouse中聚合分两个阶段：</p>
-<ul>
-<li>查询并且建立中间数据；</li>
-<li>合并中间数据 写磁盘在第一个阶段，如果无须写磁盘，clickhouse在第一个和第二个阶段需要使用相同的内存。</li>
-</ul>
-</li>
-</ul>
-<h1 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h1><h2 id="Too-many-parts-304-Merges-are-processing-significantly-slower-than-inserts"><a href="#Too-many-parts-304-Merges-are-processing-significantly-slower-than-inserts" class="headerlink" title="Too many parts(304). Merges are processing significantly slower than inserts"></a>Too many parts(304). Merges are processing significantly slower than inserts</h2><p>相信很多同学在刚开始使用clickhouse的时候都有遇到过该异常，出现异常的原因是因为MergeTree的merge的速度跟不上目录生成的速度, 数据目录越来越多就会抛出这个异常, 所以一般情况下遇到这个异常，降低一下插入频次就ok了，单纯调整background_pool_size的大小是治标不治本的。</p>
-<p>相信很多同学在刚开始使用clickhouse的时候都有遇到过该异常，出现异常的原因是因为MergeTree的merge的速度跟不上目录生成的速度, 数据目录越来越多就会抛出这个异常, 所以一般情况下遇到这个异常，降低一下插入频次就ok了，单纯调整background_pool_size的大小是治标不治本的。</p>
-<p><strong>我们的场景：</strong></p>
-<p>我们的插入速度是严格按照官方文档上面的推荐”每秒不超过1次的insert request”，但是有个插入程序在运行一段时间以后抛出了该异常，很奇怪。</p>
-<p><strong>问题排查：</strong></p>
-<p>排查发现失败的这个表的数据有一个特性，它虽然是实时数据但是数据的eventTime是最近一周内的任何时间点，我们的表又是按照day + hour组合分区的那么在极限情况下，我们的一个插入请求会涉及7*24分区的数据，也就是我们一次插入会在磁盘上生成168个数据目录(文件夹)，文件夹的生成速度太快，merge速度跟不上了，所以官方文档的上每秒不超过1个插入请求，更准确的说是每秒不超过1个数据目录。</p>
-<p><strong>case study：</strong></p>
-<p>分区字段的设置要慎重考虑，如果每次插入涉及的分区太多，那么不仅容易出现上面的异常，同时在插入的时候也比较耗时，原因是每个数据目录都需要和zookeeper进行交互。</p>
-<h2 id="DB-NetException-Connection-reset-by-peer-while-reading-from-socket-xxx"><a href="#DB-NetException-Connection-reset-by-peer-while-reading-from-socket-xxx" class="headerlink" title="DB::NetException: Connection reset by peer, while reading from socket xxx"></a>DB::NetException: Connection reset by peer, while reading from socket xxx</h2><p>查询过程中clickhouse-server进程挂掉。</p>
-<p><strong>问题排查：</strong></p>
-<p>排查发现在这个异常抛出的时间点有出现clickhouse-server的重启，通过监控系统看到机器的内存使用在该时间点出现高峰，在初期集群”裸奔”的时期，很多内存参数都没有进行限制，导致clickhouse-server内存使用量太高被OS KILL掉。</p>
-<p> <strong>case study：</strong></p>
-<p>上面推荐的内存参数强烈推荐全部加上，max_memory_usage_for_all_queries该参数没有正确设置是导致该case触发的主要原因。</p>
-<h2 id="Memory-limit-for-query-exceeded-would-use-9-37-GiB-attempt-to-allocate-chunk-of-301989888-bytes-maximum-9-31-GiB"><a href="#Memory-limit-for-query-exceeded-would-use-9-37-GiB-attempt-to-allocate-chunk-of-301989888-bytes-maximum-9-31-GiB" class="headerlink" title="Memory limit (for query) exceeded:would use 9.37 GiB (attempt to allocate chunk of 301989888 bytes), maximum: 9.31 GiB"></a>Memory limit (for query) exceeded:would use 9.37 GiB (attempt to allocate chunk of 301989888 bytes), maximum: 9.31 GiB</h2><p>该异常很直接，就是我们限制了SQL的查询内存(max_memory_usage)使用的上线，当内存使用量大于该值的时候，查询被强制KILL。</p>
-<p> 对于常规的如下简单的SQL, 查询的空间复杂度为O(1) 。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> condition1 <span class="keyword">and</span> condition2 </span><br><span class="line"><span class="keyword">select</span> c1, c2 <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> condition1 <span class="keyword">and</span> condition2</span><br></pre></td></tr></table></figure>
-
-<p> 对于group by, order by , count distinct，join这样的复杂的SQL，查询的空间复杂度就不是O(1)了，需要使用大量的内存。</p>
-<ul>
-<li>如果是group by内存不够，推荐配置上max_bytes_before_external_group_by参数，当使用内存到达该阈值，进行磁盘group by</li>
-<li>如果是order by内存不够，推荐配置上max_bytes_before_external_sort参数，当使用内存到达该阈值，进行磁盘order by</li>
-<li>如果是count distinct内存不够，推荐使用一些预估函数(如果业务场景允许)，这样不仅可以减少内存的使用同时还会提示查询速度</li>
-<li>对于JOIN场景，我们需要注意的是clickhouse在进行JOIN的时候都是将”右表”进行多节点的传输的(右表广播)，如果你已经遵循了该原则还是无法跑出来，那么好像也没有什么好办法了</li>
-</ul>
-<h2 id="zookeeper的snapshot文件太大，follower从leader同步文件时超时"><a href="#zookeeper的snapshot文件太大，follower从leader同步文件时超时" class="headerlink" title="zookeeper的snapshot文件太大，follower从leader同步文件时超时"></a>zookeeper的snapshot文件太大，follower从leader同步文件时超时</h2><p>上面有说过clickhouse对zookeeper的依赖非常的重，表的元数据信息，每个数据块的信息，每次插入的时候，数据同步的时候，都需要和zookeeper进行交互，上面存储的数据非常的多。</p>
-<p>就拿我们自己的集群举例，我们集群有60台机器30张左右的表，数据一般只存储2天，我们zookeeper集群的压力 已经非常的大了，zookeeper的节点数据已经到达500w左右，一个snapshot文件已经有2G+左右的大小了，zookeeper节点之间的数据同步已经经常性的出现超时。 </p>
-<p> <strong>问题解决：</strong></p>
-<ul>
-<li><p>zookeeper的snapshot文件存储盘不低于1T，注意清理策略，不然磁盘报警报到你怀疑人生，如果磁盘爆了那集群就处于“残废”状态； </p>
-</li>
-<li><p>zookeeper集群的znode最好能在400w以下； </p>
-</li>
-<li><p>建表的时候添加use_minimalistic_part_header_in_zookeeper参数，对元数据进行压缩存储，对于高版本的clickhouse可以直接在原表上面修改该setting信息，注意修改完了以后无法再回滚的。</p>
-</li>
-</ul>
-<h2 id="zookeeper压力太大，clickhouse表处于”read-only-mode”，插入失败"><a href="#zookeeper压力太大，clickhouse表处于”read-only-mode”，插入失败" class="headerlink" title="zookeeper压力太大，clickhouse表处于”read only mode”，插入失败"></a>zookeeper压力太大，clickhouse表处于”read only mode”，插入失败</h2><ul>
-<li>zookeeper机器的snapshot文件和log文件最好分盘存储(推荐SSD)提高ZK的响应；</li>
-<li>做好zookeeper集群和clickhouse集群的规划，可以多套zookeeper集群服务一套clickhouse集群。</li>
-</ul>
-<h1 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h1><h2 id="实时写入使用本地表，不要使用分布式表"><a href="#实时写入使用本地表，不要使用分布式表" class="headerlink" title="实时写入使用本地表，不要使用分布式表"></a>实时写入使用本地表，不要使用分布式表</h2><p>分布式表引擎会帮我们将数据自动路由到健康的数据表进行数据的存储，所以使用分布式表相对来说比较简单，对于Producer不需要有太多的考虑，但是分布式表有些致命的缺点。 </p>
-<ul>
-<li>数据的一致性问题，先在分布式表所在的机器进行落盘，然后异步的发送到本地表所在机器进行存储，中间没有一致性的校验，而且在分布式表所在机器时如果机器出现down机，会存在数据丢失风险；</li>
-<li>据说对zookeeper的压力比较大(待验证)。</li>
-</ul>
-<h2 id="推荐使用-MergeTree引擎，该引擎是clickhouse最核心的组件，也是社区优化的重点"><a href="#推荐使用-MergeTree引擎，该引擎是clickhouse最核心的组件，也是社区优化的重点" class="headerlink" title="推荐使用(*)MergeTree引擎，该引擎是clickhouse最核心的组件，也是社区优化的重点"></a>推荐使用(*)MergeTree引擎，该引擎是clickhouse最核心的组件，也是社区优化的重点</h2><p> 数据有保障，查询有保障，升级无感知。</p>
-<h2 id="谨慎使用on-cluster的SQL"><a href="#谨慎使用on-cluster的SQL" class="headerlink" title="谨慎使用on cluster的SQL"></a>谨慎使用on cluster的SQL</h2><p>使用该类型SQL hang住的案例不少，我们也有遇到，可以直接写个脚本直接操作集群的每台进行处理。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-  </div>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Astilt</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">77</span>
-          <span class="site-state-item-name">日志</span>
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/astilt322" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
+        <h2 id="name" class="hidden-xs hidden-sm">astilt</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">一行代码一包烟</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> HangZhou, China</small>
       </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">39</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
+      
+      <div class="search" id="search-form-wrap">
 
-
-
-      </div>
-
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Astilt</span>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
-  </div>
 
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
         
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/astilt322" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/u/3984800033?is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">30</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/">多线程/并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
 
 
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-%E3%80%81linux/" rel="tag">Mac 、linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Presto/" rel="tag">Presto</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPI/" rel="tag">SPI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">aop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brew/" rel="tag">brew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clickHouse/" rel="tag">clickHouse</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datax/" rel="tag">datax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastjson/" rel="tag">fastjson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greenplum/" rel="tag">greenplum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop/" rel="tag">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/" rel="tag">hive</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/" rel="tag">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda/" rel="tag">lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myBatis/" rel="tag">myBatis</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/" rel="tag">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag">单元测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/" rel="tag">多线程/并发</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" rel="tag">权限管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%9B%E5%9E%8B/" rel="tag">泛型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" rel="tag">经济学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
 
 
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Elasticsearch/" style="font-size: 13.4px;">Elasticsearch</a> <a href="/tags/Mac/" style="font-size: 13px;">Mac</a> <a href="/tags/Mac-%E3%80%81linux/" style="font-size: 13px;">Mac 、linux</a> <a href="/tags/Presto/" style="font-size: 13px;">Presto</a> <a href="/tags/SPI/" style="font-size: 13px;">SPI</a> <a href="/tags/aop/" style="font-size: 13px;">aop</a> <a href="/tags/brew/" style="font-size: 13px;">brew</a> <a href="/tags/clickHouse/" style="font-size: 14px;">clickHouse</a> <a href="/tags/datax/" style="font-size: 13px;">datax</a> <a href="/tags/docker/" style="font-size: 13.8px;">docker</a> <a href="/tags/fastjson/" style="font-size: 13px;">fastjson</a> <a href="/tags/git/" style="font-size: 13.2px;">git</a> <a href="/tags/greenplum/" style="font-size: 13px;">greenplum</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13.2px;">hive</a> <a href="/tags/idea/" style="font-size: 13px;">idea</a> <a href="/tags/lambda/" style="font-size: 13px;">lambda</a> <a href="/tags/maven/" style="font-size: 13.4px;">maven</a> <a href="/tags/myBatis/" style="font-size: 13.6px;">myBatis</a> <a href="/tags/mysql/" style="font-size: 13px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/postgresql/" style="font-size: 13px;">postgresql</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/spring/" style="font-size: 13.6px;">spring</a> <a href="/tags/tmux/" style="font-size: 13px;">tmux</a> <a href="/tags/vim/" style="font-size: 13px;">vim</a> <a href="/tags/zookeeper/" style="font-size: 13px;">zookeeper</a> <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">单元测试</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">命令</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 13.2px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/" style="font-size: 13.8px;">多线程/并发</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 13px;">方法论</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13px;">日志</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 13px;">权限管理</a> <a href="/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 13px;">泛型</a> <a href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" style="font-size: 13px;">经济学</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
 
 
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="title">设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:33:14.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/springBoot%E6%89%93%E5%8C%85/" class="title">springBoot打包</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:29:41.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/LockSupport/" class="title">LockSupport</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:45.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E4%BF%A1%E5%8F%B7%E9%87%8F/" class="title">信号量</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:39.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%B9%B6%E5%8F%91/">多线程/并发</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/06/22/%E5%BE%AA%E7%8E%AF%E6%A0%85%E6%A0%8F/" class="title">循环栅栏</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-06-22T06:11:32.000Z" itemprop="datePublished">2021-06-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  <main class="main" role="main">
+  
+  <div class="content article-list">
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/19/docker%E5%AE%89%E8%A3%85/">docker安装</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/04/19/docker%E5%AE%89%E8%A3%85/" class="article-date">
+	  <time datetime="2021-04-19T06:56:35.000Z" itemprop="datePublished">4月 19</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/docker/" rel="tag">docker</a>
+  </span>
 
 
-      </div>
-    </footer>
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/19/docker%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/16/zk/">zk</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/04/16/zk/" class="article-date">
+	  <time datetime="2021-04-16T07:12:00.000Z" itemprop="datePublished">4月 16</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/zookeeper/" rel="tag">zookeeper</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/16/zk/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/25/maven%E9%BB%98%E8%AE%A4%E5%86%85%E7%BD%AE%E5%B1%9E%E6%80%A7/">maven默认内置属性</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/03/25/maven%E9%BB%98%E8%AE%A4%E5%86%85%E7%BD%AE%E5%B1%9E%E6%80%A7/" class="article-date">
+	  <time datetime="2021-03-25T09:42:06.000Z" itemprop="datePublished">3月 25</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/maven/" rel="tag">maven</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/25/maven%E9%BB%98%E8%AE%A4%E5%86%85%E7%BD%AE%E5%B1%9E%E6%80%A7/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/25/maven/">maven</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/03/25/maven/" class="article-date">
+	  <time datetime="2021-03-25T02:14:55.000Z" itemprop="datePublished">3月 25</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/maven/" rel="tag">maven</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/25/maven/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/">堡垒机传输文件</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/" class="article-date">
+	  <time datetime="2021-03-11T04:03:30.000Z" itemprop="datePublished">3月 11</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/11/%E5%A0%A1%E5%9E%92%E6%9C%BA%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/09/clickhouse%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/">clickhouse实践案例</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/03/09/clickhouse%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" class="article-date">
+	  <time datetime="2021-03-09T01:45:16.000Z" itemprop="datePublished">3月 9</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/clickHouse/" rel="tag">clickHouse</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/09/clickhouse%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/04/clickhouse%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/">clickhouse集群安装</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/03/04/clickhouse%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/" class="article-date">
+	  <time datetime="2021-03-04T07:21:17.000Z" itemprop="datePublished">3月 4</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/clickHouse/" rel="tag">clickHouse</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/04/clickhouse%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/04/vim/">vim</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/03/04/vim/" class="article-date">
+	  <time datetime="2021-03-04T03:02:00.000Z" itemprop="datePublished">3月 4</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/vim/" rel="tag">vim</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/04/vim/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/03/tmux/">tmux</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/03/03/tmux/" class="article-date">
+	  <time datetime="2021-03-03T08:25:47.000Z" itemprop="datePublished">3月 3</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/tmux/" rel="tag">tmux</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/03/tmux/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/23/clickhouse%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%92%8C%E9%94%99%E8%AF%AF/">clickhouse常用配置参数和错误</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/02/23/clickhouse%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%92%8C%E9%94%99%E8%AF%AF/" class="article-date">
+	  <time datetime="2021-02-23T08:32:22.000Z" itemprop="datePublished">2月 23</time>
+	</a>
+</span>
+    
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+    
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/clickHouse/" rel="tag">clickHouse</a>
+  </span>
+
+
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/02/23/clickhouse%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%92%8C%E9%94%99%E8%AF%AF/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
   </div>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+    
+    <nav class="bar bar-footer clearfix" data-stick-bottom>
+        <div class="bar-inner">
+        <ul class="pager pull-left">
+            
+            <li class="prev">
+                <a href="/page/3/">
+                    <i class="icon icon-angle-left"></i>
+                    上一页
+                </a>
+            </li>
+            
+            
+            <li class="next">
+                <a href="/page/5/">
+                    下一页
+                    <i class="icon icon-angle-right"></i>
+                </a>
+            </li>
+            
+        </ul>
+        <div class="total-article bar-right">Page 4 of 8</div>
+        </div>
+    </nav>
+    
+ 
+</main>
 
-<script src="/js/utils.js"></script>
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/astilt322" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/u/3984800033?is_all=1" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
 
-<script src="/js/motion.js"></script>
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/application.js"></script>
 
 
-<script src="/js/next-boot.js"></script>
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
 
 
 
 
-  
+
+
+   
 
 
 
@@ -1713,16 +813,6 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-  
 
 </body>
 </html>
