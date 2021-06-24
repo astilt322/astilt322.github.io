@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-06-22T06:54:27.714Z</updated>
+  <updated>2021-06-24T06:01:21.335Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>文件传输</title>
+    <link href="http://yoursite.com/2021/06/24/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/"/>
+    <id>http://yoursite.com/2021/06/24/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/</id>
+    <published>2021-06-24T03:18:00.000Z</published>
+    <updated>2021-06-24T06:01:21.335Z</updated>
+    
+    <content type="html"><![CDATA[<p>文件上传和下载是日常开发中经常遇到问题，在spring中我们可以很方便使用，代码如下：</p><h1 id="spring"><a class="markdownIt-Anchor" href="#spring"></a> Spring</h1><h2 id="1-文件上传"><a class="markdownIt-Anchor" href="#1-文件上传"></a> 1 文件上传</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;/upload&quot;)</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> String <span class="title">upload</span><span class="params">(MultipartFile uploadFile, HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">       File dir = <span class="keyword">new</span> File(<span class="string">&quot;/usr/local/file&quot;</span>);</span><br><span class="line">       <span class="comment">//文件目录不存在，就创建一个</span></span><br><span class="line">       <span class="keyword">if</span> (!dir.isDirectory()) &#123;</span><br><span class="line">           <span class="keyword">boolean</span> mkdirs = dir.mkdirs();</span><br><span class="line">           <span class="keyword">if</span> (!mkdirs) &#123;</span><br><span class="line">               log.error(dir.getAbsolutePath()+<span class="string">&quot;文件目录创建失败！&quot;</span>);</span><br><span class="line">               <span class="keyword">return</span> <span class="string">&quot;创建文件目录失败！&quot;</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           String filename = uploadFile.getOriginalFilename();</span><br><span class="line">           <span class="comment">//服务端保存的文件对象</span></span><br><span class="line">           File fileServer = <span class="keyword">new</span> File(dir, filename);</span><br><span class="line">           <span class="comment">// 实现上传</span></span><br><span class="line">           uploadFile.transferTo(fileServer);</span><br><span class="line">           String filePath = request.getScheme() + <span class="string">&quot;://&quot;</span> +</span><br><span class="line">                   request.getServerName() + <span class="string">&quot;:&quot;</span></span><br><span class="line">                   + request.getServerPort()</span><br><span class="line">                   +dir.getAbsolutePath() + filename;</span><br><span class="line">           <span class="comment">// 返回可供访问的网络路径</span></span><br><span class="line">           <span class="keyword">return</span> filePath;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;上传失败&quot;</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><h2 id="2-文件下载"><a class="markdownIt-Anchor" href="#2-文件下载"></a> 2 文件下载</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/download&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">download</span><span class="params">(String fileName, HttpServletRequest request, HttpServletResponse response)</span> </span>&#123;</span><br><span class="line">    File tempFile = <span class="keyword">new</span> File(<span class="string">&quot;/Users/hf/MyProjects/untitled/file/&quot;</span> + fileName);</span><br><span class="line">    <span class="keyword">try</span> (InputStream inputStream = <span class="keyword">new</span> FileInputStream(tempFile)) &#123;</span><br><span class="line">        response.setContentType(<span class="string">&quot;application/force-download&quot;</span>);</span><br><span class="line">        response.setHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;fileName=&quot;</span> + fileName);</span><br><span class="line">        OutputStream os = response.getOutputStream();</span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2048</span>];</span><br><span class="line">        <span class="keyword">int</span> length;</span><br><span class="line">        <span class="keyword">while</span> ((length = inputStream.read(b)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            os.write(b, <span class="number">0</span>, length);</span><br><span class="line">        &#125;</span><br><span class="line">        os.flush();</span><br><span class="line">        os.close();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;文件上传和下载是日常开发中经常遇到问题，在spring中我们可以很方便使用，代码如下：&lt;/p&gt;
+&lt;h1 id=&quot;spring&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#spring&quot;&gt;&lt;/a&gt; Spring&lt;/h1&gt;
+&lt;h2 id=&quot;1-文件</summary>
+      
+    
+    
+    
+    <category term="Java基础" scheme="http://yoursite.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="spring netty" scheme="http://yoursite.com/tags/spring-netty/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>flink初探</title>
+    <link href="http://yoursite.com/2021/06/23/flink%E5%88%9D%E6%8E%A2/"/>
+    <id>http://yoursite.com/2021/06/23/flink%E5%88%9D%E6%8E%A2/</id>
+    <published>2021-06-23T03:52:39.000Z</published>
+    <updated>2021-06-23T04:28:40.307Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-安装启动"><a class="markdownIt-Anchor" href="#1-安装启动"></a> 1 安装&amp;启动</h2><blockquote><p>mac 上使用homebrew演示。</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 安装</span></span></span><br><span class="line">brew install apache-flink</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 检查版本号</span></span></span><br><span class="line">flink --version</span><br><span class="line">Version: 1.13.1, Commit ID: a7f3192</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 启动</span></span></span><br><span class="line">cd /usr/local/Cellar/apache-flink/1.13.1/libexec/bin</span><br><span class="line">./start-cluster.sh</span><br><span class="line">Starting cluster.</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># web页面</span></span></span><br><span class="line">http://localhost:8081/</span><br></pre></td></tr></table></figure><h1 id="2-idea创建工程"><a class="markdownIt-Anchor" href="#2-idea创建工程"></a> 2 idea创建工程</h1><ul><li>新增maven的快速构建脚手架</li></ul><img src="/2021/06/23/flink%E5%88%9D%E6%8E%A2/image-20210623122719967-4422443.png" class title="image-20210623122719967"><ul><li>新增工程</li></ul><img src="/2021/06/23/flink%E5%88%9D%E6%8E%A2/image-20210623122831904-4422513.png" class title="image-20210623122831904">]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;1-安装启动&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#1-安装启动&quot;&gt;&lt;/a&gt; 1 安装&amp;amp;启动&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mac 上使用homebrew演示。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figu</summary>
+      
+    
+    
+    
+    <category term="大数据" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+    <category term="flink" scheme="http://yoursite.com/tags/flink/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式</title>
@@ -476,50 +530,6 @@
     
     
     <category term="fastjson" scheme="http://yoursite.com/tags/fastjson/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>greenplum较高级用法</title>
-    <link href="http://yoursite.com/2021/06/01/greenplum%E8%BE%83%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/"/>
-    <id>http://yoursite.com/2021/06/01/greenplum%E8%BE%83%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/</id>
-    <published>2021-06-01T08:27:30.000Z</published>
-    <updated>2021-06-22T06:54:27.707Z</updated>
-    
-    
-    
-    
-    <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-    <category term="greenplum" scheme="http://yoursite.com/tags/greenplum/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hive使用</title>
-    <link href="http://yoursite.com/2021/05/12/hive%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2021/05/12/hive%E4%BD%BF%E7%94%A8/</id>
-    <published>2021-05-12T07:58:33.000Z</published>
-    <updated>2021-06-22T06:54:27.707Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>当前所在库</li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> current_databases();</span><br></pre></td></tr></table></figure><ul><li>查询数据库</li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span> <span class="keyword">like</span> <span class="string">&quot;*bank*&quot;</span>;</span><br></pre></td></tr></table></figure><ul><li>导出表结构到本地</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive -e &quot;use db; show create table adm_cust;&quot; &gt; /home/deploy/adm_cust_ddl.txt</span><br></pre></td></tr></table></figure><ul><li>导出表数据到本地</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive -e &quot;select * from taghub.adm_cust&quot; &gt; /home/deploy/adm_cust.txt</span><br></pre></td></tr></table></figure><ul><li>导入数据</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、hive</span><br><span class="line">2、use taghub;</span><br><span class="line">3、load data local inpath ‘xxxx/xxx/adm_cust.txt’ into table adm_cust;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;ul&gt;
-&lt;li&gt;当前所在库&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td cla</summary>
-      
-    
-    
-    
-    <category term="大数据" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-    <category term="hive" scheme="http://yoursite.com/tags/hive/"/>
     
   </entry>
   
